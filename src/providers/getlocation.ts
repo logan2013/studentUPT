@@ -3,11 +3,12 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
+
 @Injectable()
 export class Getlocation {
   public watch: any;    
-  public lat: number = 0;
-  public lng: number = 0;
+  public lat: number = 45.748507;
+  public lng: number = 21.239703;
   constructor(public geolocation: Geolocation,
               public backgroundGeolocation: BackgroundGeolocation,
               public zone: NgZone,) {
@@ -18,32 +19,32 @@ export class Getlocation {
  
   // Background Tracking
  
-  let config = {
-    desiredAccuracy: 0,
-    stationaryRadius: 20,
-    distanceFilter: 10, 
-    debug: false,
-    interval: 2000 
-  };
+  // let config = {
+  //   desiredAccuracy: 0,
+  //   stationaryRadius: 20,
+  //   distanceFilter: 10, 
+  //   debug: false,
+  //   interval: 2000 
+  // };
  
-  this.backgroundGeolocation.configure(config).subscribe((location) => {
+  // this.backgroundGeolocation.configure(config).subscribe((location) => {
  
-    console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
+  //   console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
  
-    // Run update inside of Angular's zone
-    this.zone.run(() => {
-      this.lat = location.latitude;
-      this.lng = location.longitude;
-    });
+  //   // Run update inside of Angular's zone
+  //   this.zone.run(() => {
+  //     this.lat = location.latitude;
+  //     this.lng = location.longitude;
+  //   });
  
-  }, (err) => {
+  // }, (err) => {
  
-    console.log(err);
+  //   console.log(err);
  
-  });
+  // });
  
-  // Turn ON the background-geolocation system.
-  this.backgroundGeolocation.start();
+  // // Turn ON the background-geolocation system.
+  // this.backgroundGeolocation.start();
  
  
   // Foreground Tracking
@@ -51,7 +52,7 @@ export class Getlocation {
 let options = {
   frequency: 3000, 
   enableHighAccuracy: true,
-  timeout: 10000,
+  timeout: 5000,
   maximumAge: 0
 };
  
@@ -73,7 +74,7 @@ public stopTracking() {
  
   // alert('stopTracking');
  
-  this.backgroundGeolocation.finish();
+  //this.backgroundGeolocation.finish();
   this.watch.unsubscribe();
  
 }

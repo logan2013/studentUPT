@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content >
-  <ion-list *ngFor="let item of infoFacultati" style="max-width: 600px; align-items: center; -webkit-box-align: center; display:flex; " > 
+  <ion-list *ngFor="let item of items" style="max-width: 600px; align-items: center; -webkit-box-align: center; display:flex; " > 
     <ion-card >
       <h2 >  {{item.faculties}} </h2>
       <ion-avatar item-left>
-        <img (click)="facultate($event, item)"  src="http://placehold.it/500x300" />
+        <img (click)="itemTapped($event, item)"  src="http://placehold.it/500x400" />
       </ion-avatar>
      <ion-row no-padding>
       <ion-col > 
@@ -31,3 +31,4 @@
   </ion-card>
   </ion-list>
 </ion-content>
+
