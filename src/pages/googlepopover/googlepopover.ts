@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Googlepopover {
   public place : any = [];
+  public booli: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log(navParams.get('place'))
     this.place = navParams.get('place')
@@ -22,8 +23,11 @@ export class Googlepopover {
   ionViewDidLoad() {
     console.log('ionViewDidLoad Googlepopover');
   }
-
-  public showUrl() {
-    alert(this.place.website)
+  public showData() {
+    this.booli = !this.booli;
+    console.log(this.booli)
+  }
+  public goToWebsite() {
+    //alert(this.place.website)
   }
 }
