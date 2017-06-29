@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { Platform } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 
@@ -10,6 +11,7 @@ export class Getlocation {
   public lat: number = 45.748507;
   public lng: number = 21.239703;
   constructor(public geolocation: Geolocation,
+              private platform: Platform,
               public backgroundGeolocation: BackgroundGeolocation,
               public zone: NgZone,) {
     // alert('Hello Getlocation Provider');
@@ -48,7 +50,7 @@ export class Getlocation {
  
  
   // Foreground Tracking
- 
+ this.platform.ready().then(() => {
 let options = {
   frequency: 3000, 
   enableHighAccuracy: true,
@@ -67,7 +69,7 @@ this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.coords
   });
  
 });
- 
+   });
 }
 
 public stopTracking() {

@@ -70,9 +70,7 @@ export class Viewpage {
   
   }
 
-
   ionViewDidLoad() {}
-
 
   presentProfileModal(item) {
     console.log(item)

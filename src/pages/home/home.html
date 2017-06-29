@@ -1,16 +1,18 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-  
-</ion-header>
-<ion-content  no-padding> 
- <super-tabs  > 
-    <super-tab [root]="informatii" title="Informatii" icon="book"></super-tab>
-    <super-tab [root]="beneficii" title="Beneficii" icon="construct"></super-tab>
-    <super-tab [root]="about" title='Despre UPT' icon="information-circle"></super-tab>
-  </super-tabs >
+<!--<ion-header>
+
+</ion-header>-->
+
+<ion-content>
+    <ion-navbar>
+        <button ion-button clear menuToggle style="margin:10px;">
+                    <ion-icon name="menu"></ion-icon>
+            </button>
+        <ion-title>Home</ion-title>
+
+    </ion-navbar>
+    <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
+        <super-tab [root]="informatii" title="Informatii"></super-tab>
+        <super-tab [root]="beneficii" title="Beneficii"></super-tab>
+        <!--<super-tab [root]="about" title='Despre UPT'></super-tab>-->
+    </super-tabs>
 </ion-content>

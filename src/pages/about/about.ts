@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SuperTabsController } from 'ionic2-super-tabs';
 
 /**
  * Generated class for the About page.
@@ -14,11 +15,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class About {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,private superTabsCtrl: SuperTabsController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad About');
+  }
+   onTabSelect(ev: any) {
+    console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }
 
 }

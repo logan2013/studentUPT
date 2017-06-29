@@ -6,30 +6,58 @@
 -->
 
 <ion-content *ngIf="dataTabs.message.serie[0]">
-  
-  <ion-list>
-    <ion-list-header><h2>{{dataTabs.message.serie[0]}}</h2></ion-list-header>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'I')">Anul I<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'II')">Anul II<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'III')">Anul III<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'IV')">Anul IV<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-  </ion-list>
 
-  <ion-list>
-    <ion-list-header><h2>{{dataTabs.message.serie[1]}}</h2></ion-list-header>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'I')">Anul I<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'II')">Anul II<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'III')">Anul III<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'IV')">Anul IV<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-  </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <h2>{{dataTabs.message.serie[0]}}</h2>
+        </ion-list-header>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'I')">Anul I
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'II')">Anul II
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'III')">Anul III
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[0],'IV')">Anul IV
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+    </ion-list>
 
-  <ion-list>
-    <ion-list-header><h2>{{dataTabs.message.serie[2]}}</h2></ion-list-header>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'I')">Anul I<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'II')">Anul II<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-    <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'III')">Anul III<ion-icon item-right name="arrow-forward"></ion-icon></ion-item>
-  </ion-list>
-<!--<ion-grid no-padding  >
+    <ion-list>
+        <ion-list-header>
+            <h2>{{dataTabs.message.serie[1]}}</h2>
+        </ion-list-header>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'I')">Anul I
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'II')">Anul II
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'III')">Anul III
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[1],'IV')">Anul IV
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>
+            <h2>{{dataTabs.message.serie[2]}}</h2>
+        </ion-list-header>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'I')">Anul I
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'II')">Anul II
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item tappable (click)="dataOrar($event,dataTabs.message,dataTabs.message.serie[2],'III')">Anul III
+            <ion-icon item-right name="arrow-forward"></ion-icon>
+        </ion-item>
+    </ion-list>
+    <!--<ion-grid no-padding  >
   <ion-row class="grid-basic-page">  
     <ion-col width-20>
       <div>
@@ -54,4 +82,3 @@
   </ion-row>
 </ion-grid>-->
 </ion-content>
-

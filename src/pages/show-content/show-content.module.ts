@@ -1,0 +1,16 @@
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { ShowContent } from './show-content';
+
+@NgModule({
+  declarations: [
+    ShowContent,
+  ],
+  imports: [
+    IonicPageModule.forChild(ShowContent),
+  ],
+  exports: [
+    ShowContent
+  ]
+})
+export class ShowContentModule {}

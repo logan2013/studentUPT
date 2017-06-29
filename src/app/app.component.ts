@@ -30,7 +30,7 @@ export class MyApp {
           this.rootPage = 'HomePage';
           this.pages = [
             { icon:'home', title: 'Home', component: "HomePage" },
-            { icon:'contact', title: 'Profilul meu', component: "Profile" },
+            { icon:'information-circle', title: 'Despre', component: "About" },
             { icon:'school', title: 'Facultati', component: "Facultati" },
             { icon:'map', title: 'Harta Campusului', component: "Googlemaps" },
             { icon:'log-in', title: 'Autentificare', component: "Login" },
@@ -40,26 +40,26 @@ export class MyApp {
           this.rootPage = 'HomePage';
           this.pages = [
             { icon:'home', title: 'Home', component: "HomePage" },
-            { icon:'contact', title: 'Profilul meu', component: "Profile" },
-            { icon:'school', title: 'Facultati', component: "Facultati" },  
+            { icon:'information-circle', title: 'Despre', component: "About" },
+            { icon:'school', title: 'Facultati', component: "Facultati" },
             { icon:'map', title: 'Harta Campusului', component: "Googlemaps" },
             { icon:'log-in', title: 'Autentificare', component: "Login" },
-            { icon:'log-in', title: 'Iesire', component: "Logout" }
+            { icon:'log-in', title: 'Iesire', component: "Logout" },
           ];
       } else {
           this.rootPage = 'Welcome';
           this.pages = [
-            { icon:'home', title: 'Home', component: "HomePage" },
-            { icon:'contact', title: 'Profilul meu', component: "Profile" },
-            { icon:'school', title: 'Facultati', component: "Facultati" },     
+           { icon:'home', title: 'Home', component: "HomePage" },
+            { icon:'information-circle', title: 'Despre', component: "About" },
+            { icon:'school', title: 'Facultati', component: "Facultati" },
             { icon:'map', title: 'Harta Campusului', component: "Googlemaps" },
             { icon:'log-in', title: 'Autentificare', component: "Login" },
-            { icon:'log-out', title: 'Iesire', component: "Logout" },
+            { icon:'log-in', title: 'Iesire', component: "Logout" },
           ];
       }
        this.pages = [
-            { icon:'home', title: 'Home', component: "HomePage" },
-            { icon:'contact', title: 'Profilul meu', component: "Profile" },
+           { icon:'home', title: 'Home', component: "HomePage" },
+            { icon:'information-circle', title: 'Despre', component: "About" },
             { icon:'school', title: 'Facultati', component: "Facultati" },
             { icon:'map', title: 'Harta Campusului', component: "Googlemaps" },
             { icon:'log-in', title: 'Autentificare', component: "Login" },
@@ -68,7 +68,7 @@ export class MyApp {
     })
   this.pages = [
             { icon:'home', title: 'Home', component: "HomePage" },
-            { icon:'contact', title: 'Profilul meu', component: "Profile" },
+            { icon:'information-circle', title: 'Despre', component: "About" },
             { icon:'school', title: 'Facultati', component: "Facultati" },
             { icon:'map', title: 'Harta Campusului', component: "Googlemaps" },
             { icon:'log-in', title: 'Autentificare', component: "Login" },

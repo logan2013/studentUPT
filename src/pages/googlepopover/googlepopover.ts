@@ -27,7 +27,10 @@ export class Googlepopover {
     this.booli = !this.booli;
     console.log(this.booli)
   }
+  
   public goToWebsite() {
-    //alert(this.place.website)
+
+    
+
   }
 }
