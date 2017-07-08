@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, Platform, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -14,29 +14,30 @@ export class Login {
   public myForm: any;
   public dataUser: any;
   constructor(public navCtrl: NavController,
-              public menuCtrl: MenuController,
-              public platform: Platform,
-              public nativeStorage: NativeStorage,
-              public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController,
-              public formBuilder: FormBuilder, 
-              public http: Http) {
+    public menuCtrl: MenuController,
+    public platform: Platform,
+    public events: Events,
+    public nativeStorage: NativeStorage,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder,
+    public http: Http) {
 
-              this.menuCtrl.enable(false);
-               
-              if( localStorage.getItem('user') ) {
-                this.toastCtrl.create({
-                  message: 'Sunteti logat cu ' +  localStorage.getItem('user'),
-                  duration: 1500,
-                  position: 'top'
-                }).present();
-                this.navCtrl.setRoot('HomePage')
-              }
-              
-              this.myForm = this.formBuilder.group({
-                user: [''],
-                password: ['']
-              });
+    this.menuCtrl.enable(false);
+
+    if (localStorage.getItem('user')) {
+      this.toastCtrl.create({
+        message: 'Sunteti logat cu ' + localStorage.getItem('user'),
+        duration: 1500,
+        position: 'top'
+      }).present();
+      this.navCtrl.setRoot('HomePage')
+    }
+
+    this.myForm = this.formBuilder.group({
+      user: [''],
+      password: ['']
+    });
 
   }
 
@@ -54,40 +55,53 @@ export class Login {
       duration: 2500,
       position: 'top'
     });
-    
+
     let headers = new Headers();
-    headers.append("Accept",'application/json');
-    headers.append('Content-Type','application/json');
-    let options = new RequestOptions({headers:headers});
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
 
     let postParams = {
-      user:this.myForm._value.user,
-      pwd:this.myForm._value.password,
+      user: this.myForm._value.user,
+      pwd: this.myForm._value.password,
     }
-      loader.present();
-      this.http.post('http://www.atestate-inf.tk/ghidtest/login.php',JSON.stringify(postParams),options).map(res => res.json()).subscribe(data=>{
+    loader.present();
+
+    this.http.post('http://www.atestate-inf.tk/ghidtest/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
       this.dataUser = data;
-        alert(this.dataUser)
-      
+      alert(this.dataUser)
+
       console.log(this.dataUser.data)
-      if(this.dataUser.success){ 
+      if (this.dataUser.success) {
         loader.dismiss();
-        localStorage.setItem('user',this.dataUser.data)
-        this.navCtrl.setRoot('HomePage',{item:this.dataUser});
+        localStorage.setItem('user', this.dataUser.data)
+        this.navCtrl.setRoot('HomePage', { item: this.dataUser });
+        this.events.publish('try:login', '');
+
       }
-      else{
+      else {
         loader.dismiss();
+
         loginFail.present(); // if login fail show a message error
       }
-    },error=>{
+    }, error => {
       console.log(error);
     });
 
   }
-   
+
   ionViewWillLeave() {
 
     this.menuCtrl.enable(true);
 
   }
+
+  guest() {
+    // this.navCtrl.push(HelloIonicPage);
+    this.navCtrl.setRoot('HomePage');
+
+    this.events.publish('try:login', '');
+
+  }
+
 }

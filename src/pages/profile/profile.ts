@@ -21,26 +21,26 @@ export class Profile {
   public myRoute: any = [];
   public zi: any = [];
   public oneDay: any;
-  public dataUser: Array<{user: string, image: string, showDetails: boolean, grupa:number, icon:string, zi:any[]}> = [];
-  constructor(public navCtrl: NavController, 
-              public http: Http,
-              private nativeStorage: NativeStorage,
-              private platform: Platform,
-              private toastCtrl: ToastController) { }
+  public dataUser: Array<{ user: string, image: string, showDetails: boolean, grupa: number, icon: string, zi: any[] }> = [];
+  constructor(public navCtrl: NavController,
+    public http: Http,
+    private nativeStorage: NativeStorage,
+    private platform: Platform,
+    private toastCtrl: ToastController) { }
 
 
   ionViewCanEnter() {
-     
+
     this.user = localStorage.getItem('user');
-  
+
     this.http.get('http://www.atestate-inf.tk/ghidtest/readxls.php').map(res => res.json()).subscribe(data => {
       this.dataXls = data;
     });
 
-  
 
-    if( this.user ) {
-      this.http.get('http://atestate-inf.tk/ghidtest/reqData.php?user='+this.user).map(res => res.json()).subscribe(data => {
+
+    if (this.user) {
+      this.http.get('http://atestate-inf.tk/ghidtest/reqData.php?user=' + this.user).map(res => res.json()).subscribe(data => {
         this.myRoute = data;
         console.log(this.myRoute)
       });
@@ -48,12 +48,12 @@ export class Profile {
       this.zi = ['luni', 'marti', 'miercuri', 'joi', 'vineri'];
       this.grupa = 1.1;
       this.dataUser.push({
-        user:this.user,
-        image:'200x200.jpg',
-        showDetails:false,
-        grupa:this.grupa,
+        user: this.user,
+        image: '200x200.jpg',
+        showDetails: false,
+        grupa: this.grupa,
         icon: 'arrow-down',
-        zi:this.zi
+        zi: this.zi
       });
     } else {
       let toast = this.toastCtrl.create({
@@ -77,14 +77,14 @@ export class Profile {
     }
 
   }
-  
+
   public createRoute(data) {
-    this.navCtrl.push('Routeprofile',{data:data});
+    this.navCtrl.push('Routeprofile', { data: data });
     let toast = this.toastCtrl.create({
-        message: 'Google maps is loading ... Please wait',
-        duration: 2000,
-        position: 'bottom'
-      })
+      message: 'Google maps is loading ... Please wait',
+      duration: 2000,
+      position: 'bottom'
+    })
     toast.present();
   }
   ionViewDidLoad() {

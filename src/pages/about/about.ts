@@ -14,7 +14,9 @@ import { SuperTabsController } from 'ionic2-super-tabs';
   templateUrl: 'about.html',
 })
 export class About {
-
+  public descriereUpt: string = "DescriereUpt";
+  public conducereUpt: string = 'ConducereUpt';
+  public noutatiUpt: string = 'NoutatiUpt';
   constructor(public navCtrl: NavController,private superTabsCtrl: SuperTabsController, public navParams: NavParams) {
   }
 

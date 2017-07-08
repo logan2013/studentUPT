@@ -1,37 +1,32 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>Login</ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content>
-    <ion-card>
-        <form [formGroup]="myForm" (ngSubmit)="logForm()">
-            <ion-list>
-
-                <ion-item>
-                    <ion-label fixed>Email</ion-label>
-                    <ion-input type="email" value="" formControlName="user"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label fixed>Password</ion-label>
-                    <ion-input type="password" value="" formControlName="password"></ion-input>
-                </ion-item>
-
-            </ion-list>
-
-            <div>
-                <button ion-button color="primary" full text-capitalize>Sign In </button>
-            </div>
-        </form>
-        <!--
-  <button (click)="googlePlus_login()" ion-button color="danger" full text-capitalize> <ion-icon name="logo-googleplus" item-left></ion-icon>Login with Google+ </button>
-  <button (click)="register()" ion-button color="light" full text-capitalize> Or create an account</button>
-  -->
-
-        <!--<button (click)="freeUser()" ion-button color="secondary" full text-capitalize> 
-  Entry without account
-  </button>-->
-    </ion-card>
+<ion-content style="background-color:#2e2f92;">
+    <!--<div class="splash-info">
+        <div class="splash-logo"></div>
+        <div class="splash-intro">
+            Welcome
+        </div>
+    </div>-->
+    <form scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
+        <h2 style="color:white"> Login </h2>
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>
+                    <p style="color:#2e2f92"> Email </p>
+                </ion-label>
+                <ion-input style="color:#2e2f92" type="email" value="" formControlName="user" placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>
+                    <p style="color:#2e2f92">Parola</p>
+                </ion-label>
+                <ion-input type="password" value="" formControlName="password" placeholder=""></ion-input>
+            </ion-item>
+        </ion-list>
+        <div class="spacer" style="height:40px;" id="login-spacer1"></div>
+        <button ion-button color="light" block>
+     <p style="color:#2e2f92"> Log in </p>
+    </button>
+        <button (click)="guest()" ion-button color="light" block>
+      <p  style="color:#2e2f92">Log in as Guest</p>
+    </button>
+    </form>
 </ion-content>

@@ -1,0 +1,42 @@
+<!--
+  Generated template for the DescriereFacultate page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content>
+    <ion-card>
+        <ion-card-header text-center>
+            Descriere facultate
+        </ion-card-header>
+        <p padding text-center text-wrap style="white-space: normal;">
+            {{descriere}}
+        </p>
+    </ion-card>
+    <ion-card>
+        <ion-card-header text-center>
+            Conducere facultate
+        </ion-card-header>
+        <ion-list>
+
+            <ion-item *ngFor="let data of conducere">
+                <ion-row *ngIf="data.image != ''">
+                    <ion-col col-5>
+                    </ion-col>
+                    <ion-col col-3>
+                        <img src="/assets//{{data.image}}">
+                    </ion-col>
+                    <ion-col col-4>
+                    </ion-col>
+                </ion-row>
+                <h2 text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
+                <h4 text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
+                <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
+                <p text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

@@ -1,23 +1,26 @@
-<ion-content style="background-color:#2e2f92;" no-padding>
-
+<ion-content style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
+    <div style="top:0px; position:absolute;">
+        <button ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
+      </button>
+    </div>
     <div style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
                 height: 50vw; 
                 background-color:#2e2f92;">
         <img style="border-radius:50%; width:30%;  margin-left:35%; margin-top:12px;" src="http://placehold.it/150x150" />
-        <h5 text-center text-wrap style="white-space: normal;color:white">
+        <p text-center text-wrap style="white-space: normal;color:white">
             {{item.title}}
-        </h5>
+        </p>
     </div>
 
 
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="rootPage" title="Noutati"></super-tab>
-        <super-tab [root]="rootLiga" title="Descriere"></super-tab>
-
+        <super-tab [root]="rootDescriere" title="Descriere"></super-tab>
         <super-tab [root]="rootOrar" title="Orar"></super-tab>
-        <!--<super-tab [root]="rootLiga" title="LIGA"></super-tab>-->
+        <!--<super-tab [root]="rootConducere" title="Conducere"></super-tab>-->
     </super-tabs>
 
 </ion-content>

@@ -5,9 +5,26 @@ import 'rxjs/add/operator/map';
 export class DataTabs {
 
   public message: any = [];
+  public conducere: any = [];
+  public descriere: any = [];
+  public orar: any = [];
   constructor() { }
 
-  setMessage(message){
+  setMessage(message) {
     this.message = message;
   }
+
+  setCoducere(conducere) {
+    this.conducere = conducere;
+  }
+
+  setDescriere(descriere) {
+    this.descriere = descriere;
+  }
+
+  setOrar(orar) {
+    this.orar = orar;
+  }
+
+
 }

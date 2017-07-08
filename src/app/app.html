@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
     <ion-header>
 
     </ion-header>
@@ -9,7 +9,7 @@
             <p *ngIf="dataUser.data == 'user'" style="color:white">Guest User </p>
             <p *ngIf="dataUser.data != 'user'" style="color:white">{{dataUser.data}} </p>
 
-            <p *ngIf="dataUser.data != 'user'" style="color:white"> Editeaza profil</p>
+            <!--<p *ngIf="dataUser.data != 'user'" style="color:white"> Editeaza profil</p>-->
         </div>
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
