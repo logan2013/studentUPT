@@ -1,5 +1,8 @@
 <ion-header>
     <ion-navbar>
+        <button ion-button menuToggle>
+       <ion-icon name="menu"></ion-icon>
+    </button>
         <ion-title>
             Harta campusului
         </ion-title>
@@ -33,22 +36,36 @@
             <ion-item>
                 <ion-row>
                     <ion-col>
-                        <h2>{{location.title}}</h2>
+                        <h2 text-center text-wrap style="white-space: normal;">{{location.title}}</h2>
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col>
-                        <button ion-button clear large color="primary" (click)="(switch = 'map'); openLocation(location);"> <ion-icon name="pin"></ion-icon></button>
+                    <ion-col text-center text-wrap style="white-space: normal;">
+
+                        <button text-capitalize ion-button clear small color="primary" (click)="(switch = 'map'); openLocation(location);"> Map<br> </button>
                     </ion-col>
-                    <ion-col>
-                        <button ion-button clear large color="primary">  <ion-icon name="browsers"></ion-icon></button>
+                    <ion-col *ngIf="location.website != ''" text-center text-wrap style="white-space: normal;">
+
+                        <button text-capitalize ion-button clear small color="primary" (click)="openBrowser(location.website);"> Website<br></button>
                     </ion-col>
 
-                    <ion-col>
-                        <button ion-button clear large color="primary"><ion-icon name="navigate"></ion-icon></button>
+                    <ion-col text-center text-wrap style="white-space: normal;">
+
+                        <button text-capitalize [disabled]=myLocation (click)="openNavigator(location);" ion-button clear small color="primary">  Navigator<br></button>
                     </ion-col>
-                    <ion-col>
+                    <!--<ion-col>
                         <button ion-button clear large color="primary"> <ion-icon name="paper"></ion-icon></button>
+                    </ion-col>-->
+                </ion-row>
+                <ion-row>
+                    <ion-col text-center>
+                        <button ion-button clear small color="primary" (click)="(switch = 'map'); openLocation(location);">   <ion-icon color="primary" name="pin"></ion-icon> </button>
+                    </ion-col>
+                    <ion-col *ngIf="location.website != ''" text-center>
+                        <button ion-button clear small color="primary" (click)="openBrowser(location.website);"> <ion-icon color="primary" name="browsers"></ion-icon> </button>
+                    </ion-col>
+                    <ion-col text-center>
+                        <button [disabled]=myLocation (click)="openNavigator(location);" ion-button clear small color="primary">  <ion-icon color="primary" name="navigate"></ion-icon></button>
                     </ion-col>
                 </ion-row>
             </ion-item>

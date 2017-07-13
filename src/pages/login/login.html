@@ -1,32 +1,64 @@
 <ion-content style="background-color:#2e2f92;">
-    <!--<div class="splash-info">
-        <div class="splash-logo"></div>
-        <div class="splash-intro">
-            Welcome
-        </div>
-    </div>-->
-    <form scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
-        <h2 style="color:white"> Login </h2>
-        <ion-list>
-            <ion-item>
-                <ion-label stacked>
-                    <p style="color:#2e2f92"> Email </p>
-                </ion-label>
-                <ion-input style="color:#2e2f92" type="email" value="" formControlName="user" placeholder=""></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label stacked>
-                    <p style="color:#2e2f92">Parola</p>
-                </ion-label>
-                <ion-input type="password" value="" formControlName="password" placeholder=""></ion-input>
-            </ion-item>
-        </ion-list>
-        <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-        <button ion-button color="light" block>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-7>
+            </ion-col>
+            <ion-col style="margin-top:5px; margin-right:-12px;"> <img src="http://193.226.9.153/images/upt.png" />
+            </ion-col>
+        </ion-row>
+        <ion-row style="margin-top:-80px;">
+            <ion-col text-center>
+                <img style="width:370px" src="http://193.226.9.153/images/electro.png">
+            </ion-col>
+        </ion-row>
+        <form style="margin-top:-110px;" scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
+
+
+
+            <h2 style="color:white"> Login </h2>
+            <ion-list>
+                <ion-item color="primary">
+                    <ion-label stacked>
+                        <p style="color:white"> Email </p>
+                    </ion-label>
+                    <ion-input type="email" value="" formControlName="user" placeholder=""></ion-input>
+                </ion-item>
+                <ion-item color="primary">
+                    <div class="spacer" style="height: 2px;"></div>
+                    <ion-label stacked>
+                        <p style="color:white">Parola</p>
+                    </ion-label>
+                    <ion-input type="password" value="" formControlName="password" placeholder=""></ion-input>
+                </ion-item>
+                <ion-input [hidden]="true"></ion-input>
+            </ion-list>
+            <div class="spacer" style="height:30px;" id="login-spacer1"></div>
+            <button ion-button color="light" block>
      <p style="color:#2e2f92"> Log in </p>
     </button>
-        <button (click)="guest()" ion-button color="light" block>
+            <button (click)="guest()" ion-button color="light" block>
       <p  style="color:#2e2f92">Log in as Guest</p>
     </button>
-    </form>
+        </form>
+
+    </ion-grid>
+    <ion-row style="position:bottom;">
+        <ion-col col-4>
+        </ion-col>
+        <ion-col> <img src="http://193.226.9.153/images/cospol.png" />
+        </ion-col>
+        <ion-col col-4>
+        </ion-col>
+    </ion-row>
 </ion-content>
+<!--<ion-footer>
+    <ion-row>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col> <img src="http://193.226.9.153/images/cospol.png" />
+        </ion-col>
+        <ion-col col-4>
+        </ion-col>
+    </ion-row>
+</ion-footer>-->

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { NoutatiUpt } from './noutati-upt';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { NoutatiUpt } from './noutati-upt';
   ],
   imports: [
     IonicPageModule.forChild(NoutatiUpt),
+    IonicImageViewerModule
   ],
   exports: [
     NoutatiUpt

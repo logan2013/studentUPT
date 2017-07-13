@@ -33,14 +33,14 @@ export class Profile {
 
     this.user = localStorage.getItem('user');
 
-    this.http.get('http://www.atestate-inf.tk/ghidtest/readxls.php').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/readxls.php').map(res => res.json()).subscribe(data => {
       this.dataXls = data;
     });
 
 
 
     if (this.user) {
-      this.http.get('http://atestate-inf.tk/ghidtest/reqData.php?user=' + this.user).map(res => res.json()).subscribe(data => {
+      this.http.get('http://193.226.9.153/reqData.php?user=' + this.user).map(res => res.json()).subscribe(data => {
         this.myRoute = data;
         console.log(this.myRoute)
       });

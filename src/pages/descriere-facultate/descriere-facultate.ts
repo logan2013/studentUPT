@@ -14,12 +14,14 @@ import { DataTabs } from '../../providers/datatabs';
   templateUrl: 'descriere-facultate.html',
 })
 export class DescriereFacultate {
-  public descriere: any;
+  public descriere: any = [];
   public conducere: any = [];
-
+  public proiecte: any = [];
   constructor(public navCtrl: NavController, public dataTabs: DataTabs, public navParams: NavParams) {
     this.descriere = this.dataTabs.descriere;
     this.conducere = this.dataTabs.conducere;
+    this.proiecte = this.dataTabs.proiecte;
+    console.log(this.descriere)
   }
 
   ionViewDidLoad() {

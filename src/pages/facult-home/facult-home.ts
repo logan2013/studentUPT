@@ -80,7 +80,7 @@ export class FacultHome {
         insertimage:localStorage.getItem('upt'),
         facultate:this.facultate
       }
-      this.http.post('http://www.atestate-inf.tk/ghidtest/insert.php',JSON.stringify(postParams),options).map(res => res.json())
+      this.http.post('http://193.226.9.153/insert.php',JSON.stringify(postParams),options).map(res => res.json())
       .subscribe(data=>{
         console.log(data);
       },error=>{
@@ -146,7 +146,7 @@ console.log(this.myForm)
         inputimage:localStorage.getItem('upt'),
         id:this.id[0].id
       }
-      this.http.post('http://www.atestate-inf.tk/ghidtest/edit.php',JSON.stringify(this.postParamss),options)
+      this.http.post('http://193.226.9.153/edit.php',JSON.stringify(this.postParamss),options)
       .subscribe(data=>{
         console.log(data);
       },error=>{
@@ -217,7 +217,7 @@ private copyFileToLocalDir(namePath, currentName, newFileName) {
 private presentToast(text) {
   let toast = this.toastCtrl.create({
     message: text,
-    duration: 3000,
+    duration: 5000,
     position: 'top'
   });
   toast.present();
@@ -263,8 +263,7 @@ public pathForImage(img) {
     this.id[0].icon = localStorage.getItem('upt');
  
   // Destination URL
-  var url = "http://www.atestate-inf.tk/ghidtest/upload.php";
- //http://atestate-inf.tk/ghidtest/upload.php
+  var url = "http://hainedefirmasj.com/placesforme/upload.php";
   // File for Upload
   var targetPath = this.pathForImage(this.lastImage);
  
@@ -289,7 +288,7 @@ public pathForImage(img) {
   // Use the FileTransfer to upload the image
   fileTransfer.upload(targetPath, url, options).then(data => {
     this.loading.dismissAll()
-    this.presentToast('Image succesful uploaded.');
+    this.presentToast('Image succesful uploaded.' +JSON.stringify(data));
   }, err => {
     this.loading.dismissAll()
     this.presentToast(err);

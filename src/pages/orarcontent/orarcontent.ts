@@ -26,7 +26,7 @@ export class Orarcontent {
         public http: Http,
         public navParams: NavParams) {
 
-        this.http.get('http://www.atestate-inf.tk/ghidtest/readxls.php').map(res => res.json()).subscribe(data => {
+        this.http.get('http://193.226.9.153/ghidtest/readxls.php').map(res => res.json()).subscribe(data => {
             this.posts = data;
         });
 

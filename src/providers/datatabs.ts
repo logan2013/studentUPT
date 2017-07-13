@@ -8,6 +8,7 @@ export class DataTabs {
   public conducere: any = [];
   public descriere: any = [];
   public orar: any = [];
+  public proiecte: any = [];
   constructor() { }
 
   setMessage(message) {
@@ -24,6 +25,10 @@ export class DataTabs {
 
   setOrar(orar) {
     this.orar = orar;
+  }
+
+  setProiecte(proiecte) {
+    this.proiecte = proiecte;
   }
 
 

@@ -39,7 +39,7 @@ export class NoutatiUpt {
       content: "Loading...",
     });
     loader.present();
-    this.http.get('http://www.atestate-inf.tk/ghidtest/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
       this.posts = data;
       localStorage.removeItem('upt');
       loader.dismiss();
@@ -48,7 +48,7 @@ export class NoutatiUpt {
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get('http://www.atestate-inf.tk/ghidtest/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
       this.posts = data;
     });
      setTimeout(() => {
@@ -83,7 +83,7 @@ export class NoutatiUpt {
       },{
         text: 'Agree',
         handler: () => {
-          this.http.get('http://www.atestate-inf.tk/ghidtest/remove.php?delete='+item).map(res => res.json()).subscribe(data => {
+          this.http.get('http://193.226.9.153/remove.php?delete='+item).map(res => res.json()).subscribe(data => {
           this.posts = data;});
       }
       }]

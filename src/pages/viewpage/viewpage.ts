@@ -41,7 +41,6 @@ export class Viewpage {
       console.log(isLoggedIn)
       console.log(this.info,this.dataTabs.message.note)
   });
-
     this.items = [];
     this.newtext = localStorage.getItem('text');// ??
     this.time = new Date().getDay() +"/"+new Date().getMonth()+ "/"+new Date().getFullYear() +"  " +new Date().getHours()+":"+new Date().getMinutes() ; // current date will be replaced with date at eevery post
@@ -50,7 +49,7 @@ export class Viewpage {
           content: "Loading...",
         });
     loader.present();
-    this.http.get('http://www.atestate-inf.tk/ghidtest/getdata.php?facultate='+ this.dataTabs.message.note).map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate='+ this.dataTabs.message.note).map(res => res.json()).subscribe(data => {
         this.posts = data;
         localStorage.removeItem('upt');
         loader.dismiss();
@@ -60,7 +59,7 @@ export class Viewpage {
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get('http://www.atestate-inf.tk/ghidtest/getdata.php?facultate='+ this.dataTabs.message.note).map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate='+ this.dataTabs.message.note).map(res => res.json()).subscribe(data => {
       this.posts = data;
     });
   
@@ -97,8 +96,8 @@ export class Viewpage {
       },{
         text: 'Agree',
         handler: () => {
-          this.http.get('http://www.atestate-inf.tk/ghidtest/remove.php?delete='+item).map(res => res.json()).subscribe(data => {
-          this.posts = data;});
+          this.http.get('http://193.226.9.153/remove.php?delete='+item).map(res => res.json()).subscribe(data => {
+         });
       }
       }]
     });

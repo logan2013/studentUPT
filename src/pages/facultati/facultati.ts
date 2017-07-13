@@ -4,6 +4,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Auth } from '../../providers/auth';
 import { Http } from '@angular/http';
 import { OneSignal } from '@ionic-native/onesignal';
+import { DataTabs } from '../../providers/datatabs';
+
 @IonicPage()
 @Component({
   selector: 'page-facultati',
@@ -25,7 +27,7 @@ export class Facultati {
   public series: any[];
   public descriereAC: any;
   public conducereAC: Array<{ functie: string, nume: string, telefon: string, email: string, image: string }> = [];
-  public orarAC: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public orarAC: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereEE: any;
   public conducereEE: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
   public orarEE: Array<{ orarFacultate: any, orarAdmitere: any }> = []
@@ -55,16 +57,23 @@ export class Facultati {
   public etcupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public a4upt: Array<{ descriere: any, conducere: any, orar: any }>;
   public ctupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[] }> = [];
+  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any , short:any}> = [];
+  public logos: Array<{ imagelink: any }> = [];
   constructor(
     public auth: Auth,
     public http: Http,
+    public dataTabs: DataTabs,
     public oneSignal: OneSignal,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public navParams: NavParams) {
+    this.dataTabs.setMessage('');
+    this.dataTabs.setCoducere('');
+    this.dataTabs.setDescriere('');
+    this.dataTabs.setOrar('');
+    this.dataTabs.setProiecte('')
     this.user = localStorage.getItem('user');
     this.auth.login().then((isLoggedIn) => {
 
@@ -80,6 +89,8 @@ export class Facultati {
          ofesională și compatibilitatea cu mediul academic internațional. Exceptând activitățile de 
          învățământ, prioritățile Facultății de Automatică și Calculatoare sunt încurajarea cercetării 
          științifice și stabilirea de parteneriate cu mediul academic sau privat.`
+         , 
+         'ac/descriereac.jpg'
       ];
 
       this.conducereAC.push({
@@ -158,20 +169,40 @@ export class Facultati {
         </tr>
         </table>
 `,
-        orarAdmitere: `Înscriere candidați: luni – sâmbătă 17 – 22 iulie, între orele 9 și 14<br>
-●	Concurs (proba de matematică și concursul de dosare): marți 25 iulie<br>
-●	Rezultatele inițiale ale admiterii: marți 26 iulie, ora 10<br>
-●	Confirmări Runda 1: Perioada marți 26 iulie ora 10 – miercuri 27 iulie ora 16 reprezintă RUNDA 1 de confirmări a statutului de admis cu lista de opțiuni inițială<br>
-●	Afișare Runda 2: joi 28 iulie, ora 10<br>
-●	Confirmări Runda 2: Intervalul orar 10 – 12 din data de vineri 29 iulie reprezintă RUNDA 2 de confirmări a statutului de admis cu lista de opțiuni inițială<br>
-●	Afișare Runda 3: vineri 29 iulie, ora 16<br>
-●	Confirmări Runda 3: Intervalul orar 16 – 18 din data de vineri 29 iulie reprezintă RUNDA 3 de confirmări a statutului de admis cu lista de opțiuni inițială<br>
-●	Rezultatele finale ale admiterii: vineri 29 iulie 2017 ora 20<br>
-`})
+        orarAdmitere: `   <table  width='100%'>
+        <tr bgcolor="#2e2f92"><td>  <font color="white">17.07.2017-22.07.2017-Orar: 09:00-14:00</td> 			<td>  <font color="white">Înscrierea candidaților</td></tr>	
+        <tr  background="blue"><td>  <font color="#2e2f92" >  <b>25.07.2017 ora 10:00	</td><td>	 <font color="#2e2f92" >  <b>			Proba de evaluare a cunoștințelor: MATEMATICĂ</td><tr>	
+        <tr bgcolor="#2e2f92"> <td>  <font color="white">26.07.2017  ora 10:00				</td><td>	 <font color="white">Afișare rezultate: runda I</td></tr><br>	
+        <tr> <td> <font color="#2e2f92" >  <b>26.07.2017 ora 10:00- 27.07.2017 ora 16:00	</td><td>			 <font color="#2e2f92" >  <b>	Confirmarea celor admiși: runda I</td></tr>
+        <tr bgcolor="#2e2f92"> <td> <font color="white">28.07.2017 ora 10:00			</td><td>	 <font color="white">	Afișare rezultate: runda II</td></tr>
+        <tr> <td> <font color="#2e2f92" >  <b>28.07.2017 ora 10:00-29.07.2017 ora 12:00		</td><td>	 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda II</td></tr>
+        <tr bgcolor="#2e2f92"><td>  <font color="white">29.07.2017 ora 16:00		</td><td>		 <font color="white">	Afișare rezultate: runda III</td></tr><br>	
+        <tr><td> <font color="#2e2f92" >  <b>29.07.2017 ora 16:00-18:00	</td><td>		 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda III</td></tr>
+        <tr bgcolor="#2e2f92"><td> <font color="white">29.07.2017 ora 20:00			</td><td>	 <font color="white">	Rezultate finale</td></tr>
+        </table>
+`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17, 6)), endTime: new Date(Date.UTC(2017, 6, 17, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 18, 6)), endTime: new Date(Date.UTC(2017, 6, 18, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 19, 6)), endTime: new Date(Date.UTC(2017, 6, 19, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 20, 6)), endTime: new Date(Date.UTC(2017, 6, 20, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 21, 6)), endTime: new Date(Date.UTC(2017, 6, 21, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 22, 6)), endTime: new Date(Date.UTC(2017, 6, 22, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: 'Proba de evaluare a cunoștințelor: MATEMATICĂ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finaleI`}
+        ]
+      })
       this.descriereEE = [
         `  Începuturile învăţământului superior electrotehnic în Timişoara coincid cu începuturile Şcolii Politehnice – Timişoara. Data de 15 noiembrie 1920 este data înfiinţării Şcolii Politehnice la Timişoara, care şi-a început activitatea cu pregătirea inginerilor în specializările Electromecanică (Mecanică şi Electricitate) respectiv Mine şi Metalurgie.
   Universitatea a apreciat întotdeauna rolul important jucat de industrie în pregătirea studenților pentru piața muncii și a susținut continuu relații de colaborare cu mediul economic. Interesul pentru dezvoltarea unor competențe care să se plieze pe nevoile pieței muncii, a influențat dezvoltarea curriculară și s-a concretizat, printre altele, în angajarea unui număr mare de absolvenți în companii multinaționale de prestigiu.
-`
+`,
+'ee/descriereee.jpg'
       ];
 
       this.conducereEE.push({
@@ -192,28 +223,125 @@ export class Facultati {
 
       this.orarEE.push({
         orarAdmitere: `
-        <table border='2'>
-        <tr><td>
-        Înscriere candidaţi:
-        </td><td>
-        17.07.2017 - 22.07.2017
-        24.07.2017 – 25.07.2017</td></tr>
-          <tr><td>Concurs de dosare:</td><td>
-        25.07.2017</td></tr>
-          <tr><td>Rezultatele concursului:</td><td>
-        26.07.2017, ora 10.00</td></tr>
-          <tr><td>Confirmări Runda I:</td><td>
-        26.07.2017, ora 10.00 - 27.07.2017, ora 16.00</tr></td>
-          <tr><td>Afişare Runda II:</td><td>
-        28.07.2017, ora 10.00</td></tr>
-          <tr><td>Confirmări Runda II:</td><td>
-        28.07.2017, ora 10.00 - 29.07.2017, ora 12.00</td></tr>
-          <tr><td>Afişare Runda III:</td><td>
-        29.07.2017, ora 16.00</td></tr>
-          <tr><td>Confirmări Runda III:</td><td>
-        29.07.2017, orele 16.00 - 18.00</td></tr>
-          <tr><td>Rezultatele finale:</td><td>
-        29.07.2017, ora 20.00  </td></tr>
+        <table  width='100%'>
+        <tr height="50px"  bgcolor="#2e2f92" >
+          <td height="50px">
+            <font color="white">
+              Înscriere candidaţi:
+            </font>
+          </td>
+          <td height="50px">
+            <font color="white">
+              17.07.2017 - 22.07.2017<br>
+              24.07.2017 – 25.07.2017
+            </font>
+          </td>
+        </tr>
+        <tr height="50px">
+          <td>
+              <font color="#2e2f92">
+                <b>Concurs de dosare:</b>
+              </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                 <b> 25.07.2017</b>
+              </font>
+          </td>
+        </tr height="50px">
+        <tr bgcolor="#2e2f92">
+          <td>
+            <font color="white">
+            Rezultatele concursului:
+          </td>
+          <td>
+            <font color="white">
+            26.07.2017, ora 10.00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <font color="#2e2f92" >
+              <b>
+                Confirmări Runda I:
+              </b>
+             </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                  26.07.2017, ora 10.00 <br> 27.07.2017, ora 16.00
+                </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+              <font color="white">
+                 Afişare Runda II:
+              </font>
+          </td>
+          <td>
+             <font color="white">
+                 28.07.2017, ora 10.00
+              </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                 Confirmări Runda II:
+               </b>
+              </font>
+          </td>
+          <td>
+             <font color="#2e2f92" >
+                  <b>
+                    28.07.2017, ora 10.00 <br> 29.07.2017, ora 12.00
+                 </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+             <font color="white">
+               Afişare Runda III:
+               </font>
+          </td>
+          <td>
+             <font color="white">
+                 29.07.2017, ora 16.00
+                </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <font color="#2e2f92" >  <b>
+                  Confirmări Runda III:
+                  </b>
+              </font>
+          </td>
+          <td>
+            <font color="#2e2f92" >
+                  <b>
+                  29.07.2017, orele 16.00 - 18.00
+                  </b>
+              </font>
+          </td>
+        </tr>
+        <tr  bgcolor="#2e2f92">
+          <td>
+           <font color="white">
+              Rezultatele finale:
+            </font>
+          </td>
+          <td>
+             <font color="white">
+              29.07.2017, ora 20.00  
+              </font>
+          </td>
+        </tr>
         </table>
 `,
         orarFacultate: `<table border='2' width = "100%" >
@@ -244,7 +372,8 @@ export class Facultati {
          precum și realizarea activităților de cercetare, proiectare, dezvoltare tehnologică și managerială la standardele cele mai ridicate. In cei peste 75 de ani de 
          existență, Facultatea de Construcții din Timisoara a fost întotdeauna deschisă colaborării cu mediul economic, social și academic, câștigându-și o imagine foarte 
          bună la nivel național și internațional, devenind un vector de dezvoltare în domeniu, un reper de profesionalism și exigență. Toate programele de studii sunt acreditate,
-          în concordanță`
+          în concordanță`,
+          'ostl/descriereostl.jpg'
       ];
 
       this.conducereOSTL.push({
@@ -265,17 +394,126 @@ export class Facultati {
 
       this.orarOSTL.push({
         orarAdmitere: `
-        <table border='2'>
-        <tr><td>Înscriere candidați:</td> <td>17.07.2017-22.07.2017
-        24.07.2017-25.07.2017</td></tr>
-        <tr><td>Concurs de dosare:	</td> <td>25.07.2017</td></tr>
-        <tr><td>Afișarea rezultatelor concursului:</td> <td>	26.07.2017, ora 10.00</td></tr>
-        <tr><td>Confirmări runda I</td> <td>	26.07.2017, ora 10.00-27.07.2017, ora 16.00</td></tr>
-        <tr><td>Afișare runda II</td> <td>	28.07.2017, ora 10.00</td></tr>
-        <tr><td>Confirmări runda II	</td> <td>28.07.2017, ora 10.00-29.07.2017, ora 12.00</td></tr>
-        <tr><td>Afișare runda III</td> <td>	29.07.2017, ora 16.00</td></tr>
-        <tr><td>Confirmări runda III	</td> <td>29.07.2017, orele 16.00-18.00</td></tr>
-        <tr><td>Rezultatele finale	</td> <td>29.07.2017, ora 20.00</td></tr>
+            <table  width='100%'>
+        <tr height="50px"  bgcolor="#2e2f92" >
+          <td height="50px">
+            <font color="white">
+              Înscriere candidaţi:
+            </font>
+          </td>
+          <td height="50px">
+            <font color="white">
+              17.07.2017 - 22.07.2017<br>
+              24.07.2017 – 25.07.2017
+            </font>
+          </td>
+        </tr>
+        <tr height="50px">
+          <td>
+              <font color="#2e2f92">
+                <b>Concurs de dosare:</b>
+              </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                 <b> 25.07.2017</b>
+              </font>
+          </td>
+        </tr height="50px">
+        <tr bgcolor="#2e2f92">
+          <td>
+            <font color="white">
+            Rezultatele concursului:
+          </td>
+          <td>
+            <font color="white">
+            26.07.2017, ora 10.00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <font color="#2e2f92" >
+              <b>
+                Confirmări Runda I:
+              </b>
+             </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                  26.07.2017, ora 10.00 <br> 27.07.2017, ora 16.00
+                </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+              <font color="white">
+                 Afişare Runda II:
+              </font>
+          </td>
+          <td>
+             <font color="white">
+                 28.07.2017, ora 10.00
+              </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                 Confirmări Runda II:
+               </b>
+              </font>
+          </td>
+          <td>
+             <font color="#2e2f92" >
+                  <b>
+                    28.07.2017, ora 10.00 <br> 29.07.2017, ora 12.00
+                 </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+             <font color="white">
+               Afişare Runda III:
+               </font>
+          </td>
+          <td>
+             <font color="white">
+                 29.07.2017, ora 16.00
+                </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <font color="#2e2f92" >
+                  <b>
+                  Confirmări Runda III:
+                  </b>
+              </font>
+          </td>
+          <td>
+            <font color="#2e2f92" >
+                  <b>
+                  29.07.2017, orele 16.00 - 18.00
+                  </b>
+              </font>
+          </td>
+        </tr>
+        <tr  bgcolor="#2e2f92">
+          <td>
+           <font color="white">
+              Rezultatele finale:
+            </font>
+          </td>
+          <td>
+             <font color="white">
+              29.07.2017, ora 20.00  
+              </font>
+          </td>
+        </tr>
         </table>`,
         orarFacultate: `
         <table border='2' width="100%">
@@ -289,7 +527,8 @@ export class Facultati {
         `Instruirea în Inginerie și Management se desfășoară la Facultatea de Management în Producție și Transporturi pe parcursul a 4 ani, iar după absolvire se poate accede la învățământ de master și școală doctorală. Licența dobândită acoperă o dublă specializare, atât în domeniul ingineresc, cât și managerial.
 Instruirea din domeniul de studiu Științe Administrative durează 3 ani, iar absolvenții sunt specialiști pregătiți în domeniul administrației publice centrale și locale, dar și al cercetării științifice de profil.
 Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: Continental, Hella, TRW, Nestle sau Coca-Cola sau și-au deschis întreprinderi proprii. 
-`
+`,
+'mpt/descrierempt.jpg'
       ];
 
       this.conducereMPT.push({
@@ -310,30 +549,297 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
 
       this.orarMPT.push({
         orarAdmitere: `
-        <table border='2'>
-        <tr><td>Înscriere candidați:</td> <td>17.07.2017-22.07.2017
-        24.07.2017-25.07.2017</td></tr>
-        <tr><td>Concurs de dosare:	</td> <td>25.07.2017</td></tr>
-        <tr><td>Afișarea rezultatelor concursului:</td> <td>	26.07.2017, ora 10.00</td></tr>
-        <tr><td>Confirmări runda I</td> <td>	26.07.2017, ora 10.00-27.07.2017, ora 16.00</td></tr>
-        <tr><td>Afișare runda II</td> <td>	28.07.2017, ora 10.00</td></tr>
-        <tr><td>Confirmări runda II	</td> <td>28.07.2017, ora 10.00-29.07.2017, ora 12.00</td></tr>
-        <tr><td>Afișare runda III</td> <td>	29.07.2017, ora 16.00</td></tr>
-        <tr><td>Confirmări runda III	</td> <td>29.07.2017, orele 16.00-18.00</td></tr>
-        <tr><td>Rezultatele finale	</td> <td>29.07.2017, ora 20.00</td></tr>
+          <table  width='100%'>
+        <tr height="50px"  bgcolor="#2e2f92" >
+          <td height="50px">
+            <font color="white">
+              Înscriere candidaţi:
+            </font>
+          </td>
+          <td height="50px">
+            <font color="white">
+              17.07.2017 - 22.07.2017<br>
+              24.07.2017 – 25.07.2017
+            </font>
+          </td>
+        </tr>
+        <tr height="50px">
+          <td>
+              <font color="#2e2f92">
+                <b>Concurs de dosare:</b>
+              </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                 <b> 25.07.2017</b>
+              </font>
+          </td>
+        </tr height="50px">
+        <tr bgcolor="#2e2f92">
+          <td>
+            <font color="white">
+            Rezultatele concursului:
+          </td>
+          <td>
+            <font color="white">
+            26.07.2017, ora 10.00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <font color="#2e2f92" >
+              <b>
+                Confirmări Runda I:
+              </b>
+             </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                  26.07.2017, ora 10.00 <br> 27.07.2017, ora 16.00
+                </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+              <font color="white">
+                 Afişare Runda II:
+              </font>
+          </td>
+          <td>
+             <font color="white">
+                 28.07.2017, ora 10.00
+              </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                 Confirmări Runda II:
+               </b>
+              </font>
+          </td>
+          <td>
+             <font color="#2e2f92" >
+                  <b>
+                    28.07.2017, ora 10.00 <br> 29.07.2017, ora 12.00
+                 </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+             <font color="white">
+               Afişare Runda III:
+               </font>
+          </td>
+          <td>
+             <font color="white">
+                 29.07.2017, ora 16.00
+                </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <font color="#2e2f92" >
+                  <b>
+                  Confirmări Runda III:
+                  </b>
+              </font>
+          </td>
+          <td>
+            <font color="#2e2f92" >
+                  <b>
+                  29.07.2017, orele 16.00 - 18.00
+                  </b>
+              </font>
+          </td>
+        </tr>
+        <tr  bgcolor="#2e2f92">
+          <td>
+           <font color="white">
+              Rezultatele finale:
+            </font>
+          </td>
+          <td>
+             <font color="white">
+              29.07.2017, ora 20.00  
+              </font>
+          </td>
+        </tr>
         </table>`,
         orarFacultate: ``
       });
 
       this.descriereMT = [
-        ''
+        `Facultatea de Mecanică din Timișoara este cea mai mare dintre facultățile Universității Politehnica Timișoara. Ea oferă studenților formarea ca inginer mecanic, cu diverse specializări.
+Aceasta dispune de următoarele departamente:
+-Mecanică și Rezistența Materialelor
+-Mecatronică și Robotică
+-Ingineria Materialelor și Fabricației
+-Mașini Mecanice, Utilaje și Transporturi
+Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cercetare științifică se desfășoară atât la nivelul departamentelor și catedrelor, cât și în două centre de cercetare de tip baze de cercetare cu utilizatori multipli. Studenții dispun de facilități de cazare și masă, petrecerea timpului liber și sport.
+`,
+'mt/descrieremt.jpg'
       ];
 
+      this.conducereMT.push({
+        functie: 'Decan',
+        nume: 'Prof.Dr.Ing. Inocențiu MANIU',
+        telefon: '+40-256-403522',
+        email: 'inocentiu.maniu@upt.ro',
+        image: 'mt/maniu.jpg'
+      });
+
+      this.conducereMT.push({
+        functie: 'Prodecan',
+        nume: 'Conf.Dr.Ing. Aurel TULCAN',
+        telefon: '+40-256-403524',
+        email: 'aurel.tulcan@upt.ro',
+        image: 'mt/tulcan.jpg'
+      });
+
+      this.conducereMT.push({
+        functie: 'Prodecan',
+        nume: 'Conf.Dr.Ing. Eugen GHITA',
+        telefon: '+40-256-403525',
+        email: 'eugen.ghita@upt.ro',
+        image: 'mt/ghita.jpg'
+      });
+
+      this.orarMT.push({
+        orarAdmitere: `
+          <table  width='100%'>
+        <tr height="50px"  bgcolor="#2e2f92" >
+          <td height="50px">
+            <font color="white">
+              Înscriere candidaţi:
+            </font>
+          </td>
+          <td height="50px">
+            <font color="white">
+              17.07.2017 - 22.07.2017<br>
+              24.07.2017 – 25.07.2017
+            </font>
+          </td>
+        </tr>
+        <tr height="50px">
+          <td>
+              <font color="#2e2f92">
+                <b>Concurs de dosare:</b>
+              </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                 <b> 25.07.2017</b>
+              </font>
+          </td>
+        </tr height="50px">
+        <tr bgcolor="#2e2f92">
+          <td>
+            <font color="white">
+            Rezultatele concursului:
+          </td>
+          <td>
+            <font color="white">
+            26.07.2017, ora 10.00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <font color="#2e2f92" >
+              <b>
+                Confirmări Runda I:
+              </b>
+             </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                  26.07.2017, ora 10.00 <br> 27.07.2017, ora 16.00
+                </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+              <font color="white">
+                 Afişare Runda II:
+              </font>
+          </td>
+          <td>
+             <font color="white">
+                 28.07.2017, ora 10.00
+              </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                 Confirmări Runda II:
+               </b>
+              </font>
+          </td>
+          <td>
+             <font color="#2e2f92" >
+                  <b>
+                    28.07.2017, ora 10.00 <br> 29.07.2017, ora 12.00
+                 </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+             <font color="white">
+               Afişare Runda III:
+               </font>
+          </td>
+          <td>
+             <font color="white">
+                 29.07.2017, ora 16.00
+                </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <font color="#2e2f92" >
+                  <b>
+                  Confirmări Runda III:
+                  </b>
+              </font>
+          </td>
+          <td>
+            <font color="#2e2f92" >
+                  <b>
+                  29.07.2017, orele 16.00 - 18.00
+                  </b>
+              </font>
+          </td>
+        </tr>
+        <tr  bgcolor="#2e2f92">
+          <td>
+           <font color="white">
+              Rezultatele finale:
+            </font>
+          </td>
+          <td>
+             <font color="white">
+              29.07.2017, ora 20.00  
+              </font>
+          </td>
+        </tr>
+        </table>`,
+        orarFacultate: ''
+      })
       this.descriereETC = [
         `Cum spune și denumirea Facultatea de Electronică, Telecomunicații și Tehnologii Informaționale, din cadrul Universității Politehnica Timișoara, are rolul de a forma ingineri în domeniul electronicii și al telecomunicațiilor. Există două domenii în care se împarte facultatea: ”Electronică aplicată” și ”Tehnologi și sisteme de telecomunicații ”, punându-se un mare accent asupra tehnologiilor informaționale.
 Munca studenților este răsplatită prin condiții extraordinare de învățământ, iar prin extraordinare înțelegem aparatură modernă, profesori de cel mai înalt calibru și printr-o atmosferă academică de neegalat. De asemenea, studenții sunt încurajați prin acordarea de burse. Datorită faptului că este o facultate excelentă și de viitor, studenții acesteia sunt căutați de firme ca: Nokia, Continental Automotive, Kathrein, AEM, Flex, etc.  
 	Prin electronică și telecomunicaţii ești la zi, ești integrat în Europa!
-`
+`,
+'etc/descriereetc.jpg'
       ];
 
       this.conducereETC.push({
@@ -362,17 +868,16 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
 
       this.orarETC.push({
         orarAdmitere: `
-        <table border='2'>
-        <tr><b> Calendar admitere iulie 2017	</b></tr><br>				
-        <tr><td>17.07.2017-22.07.2017-Orar: 09:00-14:00</td> 			<td>Înscrierea candidaților</td></tr>	
-        <tr><td> 25.07.2017 ora 10:00	</td><td>				Proba de evaluare a cunoștințelor: MATEMATICĂ</td><tr>	
-        <tr> <td>26.07.2017  ora 10:00				</td><td>	Afișare rezultate: runda I</td></tr><br>	
-        <tr> <td>26.07.2017 ora 10:00- 27.07.2017 ora 16:00	</td><td>				Confirmarea celor admiși: runda I</td></tr>
-        <tr> <td>28.07.2017 ora 10:00			</td><td>		Afișare rezultate: runda II</td></tr>
-        <tr> <td>29.07.2017 ora 10:00-29.07.2017 ora 12:00		</td><td>			Confirmarea celor admiși: runda II</td></tr>
-        <tr><td> 29.07.2017 ora 16:00		</td><td>			Afișare rezultate: runda III</td></tr><br>	
-        <tr><td>29.07.2017 ora 16:00-18:00	</td><td>				Confirmarea celor admiși: runda III</td></tr>
-        <tr><td>29.07.2017 ora 20:00			</td><td>		Rezultate finale</td></tr>
+        <table  width='100%'>
+        <tr bgcolor="#2e2f92"><td>  <font color="white">17.07.2017-22.07.2017-Orar: 09:00-14:00</td> 			<td>  <font color="white">Înscrierea candidaților</td></tr>	
+        <tr  background="blue"><td>  <font color="#2e2f92" >  <b>25.07.2017 ora 10:00	</td><td>	 <font color="#2e2f92" >  <b>			Proba de evaluare a cunoștințelor: MATEMATICĂ</td><tr>	
+        <tr bgcolor="#2e2f92"> <td>  <font color="white">26.07.2017  ora 10:00				</td><td>	 <font color="white">Afișare rezultate: runda I</td></tr><br>	
+        <tr> <td> <font color="#2e2f92" >  <b>26.07.2017 ora 10:00- 27.07.2017 ora 16:00	</td><td>			 <font color="#2e2f92" >  <b>	Confirmarea celor admiși: runda I</td></tr>
+        <tr bgcolor="#2e2f92"> <td> <font color="white">28.07.2017 ora 10:00			</td><td>	 <font color="white">	Afișare rezultate: runda II</td></tr>
+        <tr> <td> <font color="#2e2f92" >  <b>29.07.2017 ora 10:00-29.07.2017 ora 12:00		</td><td>	 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda II</td></tr>
+        <tr bgcolor="#2e2f92"><td>  <font color="white">29.07.2017 ora 16:00		</td><td>		 <font color="white">	Afișare rezultate: runda III</td></tr><br>	
+        <tr><td> <font color="#2e2f92" >  <b>29.07.2017 ora 16:00-18:00	</td><td>		 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda III</td></tr>
+        <tr bgcolor="#2e2f92"><td> <font color="white">29.07.2017 ora 20:00			</td><td>	 <font color="white">	Rezultate finale</td></tr>
         </table>`,
         orarFacultate: `<table border='2' width="100%">
         <tr><td>Luni - Joi</td><td>10:00 - 12:00</td></tr>
@@ -384,7 +889,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         `Facultatea de Arhitectură, cea mai tânără facultate a Universităţii Politehnica Timişoara, a cunoscut o continuă dezvoltare, atât ca număr de studenţi şi cadre didactice, cât și ca diversificare a ofertei educaţionale. Actualmente există două specializări: Arhitectură şi Mobilier şi Amenajări interioare. Durata studiilor este de 12 semestre/ 6 ani.
 
 Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţilor facultăţii noastre la concursuri de arhitectură naţionale şi internaţionale, la workshopuri şi manifestări ştiinţifice, confirmă calitatea învăţământului de arhitectură din Timişoara şi conferă acestuia o poziţie meritorie la nivel naţional. Planul de învățământ cuprinde discipline de pregătire generală, discipline de specialitate şi activităţi practice în domeniile tehnic şi artistic.
-`
+`,
+'a4/descrierea4.jpg'
       ];
 
       this.conducereA4.push({
@@ -413,51 +919,78 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
 
       this.orarA4.push({
         orarAdmitere: `
-        <table border='2' width='100%'>
-        <tr><td>
+        <table width='100%'>
+        <tr bgcolor="#2e2f92">
+        <td>
+          <font color="white">
           Înscriere candidaţi
           </td><td>
+            <font color="white">
           17.07.2017 - 22.07.2017
           </td></tr>
         <tr><td>
+        <font color="#2e2f92" >
+                  <b>
           Concurs de admitere
           Desen tehnic si liber
           </td><td>
+          <font color="#2e2f92" >
+                  <b>
           25.07.2017
           </td></tr>
-        <tr><td>
+        <tr bgcolor="#2e2f92"><td>
+          <font color="white">
           Rezultatele concursului:	
           </td><td>
+            <font color="white">
           26.07.2017, ora 10.00
           </td></tr>
         <tr><td>
+        <font color="#2e2f92" >
+                  <b>
           Confirmări 	Runda I:	
           </td><td>
+          <font color="#2e2f92" >
+                  <b>
           26.07.2017, ora 10.00 - 27.07.2017, ora 16.00
           </td></tr>
-        <tr><td>
+        <tr bgcolor="#2e2f92"><td>
+          <font color="white">
           Afişare Runda II:
           </td><td>
+            <font color="white">
           28.07.2017, ora 10.00
           </td></tr>
         <tr><td>
+           <font color="#2e2f92" >
+                  <b>
           Confirmări 	Runda II:	
           </td><td>
+             <font color="#2e2f92" >
+                  <b>
           28.07.2017, ora 10.00 - 29.07.2017, ora 12.00
           </td></tr>
-        <tr><td>
+        <tr bgcolor="#2e2f92"><td>
+          <font color="white">
           Afişare Runda III:
           </td><td>
+            <font color="white">
           29.07.2017, ora 16.00
           </td></tr>
         <tr><td>
+           <font color="#2e2f92" >
+                  <b>
           Confirmări 	Runda III:	
           </td><td>
+             <font color="#2e2f92" >
+                  <b>
           29.07.2017, orele 16.00 - 18.00
           </td></tr>
-        <tr><td>
+        <tr bgcolor="#2e2f92"><td>
+          <font color="white">
           Rezultatele finale:
           </td><td>
+            <font color="white">
           29.07.2017, ora 20.00
           </td></tr>
 			</table>
@@ -472,7 +1005,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         `Facultatea de Chimie Industrială a fost înființată, în cadrul Școlii Politehnice din Timișoara, în anul 1948.
   Începând cu anul 2005, Universitatea Politehnica Timișoara și implicit Facultatea de Chimie Industrială și Ingineria Mediului trec la organizarea învățământului superior pe trei cicluri: ciclul de licență, ciclul de master și ciclul de doctorat. Tot în această perioadă se realizează organizarea facultății pe două departamente: Chimie Aplicată și Ingineria Compușilor Anorganici și a Mediului (CAICAM) și Chimie Aplicată și Ingineria Compușilor Organici și Naturali (CAICON).
   Misiunea de bază a facultății o constituie dezvoltarea învățământului universitar în domeniile: inginerie chimică, ingineria mediului și ingineria produselor alimentare.
-  `
+  `,
+  'ct/descrierect.jpg'
       ];
 
       this.conducereCT.push({
@@ -493,23 +1027,35 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
 
       this.orarCT.push({
         orarAdmitere: `
-            <table border='2' width = "100%">
-              <tr>
+            <table  width = "100%">
+              <tr bgcolor="#2e2f92">
                 <td>
+                 <font color="white">
                   Înscrieri si interviu:
+                  </font>
                 </td>
                 <td>
+                 <font color="white">
                   Confirmari:
+                  </font>
                 </td>
               </tr>
               <tr>
                 <td>
-                  17.07 - 22.07.2017;
-                  24.07 - 25.07.2017,
-                  orele 9:00- 16:00
+                 <font color="#2e2f92" >
+                    <b>
+                    17.07 - 22.07.2017;
+                    24.07 - 25.07.2017,
+                    orele 9:00- 16:00
+                    </b>
+                  </font>
                 </td>
                 <td>
-                  26.07 - 27.07.2017, orele 10:00- 16:00
+                 <font color="#2e2f92" >
+                    <b>
+                    26.07 - 27.07.2017, orele 10:00- 16:00
+                    </b>
+                  </font>
                 </td>
               </tr>
             </table>
@@ -524,12 +1070,15 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
       this.faculties = [
         'Facultatea de Automatică și Calculatoare',
         'Facultatea de Chimie Industrială și Ingineria Mediului ',
-        'Facultatea Electrotehnica si Electroenergetica',
-        'Facultatea de Electronica si Telecomunicatii',
-        'Facultatea de Mecanica',
-        'Facultatea de Management si Productie in Transporturi',
-        'Facultatea de Constructii',
-        'Facultatea de Arhitectura si Urbanism'];
+        'Facultatea Electrotehnică și Electroenergetică',
+        'Facultatea de Electronică, Telecomunicații și Tehnologii Informaționale',
+        'Facultatea de Mecanică',
+        'Facultatea de Management în Producție și Transporturi',
+        'Facultatea de Construcții',
+        'Facultatea de Arhitectură și Urbanism'];
+      let short = ['AC', 'CIIM', 'EE', 'ETTI', 'MEC', 'MPT', 'CT', 'ARH']
+      let logos = ['ac/ac.png', 'ct/ct.png', 'ee/ee.png', 'etc/etc.png', 'mt/mt.png', 'mpt/mpt.png', 'ostl/ostl.png', 'a4/a4.png'];
+
       this.items = [];
       console.log(this.selectedItem)
       // If we navigated to this page, we will have an item available as a nav param
@@ -557,7 +1106,9 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
             iconActive: "",
             faculties: this.faculties[i],
             favorite: "",
-            serie: this.series
+            serie: this.series,
+            imagelink: logos[i],
+            short:short[i]
           });
         }
       } else {
@@ -587,18 +1138,26 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
 
 
 
-
           this.items.push({
             title: this.faculties[i],
             note: this.notes[i],
             iconActive: this.danger,
             faculties: this.faculties[i],
             favorite: this.favorite,
-            serie: this.series
+            serie: this.series,
+            imagelink: logos[i],
+            short:short[i]
           });
         }
       }
+
     });
+    // let logos = ['ac/ac.jpg', 'ee/ee.jpg', 'etc/etc.png', 'ostl/ostl.jpg', 'mpt/mpt.jpg', 'ct/ct.jpg', 'a4/a4.jpg', 'mt/mt.jpg'];
+    // for (let i = 0, count = logos.length; i < count; i++) {
+    //   this.logos.push({
+    //     imagelink: logos[i]
+    //   });
+    // }
   }
 
   /**
@@ -660,15 +1219,21 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         orar: this.orarCT,
         conducere: this.conducereCT
       });
-    } else if(item.note == 'a4upt') {
-       this.navCtrl.push('Paginafacultate', {
+    } else if (item.note == 'a4upt') {
+      this.navCtrl.push('Paginafacultate', {
         item: item,
         descriere: this.descriereA4,
         orar: this.orarA4,
         conducere: this.conducereA4
       });
+    } else if (item.note == 'MECUPT') {
+      this.navCtrl.push('Paginafacultate', {
+        item: item,
+        descriere: this.descriereMT,
+        orar: this.orarMT,
+        conducere: this.conducereMT
+      });
     }
-
   }
 
   /**
@@ -679,7 +1244,7 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
     console.log(itemss)
     this.oneSignal.getIds().then((ids) => {
       this.id = ids.userId; // recieve de id device and send it to server 
-      this.http.get('http://www.atestate-inf.tk/ghidtest/notification.php?id=' + this.id + '&user=' + this.user + '&facultate=' + itemss.note/*+'&ids='+Device.uuid*/).map(res => res.json()).subscribe(data => {
+      this.http.get('http://193.226.9.153/notification.php?id=' + this.id + '&user=' + this.user + '&facultate=' + itemss.note/*+'&ids='+Device.uuid*/).map(res => res.json()).subscribe(data => {
         this.posts = data;
       });
     });

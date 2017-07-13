@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Beneficii } from './beneficii';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Beneficii } from './beneficii';
   ],
   imports: [
     IonicPageModule.forChild(Beneficii),
+    IonicImageViewerModule
   ],
   exports: [
     Beneficii

@@ -6,14 +6,35 @@
 -->
 
 <ion-content>
-    <ion-card *ngIf="orar[0].orarFacultate != ''">
-        <h2 text-center>Orar secretariat</h2>
-        <p padding-horizontal text-center style="white-space: pre-line;" [innerHTML]="orar[0].orarFacultate">
-        </p>
-    </ion-card>
-    <ion-card *ngIf="orar[0].orarAdmitere != ''">
+    <button *ngIf="!showCalendar" (click)="toggle()" ion-button full icon-right text-capitalize>
+                   Calendar 
+                   
+                    </button>
+    <button *ngIf="!showTabel" (click)="toggle()" ion-button full color="primary" icon-right text-capitalize>
+                   Tabel 
+                    
+                    </button>
+
+
+    <div *ngIf="showCalendar">
+        <ion-navbar color="light">
+            <ion-title color='primary'>
+                {{viewTitle}}
+            </ion-title>
+        </ion-navbar>
+        <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30" class="calendar">
+        </calendar>
+    </div>
+
+    <div *ngIf="showTabel">
+
         <h2 text-center>Orar admitere</h2>
-        <p padding-horizontal text-center style="white-space: pre-line;" [innerHTML]="orar[0].orarAdmitere">
+        <p text-center style="white-space: normal;" [innerHTML]="orar[0].orarAdmitere">
         </p>
-    </ion-card>
+        <!--<ion-card *ngIf="orar[0].orarFacultate != ''">
+            <h2 text-center>Orar secretariat</h2>
+            <p padding-horizontal text-center style="white-space: pre-line;" [innerHTML]="orar[0].orarFacultate">
+            </p>
+        </ion-card>-->
+    </div>
 </ion-content>

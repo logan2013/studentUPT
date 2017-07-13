@@ -39,8 +39,8 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
@@ -49,8 +49,8 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
@@ -59,8 +59,8 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
@@ -88,8 +88,8 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
 
@@ -98,18 +98,19 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
 
         ];
       } else {
+        this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultati', component: "Facultati" },
-          { icon: 'school', title: 'Organizatii', component: "Facultati" },
+          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];

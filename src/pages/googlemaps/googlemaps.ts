@@ -6,11 +6,13 @@ import { Getlocation } from 'C:/Users/bogdan/Desktop/ghidstudent/ghidstudent/src
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 declare var google: any;
 @IonicPage()
 @Component({
   selector: 'page-googlemaps',
-  templateUrl: 'googlemaps.html',
+  templateUrl: 'googlemaps.html'
 })
 export class Googlemaps {
   @ViewChild('map') mapElement: ElementRef;
@@ -30,9 +32,12 @@ export class Googlemaps {
   regionals: any = [];
   currentregional: any;
   markersArray = [];
-
+  public myLocation: boolean = true;
+  public locatieNavigator: any = [];
   constructor(
+    private iab: InAppBrowser,
     private diagnostic: Diagnostic,
+    private launchNavigator: LaunchNavigator,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public getlocation: Getlocation,
@@ -48,14 +53,52 @@ export class Googlemaps {
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
       "title": "Facultatea de Automatica si Calculatoare",
+      "website": "http://www.ac.upt.ro",
       "latitude": 45.747286,
       "longitude": 21.2263,
     }, {
+      "title": "Facultatea de Electrotehnica si Electroenergetica",
+      "website": "http://www.et.upt.ro",
+      "latitude": 45.747286,
+      "longitude": 21.2263,
+    }, {
+      "title": "Facultatea de Electronica si Telecomunicatii",
+      "website": "http://www.etc.upt.ro",
+      "latitude": 45.747286,
+      "longitude": 21.2263,
+    }, {
+      "title": "Facultatea de Mecanica",
+      "website": "http://www.mec.upt.ro",
+      "latitude": 45.745051,
+      "longitude": 21.225655,
+    }, {
+      "title": "Facultatea de Management în Producţie şi Transporturi",
+      "website": "http://www.mpt.upt.ro",
+      "latitude": 45.745718,
+      "longitude": 21.222742,
+    }, {
+      "title": "Facultatea de Constructii",
+      "website": "http://www.ct.upt.ro",
+      "latitude": 45.745552,
+      "longitude": 21.229909,
+    }, {
+      "title": "Facultatea de Arhitectura și Urbanism",
+      "website": "http://www.arh.upt.ro",
+      "latitude": 45.745495,
+      "longitude": 21.229845,
+    }, {
       "title": "Rectorat Universitatea Politehnica Timisoara",
+      "website": "http://www.upt.ro",
       "latitude": 45.753621,
       "longitude": 21.225085,
     }, {
+      "title": "Facultatea de Chimie Industriala si Ingineria Mediului",
+      "website": "http://www.chim.upt.ro/ro/",
+      "latitude": 45.747674,
+      "longitude": 21.233203,
+    }, {
       "title": "Restaurant universitar",
+      "website": '',
       "latitude": 45.748358,
       "longitude": 21.239724
     }];
@@ -92,12 +135,12 @@ export class Googlemaps {
 
 
   public ionViewCanEnter() {
-    
-    let successCallback = (isAvailable) => { if(!isAvailable) { this.loadSetGoogle(); }  };
+
+    let successCallback = (isAvailable) => { if (!isAvailable) { this.loadSetGoogle(); } };
     let errorCallback = (e) => console.log(e);
     this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
-  //  this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
-}
+    //  this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
+  }
 
 
   loadMaps() {
@@ -185,17 +228,13 @@ export class Googlemaps {
   initializeMap() {
     this.zone.run(() => {
       var mapEle = this.mapElement.nativeElement;
-        google.maps.InfoWindow.prototype.opened = false;
-      
+      google.maps.InfoWindow.prototype.opened = false;
+
       this.map = new google.maps.Map(mapEle, {
         zoom: 15,
         center: { lat: 45.747252, lng: 21.229041 }, //complex
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-       // styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }],
-        disableDoubleClickZoom: false,
-        disableDefaultUI: true,
-        zoomControl: true,
-        scaleControl: true,
+        // styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }],
       });
 
       for (let regional of this.regionals) {
@@ -246,25 +285,49 @@ export class Googlemaps {
     });
   }
   openLocation(markerInfo) {
-      console.log(this.markersArray,markerInfo)
+    console.log(this.markersArray, markerInfo)
 
-     for( let i = 0; i < this.markersArray.length; i++) {
-     
-       if(markerInfo.title == this.markersArray[i].title) {
-          this.map.panTo(this.markersArray[i].getPosition());
-           let infoWindow = new google.maps.InfoWindow({
-            content: markerInfo.title
-          });
-          if(infoWindow.opened)
-          infoWindow.open(this.map, this.markersArray[i]);
-      console.log(this.markersArray,markerInfo)
-          
-       }
+    for (let i = 0; i < this.markersArray.length; i++) {
+
+      if (markerInfo.title == this.markersArray[i].title) {
+        this.map.panTo(this.markersArray[i].getPosition());
+        this.map.setZoom(16);
+        let infoWindow = new google.maps.InfoWindow({
+          content: markerInfo.title
+        });
+        infoWindow.open(this.map, this.markersArray[i]);
+        console.log(this.markersArray, markerInfo)
+
+      }
     }
-         
-  }
-  
 
+  }
+
+  openBrowser(website) {
+    this.iab.create(website);
+  }
+
+  openNavigator(location) {
+    //alert(location.latitude)
+    try {
+ window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude/* + '(' + this.location.name + ')'*/, '_system');
+
+
+      // console.log(this.locatieNavigator, location)
+      // let options: LaunchNavigatorOptions = {
+      //   start: location.latitude + "," + location.longitude
+      // };
+
+      // this.launchNavigator.navigate(this.locatieNavigator, options)
+      //   .then(
+      //   success => console.log('Launched navigator'),
+      //   error => alert('Error launching navigator' + error)
+      //   );
+    }
+    catch (e) {
+      alert(e)
+    }
+  }
   //Center zoom
   //http://stackoverflow.com/questions/19304574/center-set-zoom-of-map-to-cover-all-visible-markers
   bounceMap(markers) {
@@ -291,7 +354,7 @@ export class Googlemaps {
           center: myPos,
           zoom: 14
         });
-        let marker = this.addMarker(myPos, "My last saved Location: " + result.location);
+        let marker = this.addMarker(myPos, "My last saved Location ");
 
         markers.push(marker);
         this.bounceMap(markers);
@@ -352,15 +415,18 @@ export class Googlemaps {
     });
     this.loading.present();
 
-    let locationOptions = { frequency: 3000, enableHighAccuracy: true, timeout:10000, maximumAge: 3000 };
+    let locationOptions = { frequency: 3000, enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 };
 
     this.geolocation.getCurrentPosition(locationOptions).then(
       (position) => {
         this.loading.dismiss().then(() => {
 
           this.showToast('Location found!');
+          this.myLocation = false;
+
           this.watchlocaiton = 0;
-          console.log(position.coords.latitude, position.coords.longitude);
+          // console.log(position.coords.latitude, position.coords.longitude);
+          this.locatieNavigator = [position.coords.latitude, position.coords.longitude];
           let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           let options = {
             center: myPos,
@@ -393,44 +459,50 @@ export class Googlemaps {
         });
       },
       (error) => {
-        this.watchlocaiton = 1;
-        if(this.watchlocaiton == 1) {
+         this.myLocation = true;
+        
+        // this.watchlocaiton = 1;
+        // this.myLocation = false;
 
-            this.showToast('Location found!');
-            console.log(this.getlocation.lat, this.getlocation.lng);
-            let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
-            let options = {
-              center: myPos,
-              zoom: 14
-            };
-            this.map.setOptions(options);
-            this.addMarker(myPos, "Locatia mea!");
+        // if (this.watchlocaiton == 1) {
 
-            let alert = this.alertCtrl.create({
-              title: 'Location',
-              message: 'Do you want to save the Location?',
-              buttons: [
-                {
-                  text: 'Cancel'
-                },
-                {
-                  text: 'Save',
-                  handler: data => {
-                    let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
-                    console.log(lastLocation);
-                    this.storage.set('lastLocation', lastLocation).then(() => {
-                      this.showToast('Location saved');
-                    });
-                  }
-                }
-              ]
-            });
-            alert.present();
+        //   this.showToast('Location found!');
+        //   console.log(this.getlocation.lat, this.getlocation.lng);
+        //   this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
 
-            this.watchlocaiton = 0;
-        }
+        //   let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
+        //   let options = {
+        //     center: myPos,
+        //     zoom: 14
+        //   };
+        //   this.map.setOptions(options);
+        //   this.addMarker(myPos, "Locatia mea!");
+
+        //   let alert = this.alertCtrl.create({
+        //     title: 'Location',
+        //     message: 'Do you want to save the Location?',
+        //     buttons: [
+        //       {
+        //         text: 'Cancel'
+        //       },
+        //       {
+        //         text: 'Save',
+        //         handler: data => {
+        //           let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
+        //           console.log(lastLocation);
+        //           this.storage.set('lastLocation', lastLocation).then(() => {
+        //             this.showToast('Location saved');
+        //           });
+        //         }
+        //       }
+        //     ]
+        //   });
+        //   alert.present();
+
+        //   this.watchlocaiton = 0;
+        // }
         this.loading.dismiss().then(() => {
-          this.showToast('Location not found. Please enable your GPS!');
+          this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
 
           console.log(error);
         });
@@ -449,8 +521,9 @@ export class Googlemaps {
   addMarker(position, content) {
     let marker = new google.maps.Marker({
       map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: position
+      position: position,
+          image:"<div class='pin bounce'></div><div class='pulse'></div>"
+      
     });
 
     this.addInfoWindow(marker, content);

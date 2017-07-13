@@ -9,30 +9,13 @@
 
 
 
-    <img style="width:100%; height:200px; position:relative;" src={{item.imageLink}}/>
-    <div style="top:0px; position:absolute;">
-        <button ion-button clear (click)="goBack()" icon-only>
-        <ion-icon color="primary"  name='md-arrow-round-back'></ion-icon>
+    <img style="width:100%; height:200px; position:relative;" src="http://193.226.9.153/images/{{item.imageLink}}" imageViewer/>
+    <div style="top:0px; position:absolute; z-index:5;">
+        <button ion-button clear full (click)="goBack()" icon-only>
+        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
       </button>
     </div>
-    <h1>{{item.title}}</h1>
-
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-
-    <div> {{item.content}}</div>
-
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
-    <div> {{item.content}}</div>
+    <h1 text-center>{{item.title}}</h1>
+    <div padding-horizontal text-center style="white-space: pre-line;" [innerHTML]="item.content"> </div>
 
 </ion-content>

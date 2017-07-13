@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Viewpage } from './viewpage';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Viewpage } from './viewpage';
   ],
   imports: [
     IonicPageModule.forChild(Viewpage),
+    IonicImageViewerModule
   ],
   exports: [
     Viewpage

@@ -44,13 +44,13 @@ export class ConducereUpt {
     ];
 
     this.image = [
-      'serban.jpg',
-      'davidescu.jpg',
-      'oltesteanu.jpg',
-      'dan.jpg',
-      'dragan.jpg',
-      'cadariu-brailoiu.jpg',
-      'staicu.jpg'
+      'upt/serban.jpg',
+      'upt/davidescu.jpg',
+      'upt/oltesteanu.jpg',
+      'upt/dan.jpg',
+      'upt/dragan.jpg',
+      'upt/cadariu-brailoiu.jpg',
+      'upt/staicu.jpg'
     ];
 
     this.resort = [

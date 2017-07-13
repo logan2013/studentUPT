@@ -15,14 +15,14 @@
                 <ion-col col-5>
                 </ion-col>
                 <ion-col col-3>
-                    <img src="/assets//{{data.image}}">
+                    <img src="http://193.226.9.153/images//{{data.image}}">
                 </ion-col>
                 <ion-col col-4>
                 </ion-col>
             </ion-row>
             <h2 *ngIf="data.functie" text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
             <h4 *ngIf="data.nume" text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
-            <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telwfon: </b>{{data.telefon}}</p>
+            <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
             <p *ngIf="data.email" text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
         </ion-item>
     </ion-list>

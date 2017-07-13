@@ -23,17 +23,24 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OneSignal } from '@ionic-native/onesignal';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { NgCalendarModule } from 'ionic2-calendar';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 @NgModule({
   declarations: [
     MyApp,
     ElasticHeader
   ],
   imports: [
+    NgCalendarModule,
     BrowserModule,
+    IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: 'back',
-      iconMode: 'ios',
       tabsPlacement: 'bottom',
       pageTransition: 'wp-transition'
     }),
@@ -49,12 +56,15 @@ import { ElasticHeader } from '../components/elastic-header/elastic-header';
     SplashScreen,
     Network,
     HTTP,
+    PhotoViewer,
     NativeStorage,
+    IonicImageViewerModule,
     Auth,
     DataTabs,
     Getlocation,
     Camera,
     File,
+    LocalNotifications,
     FilePath,
     Transfer,
     BackgroundGeolocation,
@@ -62,7 +72,9 @@ import { ElasticHeader } from '../components/elastic-header/elastic-header';
     Diagnostic,
     OneSignal,
     Connectivity,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    InAppBrowser,
+    LaunchNavigator,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

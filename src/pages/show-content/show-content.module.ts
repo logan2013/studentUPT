@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ShowContent } from './show-content';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ShowContent } from './show-content';
   ],
   imports: [
     IonicPageModule.forChild(ShowContent),
+    IonicImageViewerModule
   ],
   exports: [
     ShowContent
