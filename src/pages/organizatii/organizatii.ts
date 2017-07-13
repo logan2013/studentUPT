@@ -535,7 +535,7 @@ Probele acestui proiect sunt:
 -Roboți mobili
 
 `,
-        image: ``
+        image: `ligamt/mecart.jpg`
       });
 
       this.proiecteMT.push({
@@ -544,25 +544,25 @@ Probele acestui proiect sunt:
 În acest proiect studenții din Facultatea de Mecanică își pot expune punctul de vedere sau opinia personală legată de nelămuririle sau dificultățile întâmpinate în facultate,pe baza unor chestionare propuse de membrii Ligii Studenților din Facultatea de Mecanică.
 Numele ales pentru acest proiect nu este întâmplător, dat fiind faptul ca participanții vor primi o cafea in urma completării chestionarelor
 `,
-        image: ''
+        image: 'ligamt/lacafea.jpg'
       });
 
       this.proiecteMT.push({
         descriere: `<b><h1>UN DAR, UN Z MBET DE CRĂCIUN </h1></b><br>Acest proiect are ca scop strângerea de fonduri pentru copiii nevoiași sau cu probleme grave de sănătate. Studenții Facultății de Mecanică din Timișoara 
           se mobilizează în grupuri și merg la colindat în căminele din Complexul Studențesc.`,
-        image: ''
+        image: 'ligamt/craciun.jpg'
       });
 
       this.proiecteMT.push({
         descriere: `<b><h1>UN MĂRȚIȘOR DIN PARTEA LSFMT</h1></b><br> LSFMT o să împartă mărțișoare la doamne și domnișoare prin facultate, rectorat, administrații, cămine, bibliotecă și bineînțeles,se vor împărți
            și în celelalte sedii ale ligilor studențești din Timișoara `,
-        image: ''
+        image: 'ligamt/'
       });
 
       this.proiecteMT.push({
         descriere: `<b><h1>ZILELE TEHNICE STUDENȚEȘTI TIMIȘOARA</h1></b><br>Valorificarea potențialului creativ al tinerilor în domeniul 
           tehnico-științific și familiarizarea acestora cu tehnica de vârf.`,
-        image: 'ligamt/zilestudentesti.png'
+        image: 'ligamt/zts.jpg'
       });
 
       // this.proiecteMT.push({
@@ -617,7 +617,7 @@ Proiectul se adresează studenților din Facultatea de Electronică, Telecomunic
      laboratoare, având totodată parte de seri sociale tematice și tururi culturale 
      ale orașului.<br>
 `,
-        image: ''
+        image: 'ligaetc/exchange.jpg'
       });
 
       this.proiecteETC.push({
@@ -666,7 +666,7 @@ Prin acest proiect dorim implicarea voluntarilor în domeniul social al societă
   prin activități recreative și jocuri de rol menite să le întărească stima de 
   sine și încrederea. <br>
 `,
-        image: ''
+        image: 'ligaetc/frate.jpg'
       });
 
       this.proiecteETC.push({
@@ -681,7 +681,7 @@ Abandonul școlar timpuriu este una dintre problemele principale la nivel națio
    lângă acestea, elevii vor beneficia și de seri sociale și activități 
    recreative și sportive.<br>
 `,
-        image: ''
+        image: 'ligaetc/esu.jpg'
       });
 
       this.descriereA4 = [

@@ -20,8 +20,8 @@ export class ConducereUpt {
   public adresa: any = [];
   public telfax: any = [];
   public email: any = [];
-
-  public all: Array<{ functie: any, nume: any, image: any, resort: any, adresa: any, telfax: any, email: any }>;
+  public show: any = [false, false, false, false, false, false, false];
+  public all: Array<{ functie: any, nume: any, image: any, resort: any, adresa: any, telfax: any, email: any, show: any }>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.functie = [
       'Rector',
@@ -102,13 +102,23 @@ export class ConducereUpt {
         resort: this.resort[i],
         adresa: this.adresa[i],
         telfax: this.telfax[i],
-        email: this.email[i]
+        email: this.email[i],
+        show: this.show[i]
       })
     }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConducereUpt');
+  }
+
+  toggle(nume) {
+    for (let i: number = 0; i < this.nume.length; i++) {
+      if (this.all[i].nume == nume) {
+        console.log('ss')
+        this.all[i].show = !this.all[i].show;
+      }
+    }
   }
 
 }

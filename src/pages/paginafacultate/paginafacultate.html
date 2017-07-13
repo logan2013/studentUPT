@@ -26,16 +26,16 @@
       </button>
         </div>
         <img style=" width:100px; margin-left:35%; margin-top:12px;" src="http://193.226.9.153/images/{{item.imagelink}}" />
-        <p text-center text-wrap style="white-space: pre-line;color:white">
+        <p text-center text-wrap style="white-space: pre-line;color:white; ">
             {{item.title}}
         </p>
     </ion-navbar>
 
 
-    <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
-        <super-tab [root]="rootPage" title="Noutati"></super-tab>
-        <super-tab [root]="rootDescriere" title="Descriere"></super-tab>
-        <super-tab [root]="rootOrar" title="Orar"></super-tab>
-        <super-tab [root]="rootConducere" title="Conducere"></super-tab>
+    <super-tabs small indicatorColor="light" badgeColor="light" toolbarColor="light">
+        <super-tab small [root]="rootPage" title="Noutati"></super-tab>
+        <super-tab small [root]="rootDescriere" title="Descriere"></super-tab>
+        <super-tab small [root]="rootOrar" title="Orar"></super-tab>
+        <super-tab small [root]="rootConducere" title="Conducere"></super-tab>
     </super-tabs>
 </ion-content>

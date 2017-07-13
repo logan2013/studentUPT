@@ -22,7 +22,7 @@ export class OrarFacultate {
   public eventSource = [];
   public viewTitle: string;
   public selectedDay = new Date();
-
+  public startToggle: any = 1;
   public calendar = {
     mode: 'month',
     currentDate: new Date()
@@ -48,17 +48,19 @@ export class OrarFacultate {
   }
   onViewTitleChanged(title) {
     this.viewTitle = title;
+    window.scrollTo(0, 0)
+    
   }
 
   onEventSelected(event) {
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
     if (start == end) {
-       this.alertCtrl.create({
-            title: '' + event.title,
-            subTitle: 'At: ' + start ,
-            buttons: ['OK']
-        }).present()
+      this.alertCtrl.create({
+        title: '' + event.title,
+        subTitle: 'At: ' + start,
+        buttons: ['OK']
+      }).present()
     } else {
       this.alertCtrl.create({
         title: '' + event.title,
@@ -72,15 +74,19 @@ export class OrarFacultate {
 
   onTimeSelected(ev) {
     this.selectedDay = ev.selectedTime;
+    window.scrollTo(0, 0)
   }
 
   public toggle() {
-    if (this.showCalendar == true && this.showTabel == false) {
-      this.showCalendar = false;
-      this.showTabel = true;
-    } else if (this.showCalendar == false && this.showTabel == true) {
-      this.showCalendar = true;
-      this.showTabel = false;
+    if (this.startToggle == 1) {
+      this.showCalendar = !this.showCalendar;
+      this.startToggle = 0;
+      console.log(this.startToggle)
+      let scope = this;
+      setTimeout(function () {
+        scope.startToggle = 1;
+        console.log(scope.startToggle)
+      }, 1000)
     }
   }
 }

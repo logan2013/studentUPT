@@ -11,7 +11,10 @@
     <ion-card>
         <!--<ion-card-header text-center>
         </ion-card-header>-->
-        <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
+
+        <div *ngIf="descriere[1]">
+            <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
+        </div>
         <p padding text-center text-wrap style="white-space: normal;">
             {{descriere[0]}}
         </p>

@@ -26,29 +26,29 @@ export class Facultati {
   private notes: any[];
   public series: any[];
   public descriereAC: any;
-  public conducereAC: Array<{ functie: string, nume: string, telefon: string, email: string, image: string }> = [];
+  public conducereAC: Array<{ functie: string, nume: string, telefon: string, email: string, image: string, show: any }> = [];
   public orarAC: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereEE: any;
-  public conducereEE: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarEE: Array<{ orarFacultate: any, orarAdmitere: any }> = []
+  public conducereEE: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarEE: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = []
   public descriereOSTL: any;
-  public conducereOSTL: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarOSTL: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public conducereOSTL: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarOSTL: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = [];
   public descriereMPT: any;
-  public conducereMPT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarMPT: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public conducereMPT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarMPT: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = [];
   public descriereMT: any;
-  public conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarMT: Array<{ orarFacultate: any, orarAdmitere: any }> = []
+  public conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
+  public orarMT: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = []
   public descriereETC: any;
-  public conducereETC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarETC: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public conducereETC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarETC: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereA4: any;
-  public conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarA4: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
+  public orarA4: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereCT: any;
-  public conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public orarCT: Array<{ orarFacultate: any, orarAdmitere: any }> = [];
+  public conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
+  public orarCT: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public acupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public eeupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public ostl: Array<{ descriere: any, conducere: any, orar: any }>;
@@ -99,6 +99,7 @@ export class Facultati {
         telefon: '0256 403 212 / 0256 403 229',
         email: 'radu.precup@upt.ro',
         image: 'ac/precup.jpg'
+        ,show :false
       });
 
       this.conducereAC.push({
@@ -107,6 +108,8 @@ export class Facultati {
         telefon: '0256 403 213 / 0256 403 278 ',
         email: 'lprodan@cs.upt.ro  / lucian.prodan@upt.ro',
         image: 'ac/prodan.jpg'
+        ,show :false
+        
       });
 
       this.conducereAC.push({
@@ -115,6 +118,8 @@ export class Facultati {
         telefon: '0256 403 217/ 0256 404 061',
         email: 'chirila@cs.upt.ro  / ciprian.chirila@upt.ro',
         image: 'ac/chirila.jpg'
+        ,show :false
+        
       });
 
       this.orarAC.push({
@@ -190,12 +195,12 @@ export class Facultati {
           { startTime: new Date(Date.UTC(2017, 6, 22, 6)), endTime: new Date(Date.UTC(2017, 6, 22, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
           { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: 'Proba de evaluare a cunoștințelor: MATEMATICĂ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
-          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finaleI`}
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
         ]
       })
       this.descriereEE = [
@@ -211,6 +216,8 @@ export class Facultati {
         telefon: '0256-403462',
         email: 'sorin.musuroi@upt.ro',
         image: 'ee/musuroi.jpg'
+        ,show :false
+        
       });
 
       this.conducereEE.push({
@@ -219,6 +226,8 @@ export class Facultati {
         telefon: '0256-403415',
         email: 'doru.vatau@upt.ro',
         image: 'ee/vatau.jpg'
+        ,show :false
+        
       });
 
       this.orarEE.push({
@@ -344,6 +353,18 @@ export class Facultati {
         </tr>
         </table>
 `,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17)), endTime: new Date(Date.UTC(2017, 6, 22)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 24)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 25)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Concurs de dosare' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Rezultatele concursului' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmări Runda I' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: 'Afişare Runda II' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: `<table border='2' width = "100%" >
         <tr>
        <td> Orare</td> <td> Luni - Joi</td><td> Vineri</td>
@@ -382,6 +403,8 @@ export class Facultati {
         telefon: '0256403922',
         email: 'raul.zaharia@upt.ro',
         image: 'ostl/zaharia.jpg'
+        ,show :false
+        
       });
 
       this.conducereOSTL.push({
@@ -390,6 +413,8 @@ export class Facultati {
         telefon: '0256403984',
         email: 'sorin.herban@upt.ro',
         image: 'ostl/herban.jpg'
+        ,show :false
+        
       });
 
       this.orarOSTL.push({
@@ -515,6 +540,18 @@ export class Facultati {
           </td>
         </tr>
         </table>`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17)), endTime: new Date(Date.UTC(2017, 6, 22)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 24)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 25)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Concurs de dosare' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Rezultatele concursului' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmări Runda I' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: 'Afişare Runda II' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: `
         <table border='2' width="100%">
         <tr><td>Luni - Joi</td><td>13:00 - 15:00</td></tr>
@@ -537,6 +574,8 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
         telefon: '0256 404284',
         email: ' marian.mocan@upt.ro',
         image: 'mpt/mocan.jpg'
+        ,show :false
+        
       });
 
       this.conducereMPT.push({
@@ -545,6 +584,8 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
         telefon: '0256 404287',
         email: 'ilie.taucean@upt.ro  ',
         image: 'mpt/taucean.jpg'
+        ,show :false
+        
       });
 
       this.orarMPT.push({
@@ -670,6 +711,18 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
           </td>
         </tr>
         </table>`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17)), endTime: new Date(Date.UTC(2017, 6, 22)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 24)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 25)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Concurs de dosare' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Rezultatele concursului' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmări Runda I' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: 'Afişare Runda II' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: ``
       });
 
@@ -691,6 +744,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403522',
         email: 'inocentiu.maniu@upt.ro',
         image: 'mt/maniu.jpg'
+        ,show :false
+        
       });
 
       this.conducereMT.push({
@@ -699,6 +754,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403524',
         email: 'aurel.tulcan@upt.ro',
         image: 'mt/tulcan.jpg'
+        ,show :false
+        
       });
 
       this.conducereMT.push({
@@ -707,6 +764,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403525',
         email: 'eugen.ghita@upt.ro',
         image: 'mt/ghita.jpg'
+        ,show :false
+        
       });
 
       this.orarMT.push({
@@ -832,6 +891,18 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
           </td>
         </tr>
         </table>`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17)), endTime: new Date(Date.UTC(2017, 6, 22)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 24)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 25)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Concurs de dosare' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Rezultatele concursului' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmări Runda I' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: 'Afişare Runda II' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: ''
       })
       this.descriereETC = [
@@ -848,6 +919,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'florin.alexa@upt.ro',
         telefon: '',
         image: 'etc/alexa.jpg'
+        ,show :false
+        
       });
 
       this.conducereETC.push({
@@ -856,6 +929,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'catalin.caleanu@upt.ro',
         telefon: '',
         image: 'etc/caleanu.jpg'
+        ,show :false
+        
       });
 
       this.conducereETC.push({
@@ -864,21 +939,39 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'ivan.bogdanov@upt.ro',
         telefon: '',
         image: 'etc/bogdanov.jpg'
+        ,show :false
+        
       });
 
       this.orarETC.push({
-        orarAdmitere: `
-        <table  width='100%'>
+        orarAdmitere: `   <table  width='100%'>
         <tr bgcolor="#2e2f92"><td>  <font color="white">17.07.2017-22.07.2017-Orar: 09:00-14:00</td> 			<td>  <font color="white">Înscrierea candidaților</td></tr>	
         <tr  background="blue"><td>  <font color="#2e2f92" >  <b>25.07.2017 ora 10:00	</td><td>	 <font color="#2e2f92" >  <b>			Proba de evaluare a cunoștințelor: MATEMATICĂ</td><tr>	
         <tr bgcolor="#2e2f92"> <td>  <font color="white">26.07.2017  ora 10:00				</td><td>	 <font color="white">Afișare rezultate: runda I</td></tr><br>	
         <tr> <td> <font color="#2e2f92" >  <b>26.07.2017 ora 10:00- 27.07.2017 ora 16:00	</td><td>			 <font color="#2e2f92" >  <b>	Confirmarea celor admiși: runda I</td></tr>
         <tr bgcolor="#2e2f92"> <td> <font color="white">28.07.2017 ora 10:00			</td><td>	 <font color="white">	Afișare rezultate: runda II</td></tr>
-        <tr> <td> <font color="#2e2f92" >  <b>29.07.2017 ora 10:00-29.07.2017 ora 12:00		</td><td>	 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda II</td></tr>
+        <tr> <td> <font color="#2e2f92" >  <b>28.07.2017 ora 10:00-29.07.2017 ora 12:00		</td><td>	 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda II</td></tr>
         <tr bgcolor="#2e2f92"><td>  <font color="white">29.07.2017 ora 16:00		</td><td>		 <font color="white">	Afișare rezultate: runda III</td></tr><br>	
         <tr><td> <font color="#2e2f92" >  <b>29.07.2017 ora 16:00-18:00	</td><td>		 <font color="#2e2f92" >  <b>		Confirmarea celor admiși: runda III</td></tr>
         <tr bgcolor="#2e2f92"><td> <font color="white">29.07.2017 ora 20:00			</td><td>	 <font color="white">	Rezultate finale</td></tr>
-        </table>`,
+        </table>
+`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17, 6)), endTime: new Date(Date.UTC(2017, 6, 17, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 18, 6)), endTime: new Date(Date.UTC(2017, 6, 18, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 19, 6)), endTime: new Date(Date.UTC(2017, 6, 19, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 20, 6)), endTime: new Date(Date.UTC(2017, 6, 20, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 21, 6)), endTime: new Date(Date.UTC(2017, 6, 21, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 22, 6)), endTime: new Date(Date.UTC(2017, 6, 22, 11)), allDay: false, title: 'Insciere candidati, intre orele 09:00 si 14:00' },
+          { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: 'Proba de evaluare a cunoștințelor: MATEMATICĂ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: `<table border='2' width="100%">
         <tr><td>Luni - Joi</td><td>10:00 - 12:00</td></tr>
         <tr><td>Vineri</td><td>10:00 - 11:00</td></tr>
@@ -899,6 +992,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         telefon: '0256404022',
         email: 'oan.andreescu@upt.ro',
         image: 'a4/andreescu.jpg'
+        ,show :false
+        
       });
 
       this.conducereA4.push({
@@ -907,6 +1002,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'marius.mosoarca@upt.ro',
         telefon: '0256404560',
         image: 'a4/mosoarca.jpg'
+        ,show :false
+        
       });
 
       this.conducereA4.push({
@@ -915,6 +1012,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         telefon: '0256404019',
         email: 'catalina.bocan@upt.ro ',
         image: 'a4/bocan.jpg'
+        ,show :false
+        
       });
 
       this.orarA4.push({
@@ -995,6 +1094,22 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
           </td></tr>
 			</table>
 `,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17, 6)), endTime: new Date(Date.UTC(2017, 6, 17, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 18, 6)), endTime: new Date(Date.UTC(2017, 6, 18, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 19, 6)), endTime: new Date(Date.UTC(2017, 6, 19, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 20, 6)), endTime: new Date(Date.UTC(2017, 6, 20, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 21, 6)), endTime: new Date(Date.UTC(2017, 6, 21, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 22, 6)), endTime: new Date(Date.UTC(2017, 6, 22, 11)), allDay: false, title: 'Insciere candidati, intre orele ' },
+          { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: ' Concurs de admitereDesen tehnic si liber' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+        ],
         orarFacultate: `<table border="2" width="100%">
         <tr><td>Luni - Joi</td><td>12:00 - 14:00</td></tr>
         <tr><td>Vineri</td><td>10:00 - 12:00</td></tr>
@@ -1015,6 +1130,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'nicolae.vaszilcsin@upt.ro',
         telefon: '0256-403061',
         image: ''
+        ,show :false
+        
       });
 
       this.conducereCT.push({
@@ -1023,6 +1140,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'alina.dumitrel@upt.ro',
         telefon: '0256-403062',
         image: ''
+        ,show :false
+        
       });
 
       this.orarCT.push({
@@ -1060,6 +1179,11 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
               </tr>
             </table>
           `,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17, 6)), endTime: new Date(Date.UTC(2017, 6, 22, 13)), allDay: false, title: 'Înscrieri si interviu' },
+          { startTime: new Date(Date.UTC(2017, 6, 24, 6)), endTime: new Date(Date.UTC(2017, 6, 25, 13)), allDay: false, title: 'Înscrieri si interviu' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: 'Confirmari' }
+        ],
         orarFacultate: ``
       })
 

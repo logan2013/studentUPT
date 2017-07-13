@@ -11,7 +11,7 @@
     <ion-list *ngFor="let proiecte of proiecte">
         <ion-card>
             <div *ngIf="proiecte.image != ''">
-                <img src="http://193.226.9.153/images/{{proiecte.image}}" imgViewer>
+                <img src="http://193.226.9.153/images/{{proiecte.image}}" imageViewer />
             </div>
             <br>
             <p paddings text-wrap text-center style="white-space: normal;" [innerHTML]="proiecte.descriere ">

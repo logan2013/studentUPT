@@ -5,12 +5,12 @@
   Ionic pages and navigation.
 -->
 
-<ion-content>
-    <button *ngIf="!showCalendar" (click)="toggle()" ion-button full icon-right text-capitalize>
+<ion-content text-center>
+    <button *ngIf="!showCalendar" (click)="toggle()" full ion-button round icon-right text-capitalize>
                    Calendar 
                    
                     </button>
-    <button *ngIf="!showTabel" (click)="toggle()" ion-button full color="primary" icon-right text-capitalize>
+    <button *ngIf="showCalendar" (click)="toggle()" full ion-button round color="primary" icon-right text-capitalize>
                    Tabel 
                     
                     </button>
@@ -26,7 +26,7 @@
         </calendar>
     </div>
 
-    <div *ngIf="showTabel">
+    <div *ngIf="!showCalendar">
 
         <h2 text-center>Orar admitere</h2>
         <p text-center style="white-space: normal;" [innerHTML]="orar[0].orarAdmitere">
