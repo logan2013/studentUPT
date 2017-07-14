@@ -1,4 +1,4 @@
-<ion-content no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
+<ion-content (ionScroll)="scrollToTop()" no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
     <!--<div no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
         <div ion-fixed style="top:0px; position:absolute;">
             <button ion-button clear (click)="goBack()" icon-only>
@@ -16,26 +16,24 @@
             </p>
         </div>
     </div>-->
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
+      </button>
     <ion-navbar hideBackButton style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
                 background-color:#2e2f92;">
-        <div ion-fixed style="top:0px; position:absolute;">
-            <button ion-button clear (click)="goBack()" icon-only>
-        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
-      </button>
-        </div>
+
         <img style=" width:100px; margin-left:35%; margin-top:12px;" src="http://193.226.9.153/images/{{item.imagelink}}" />
         <p text-center text-wrap style="white-space: pre-line;color:white; ">
             {{item.title}}
         </p>
     </ion-navbar>
 
-
     <super-tabs small indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab small [root]="rootPage" title="Noutati"></super-tab>
         <super-tab small [root]="rootDescriere" title="Descriere"></super-tab>
         <super-tab small [root]="rootOrar" title="Orar"></super-tab>
-        <super-tab small [root]="rootConducere" title="Conducere"></super-tab>
+        <!--<super-tab small [root]="rootConducere" title="Conducere"></super-tab>-->
     </super-tabs>
 </ion-content>

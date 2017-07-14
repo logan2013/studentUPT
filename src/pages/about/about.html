@@ -1,9 +1,18 @@
 <ion-content scroll="false" no-padding>
-    <ion-navbar>
-        <button ion-button clear menuToggle style="margin:10px;">
-                    <ion-icon name="menu"></ion-icon>
+    <div ion-fixed style="top:0px; margin-left:-5px; position:absolute;">
+
+        <button ion-button clear menuToggle>
+                    <ion-icon color="light" item-start name="menu"></ion-icon>
             </button>
-        <ion-title>UPT</ion-title>
+    </div>
+
+    <ion-navbar hideBackButton style="background-size: cover;
+                background-position: center;
+                overflow: hidden;
+                background-color:#2e2f92;">
+        <ion-title text-center>
+            UPT
+        </ion-title>
     </ion-navbar>
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="noutatiUpt" title="Noutati"></super-tab>

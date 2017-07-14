@@ -3,34 +3,28 @@
         <ion-card (click)='showContent(item)' no-padding>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-3>
-                        <ion-item>
-                            <ion-avatar item-left>
-                                <img src="http://placehold.it/50x50" />
-                            </ion-avatar>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-7 text-left>
+
+                    <ion-col text-left>
                         <ion-card-title style="white-space: normal;">
-                            <h2> {{item.title}} </h2>
+                            <h2 text-center> {{item.title}} </h2>
                         </ion-card-title>
                     </ion-col>
-                    <ion-col col-2>
+                    <!--<ion-col col-3>
                         <ion-buttons end>
                             <a tappable clear ion-button icon-only>
                                 <ion-icon name="ios-arrow-down-outline"></ion-icon>
                             </a>
                         </ion-buttons>
-                    </ion-col>
+                    </ion-col>-->
                 </ion-row>
                 <ion-row>
                     <ion-col col-7>
-                        <p text-center text-wrap style="white-space: normal;">
+                        <p text-left text-wrap style="white-space: normal;">
                             {{item.content}}
                         </p>
                     </ion-col>
                     <ion-col col-5>
-                        <img src={{item.imageLink}}>
+                        <img src="{{item.imageLink}}" imageViewer>
                     </ion-col>
                 </ion-row>
             </ion-grid>

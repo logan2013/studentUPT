@@ -4,14 +4,19 @@
 
 <ion-content>
 
-    <ion-navbar>
-
-
-        <button ion-button clear menuToggle style="margin:15px; margin-right:-20px;">
-                    <ion-icon  style="margin-left:-25px;" item-start name="menu"></ion-icon>
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+                    <ion-icon color="light" item-start name="menu"></ion-icon>
             </button>
-        <ion-title style="margin-left:-5px;">HOME</ion-title>
 
+
+    <ion-navbar hideBackButton style="background-size: cover;
+                background-position: center;
+                overflow: hidden;
+                background-color:#2e2f92;">
+
+        <ion-title text-center>
+            Home
+        </ion-title>
     </ion-navbar>
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="informatii" title="Informatii"></super-tab>

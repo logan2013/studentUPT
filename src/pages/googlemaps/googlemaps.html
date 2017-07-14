@@ -1,9 +1,10 @@
 <ion-header>
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+                    <ion-icon color="light" item-start name="menu"></ion-icon>
+            </button>
     <ion-navbar>
-        <button ion-button menuToggle>
-       <ion-icon name="menu"></ion-icon>
-    </button>
-        <ion-title>
+
+        <ion-title text-center>
             Harta campusului
         </ion-title>
         <ion-buttons [hidden]="(switch == 'list')" end>

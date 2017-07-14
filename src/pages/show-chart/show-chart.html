@@ -1,0 +1,71 @@
+<!--
+  Generated template for the ShowChart page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light" name='md-arrow-round-back'></ion-icon>
+        </button>
+    <ion-navbar>
+
+        <ion-title text-center>
+            Statistici
+        </ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+
+
+
+    <ion-card no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            {{valori.statistici[0].chart[0].titlu}} in data de {{valori.statistici[0].chart[0].ziua}}
+        </p>
+        <canvas #doughnutCanvas></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[0].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[0].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-card no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            {{valori.statistici[0].chart[1].titlu}} in data de {{valori.statistici[0].chart[1].ziua}}
+        </p>
+        <canvas #doughnutCanvas1></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[1].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[1].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-card hidden no-padding>
+        <ion-card-header>
+            Line Chart
+        </ion-card-header>
+        <canvas #lineCanvas></canvas>
+    </ion-card>
+    <ion-card hidden no-padding>
+        <ion-card-header>
+            Bar Chart
+        </ion-card-header>
+        <canvas #barCanvas></canvas>
+    </ion-card>
+</ion-content>

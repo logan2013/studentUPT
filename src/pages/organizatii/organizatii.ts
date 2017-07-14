@@ -475,7 +475,7 @@ Ești curios cum ar fi dacă ai studia în alt centru universitar? Proiectul Stu
    Vei participa la cursuri și laboratoare, dar vei și gusta din plin viața de student din orașul 
    gazdă. <br>
 `,
-        image: ''
+        image: 'ligampt/exchange.jpg'
       });
       this.proiecteMPT.push({
         descriere: `<b><h1>MTalks</h1></b><br>
@@ -484,14 +484,14 @@ cu studenții MPT. Astfel, studenții au ocazia să afle de la cei mai buni din 
 cum au reușit în afaceri, care au fost cheile succesului lor, dar și care sunt cele mai
  mari provocări ale unui antreprenor în ziua de astăzi. <br> 
 `,
-        image: ''
+        image: 'ligampt/mtalks.jpg'
       });
       this.proiecteMPT.push({
         descriere: `<b><h1>Cupa MPT</h1></b><br>
 Cupa MPT este o competiţie sportivă care se desfăşoară anual, şi care promovează sportul
  în rândul studenţilor.<br>
 `,
-        image: ''
+        image: 'ligampt/cupampt.jpg'
       });
 
       this.proiecteMPT.push({
@@ -499,7 +499,7 @@ Cupa MPT este o competiţie sportivă care se desfăşoară anual, şi care prom
 În fiecare an , LSFMPT organizează o acţiune caritabilă care are ca obiectiv strângerea de 
 fonduri în scopuri umanitare.<br>
 `,
-        image: ''
+        image: 'ligampt/inima.jpg'
       });
 
       this.proiecteMPT.push({
@@ -508,7 +508,7 @@ Un proiect dedicat studenţilor nefamiliarizaţi cu oraşul, dar nu numai. Prin 
  acest eveniment studenţii pot cunoaşte oraşul într-un mod interactiv, de asemenea vor avea
   ocazia să îşi dezvolte simţurile orientative dar şi să cunoască colegi din univestitate.<br>
 `,
-        image: ''
+        image: 'ligampt/unravel.jpg'
       });
 
 
@@ -885,7 +885,7 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
 -în fiecare an membrii ligii merg să colinde cadrele didactice din facultate, conducerea facultății,
  a universității, dar și colegii din alte organizații.<br>
 `,
-        image: ''
+        image: 'ligact/colinda.jpg'
       });
 
       this.info = isLoggedIn;

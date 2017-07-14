@@ -27,5 +27,12 @@ export class DescriereFacultate {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DescriereFacultate');
   }
-
+  toggle(nume) {
+    for (let i: number = 0; i < this.conducere.length; i++) {
+      if (this.conducere[i].nume == nume) {
+        console.log('ss')
+        this.conducere[i].show = !this.conducere[i].show;
+      }
+    }
+  }
 }

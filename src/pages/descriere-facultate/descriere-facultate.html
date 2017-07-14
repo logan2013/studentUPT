@@ -15,7 +15,7 @@
         <div *ngIf="descriere[1]">
             <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
         </div>
-        <p padding text-center text-wrap style="white-space: normal;">
+        <p padding text-left text-wrap style="white-space: pre;">
             {{descriere[0]}}
         </p>
     </ion-card>
@@ -23,26 +23,31 @@
         <!--<ion-card-header text-center>
             <h1> Conducere </h1>
         </ion-card-header>-->
-        <!--<ion-list>
+        <ion-list *ngFor="let data of conducere">
 
-            <ion-item *ngFor="let data of conducere">
-                <ion-row *ngIf="data.image != ''">
-                    <ion-col col-5>
-                    </ion-col>
-                    <ion-col col-3>
-                        <img src="http://hainedefirmasj.com/images/{{data.image}}">
-                    </ion-col>
+            <ion-card>
+                <ion-row *ngIf="data.image">
                     <ion-col col-4>
                     </ion-col>
+                    <ion-col col-4>
+                        <img src="http://193.226.9.153/images//{{data.image}}" imageViewer />
+                    </ion-col>
                 </ion-row>
-                <h2 text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
-                <h4 text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
-                <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
-                <p text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
-                <hr>
 
-            </ion-item>
-        </ion-list>-->
+                <h2 *ngIf="data.functie" text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
+                <h4 *ngIf="data.nume" text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
+                <div text-center>
+                    <button (click)='toggle(data.nume)' clear ion-button icon-only>
+                <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline'"></ion-icon>
+            </button>
+                </div>
+                <div *ngIf="data.show">
+
+                    <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
+                    <p *ngIf="data.email" text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
+                </div>
+            </ion-card>
+        </ion-list>
     </ion-card>
 
 </ion-content>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Content, Navbar } from 'ionic-angular';
 import { DataTabs } from '../../providers/datatabs';
 
 @IonicPage()
@@ -8,6 +8,9 @@ import { DataTabs } from '../../providers/datatabs';
   templateUrl: 'paginafacultate.html',
 })
 export class Paginafacultate {
+  @ViewChild(Content) content: Content;
+  @ViewChild(Navbar) navbar: Navbar;
+  
   public item: any;
   public descriere: any;
   public orar: any;
@@ -32,7 +35,9 @@ export class Paginafacultate {
     this.dataTabs.setOrar(this.orar);
 
   }
-
+scrollToTop() {
+ 
+  }
   ionViewDidLoad() {
   }
   presentProfileModal() {
