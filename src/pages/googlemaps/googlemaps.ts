@@ -27,7 +27,7 @@ export class Googlemaps {
   search: boolean = false;
   error: any;
   switch: string = "map";
-  watchlocaiton: number = 0;
+  watchlocaiton: number = 1;
 
   regionals: any = [];
   currentregional: any;
@@ -310,7 +310,7 @@ export class Googlemaps {
   openNavigator(location) {
     //alert(location.latitude)
     try {
- window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude/* + '(' + this.location.name + ')'*/, '_system');
+      window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude/* + '(' + this.location.name + ')'*/, '_system');
 
 
       // console.log(this.locatieNavigator, location)
@@ -459,53 +459,54 @@ export class Googlemaps {
         });
       },
       (error) => {
-         this.myLocation = true;
-        
-        // this.watchlocaiton = 1;
-        // this.myLocation = false;
+        this.myLocation = true;
 
-        // if (this.watchlocaiton == 1) {
+        this.myLocation = false;
 
-        //   this.showToast('Location found!');
-        //   console.log(this.getlocation.lat, this.getlocation.lng);
-        //   this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
+        if (this.watchlocaiton == 1) {
 
-        //   let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
-        //   let options = {
-        //     center: myPos,
-        //     zoom: 14
-        //   };
-        //   this.map.setOptions(options);
-        //   this.addMarker(myPos, "Locatia mea!");
+          this.showToast('Locația dvs. nu poate fi stabilită cu acuratete maxima.');
+          console.log(this.getlocation.lat, this.getlocation.lng);
+          this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
 
-        //   let alert = this.alertCtrl.create({
-        //     title: 'Location',
-        //     message: 'Do you want to save the Location?',
-        //     buttons: [
-        //       {
-        //         text: 'Cancel'
-        //       },
-        //       {
-        //         text: 'Save',
-        //         handler: data => {
-        //           let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
-        //           console.log(lastLocation);
-        //           this.storage.set('lastLocation', lastLocation).then(() => {
-        //             this.showToast('Location saved');
-        //           });
-        //         }
-        //       }
-        //     ]
-        //   });
-        //   alert.present();
+          let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
+          let options = {
+            center: myPos,
+            zoom: 14
+          };
+          this.map.setOptions(options);
+          this.addMarker(myPos, "Locatia mea!");
 
-        //   this.watchlocaiton = 0;
-        // }
-        this.loading.dismiss().then(() => {
-          this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
+          let alert = this.alertCtrl.create({
+            title: 'Location',
+            message: 'Do you want to save the Location?',
+            buttons: [
+              {
+                text: 'Cancel'
+              },
+              {
+                text: 'Save',
+                handler: data => {
+                  let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
+                  console.log(lastLocation);
+                  this.storage.set('lastLocation', lastLocation).then(() => {
+                    this.showToast('Location saved');
+                  });
+                }
+              }
+            ]
+          });
+          alert.present();
 
-          console.log(error);
-        });
+          this.watchlocaiton = 0;
+        } else {
+          this.loading.dismiss().then(() => {
+            this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
+
+            console.log(error);
+          });
+        }
+
       }
     )
   }
@@ -522,8 +523,8 @@ export class Googlemaps {
     let marker = new google.maps.Marker({
       map: this.map,
       position: position,
-          image:"<div class='pin bounce'></div><div class='pulse'></div>"
-      
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+
     });
 
     this.addInfoWindow(marker, content);

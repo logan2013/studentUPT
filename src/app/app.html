@@ -1,9 +1,9 @@
 <ion-menu [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
     <ion-content>
-        <div style="opacity:0.9;background-color:#2e2f92; padding:5px">
+        <div (click)="editProfile(dataUser)" style="opacity:0.9;background-color:#2e2f92; padding:5px">
             <img style="border-radius:50%; margin-top:10px;margin-left:10px; width:80px; height:80px;" src="http://193.226.9.153/profilelogo.png" />
             <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
-            <p *ngIf="dataUser.data != 'user'" style="color:white">{{dataUser.data}} </p>
+            <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
             <!--<p *ngIf="dataUser.data != 'user'" style="color:white"> Editeaza profil</p>-->
         </div>
         <ion-list>

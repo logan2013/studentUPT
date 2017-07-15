@@ -44,8 +44,8 @@ export class Beneficii {
       sau Fast Food 1 MV (la parterul căminului ...`,
       `Poţi beneficia de controale medicale, consultaţii, tratamente gratuite, servicii de
  medicină generală, stomatologie, ORL ...`,
-      `Dacă la sfârșit de săptămână bănuții nu îți sunt suficienți ca să ajungi acasa, trebuie să
-  știi că, student fiind, beneficiezi de 50% ...`
+      `Dacă la sfârșit de săptămână bănuții nu îți sunt suficienți ca să ajungi acasa, trebuie să știi că, student fiind, beneficiezi 
+      de 100%  ...`
     ];
     this.content = [`
 Una dintre cele mai moderne biblioteci din țară, BCUPT pune la dispoziția studenților o serie de facilităţi şi servicii gratuite precum: 

@@ -33,22 +33,25 @@ export class Facultati {
   public orarEE: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = []
   public descriereOSTL: any;
   public conducereOSTL: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
-  public orarOSTL: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = [];
+  public orarOSTL: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereMPT: any;
   public conducereMPT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
-  public orarMPT: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = [];
+  public orarMPT: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereMT: any;
-  public conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
-  public orarMT: Array<{ orarFacultate: any, orarAdmitere: any , eventSource: any}> = []
+  public conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarMT: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = []
   public descriereETC: any;
   public conducereETC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
   public orarETC: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereA4: any;
-  public conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
+  public conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
   public orarA4: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public descriereCT: any;
-  public conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any , show: any}> = [];
+  public conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
   public orarCT: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
+  public descriereFSC: any;
+  public conducereFSC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any, show: any }> = [];
+  public orarFSC: Array<{ orarFacultate: any, orarAdmitere: any, eventSource: any }> = [];
   public acupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public eeupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public ostl: Array<{ descriere: any, conducere: any, orar: any }>;
@@ -57,7 +60,8 @@ export class Facultati {
   public etcupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public a4upt: Array<{ descriere: any, conducere: any, orar: any }>;
   public ctupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any , short:any}> = [];
+  public fscupt: Array<{ descriere: any, conducere: any, orar: any }>;
+  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any, short: any }> = [];
   public logos: Array<{ imagelink: any }> = [];
   constructor(
     public auth: Auth,
@@ -89,8 +93,8 @@ export class Facultati {
          ofesională și compatibilitatea cu mediul academic internațional. Exceptând activitățile de 
          învățământ, prioritățile Facultății de Automatică și Calculatoare sunt încurajarea cercetării 
          științifice și stabilirea de parteneriate cu mediul academic sau privat.`
-         , 
-         'ac/descriereac.jpg'
+        ,
+        'ac/descriereac.jpg'
       ];
 
       this.conducereAC.push({
@@ -99,7 +103,7 @@ export class Facultati {
         telefon: '0256 403 212 / 0256 403 229',
         email: 'radu.precup@upt.ro',
         image: 'ac/precup.jpg'
-        ,show :false
+        , show: false
       });
 
       this.conducereAC.push({
@@ -108,8 +112,8 @@ export class Facultati {
         telefon: '0256 403 213 / 0256 403 278 ',
         email: 'lprodan@cs.upt.ro  / lucian.prodan@upt.ro',
         image: 'ac/prodan.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereAC.push({
@@ -118,8 +122,8 @@ export class Facultati {
         telefon: '0256 403 217/ 0256 404 061',
         email: 'chirila@cs.upt.ro  / ciprian.chirila@upt.ro',
         image: 'ac/chirila.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarAC.push({
@@ -196,18 +200,18 @@ export class Facultati {
           { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: 'Proba de evaluare a cunoștințelor: MATEMATICĂ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ]
       })
       this.descriereEE = [
         `  Începuturile învăţământului superior electrotehnic în Timişoara coincid cu începuturile Şcolii Politehnice – Timişoara. Data de 15 noiembrie 1920 este data înfiinţării Şcolii Politehnice la Timişoara, care şi-a început activitatea cu pregătirea inginerilor în specializările Electromecanică (Mecanică şi Electricitate) respectiv Mine şi Metalurgie.
   Universitatea a apreciat întotdeauna rolul important jucat de industrie în pregătirea studenților pentru piața muncii și a susținut continuu relații de colaborare cu mediul economic. Interesul pentru dezvoltarea unor competențe care să se plieze pe nevoile pieței muncii, a influențat dezvoltarea curriculară și s-a concretizat, printre altele, în angajarea unui număr mare de absolvenți în companii multinaționale de prestigiu.
 `,
-'ee/descriereee.jpg'
+        'ee/descriereee.jpg'
       ];
 
       this.conducereEE.push({
@@ -216,8 +220,8 @@ export class Facultati {
         telefon: '0256-403462',
         email: 'sorin.musuroi@upt.ro',
         image: 'ee/musuroi.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereEE.push({
@@ -226,8 +230,8 @@ export class Facultati {
         telefon: '0256-403415',
         email: 'doru.vatau@upt.ro',
         image: 'ee/vatau.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarEE.push({
@@ -363,7 +367,7 @@ export class Facultati {
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: `<table border='2' width = "100%" >
         <tr>
@@ -394,7 +398,7 @@ export class Facultati {
          existență, Facultatea de Construcții din Timisoara a fost întotdeauna deschisă colaborării cu mediul economic, social și academic, câștigându-și o imagine foarte 
          bună la nivel național și internațional, devenind un vector de dezvoltare în domeniu, un reper de profesionalism și exigență. Toate programele de studii sunt acreditate,
           în concordanță`,
-          'ostl/descriereostl.jpg'
+        'ostl/descriereostl.jpg'
       ];
 
       this.conducereOSTL.push({
@@ -403,8 +407,8 @@ export class Facultati {
         telefon: '0256403922',
         email: 'raul.zaharia@upt.ro',
         image: 'ostl/zaharia.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereOSTL.push({
@@ -413,8 +417,8 @@ export class Facultati {
         telefon: '0256403984',
         email: 'sorin.herban@upt.ro',
         image: 'ostl/herban.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarOSTL.push({
@@ -550,7 +554,7 @@ export class Facultati {
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: `
         <table border='2' width="100%">
@@ -565,7 +569,7 @@ export class Facultati {
 Instruirea din domeniul de studiu Științe Administrative durează 3 ani, iar absolvenții sunt specialiști pregătiți în domeniul administrației publice centrale și locale, dar și al cercetării științifice de profil.
 Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: Continental, Hella, TRW, Nestle sau Coca-Cola sau și-au deschis întreprinderi proprii. 
 `,
-'mpt/descrierempt.jpg'
+        'mpt/descrierempt.jpg'
       ];
 
       this.conducereMPT.push({
@@ -574,8 +578,8 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
         telefon: '0256 404284',
         email: ' marian.mocan@upt.ro',
         image: 'mpt/mocan.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereMPT.push({
@@ -584,8 +588,8 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
         telefon: '0256 404287',
         email: 'ilie.taucean@upt.ro  ',
         image: 'mpt/taucean.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarMPT.push({
@@ -721,7 +725,7 @@ Absolvenții facultății lucrează în întreprinderi de prestigiu cum ar fi: C
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: ``
       });
@@ -735,7 +739,7 @@ Aceasta dispune de următoarele departamente:
 -Mașini Mecanice, Utilaje și Transporturi
 Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cercetare științifică se desfășoară atât la nivelul departamentelor și catedrelor, cât și în două centre de cercetare de tip baze de cercetare cu utilizatori multipli. Studenții dispun de facilități de cazare și masă, petrecerea timpului liber și sport.
 `,
-'mt/descrieremt.jpg'
+        'mt/descrieremt.jpg'
       ];
 
       this.conducereMT.push({
@@ -744,8 +748,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403522',
         email: 'inocentiu.maniu@upt.ro',
         image: 'mt/maniu.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereMT.push({
@@ -754,8 +758,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403524',
         email: 'aurel.tulcan@upt.ro',
         image: 'mt/tulcan.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereMT.push({
@@ -764,8 +768,8 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
         telefon: '+40-256-403525',
         email: 'eugen.ghita@upt.ro',
         image: 'mt/ghita.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarMT.push({
@@ -901,7 +905,7 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
           { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
           { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: ''
       })
@@ -910,7 +914,7 @@ Actual oferă ciclurile de licență, masterat și doctorat. Activitatea de cerc
 Munca studenților este răsplatită prin condiții extraordinare de învățământ, iar prin extraordinare înțelegem aparatură modernă, profesori de cel mai înalt calibru și printr-o atmosferă academică de neegalat. De asemenea, studenții sunt încurajați prin acordarea de burse. Datorită faptului că este o facultate excelentă și de viitor, studenții acesteia sunt căutați de firme ca: Nokia, Continental Automotive, Kathrein, AEM, Flex, etc.  
 	Prin electronică și telecomunicaţii ești la zi, ești integrat în Europa!
 `,
-'etc/descriereetc.jpg'
+        'etc/descriereetc.jpg'
       ];
 
       this.conducereETC.push({
@@ -919,8 +923,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'florin.alexa@upt.ro',
         telefon: '',
         image: 'etc/alexa.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereETC.push({
@@ -929,8 +933,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'catalin.caleanu@upt.ro',
         telefon: '',
         image: 'etc/caleanu.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereETC.push({
@@ -939,8 +943,8 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
         email: 'ivan.bogdanov@upt.ro',
         telefon: '',
         image: 'etc/bogdanov.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarETC.push({
@@ -966,11 +970,11 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
           { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: 'Proba de evaluare a cunoștințelor: MATEMATICĂ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: `<table border='2' width="100%">
         <tr><td>Luni - Joi</td><td>10:00 - 12:00</td></tr>
@@ -983,7 +987,7 @@ Munca studenților este răsplatită prin condiții extraordinare de învățăm
 
 Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţilor facultăţii noastre la concursuri de arhitectură naţionale şi internaţionale, la workshopuri şi manifestări ştiinţifice, confirmă calitatea învăţământului de arhitectură din Timişoara şi conferă acestuia o poziţie meritorie la nivel naţional. Planul de învățământ cuprinde discipline de pregătire generală, discipline de specialitate şi activităţi practice în domeniile tehnic şi artistic.
 `,
-'a4/descrierea4.jpg'
+        'a4/descrierea4.jpg'
       ];
 
       this.conducereA4.push({
@@ -992,8 +996,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         telefon: '0256404022',
         email: 'oan.andreescu@upt.ro',
         image: 'a4/andreescu.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereA4.push({
@@ -1002,8 +1006,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'marius.mosoarca@upt.ro',
         telefon: '0256404560',
         image: 'a4/mosoarca.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereA4.push({
@@ -1012,8 +1016,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         telefon: '0256404019',
         email: 'catalina.bocan@upt.ro ',
         image: 'a4/bocan.jpg'
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarA4.push({
@@ -1104,11 +1108,11 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
           { startTime: new Date(Date.UTC(2017, 6, 25, 7)), endTime: new Date(Date.UTC(2017, 6, 25, 10)), allDay: false, title: ' Concurs de admitereDesen tehnic si liber' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Afișare rezultate: runda I  ' },
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmarea celor admiși: runda I ' },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28,7)), allDay: false, title: `Afișare rezultate: runda II ` },
-          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III`},
-          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale`}
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: `Afișare rezultate: runda II ` },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: `Confirmarea celor admiși: runda II` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: `Afișare rezultate: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 15)), allDay: false, title: `Confirmarea celor admiși: runda III` },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
         ],
         orarFacultate: `<table border="2" width="100%">
         <tr><td>Luni - Joi</td><td>12:00 - 14:00</td></tr>
@@ -1121,7 +1125,7 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
   Începând cu anul 2005, Universitatea Politehnica Timișoara și implicit Facultatea de Chimie Industrială și Ingineria Mediului trec la organizarea învățământului superior pe trei cicluri: ciclul de licență, ciclul de master și ciclul de doctorat. Tot în această perioadă se realizează organizarea facultății pe două departamente: Chimie Aplicată și Ingineria Compușilor Anorganici și a Mediului (CAICAM) și Chimie Aplicată și Ingineria Compușilor Organici și Naturali (CAICON).
   Misiunea de bază a facultății o constituie dezvoltarea învățământului universitar în domeniile: inginerie chimică, ingineria mediului și ingineria produselor alimentare.
   `,
-  'ct/descrierect.jpg'
+        'ct/descrierect.jpg'
       ];
 
       this.conducereCT.push({
@@ -1130,8 +1134,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'nicolae.vaszilcsin@upt.ro',
         telefon: '0256-403061',
         image: ''
-        ,show :false
-        
+        , show: false
+
       });
 
       this.conducereCT.push({
@@ -1140,8 +1144,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         email: 'alina.dumitrel@upt.ro',
         telefon: '0256-403062',
         image: ''
-        ,show :false
-        
+        , show: false
+
       });
 
       this.orarCT.push({
@@ -1185,12 +1189,179 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
           { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: 'Confirmari' }
         ],
         orarFacultate: ``
-      })
+      });
 
+      this.conducereFSC.push({
+        functie: 'Decan',
+        nume: 'Conf. univ. dr. Daniel Dejica-Carțiș',
+        telefon: '',
+        email: 'daniel.dejica@upt.ro',
+        image: 'fsc/dejica.jpg',
+        show: false
+      });
+      this.conducereFSC.push({
+        functie: 'Prodecan',
+        nume: 'Lect. univ. dr. Simona Cristina Șimon',
+        telefon: '',
+        email: ' simona.simon@upt.ro',
+        image: 'fsc/simon.jpg',
+        show: false
+      });
+
+      this.descriereFSC = [
+        `Facultatea de Științe ale Comunicării a fost înființată în data de 1 octombrie 2011. 
+În prezent, Facultatea de Științe ale Comunicării gestionează un număr de aproximativ 500 de studenți 
+înscriși la cele două programe de studii la nivel de licență, forma de învățământ cu frecvență – Comunicare și 
+relații publice și Traducere și interpretare -, la programul de studii la nivel de licență, forma de învățământ 
+la distanță - Comunicare și relații publice – și la programul de studii interdisciplinar cu Inginerie electronică 
+și telecomunicații, la nivel de master, forma de învățământ cu frecvență - Comunicare, relații publice și media 
+digitală. Luând în considerare specificul programelor de studii, misiunea didactică a Facultății de Științe ale 
+Comunicării este de a forma atât specialiști în domeniul comunicării și al relațiilor publice. `,
+        'fsc/descrierefsc.jpg'
+      ];
+this.orarFSC.push({
+        orarAdmitere: `
+          <table  width='100%'>
+        <tr height="50px"  bgcolor="#2e2f92" >
+          <td height="50px">
+            <font color="white">
+              Înscriere candidaţi:
+            </font>
+          </td>
+          <td height="50px">
+            <font color="white">
+             17.07.2017 - 22.07.2017, orele 9.00-14.00;<br>
+24.07.2017 orele 9.00-14.00<br>
+25.07.2017-orele 9.00-12.00
+
+            </font>
+          </td>
+        </tr>
+        <tr height="50px">
+          <td>
+              <font color="#2e2f92">
+                <b>Concurs de dosare:</b>
+              </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                 <b> 25.07.2017</b>
+              </font>
+          </td>
+        </tr height="50px">
+        <tr bgcolor="#2e2f92">
+          <td>
+            <font color="white">
+            Rezultatele concursului:
+          </td>
+          <td>
+            <font color="white">
+            26.07.2017, ora 10.00
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <font color="#2e2f92" >
+              <b>
+                Confirmări Runda I:
+              </b>
+             </font>
+          </td>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                  26.07.2017, ora 10.00 <br> 27.07.2017, ora 16.00
+                </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+              <font color="white">
+                 Afişare Runda II:
+              </font>
+          </td>
+          <td>
+             <font color="white">
+                 28.07.2017, ora 10.00
+              </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <font color="#2e2f92" >
+                <b>
+                 Confirmări Runda II:
+               </b>
+              </font>
+          </td>
+          <td>
+             <font color="#2e2f92" >
+                  <b>
+                    28.07.2017, ora 10.00 <br> 29.07.2017, ora 12.00
+                 </b>
+              </font>
+          </td>
+        </tr>
+        <tr bgcolor="#2e2f92">
+          <td>
+             <font color="white">
+               Afişare Runda III:
+               </font>
+          </td>
+          <td>
+             <font color="white">
+                 29.07.2017, ora 16.00
+                </font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+           <font color="#2e2f92" >
+                  <b>
+                  Confirmări Runda III:
+                  </b>
+              </font>
+          </td>
+          <td>
+            <font color="#2e2f92" >
+                  <b>
+                  29.07.2017, orele 16.00 - 18.00
+                  </b>
+              </font>
+          </td>
+        </tr>
+        <tr  bgcolor="#2e2f92">
+          <td>
+           <font color="white">
+              Rezultatele finale:
+            </font>
+          </td>
+          <td>
+             <font color="white">
+              29.07.2017, ora 20.00  
+              </font>
+          </td>
+        </tr>
+        </table>`,
+        eventSource: [
+          { startTime: new Date(Date.UTC(2017, 6, 17)), endTime: new Date(Date.UTC(2017, 6, 22)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 24)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Insciere candidati' },
+          { startTime: new Date(Date.UTC(2017, 6, 25)), endTime: new Date(Date.UTC(2017, 6, 25)), allDay: false, title: 'Concurs de dosare' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 26, 7)), allDay: false, title: 'Rezultatele concursului' },
+          { startTime: new Date(Date.UTC(2017, 6, 26, 7)), endTime: new Date(Date.UTC(2017, 6, 27, 13)), allDay: false, title: ' Confirmări Runda I' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 28, 7)), allDay: false, title: 'Afişare Runda II' },
+          { startTime: new Date(Date.UTC(2017, 6, 28, 7)), endTime: new Date(Date.UTC(2017, 6, 29, 9)), allDay: false, title: ' Confirmări Runda II ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 29, 13)), allDay: false, title: 'Afişare Runda III ' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 13)), endTime: new Date(Date.UTC(2017, 6, 26, 15)), allDay: false, title: ' Confirmări Runda III' },
+          { startTime: new Date(Date.UTC(2017, 6, 29, 17)), endTime: new Date(Date.UTC(2017, 6, 29, 17)), allDay: false, title: `Rezultate finale` }
+        ],
+        orarFacultate: ''
+      })
       this.info = isLoggedIn;
       console.log(this.info)
       this.selectedItem = navParams.get('item');
-      this.notes = ['ACUPT', 'CHIUPT', 'EEUPT', 'ETCUPT', 'MECUPT', 'MPTUPT', 'OSTLUPT', 'a4upt'];
+      this.notes = ['ACUPT', 'CHIUPT', 'EEUPT', 'ETCUPT', 'MECUPT', 'MPTUPT', 'OSTLUPT', 'a4upt', 'FSCUPT'];
       this.faculties = [
         'Facultatea de Automatică și Calculatoare',
         'Facultatea de Chimie Industrială și Ingineria Mediului ',
@@ -1199,15 +1370,16 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         'Facultatea de Mecanică',
         'Facultatea de Management în Producție și Transporturi',
         'Facultatea de Construcții',
-        'Facultatea de Arhitectură și Urbanism'];
-      let short = ['AC', 'CIIM', 'EE', 'ETTI', 'MEC', 'MPT', 'CT', 'ARH']
-      let logos = ['ac/ac.png', 'ct/ct.png', 'ee/ee.png', 'etc/etc.png', 'mt/mt.png', 'mpt/mpt.png', 'ostl/ostl.png', 'a4/a4.png'];
+        'Facultatea de Arhitectură și Urbanism',
+        'Facultatea de Ştiinţe ale Comunicării '];
+      let short = ['AC', 'CIIM', 'EE', 'ETTI', 'MEC', 'MPT', 'CT', 'ARH', 'FSC']
+      let logos = ['ac/ac.png', 'ct/ct.png', 'ee/ee.png', 'etc/etc.png', 'mt/mt.png', 'mpt/mpt.png', 'ostl/ostl.png', 'a4/a4.png', 'fsc/fsc.png'];
 
       this.items = [];
       console.log(this.selectedItem)
       // If we navigated to this page, we will have an item available as a nav param
       if (this.info.data == "user") {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < logos.length; i++) {
           // for(let j = 0; j < this.info.follow.length; j++){
           //   if(this.notes[i] == this.info.follow[j].value && this.info.follow[j].counter == 1 ){
           //       this.danger = "secondary";
@@ -1232,11 +1404,11 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
             favorite: "",
             serie: this.series,
             imagelink: logos[i],
-            short:short[i]
+            short: short[i]
           });
         }
       } else {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < logos.length; i++) {
           this.danger = "danger";
           this.favorite = "Follow"
           if (this.info.follow != null) {
@@ -1270,7 +1442,7 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
             favorite: this.favorite,
             serie: this.series,
             imagelink: logos[i],
-            short:short[i]
+            short: short[i]
           });
         }
       }
@@ -1356,6 +1528,13 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
         descriere: this.descriereMT,
         orar: this.orarMT,
         conducere: this.conducereMT
+      });
+    } else if (item.note == 'FSCUPT') {
+      this.navCtrl.push('Paginafacultate', {
+        item: item,
+        descriere: this.descriereFSC,
+        orar: this.orarFSC,
+        conducere: this.conducereFSC
       });
     }
   }

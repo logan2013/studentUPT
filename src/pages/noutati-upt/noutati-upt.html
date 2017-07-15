@@ -18,23 +18,22 @@
         <button ion-button full (click)="addNew()">Add new post &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
     </ion-buttons>
     <ion-list no-padding style="margin:0;" *ngFor="let post of posts">
-        <ion-card no-padding fullscreen>
+        <ion-card (click)='showContent(post)' no-padding fullscreen>
             <ion-card-content>
                 <ion-row>
                     <ion-col>
-                        <h1 style="white-space: pre-line;" text-wrap>&nbsp;&nbsp;{{post.title}}</h1>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-6>
-                        <p padding-horizontal text-justify style="white-space: pre-line;" text-wrap [innerHTML]="post.text"></p>
+                        <!--<p padding-horizontal text-justify style="white-space: pre-line;" text-wrap [innerHTML]="post.text"></p>-->
+                        <!--<p text-left text-wrap style="white-space: normal;">
+                            {{post.preview}}
+                        </p>-->
+                        <h2 style="white-space: pre-line;font-size:16,5px;" text-wrap> <b>&nbsp;&nbsp;{{post.title}} </b></h2>
+                        <p text-left style="white-space: pre-line; font-size:13.5px;" text-wrap [innerHTML]="post.preview"></p>
+                        <b style="position:bottom;font-size:12px;" text-left>{{post.data}} </b>
 
                     </ion-col>
                     <ion-col col-6>
                         <img *ngIf="post.icon" src="http://193.226.9.153/upload/{{post.icon}}" />
-                        <img *ngIf="!post.icon" src="https://blog.stylingandroid.com/wp-content/themes/lontano-pro/images/no-image-slide.png">
                     </ion-col>
-                    <p padding style="position:bottom" text-left>{{post.data}} </p>
 
                 </ion-row>
             </ion-card-content>

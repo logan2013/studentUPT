@@ -89,118 +89,118 @@ Unul din principalele obiective ale organizației este informarea studenților. 
         'ligaac/descriereac.jpg'
       ];
 
-      this.conducereAC.push({
-        functie: 'Președinte',
-        nume: 'Alexandru - Marian CHIRU ',
-        telefon: '+40 788 327 218',
-        email: ': alexandru.chiru@ligaac.ro',
-        image: 'ligaac/chiru.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Președinte',
+      //   nume: 'Alexandru - Marian CHIRU ',
+      //   telefon: '+40 788 327 218',
+      //   email: ': alexandru.chiru@ligaac.ro',
+      //   image: 'ligaac/chiru.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Vicepreședinte Interne',
-        nume: 'Bogdan BODESCU',
-        telefon: '+40 769 714 367',
-        email: 'bogdan.bodescu@ligaac.ro ',
-        image: 'ligaac/bodescu.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Vicepreședinte Interne',
+      //   nume: 'Bogdan BODESCU',
+      //   telefon: '+40 769 714 367',
+      //   email: 'bogdan.bodescu@ligaac.ro ',
+      //   image: 'ligaac/bodescu.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Vicepreședinte Externe',
-        nume: 'Ioana Georgiana PLITEA ',
-        telefon: '+40 760 553 933',
-        email: 'ioana.plitea@ligaac.ro',
-        image: 'ligaac/piltea.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Vicepreședinte Externe',
+      //   nume: 'Ioana Georgiana PLITEA ',
+      //   telefon: '+40 760 553 933',
+      //   email: 'ioana.plitea@ligaac.ro',
+      //   image: 'ligaac/piltea.jpg'
+      // });
 
 
-      this.conducereAC.push({
-        functie: 'Vicepreședinte Proiecte',
-        nume: 'Cosmin - Ionuț CÎRLEA ',
-        telefon: '+40 760 287 725',
-        email: 'cosmin.cirlea@ligaac.ro',
-        image: 'ligaac/carlea.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Vicepreședinte Proiecte',
+      //   nume: 'Cosmin - Ionuț CÎRLEA ',
+      //   telefon: '+40 760 287 725',
+      //   email: 'cosmin.cirlea@ligaac.ro',
+      //   image: 'ligaac/carlea.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Secretar General',
-        nume: 'Laurențiu - Adrian MOLNAR',
-        telefon: '+40 770 715 451',
-        email: 'laurentiu.molnar@ligaac.ro',
-        image: 'ligaac/molnar.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Secretar General',
+      //   nume: 'Laurențiu - Adrian MOLNAR',
+      //   telefon: '+40 770 715 451',
+      //   email: 'laurentiu.molnar@ligaac.ro',
+      //   image: 'ligaac/molnar.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Educațional',
-        nume: 'Calina - Elena DRĂGULESCU',
-        telefon: '+40 761 636 364',
-        email: 'calina.dragulescu@ligaac.ro ',
-        image: 'ligaac/dragulescu.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Educațional',
+      //   nume: 'Calina - Elena DRĂGULESCU',
+      //   telefon: '+40 761 636 364',
+      //   email: 'calina.dragulescu@ligaac.ro ',
+      //   image: 'ligaac/dragulescu.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Financiar ',
-        nume: 'Răzvan - Dumitru LĂCĂTUȘU ',
-        telefon: '+40 771 328 438',
-        email: 'razvan.lacatusu@ligaac.ro ',
-        image: 'ligaac/lacatusu.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Financiar ',
+      //   nume: 'Răzvan - Dumitru LĂCĂTUȘU ',
+      //   telefon: '+40 771 328 438',
+      //   email: 'razvan.lacatusu@ligaac.ro ',
+      //   image: 'ligaac/lacatusu.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Imagine',
-        nume: 'Arpad GABOR ',
-        telefon: '+40 742 571 335',
-        email: 'arpad.gabor@ligaac.ro',
-        image: 'ligaac/gabor.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Imagine',
+      //   nume: 'Arpad GABOR ',
+      //   telefon: '+40 742 571 335',
+      //   email: 'arpad.gabor@ligaac.ro',
+      //   image: 'ligaac/gabor.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Promovare',
-        nume: 'Diana - Adina NIȚU',
-        telefon: '+40 755 126 968',
-        email: 'diana.nitu@ligaac.ro',
-        image: 'ligaac/nitu.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Promovare',
+      //   nume: 'Diana - Adina NIȚU',
+      //   telefon: '+40 755 126 968',
+      //   email: 'diana.nitu@ligaac.ro',
+      //   image: 'ligaac/nitu.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Resurse Umane',
-        nume: 'Maria - Bernadeta URSAN ',
-        telefon: '+40 740 201 219',
-        email: 'bernadeta.ursan@ligaac.ro',
-        image: 'ligaac/ursan.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Resurse Umane',
+      //   nume: 'Maria - Bernadeta URSAN ',
+      //   telefon: '+40 740 201 219',
+      //   email: 'bernadeta.ursan@ligaac.ro',
+      //   image: 'ligaac/ursan.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Tehnic',
-        nume: 'Denis - Remus TRONCOTĂ ',
-        telefon: '+40 753 964 349',
-        email: 'denis.troncota@ligaac.ro',
-        image: 'ligaac/troncota.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Tehnic',
+      //   nume: 'Denis - Remus TRONCOTĂ ',
+      //   telefon: '+40 753 964 349',
+      //   email: 'denis.troncota@ligaac.ro',
+      //   image: 'ligaac/troncota.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Coordonator Tineret',
-        nume: 'Alexandru - Constantin ILIESCU',
-        telefon: '+40 765 822 936',
-        email: 'alexandru.iliescu@ligaac.ro',
-        image: 'ligaac/iliescu.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Coordonator Tineret',
+      //   nume: 'Alexandru - Constantin ILIESCU',
+      //   telefon: '+40 765 822 936',
+      //   email: 'alexandru.iliescu@ligaac.ro',
+      //   image: 'ligaac/iliescu.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Cenzor',
-        nume: 'Ioana - Ștefania SÂNTIMBREAN ',
-        telefon: '+40 733 573 743',
-        email: 'stefania.santimbrean@ligaac.ro',
-        image: 'ligaac/santimbrean.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Cenzor',
+      //   nume: 'Ioana - Ștefania SÂNTIMBREAN ',
+      //   telefon: '+40 733 573 743',
+      //   email: 'stefania.santimbrean@ligaac.ro',
+      //   image: 'ligaac/santimbrean.jpg'
+      // });
 
-      this.conducereAC.push({
-        functie: 'Cenzor',
-        nume: 'Nicoleta - Alisa CIUBOTARU  ',
-        telefon: '+40 734 965 564',
-        email: 'alisa.ciubotaru@ligaac.ro',
-        image: 'ligaac/ciubotaru.jpg'
-      });
+      // this.conducereAC.push({
+      //   functie: 'Cenzor',
+      //   nume: 'Nicoleta - Alisa CIUBOTARU  ',
+      //   telefon: '+40 734 965 564',
+      //   email: 'alisa.ciubotaru@ligaac.ro',
+      //   image: 'ligaac/ciubotaru.jpg'
+      // });
 
       this.proiecteAC.push({
         descriere: `<b><h1>Chess Contest</h1></b><br>Când în holul Electro apar piese de şah de mărimea unui om mic, ştim că se apropie 
@@ -448,7 +448,7 @@ Este cel mai mare proiect sportiv al L.S.F.E.E., care, sub sloganul PLAY, FIGHT 
 Membrii organizaţiei au în comun plăcerea de a fi voluntari. Se implică în viaţă socetatii pentru a obţine, printre altele, sporirea prestigiului studentului, crearea unor legături bune cu cadrele didactice, dar şi revendicarea drepturilor tuturor studenţilor.
 Liga aşteaptă noi voluntari, de aceea nu ezită să participi la sesiunea de recrutări care are loc la fiecare început de semestru. 
 `,
-        'ligamt/descrierempt.jpg'
+        'ligampt/descrierempt.jpg'
       ];
 
       // this.conducereMPT.push({
@@ -694,7 +694,7 @@ A4 invită la dialog studenții și corpul didactic, militează pentru proiecte 
 ...și probabil cea mai des auzită întrebare: de ce Asociația de la 4? Pentru că Facultatea de
 Arhitectură și Urbanism împarte aceeași clădire cu Facultatea de Construcții, iar Arhitectura
 începe de la etajul....4!
-`, 'ligaat/descrierea4.jpg'
+`, 'ligaa4/descrierea4.jpg'
       ];
 
       // this.conducereA4.push({

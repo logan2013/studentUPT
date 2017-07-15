@@ -1,8 +1,11 @@
+import { using } from 'rxjs/observable/using';
 import { Component } from '@angular/core';
-import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Network } from '@ionic-native/network';
+
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -13,10 +16,13 @@ import 'rxjs/add/operator/map';
 export class Login {
   public myForm: any;
   public dataUser: any;
+  public show: any = true;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
+    public alertCtrl: AlertController,
     public platform: Platform,
     public events: Events,
+    private network: Network,
     public nativeStorage: NativeStorage,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
@@ -41,6 +47,46 @@ export class Login {
 
   }
 
+  ionViewDidEnter() {
+    this.network.onConnect().subscribe(data => {
+      this.show = true;
+      }
+      , error => console.log(error));
+
+    this.network.onDisconnect().subscribe(data => {
+      let alert = this.alertCtrl.create({
+        title: 'Network was disconnected :-(',
+        subTitle: 'Please check your connection. And try again',
+        buttons: ['OK']
+      });
+      if(this.show == true) {
+        alert.present();
+        this.show = false;
+      }
+    }
+      , error => console.log(error)
+    );
+  }
+
+
+  displayNetowrk(connectionState: string) {
+    let networkType = this.network.type;
+    if (networkType === 'none') {
+      this.navCtrl.push('NoNetwork');
+
+      this.toastCtrl.create({
+        message: 'You are now ' + connectionState,
+        duration: 5000
+      }).present();
+    } else {
+      this.navCtrl.push('Login');
+      // this.navCtrl.pop();
+      this.toastCtrl.create({
+        message: 'You are now ' + connectionState + ' via ' + networkType,
+        duration: 5000
+      }).present();
+    }
+  }
   ionViewDidLoad() { }
 
   public logForm() {
@@ -69,7 +115,6 @@ export class Login {
 
     this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
       this.dataUser = data;
-      alert(this.dataUser)
 
       console.log(this.dataUser.data)
       if (this.dataUser.success) {

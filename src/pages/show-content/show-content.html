@@ -4,17 +4,36 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<ion-header>
 
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light" name='md-arrow-round-back'></ion-icon>
+        </button>
+    <ion-navbar>
+
+        <ion-title text-center>
+
+        </ion-title>
+
+    </ion-navbar>
+
+</ion-header>
 <ion-content elastic-header>
 
 
+    <img *ngIf="item.imageLink" style="width:100%; height:200px; position:relative;" src="http://193.226.9.153/images/{{item.imageLink}}" imageViewer/>
+    <img *ngIf="item.icon" style="width:100%;  position:relative;" src="http://hainedefirmasj.com/placesforme/upload/{{item.icon}}" imageViewer/>
 
-    <img style="width:100%; height:200px; position:relative;" src="http://193.226.9.153/images/{{item.imageLink}}" imageViewer/>
-    <div style="top:0px; position:absolute; z-index:5;">
-        <button ion-button clear full (click)="goBack()" icon-only>
-        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
-      </button>
-    </div>
-    <h1 text-center>{{item.title}}</h1>
-    <div padding-horizontal text-left style="white-space: pre-line;" [innerHTML]="item.content"> </div>
-    <=< /ion-content>
+    <!--<button *ngIf="item.imageLink || item.icon" ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light" name='md-arrow-round-back'></ion-icon>
+        </button>-->
+    <ion-card>
+        <h2 text-center><b>{{item.title}}</b></h2><br>
+        <div *ngIf="item.content" padding-horizontal text-justify style="white-space: pre-line;text-indent: 20px;
+    text-align: justify;
+   " [innerHTML]="item.content"> </div>
+        <div *ngIf="item.text" padding-horizontal text-left style="white-space: pre-line;text-indent: 20px;
+    text-align: left;
+   " [innerHTML]="item.text"> </div>
+    </ion-card>
+</ion-content>

@@ -15,7 +15,9 @@
         <div *ngIf="descriere[1]">
             <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
         </div>
-        <p padding text-left text-wrap style="white-space: pre;">
+        <p padding text-wrap style="white-space: pre;text-indent: 20px;
+    text-align: justify;
+   ">
             {{descriere[0]}}
         </p>
     </ion-card>
@@ -36,16 +38,17 @@
 
                 <h2 *ngIf="data.functie" text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
                 <h4 *ngIf="data.nume" text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
-                <div text-center>
-                    <button (click)='toggle(data.nume)' clear ion-button icon-only>
-                <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline'"></ion-icon>
-            </button>
-                </div>
                 <div *ngIf="data.show">
 
                     <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
                     <p *ngIf="data.email" text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
                 </div>
+                <div text-center>
+                    <button (click)='toggle(data.nume)' clear ion-button icon-only>
+                <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline'"></ion-icon>
+            </button>
+                </div>
+
             </ion-card>
         </ion-list>
     </ion-card>

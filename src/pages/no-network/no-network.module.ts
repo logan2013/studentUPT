@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { Profile } from './profile';
+import { NoNetwork } from './no-network';
 
 @NgModule({
   declarations: [
-    Profile,
+    NoNetwork,
   ],
   imports: [
-    IonicPageModule.forChild(Profile),
+    IonicPageModule.forChild(NoNetwork),
   ],
   exports: [
-    Profile
+    NoNetwork
   ]
 })
-export class ProfileModule {}
+export class NoNetworkModule {}

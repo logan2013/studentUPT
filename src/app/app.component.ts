@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Events, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Events, Platform, LoadingController, ToastController, AlertController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Auth } from '../providers/auth';
 import { Getlocation } from '../providers/getlocation';
 import { OneSignal } from '@ionic-native/onesignal';
-
+import { Device } from '@ionic-native/device';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,9 +19,13 @@ export class MyApp {
 
   constructor(private oneSignal: OneSignal,
     public events: Events,
+    public device: Device,
+    public modalCtrl: ModalController,
+    private toastCtrl: ToastController,
     public loadCtrl: LoadingController,
     public getlocation: Getlocation,
     public auth: Auth,
+    public alertCtrl: AlertController,
     public platform: Platform,
     private nativeStorage: NativeStorage,
     public statusBar: StatusBar,
@@ -119,35 +123,55 @@ export class MyApp {
     })
     //code to execute when menu ha opened
   }
-  initializeApp() {
-    //a0bfcab0-43b0-456e-a62d-48c86af5202a
-    this.platform.ready().then(() => {
-      this.getlocation.startTracking();
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.oneSignal.startInit("a0bfcab0-43b0-456e-a62d-48c86af5202a", "791062974267");
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-      this.oneSignal.setSubscription(true);
-      this.oneSignal.handleNotificationReceived().subscribe(() => {
-        // do something when the notification is received.
+
+  /**
+   * editProfile
+   */
+  public editProfile(user) {
+    if (user.data == 'user') {
+      let alert = this.alertCtrl.create({
+        title: 'Trebuie sa te loghezi :-(',
+        subTitle: 'Momentan aceasta sectiune nu este disponibila pentru studenti. Multumim!',
+        buttons: ['OK']
       });
-      this.oneSignal.handleNotificationOpened().subscribe(() => {
-        // do something when the notification is opened.
-        this.rootPage = 'Facultati';
-      });
-      this.oneSignal.endInit();
-      this.oneSignal.getIds().then(data => {
-        // this gives you back the new userId and pushToken associated with the device. Helpful.
-      });
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      alert.present();
+  } else {
+    this.modalCtrl.create('Profile').present() 
+   // this.rootPage = 'Profile';
+  }
+  console.log(user)
+}
+
+
+initializeApp() {
+  //a0bfcab0-43b0-456e-a62d-48c86af5202a
+  this.platform.ready().then(() => {
+    this.getlocation.startTracking();
+    // Okay, so the platform is ready and our plugins are available.
+    // Here you can do any higher level native things you might need.
+    this.oneSignal.startInit("a0bfcab0-43b0-456e-a62d-48c86af5202a", "791062974267");
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.setSubscription(true);
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when the notification is received.
     });
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when the notification is opened.
+      this.rootPage = 'Facultati';
+    });
+    this.oneSignal.endInit();
+    this.oneSignal.getIds().then(data => {
+      // this gives you back the new userId and pushToken associated with the device. Helpful.
+    });
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+  });
 
-  }
+}
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+openPage(page) {
+  // Reset the content nav to have just this page
+  // we wouldn't want the back button to show in this scenario
+  this.nav.setRoot(page.component);
+}
 }

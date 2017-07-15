@@ -8,32 +8,47 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-buttons *ngIf="info.facultate == dataTabs.message.note && info.right == 1">
-        <button ion-button full (click)="addNew()">Add new  <ion-icon name="add"></ion-icon></button>
+        <button ion-button full (click)="addNew()">Adauga postare  <ion-icon name="add"></ion-icon></button>
     </ion-buttons>
     <ion-list no-padding style="margin:0;" *ngFor="let post of posts">
         <ion-card no-padding fullscreen>
-            <ion-card-content>
-                <h1 style="white-space: pre-line;" text-wrap>&nbsp;&nbsp;{{post.title}}</h1>
-                <br>
-                <p padding-horizontal text-justify style="white-space: pre-line;">{{post.text}}
-                </p>
-                <ion-col>
-                    <img *ngIf="post.icon" src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" />
-                </ion-col>
-                <p padding style="position:bottom" text-left>{{post.data}} </p>
+            <ion-card-content (click)='showContent(post)'>
+                <ion-row>
+                    <ion-col>
+                        <h2 style="white-space: pre;font-size:15.5px;" text-wrap> <b>&nbsp;&nbsp;{{post.title}} </b></h2>
+                        <p style="position:bottom;font-size:12px;" text-left>{{post.data}} </p>
 
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+
+                    <ion-col>
+                        <!--<p padding-horizontal text-justify style="white-space: pre-line;" text-wrap [innerHTML]="post.text"></p>-->
+                        <!--<p text-left text-wrap style="white-space: normal;">
+                            {{post.preview}}
+                        </p>-->
+
+                        <!--<p text-left style="white-space: pre-line; font-size:13.5px;" text-wrap [innerHTML]="post.preview"></p>-->
+
+                    </ion-col>
+                    <ion-col *ngIf="post.icon" col-12>
+                        <img *ngIf="post.icon" src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" />
+
+                    </ion-col>
+
+                </ion-row>
             </ion-card-content>
             <ion-row>
                 <ion-col tappable *ngIf="info.facultate == dataTabs.message.note && info.right == 1" (click)="presentProfileModal(post)" width-50 text-left>
                     <button ion-button outline full clear icon-left text-capitalize>
                     <ion-icon name='create'></ion-icon>
-                    Edit 
+                    Editeaza
                     </button>
                 </ion-col>
                 <ion-col tappable *ngIf="info.facultate == dataTabs.message.note && info.right == 1" (click)="deleteProfil(post.id)" width-50 text-center>
                     <button ion-button outline full clear icon-left text-capitalize>
                     <ion-icon  name="close-circle"></ion-icon>
-                    Remove 
+                    Sterge
                     </button>
                 </ion-col>
                 <!--<ion-col tappable *ngIf="info.facultate == dataTabs.message.note && (info.right == 0) || (!info.right)" text-center>

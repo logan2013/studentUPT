@@ -1,141 +1,61 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
+
     <ion-navbar>
-        <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-        <ion-title>Profile {{user}}</ion-title>
+        <button ion-button clear (click)="goBack()">
+                    <ion-icon color="light" item-start name='md-arrow-round-back'></ion-icon>
+            </button>
+        <ion-title text-center>Profile</ion-title>
     </ion-navbar>
 
 </ion-header>
 
-<ion-content no-padding fullscreen>
-    <ion-row class="header">
-        <ion-col style="max-width: 200px; max-height: 200px;" width-40>
-            <img src="http://193.226.9.153/profilelogo.png" />
-        </ion-col>
-        <ion-col width-60 class="button-container">
-            <button full round icon-only ion-button icon-left>
-          <ion-icon name="cog"></ion-icon>
+
+<ion-content>
+    <ion-card>
+
+        <h2>Mai multe setari vor fi disponibile in curand. Momentan din sectiunea de profil se poate efectua doar operatia de resetare a parolei. Multumim.</h2>
+
+        <button ion-button color="light" (click)="showForm()" block>
+           <p style="color:#2e2f92">  I want to change my password </p>
         </button>
-            <button full round icon-only ion-button icon-right>
-          <ion-icon name="people"></ion-icon>
-        </button>
-            <button full round icon-only ion-button icon-left>
-          <ion-icon name="cog"></ion-icon>
-        </button>
-            <button round full ion-button>
-          Edit Profile
-        </button>
-        </ion-col>
-    </ion-row>
 
-    <div style="font-size:12 px;" text-capitalize>
-        <ion-segment [(ngModel)]="profil">
-            <ion-segment-button style="font-size:12 px;" text-capitalize value="orar">
-                Orar
-            </ion-segment-button>
-            <ion-segment-button style="font-size:12 px;" text-capitalize value="note">
-                Note
-            </ion-segment-button>
-            <ion-segment-button style="font-size:12 px;" text-capitalize value="locatii">
-                Locatii
-            </ion-segment-button>
+        <form *ngIf="show" scroll="false" [formGroup]="myForm" (ngSubmit)="resetPassowrd()" padding>
 
-            <ion-segment-button value="informatii">
-                Cont
-            </ion-segment-button>
-        </ion-segment>
-    </div>
-
-    <div style="font-size:12 px;" text-capitalize no-padding [ngSwitch]="profil">
-        <ion-list *ngSwitchCase="'orar'">
-            <ion-list *ngFor="let d of dataUser" no-padding>
-                <ion-grid no-padding>
-                    <ion-row class="grid-basic-page">
-                        <ion-col style="background-color:  #55acee;" item-left width-100>
-                            <div>
-                                {{d.grupa}}
-                            </div>
-                        </ion-col>
-                    </ion-row>
-
-                    <div *ngFor="let p of dataXls">
-                        <!-- parsarea intregilor date venite de la server-->
-                        <div *ngIf="p.grupa == d.grupa">
-                            <!-- verificare existenta grupa -->
-
-                            <div *ngFor="let t of p.orar">
-                                <!--  parsare date timp - zi si informatii -->
-                                <ion-row class="grid-basic-page">
-                                    <ion-col *ngIf="t.zi!='c'" style="background-color: #69e814; font-size:12px;" col-3>
-                                        <div>
-                                            Timp
-                                        </div>
-                                    </ion-col>
-                                    <ion-col *ngIf="t.zi!='c'" style="background-color: #69e814; font-size:12px;" item-left col-9>
-                                        <div>
-                                            {{t.zi}}
-                                        </div>
-                                        <ion-icon (click)="toggleDetails(d,t.zi)" color="primary" item-right [name]="d.icon"></ion-icon>
-
-                                    </ion-col>
-                                </ion-row>
-                                <ion-row *ngIf="t.time!='' && d.showDetails " class="grid-basic-page">
-                                    <ion-col style="font-size:12px;" col-3>
-                                        <div text-left>
-                                            {{t.time}}
-                                        </div>
-                                    </ion-col>
-                                    <ion-col style="font-size:12px;" item-left col-9>
-                                        <div text-left>
-                                            {{t.info}}
-                                        </div>
-                                    </ion-col>
-                                </ion-row>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </ion-grid>
-
+            <ion-list>
+                <ion-item color="primary">
+                    <ion-label stacked>
+                        <p style="color:white"> Parola curenta </p>
+                    </ion-label>
+                    <ion-input type="password" value="" formControlName="curentpass" placeholder=""></ion-input>
+                </ion-item>
+                <ion-item color="primary">
+                    <div class="spacer" style="height: 2px;"></div>
+                    <ion-label stacked>
+                        <p style="color:white">Noua parola</p>
+                    </ion-label>
+                    <ion-input type="password" value="" formControlName="pass" placeholder=""></ion-input>
+                </ion-item>
+                <ion-item color="primary">
+                    <div class="spacer" style="height: 2px;"></div>
+                    <ion-label stacked>
+                        <p style="color:white">Repeta parola</p>
+                    </ion-label>
+                    <ion-input type="password" value="" formControlName="repetpass" placeholder=""></ion-input>
+                </ion-item>
+                <ion-input [hidden]="true"></ion-input>
             </ion-list>
+            <div class="spacer" style="height:30px;" id="login-spacer1"></div>
+            <button ion-button color="light" block>
+              <p style="color:#2e2f92"> Reset password </p>
+            </button>
 
-        </ion-list>
+        </form>
 
-        <ion-list *ngSwitchCase="'note'">
-            <img src="http://atestate-inf.tk/ghidtest/underconstruction.png" />
-        </ion-list>
-
-        <ion-list *ngSwitchCase="'locatii'">
-            <ion-list *ngFor="let data of myRoute">
-                <ion-card>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col>
-                                <h2> {{data.location}} </h2>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-11>
-                                <p> {{data.address}} </p>
-                            </ion-col>
-                            <ion-col col-1>
-                                <ion-icon tappable (click)="createRoute(data)" color="secondary" item-right name="navigate"> </ion-icon>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card>
-            </ion-list>
-            <!--<ion-thumbnail item-left>
-      </ion-thumbnail>
-      <h2>Locatii</h2>-->
-        </ion-list>
-        <ion-list *ngSwitchCase="'informatii'">
-            <img src="http://atestate-inf.tk/ghidtest/underconstruction.png" />
-        </ion-list>
-        <img *ngIf="!profil" src='http://atestate-inf.tk/ghidtest/upt.png'>
-        <img *ngIf="!profil" src='http://atestate-inf.tk/ghidtest/ligalogo.jpg'>
-
-    </div>
+    </ion-card>
 </ion-content>

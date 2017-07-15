@@ -90,4 +90,8 @@ export class NoutatiUpt {
     });
     confirm.present();
   }
+    showContent(item) {
+    this.modalCtrl.create('ShowContent', { item: item }).present();
+    // this.navCtrl.push('ShowContent', {item:item});
+  }
 }

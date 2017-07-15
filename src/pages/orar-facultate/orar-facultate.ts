@@ -30,12 +30,12 @@ export class OrarFacultate {
   constructor(public dataTabs: DataTabs,
     private localNotifications: LocalNotifications,
     public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
-    this.localNotifications.schedule({
-      text: 'Notificare locala',
-      at: new Date(new Date().getTime() + 3600),
-      led: 'FF0000',
-      sound: null
-    });
+    // this.localNotifications.schedule({
+    //   text: 'Notificare locala',
+    //   at: new Date(new Date().getTime() + 3600),
+    //   led: 'FF0000',
+    //   sound: null
+    // });
     this.eventSource = this.dataTabs.orar[0].eventSource;
     console.log(this.dataTabs.orar)
     this.orar = this.dataTabs.orar;

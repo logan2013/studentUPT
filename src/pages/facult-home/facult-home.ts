@@ -198,7 +198,7 @@ navigateToSecondPage() {
 private createFileName() {
     var d = new Date(),
     n = d.getDay()+d.getHours()+d.getSeconds()+d.getSeconds(),
-    newFileName =  n + ".jpg";
+    newFileName = ''+localStorage.getItem('user') + n + ".jpg";
     
     localStorage.setItem('upt',newFileName);
     return newFileName;
