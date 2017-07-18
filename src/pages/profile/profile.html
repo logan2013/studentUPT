@@ -28,23 +28,23 @@
         <form *ngIf="show" scroll="false" [formGroup]="myForm" (ngSubmit)="resetPassowrd()" padding>
 
             <ion-list>
-                <ion-item color="primary">
+                <ion-item>
                     <ion-label stacked>
-                        <p style="color:white"> Parola curenta </p>
+                        <p> Parola curenta </p>
                     </ion-label>
                     <ion-input type="password" value="" formControlName="curentpass" placeholder=""></ion-input>
                 </ion-item>
-                <ion-item color="primary">
+                <ion-item>
                     <div class="spacer" style="height: 2px;"></div>
                     <ion-label stacked>
-                        <p style="color:white">Noua parola</p>
+                        <p>Noua parola</p>
                     </ion-label>
                     <ion-input type="password" value="" formControlName="pass" placeholder=""></ion-input>
                 </ion-item>
-                <ion-item color="primary">
+                <ion-item>
                     <div class="spacer" style="height: 2px;"></div>
                     <ion-label stacked>
-                        <p style="color:white">Repeta parola</p>
+                        <p>Repeta parola</p>
                     </ion-label>
                     <ion-input type="password" value="" formControlName="repetpass" placeholder=""></ion-input>
                 </ion-item>
@@ -52,10 +52,12 @@
             </ion-list>
             <div class="spacer" style="height:30px;" id="login-spacer1"></div>
             <button ion-button color="light" block>
-              <p style="color:#2e2f92"> Reset password </p>
+              <p > Reset password </p>
             </button>
 
         </form>
-
+        <button ion-button color="light" (click)="logout()" block>
+        <p style="color:#2e2f92"> Logout </p>
+        </button>
     </ion-card>
 </ion-content>

@@ -1,11 +1,4 @@
-<!--
-  Generated template for the NoutatiUpt page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-<ion-content elastic-header>
+<ion-content>
     <!--<div class="background-image">
         <img style="border-radius:50%; width:50%;  margin-left:25%;" src="http://placehold.it/200x200" />
     </div>
@@ -15,24 +8,32 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-buttons *ngIf="info.right == 2">
-        <button ion-button full (click)="addNew()">Add new post &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
+        <button ion-button full (click)="addNew()">Adauga postare &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
     </ion-buttons>
     <ion-list no-padding style="margin:0;" *ngFor="let post of posts">
-        <ion-card (click)='showContent(post)' no-padding fullscreen>
-            <ion-card-content>
+        <ion-card no-padding fullscreen>
+            <ion-card-content (click)='showContent(post)' tappable>
                 <ion-row>
+                    <ion-col>
+                        <h2 style="white-space: pre;font-size:15.5px;" text-wrap> <b>{{post.title}} </b></h2>
+                        <p style="position:bottom;font-size:12px;" text-left>{{post.data}} </p>
+
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+
                     <ion-col>
                         <!--<p padding-horizontal text-justify style="white-space: pre-line;" text-wrap [innerHTML]="post.text"></p>-->
                         <!--<p text-left text-wrap style="white-space: normal;">
                             {{post.preview}}
                         </p>-->
-                        <h2 style="white-space: pre-line;font-size:16,5px;" text-wrap> <b>&nbsp;&nbsp;{{post.title}} </b></h2>
-                        <p text-left style="white-space: pre-line; font-size:13.5px;" text-wrap [innerHTML]="post.preview"></p>
-                        <b style="position:bottom;font-size:12px;" text-left>{{post.data}} </b>
+
+                        <!--<p text-left style="white-space: pre-line; font-size:13.5px;" text-wrap [innerHTML]="post.preview"></p>-->
 
                     </ion-col>
-                    <ion-col col-6>
-                        <img *ngIf="post.icon" src="http://193.226.9.153/upload/{{post.icon}}" />
+                    <ion-col *ngIf="post.icon" col-12>
+                        <img *ngIf="post.icon" src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" />
+
                     </ion-col>
 
                 </ion-row>
@@ -41,13 +42,13 @@
                 <ion-col tappable *ngIf=" info.right == 2" (click)="presentProfileModal(post)" width-50 text-left>
                     <button ion-button outline full clear icon-left text-capitalize>
                     <ion-icon name='create'></ion-icon>
-                    Edit 
+                    Editeaza 
                     </button>
                 </ion-col>
                 <ion-col tappable *ngIf=" info.right == 2" (click)="deleteProfil(post.id)" width-50 text-center>
                     <button ion-button outline full clear icon-left text-capitalize>
                     <ion-icon  name="close-circle"></ion-icon>
-                    Delete 
+                   Sterge
                     </button>
                 </ion-col>
                 <!--<ion-col tappable *ngIf=" (info.right == 0) || (!info.right)" text-center>

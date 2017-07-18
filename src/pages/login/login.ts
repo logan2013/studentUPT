@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
+import { AppUpdate } from '@ionic-native/app-update';
 
 import 'rxjs/add/operator/map';
 
@@ -17,6 +18,7 @@ export class Login {
   public myForm: any;
   public dataUser: any;
   public show: any = true;
+  public update: any;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
@@ -27,8 +29,9 @@ export class Login {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
+    private appUpdate: AppUpdate,
     public http: Http) {
-
+  
     this.menuCtrl.enable(false);
 
     if (localStorage.getItem('user')) {
@@ -48,18 +51,20 @@ export class Login {
   }
 
   ionViewDidEnter() {
+    
+      
     this.network.onConnect().subscribe(data => {
       this.show = true;
-      }
+    }
       , error => console.log(error));
 
     this.network.onDisconnect().subscribe(data => {
       let alert = this.alertCtrl.create({
         title: 'Network was disconnected :-(',
-        subTitle: 'Please check your connection. And try again',
+        subTitle: 'Please check your connection. And try again ',
         buttons: ['OK']
       });
-      if(this.show == true) {
+      if (this.show == true) {
         alert.present();
         this.show = false;
       }
@@ -91,6 +96,10 @@ export class Login {
 
   public logForm() {
 
+        const updateUrl = 'http://193.226.9.153/update.xml';
+        this.appUpdate.checkAppUpdate(updateUrl);
+   
+
     let loader = this.loadingCtrl.create({
       content: "Authentification...",
       duration: 750
@@ -112,26 +121,30 @@ export class Login {
       pwd: this.myForm._value.password,
     }
     loader.present();
+    if (postParams.user != '' && postParams.pwd != '') {
+      this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
+        this.dataUser = data;
 
-    this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
-      this.dataUser = data;
+        console.log(this.dataUser.data)
+        if (this.dataUser.success) {
+          loader.dismiss();
+          localStorage.setItem('user', this.dataUser.data)
+          this.navCtrl.setRoot('HomePage', { item: this.dataUser });
+          this.events.publish('try:login', '');
 
-      console.log(this.dataUser.data)
-      if (this.dataUser.success) {
-        loader.dismiss();
-        localStorage.setItem('user', this.dataUser.data)
-        this.navCtrl.setRoot('HomePage', { item: this.dataUser });
-        this.events.publish('try:login', '');
+        }
+        else {
+          loader.dismiss();
 
-      }
-      else {
-        loader.dismiss();
+          loginFail.present(); // if login fail show a message error
+        }
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      loader.dismiss();
+    }
 
-        loginFail.present(); // if login fail show a message error
-      }
-    }, error => {
-      console.log(error);
-    });
 
   }
 
@@ -143,10 +156,10 @@ export class Login {
 
   guest() {
     // this.navCtrl.push(HelloIonicPage);
-    this.navCtrl.setRoot('HomePage');
-
+      this.navCtrl.setRoot('HomePage');
+ 
     this.events.publish('try:login', '');
-
+    this.menuCtrl.enable(true);
   }
 
 }

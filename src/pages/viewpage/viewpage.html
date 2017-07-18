@@ -1,21 +1,18 @@
 <ion-content elastic-header>
-    <!--<div class="background-image">
-        <img style="border-radius:50%; width:50%;  margin-left:25%;" src="http://placehold.it/200x200" />
-    </div>
-    <div no-padding class="main-content">-->
+
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
     <ion-buttons *ngIf="info.facultate == dataTabs.message.note && info.right == 1">
-        <button ion-button full (click)="addNew()">Adauga postare  <ion-icon name="add"></ion-icon></button>
+        <button ion-button full (click)="addNew()">Adauga postare &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
     </ion-buttons>
     <ion-list no-padding style="margin:0;" *ngFor="let post of posts">
         <ion-card no-padding fullscreen>
-            <ion-card-content (click)='showContent(post)'>
+            <ion-card-content (click)='showContent(post)' tappable>
                 <ion-row>
                     <ion-col>
-                        <h2 style="white-space: pre;font-size:15.5px;" text-wrap> <b>&nbsp;&nbsp;{{post.title}} </b></h2>
+                        <h2 style="white-space: pre;font-size:15.5px;" text-wrap> <b>{{post.title}} </b></h2>
                         <p style="position:bottom;font-size:12px;" text-left>{{post.data}} </p>
 
                     </ion-col>
@@ -24,9 +21,10 @@
 
                     <ion-col>
                         <!--<p padding-horizontal text-justify style="white-space: pre-line;" text-wrap [innerHTML]="post.text"></p>-->
-                        <!--<p text-left text-wrap style="white-space: normal;">
+                        <p *ngIf="!post.icon" text-left text-wrap style="white-space: pre-line;
+    text-align: left">
                             {{post.preview}}
-                        </p>-->
+                        </p>
 
                         <!--<p text-left style="white-space: pre-line; font-size:13.5px;" text-wrap [innerHTML]="post.preview"></p>-->
 

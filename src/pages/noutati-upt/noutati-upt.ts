@@ -26,6 +26,7 @@ export class NoutatiUpt {
   public newtext: any;
   public time: any;
   public info: any = [];
+  public statistici: any = [];
   constructor(public alertCtrl: AlertController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
      this.auth.login().then((isLoggedIn)=>{
       this.info = isLoggedIn;
@@ -39,6 +40,10 @@ export class NoutatiUpt {
       content: "Loading...",
     });
     loader.present();
+        this.http.get('http://193.226.9.153/statistici.php').map(res => res.json()).subscribe(data => {
+          this.statistici = data;
+          console.log(this.statistici)
+        });
     this.http.get('http://193.226.9.153/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
       this.posts = data;
       localStorage.removeItem('upt');

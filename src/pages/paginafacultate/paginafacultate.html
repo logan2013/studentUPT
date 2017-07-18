@@ -1,29 +1,12 @@
-<ion-content (ionScroll)="scrollToTop()" no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
-    <!--<div no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
-        <div ion-fixed style="top:0px; position:absolute;">
-            <button ion-button clear (click)="goBack()" icon-only>
-        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
-      </button>
-        </div>
-        <div style="background-size: cover;
-                background-position: center;
-                overflow: hidden;
-                height: 40vw; 
-                background-color:#2e2f92;">
-            <img style=" width:70px; margin-left:40%; margin-top:12px;" src="http://193.226.9.153/images/{{item.imagelink}}" />
-            <p text-center text-wrap style="white-space: pre-line;color:white">
-                {{item.title}}
-            </p>
-        </div>
-    </div>-->
-    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
-        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
-      </button>
+<ion-content no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
+
     <ion-navbar hideBackButton style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
                 background-color:#2e2f92;">
-
+        <button ion-fixed ion-button clear (click)="goBack()" icon-only>
+        <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
+      </button>
         <img style=" width:100px; margin-left:35%; margin-top:12px;" src="http://193.226.9.153/images/{{item.imagelink}}" />
         <p text-center text-wrap style="white-space: pre-line;color:white; ">
             {{item.title}}

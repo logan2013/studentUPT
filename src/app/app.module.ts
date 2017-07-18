@@ -22,17 +22,20 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OneSignal } from '@ionic-native/onesignal';
-import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Device } from '@ionic-native/device';
+import { AppMinimize } from '@ionic-native/app-minimize';
+import { AppUpdate } from '@ionic-native/app-update';
+import { AppVersion } from '@ionic-native/app-version';
+
 @NgModule({
   declarations: [
-    MyApp,
-    ElasticHeader
+    MyApp
   ],
   imports: [
     NgCalendarModule,
@@ -40,9 +43,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      backButtonText: 'back',
-      tabsPlacement: 'bottom',
-      pageTransition: 'wp-transition'
+      pageTransitionDelay: 40
     }),
     SuperTabsModule.forRoot(),
     IonicStorageModule.forRoot()
@@ -63,13 +64,17 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     DataTabs,
     Getlocation,
     Camera,
+    AppMinimize,
+    AppVersion,
     File,
+    AppUpdate,
     LocalNotifications,
     FilePath,
     Transfer,
     BackgroundGeolocation,
     Geolocation,
     Diagnostic,
+    Device,
     OneSignal,
     Connectivity,
     InAppBrowser,

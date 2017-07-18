@@ -54,58 +54,85 @@ export class Googlemaps {
     this.regionals = [{
       "title": "Facultatea de Automatica si Calculatoare",
       "website": "http://www.ac.upt.ro",
-      "latitude": 45.747286,
-      "longitude": 21.2263,
+      "latitude": 45.747322,
+      "longitude": 21.2262,
+      "img": 'ac/descriereac.jpg',
+      "logo": 'ac/ac.png'
     }, {
       "title": "Facultatea de Electrotehnica si Electroenergetica",
       "website": "http://www.et.upt.ro",
-      "latitude": 45.747286,
-      "longitude": 21.2263,
+      "latitude": 45.746837,
+      "longitude": 21.227275,
+      "img": 'ee/descriereee.jpg',
+      "logo": 'ee/ee.png'
     }, {
       "title": "Facultatea de Electronica si Telecomunicatii",
       "website": "http://www.etc.upt.ro",
       "latitude": 45.747286,
       "longitude": 21.2263,
+      "img": 'etc/descriereetc.jpg',
+      "logo": 'etc/etc.png'
     }, {
       "title": "Facultatea de Mecanica",
       "website": "http://www.mec.upt.ro",
-      "latitude": 45.745051,
-      "longitude": 21.225655,
+      "latitude": 45.745953,
+      "longitude": 21.225835,
+      "img": 'mt/descrieremt.jpg',
+      "logo": 'mt/mt.png'
     }, {
       "title": "Facultatea de Management în Producţie şi Transporturi",
       "website": "http://www.mpt.upt.ro",
       "latitude": 45.745718,
       "longitude": 21.222742,
+      "img": 'mpt/descrierempt.jpg',
+      "logo": 'mpt/mpt.png'
     }, {
       "title": "Facultatea de Constructii",
       "website": "http://www.ct.upt.ro",
       "latitude": 45.745552,
       "longitude": 21.229909,
+      "img": 'ostl/descriereostl.jpg',
+      "logo": 'ostl/ostl.png'
     }, {
       "title": "Facultatea de Arhitectura și Urbanism",
       "website": "http://www.arh.upt.ro",
       "latitude": 45.745495,
       "longitude": 21.229845,
+      "img": 'a4/descrierea4.jpg',
+      "logo": 'a4/a4.png'
     }, {
       "title": "Rectorat Universitatea Politehnica Timisoara",
       "website": "http://www.upt.ro",
       "latitude": 45.753621,
       "longitude": 21.225085,
+      "img": 'upt/legitimatie.jpg',
+      "logo": 'icon.png'
     }, {
       "title": "Facultatea de Chimie Industriala si Ingineria Mediului",
       "website": "http://www.chim.upt.ro/ro/",
       "latitude": 45.747674,
       "longitude": 21.233203,
+      "img": 'ct/descrierect.jpg',
+      "logo": 'ct/ct.png'
+    }, {
+      "title": "Facultatea de Ştiinţe ale Comunicării",
+      "website": "https://sc.upt.ro/ro/",
+      "latitude": 45.74557,
+      "longitude": 21.229878,
+      "img": 'fsc/descrierefsc.jpg',
+      "logo": 'fsc/fsc.png'
     }, {
       "title": "Restaurant universitar",
       "website": '',
       "latitude": 45.748358,
-      "longitude": 21.239724
+      "longitude": 21.239724,
+      "img": 'upt/cantina.jpg',
+      "logo": "icon.png"
     }];
   }
 
   viewPlace(id) {
-    console.log('Clicked Marker', id);
+    //console.log('Clicked Marker', id);
   }
 
   loadSetGoogle() {
@@ -196,11 +223,11 @@ export class Googlemaps {
       console.log('Searchdata', location);
 
       let options = {
-        center: location,
+        center: location.geometry.location,
         zoom: 15
       };
       this.map.setOptions(options);
-      this.addMarker(location, "Location");
+      this.addMarker(location.geometry.location, '<p><b>'+location.name+ '</b></p>'+location.adr_address +'<br><img src='+ location.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200})+' imageViewer />', false);
 
     });
   }
@@ -216,9 +243,10 @@ export class Googlemaps {
             message: 'Autocomplete returned place with no geometry'
           });
         } else {
+          console.log(place)
           console.log('Search Lat', place.geometry.location.lat());
           console.log('Search Lng', place.geometry.location.lng());
-          sub.next(place.geometry.location);
+          sub.next(place);
           //sub.complete();
         }
       });
@@ -241,7 +269,7 @@ export class Googlemaps {
         regional.distance = 0;
         regional.visible = false;
         regional.current = false;
-
+        //console.log(regional)
         let markerData = {
           position: {
             lat: regional.latitude,
@@ -249,11 +277,12 @@ export class Googlemaps {
           },
           map: this.map,
           title: regional.title,
+          img: regional.img
         };
 
         regional.marker = new google.maps.Marker(markerData);
         this.markersArray.push(regional.marker);
-        this.addMarker(markerData.position, regional.title)
+        this.addMarker(markerData.position, "<div><table><tr><td><img style='margin-top:5px;' width='40px;'src='http://193.226.9.153/images/" + regional.logo + "' imageViewer/>&nbsp;&nbsp;</td><td><p><b>" + regional.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + regional.img + "'/ imageViewer> <br></div>", true)
         regional.marker.addListener('click', () => {
           for (let c of this.regionals) {
             c.current = false;
@@ -293,7 +322,7 @@ export class Googlemaps {
         this.map.panTo(this.markersArray[i].getPosition());
         this.map.setZoom(16);
         let infoWindow = new google.maps.InfoWindow({
-          content: markerInfo.title
+          content: "<div><table><tr><td><img style='margin-top:5px;' width='35px;'src='http://193.226.9.153/images/" + markerInfo.logo + "' imageViewer/> &nbsp;&nbsp;</td><td><p><b>" + markerInfo.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + markerInfo.img + "'/ imageViewer> <br></div>"
         });
         infoWindow.open(this.map, this.markersArray[i]);
         console.log(this.markersArray, markerInfo)
@@ -310,15 +339,15 @@ export class Googlemaps {
   openNavigator(location) {
     //alert(location.latitude)
     try {
-      window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude/* + '(' + this.location.name + ')'*/, '_system');
+      window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude + '(' + location.title + ')', '_system');
 
 
       // console.log(this.locatieNavigator, location)
       // let options: LaunchNavigatorOptions = {
-      //   start: location.latitude + "," + location.longitude
+      //   start: [location.latitude , location.longitude]
       // };
 
-      // this.launchNavigator.navigate(this.locatieNavigator, options)
+      // this.launchNavigator.navigate([this.locatieNavigator[0],this.locatieNavigator[1]] , options)
       //   .then(
       //   success => console.log('Launched navigator'),
       //   error => alert('Error launching navigator' + error)
@@ -354,7 +383,7 @@ export class Googlemaps {
           center: myPos,
           zoom: 14
         });
-        let marker = this.addMarker(myPos, "My last saved Location ");
+        let marker = this.addMarker(myPos, "My last saved Location ", false);
 
         markers.push(marker);
         this.bounceMap(markers);
@@ -433,7 +462,7 @@ export class Googlemaps {
             zoom: 14
           };
           this.map.setOptions(options);
-          this.addMarker(myPos, "Locatia mea!");
+          this.addMarker(myPos, "Locatia mea!", false);
 
           let alert = this.alertCtrl.create({
             title: 'Location',
@@ -459,53 +488,52 @@ export class Googlemaps {
         });
       },
       (error) => {
-        this.myLocation = true;
+        // this.myLocation = true;
 
-        this.myLocation = false;
+        // this.watchlocaiton = 1;
+        // if (this.watchlocaiton == 1) {
 
-        if (this.watchlocaiton == 1) {
+        //   this.showToast('Locația dvs. nu poate fi stabilită cu acuratete maxima.');
+        //   console.log(this.getlocation.lat, this.getlocation.lng);
+        //   this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
 
-          this.showToast('Locația dvs. nu poate fi stabilită cu acuratete maxima.');
-          console.log(this.getlocation.lat, this.getlocation.lng);
-          this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
+        //   let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
+        //   let options = {
+        //     center: myPos,
+        //     zoom: 14
+        //   };
+        //   this.map.setOptions(options);
+        //   this.addMarker(myPos, "Locatia mea!", false);
 
-          let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
-          let options = {
-            center: myPos,
-            zoom: 14
-          };
-          this.map.setOptions(options);
-          this.addMarker(myPos, "Locatia mea!");
+        //   let alert = this.alertCtrl.create({
+        //     title: 'Location',
+        //     message: 'Do you want to save the Location?',
+        //     buttons: [
+        //       {
+        //         text: 'Cancel'
+        //       },
+        //       {
+        //         text: 'Save',
+        //         handler: data => {
+        //           let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
+        //           console.log(lastLocation);
+        //           this.storage.set('lastLocation', lastLocation).then(() => {
+        //             this.showToast('Location saved');
+        //           });
+        //         }
+        //       }
+        //     ]
+        //   });
+        //   alert.present();
 
-          let alert = this.alertCtrl.create({
-            title: 'Location',
-            message: 'Do you want to save the Location?',
-            buttons: [
-              {
-                text: 'Cancel'
-              },
-              {
-                text: 'Save',
-                handler: data => {
-                  let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
-                  console.log(lastLocation);
-                  this.storage.set('lastLocation', lastLocation).then(() => {
-                    this.showToast('Location saved');
-                  });
-                }
-              }
-            ]
-          });
-          alert.present();
+        //   this.watchlocaiton = 0;
+        // } else {
+        this.loading.dismiss().then(() => {
+          this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
 
-          this.watchlocaiton = 0;
-        } else {
-          this.loading.dismiss().then(() => {
-            this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
-
-            console.log(error);
-          });
-        }
+          console.log(error);
+        });
+        // }
 
       }
     )
@@ -519,16 +547,26 @@ export class Googlemaps {
     }
   }
 
-  addMarker(position, content) {
-    let marker = new google.maps.Marker({
-      map: this.map,
-      position: position,
-      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  addMarker(position, content, data) {
+    if (data == false) {
 
-    });
+      let marker = new google.maps.Marker({
+        map: this.map,
+        position: position,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      });
 
-    this.addInfoWindow(marker, content);
-    return marker;
+      this.addInfoWindow(marker, content);
+      return marker;
+    } else {
+      let marker = new google.maps.Marker({
+        map: this.map,
+        position: position,
+      });
+
+      this.addInfoWindow(marker, content);
+      return marker;
+    }
   }
 
   addInfoWindow(marker, content) {

@@ -340,7 +340,7 @@ Este cel mai mare proiect sportiv al L.S.F.E.E., care, sub sloganul PLAY, FIGHT 
       });
 
       this.proiecteEE.push({
-        descriere: `<b><h1>COLINDE </h1></br><br>
+        descriere: `<b><h1>COLINDE </b></h1></br><br>
  Proiect cu tradiție al L.S.F.E.E., „Colinde” încearcă să aducă spiritul sărbătorilor
   de iarnă mai aproape de noi, astfel colindăm studenții, cadrele didactice și nu 
   numai,pentru a-i transpune în atmosfera și bucuria acestor sărbători.
@@ -548,7 +548,7 @@ Numele ales pentru acest proiect nu este întâmplător, dat fiind faptul ca par
       });
 
       this.proiecteMT.push({
-        descriere: `<b><h1>UN DAR, UN Z MBET DE CRĂCIUN </h1></b><br>Acest proiect are ca scop strângerea de fonduri pentru copiii nevoiași sau cu probleme grave de sănătate. Studenții Facultății de Mecanică din Timișoara 
+        descriere: `<b><h1>UN DAR, UN ZAMBET DE CRĂCIUN </h1></b><br>Acest proiect are ca scop strângerea de fonduri pentru copiii nevoiași sau cu probleme grave de sănătate. Studenții Facultății de Mecanică din Timișoara 
           se mobilizează în grupuri și merg la colindat în căminele din Complexul Studențesc.`,
         image: 'ligamt/craciun.jpg'
       });

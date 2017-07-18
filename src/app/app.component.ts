@@ -7,6 +7,10 @@ import { Auth } from '../providers/auth';
 import { Getlocation } from '../providers/getlocation';
 import { OneSignal } from '@ionic-native/onesignal';
 import { Device } from '@ionic-native/device';
+import { Http } from '@angular/http';
+import { AppMinimize } from '@ionic-native/app-minimize';
+import 'rxjs/add/operator/map';
+import { AppUpdate } from '@ionic-native/app-update';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,51 +23,60 @@ export class MyApp {
 
   constructor(private oneSignal: OneSignal,
     public events: Events,
+    private appMinimize: AppMinimize,
     public device: Device,
     public modalCtrl: ModalController,
     private toastCtrl: ToastController,
     public loadCtrl: LoadingController,
     public getlocation: Getlocation,
     public auth: Auth,
+    private http: Http,
     public alertCtrl: AlertController,
     public platform: Platform,
     private nativeStorage: NativeStorage,
     public statusBar: StatusBar,
+    private appUpdate: AppUpdate,
     public splashScreen: SplashScreen) {
     this.initializeApp();
     let load = this.loadCtrl.create({
       content: "Data is loading...",
     });
     this.auth.login().then((isLoggedIn) => {
+    
       load.dismiss();
       this.dataUser = isLoggedIn;
       console.log(this.dataUser)
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
       if (this.dataUser.right == 0) {
+
         this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else if (this.dataUser.right == 1) {
+
         this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
+
         this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
@@ -92,7 +105,7 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
@@ -102,18 +115,17 @@ export class MyApp {
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
 
         ];
       } else {
-        this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
           { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultați', component: "Facultati" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
@@ -135,43 +147,52 @@ export class MyApp {
         buttons: ['OK']
       });
       alert.present();
-  } else {
-    this.modalCtrl.create('Profile').present() 
-   // this.rootPage = 'Profile';
+    } else {
+      this.modalCtrl.create('Profile').present()
+      // this.rootPage = 'Profile';
+    }
+    console.log(user)
   }
-  console.log(user)
-}
 
 
-initializeApp() {
-  //a0bfcab0-43b0-456e-a62d-48c86af5202a
-  this.platform.ready().then(() => {
-    this.getlocation.startTracking();
-    // Okay, so the platform is ready and our plugins are available.
-    // Here you can do any higher level native things you might need.
-    this.oneSignal.startInit("a0bfcab0-43b0-456e-a62d-48c86af5202a", "791062974267");
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-    this.oneSignal.setSubscription(true);
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
-      // do something when the notification is received.
+  initializeApp() {
+    //a0bfcab0-43b0-456e-a62d-48c86af5202a
+    this.platform.ready().then(() => {
+      
+
+      this.getlocation.startTracking();
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.oneSignal.startInit("a0bfcab0-43b0-456e-a62d-48c86af5202a", "791062974267");
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.setSubscription(true);
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+        // do something when the notification is received.
+      });
+      this.oneSignal.handleNotificationOpened().subscribe(() => {
+        // do something when the notification is opened.
+        // this.rootPage = 'Facultati';
+      });
+      this.oneSignal.endInit();
+      this.oneSignal.getIds().then(data => {
+        this.http.get('http://193.226.9.153/sendDevices.php?uuid=' + data.userId + '&deviceid=' + this.device.uuid + '&model=' + this.device.model + '&platform=' +
+          this.device.platform + '&version=' + this.device.version + '&manufacturer=' + this.device.manufacturer).map(res => res.json()).subscribe(data => {
+            if (data.success) {
+              //    alert('merge');
+            } else {
+              alert(data.error)
+            }
+          });
+        // this gives you back the new userId and pushToken associated with the device. Helpful.
+      });
+
     });
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when the notification is opened.
-      this.rootPage = 'Facultati';
-    });
-    this.oneSignal.endInit();
-    this.oneSignal.getIds().then(data => {
-      // this gives you back the new userId and pushToken associated with the device. Helpful.
-    });
-    this.statusBar.styleDefault();
-    this.splashScreen.hide();
-  });
 
-}
+  }
 
-openPage(page) {
-  // Reset the content nav to have just this page
-  // we wouldn't want the back button to show in this scenario
-  this.nav.setRoot(page.component);
-}
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
+  }
 }

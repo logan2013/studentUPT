@@ -1,12 +1,6 @@
-<!--
-  Generated template for the ShowChart page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear (click)="goBack()" icon-only>
+    <button ion-fixed style="margin-top:-5px;" ion-button clear (click)="goBack()" icon-only>
         <ion-icon color="light" name='md-arrow-round-back'></ion-icon>
         </button>
     <ion-navbar>
@@ -22,13 +16,35 @@
 
 <ion-content no-padding>
 
+    <button full ion-button full (click)="chart11()">
+        {{valori.statistici[0].chart[10].titlu}}
+        </button>
 
-
-    <ion-card no-padding>
+    <div [hidden]="hide11" text-center no-padding>
         <p style=" color:#2e2f92;" text-center>
-            {{valori.statistici[0].chart[0].titlu}} in data de {{valori.statistici[0].chart[0].ziua}}
+            <b>  data : {{valori.statistici[0].chart[10].ziua}}</b>
         </p>
-        <canvas #doughnutCanvas></canvas>
+        <canvas #doughnutCanvas11></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[10].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[10].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+    <button full ion-button full (click)="chart1()">
+        {{valori.statistici[0].chart[0].titlu}}
+        </button>
+
+    <div [hidden]="hide1" text-center no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[0].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas1></canvas>
         <ion-row style="background-color:#2e2f92;   color:white;">
             <ion-col *ngFor="let data of valori.statistici[0].chart[0].nume">
                 <b>  {{data}}</b>
@@ -39,12 +55,15 @@
                 <b> {{data}}</b>
             </ion-col>
         </ion-row>
-    </ion-card>
-    <ion-card no-padding>
+    </div>
+    <button ion-button full (click)="chart2()">
+        {{valori.statistici[0].chart[1].titlu}}
+        </button>
+    <div text-center [hidden]="hide2" no-padding>
         <p style=" color:#2e2f92;" text-center>
-            {{valori.statistici[0].chart[1].titlu}} in data de {{valori.statistici[0].chart[1].ziua}}
+            <b> data : {{valori.statistici[0].chart[1].ziua}}</b>
         </p>
-        <canvas #doughnutCanvas1></canvas>
+        <canvas #doughnutCanvas2></canvas>
         <ion-row style="background-color:#2e2f92;   color:white;">
             <ion-col *ngFor="let data of valori.statistici[0].chart[1].nume">
                 <b>  {{data}}</b>
@@ -55,8 +74,169 @@
                 <b> {{data}}</b>
             </ion-col>
         </ion-row>
-    </ion-card>
-    <ion-card hidden no-padding>
+    </div>
+    <button ion-button full (click)="chart3()">
+        {{valori.statistici[0].chart[2].titlu}}
+        </button>
+    <div text-center [hidden]="hide3" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>   data : {{valori.statistici[0].chart[2].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas3></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[2].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[2].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+    <button ion-button full (click)="chart4()">
+        {{valori.statistici[0].chart[3].titlu}}
+        </button>
+    <div text-center [hidden]="hide4" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b> data : {{valori.statistici[0].chart[3].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas4></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[3].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[3].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+    <button ion-button full (click)="chart5()">
+        {{valori.statistici[0].chart[4].titlu}}
+        </button>
+
+    <div text-center [hidden]="hide5" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[4].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas5></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[4].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[4].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+    <button ion-button full (click)="chart6()">
+        {{valori.statistici[0].chart[5].titlu}}
+        </button>
+
+    <div text-center [hidden]="hide6" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[5].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas6></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[5].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[5].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <button ion-button full (click)="chart7()">
+        {{valori.statistici[0].chart[6].titlu}}
+        </button>
+    <div text-center [hidden]="hide7" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[6].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas7></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[6].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[6].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <button ion-button full (click)="chart8()">
+        {{valori.statistici[0].chart[7].titlu}}
+        </button>
+    <div text-center [hidden]="hide8" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[7].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas8></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[7].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[7].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <button ion-button full (click)="chart9()">
+        {{valori.statistici[0].chart[8].titlu}}
+        </button>
+    <div text-center [hidden]="hide9" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data : {{valori.statistici[0].chart[8].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas9></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[8].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[8].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+    <button ion-button full (click)="chart10()">
+        {{valori.statistici[0].chart[9].titlu}}
+        </button>
+
+    <div text-center [hidden]="hide10" no-padding>
+        <p style=" color:#2e2f92;" text-center>
+            <b>  data: {{valori.statistici[0].chart[9].ziua}}</b>
+        </p>
+        <canvas #doughnutCanvas10></canvas>
+        <ion-row style="background-color:#2e2f92;   color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[9].nume">
+                <b>  {{data}}</b>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color:#2e2f92;  color:white;">
+            <ion-col *ngFor="let data of valori.statistici[0].chart[9].valori">
+                <b> {{data}}</b>
+            </ion-col>
+        </ion-row>
+    </div>
+
+
+
+    <!--<ion-card hidden no-padding>
         <ion-card-header>
             Line Chart
         </ion-card-header>
@@ -67,5 +247,5 @@
             Bar Chart
         </ion-card-header>
         <canvas #barCanvas></canvas>
-    </ion-card>
+    </ion-card>-->
 </ion-content>

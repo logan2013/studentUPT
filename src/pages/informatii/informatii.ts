@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 /**
@@ -21,6 +21,7 @@ export class Informatii {
   public items: Array<{ title: string, content: string, imageLink: string, typeOfPage: number, statistici: any }>;
   constructor(
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public http: Http,
     public navParams: NavParams) {
@@ -61,6 +62,7 @@ export class Informatii {
   showContent(item) {
     if (item.typeOfPage == 1) {
       this.modalCtrl.create('ShowChart', { item: item }).present();
+
     } else {
       this.modalCtrl.create('ShowContent', { item: item }).present();
     }

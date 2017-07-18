@@ -1,9 +1,9 @@
 <ion-header>
-    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+
+    <ion-navbar>
+        <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
                     <ion-icon color="light" item-start name="menu"></ion-icon>
             </button>
-    <ion-navbar>
-
         <ion-title text-center>
             Harta campusului
         </ion-title>
@@ -54,9 +54,6 @@
 
                         <button text-capitalize [disabled]=myLocation (click)="openNavigator(location);" ion-button clear small color="primary">  Navigator<br></button>
                     </ion-col>
-                    <!--<ion-col>
-                        <button ion-button clear large color="primary"> <ion-icon name="paper"></ion-icon></button>
-                    </ion-col>-->
                 </ion-row>
                 <ion-row>
                     <ion-col text-center>

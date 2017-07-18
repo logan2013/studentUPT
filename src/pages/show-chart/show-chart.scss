@@ -5,4 +5,11 @@ page-show-chart {
     ion-card-header {
         font-weight: bold;
     }
+    button {
+        text-transform: none !important;
+        white-space: pre-line !important;
+        text-align: center;
+        height: 50px !important;
+        font-size: 14px !important;
+    }
 }

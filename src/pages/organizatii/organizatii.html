@@ -1,9 +1,9 @@
 <ion-header>
-    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+
+    <ion-navbar>
+        <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
                     <ion-icon color="light" item-start name="menu"></ion-icon>
             </button>
-    <ion-navbar>
-
         <ion-title text-center>Organizații studențești</ion-title>
     </ion-navbar>
 </ion-header>
@@ -13,9 +13,9 @@
         <ion-item>
             <ion-row>
                 <ion-col col-2>
-                    <img (click)="itemTapped($event, item)" src="http://193.226.9.153/images/{{item.imagelink}}" />
+                    <img (click)="itemTapped($event, item)" tappable src="http://193.226.9.153/images/{{item.imagelink}}" />
                 </ion-col>
-                <ion-col (click)="itemTapped($event, item)" col-10>
+                <ion-col (click)="itemTapped($event, item)" tappable col-10>
                     <p>{{item.short}}</p>
                     <h3 text-left text-wrap style="white-space: normal;"> {{item.faculties}} </h3>
                 </ion-col>

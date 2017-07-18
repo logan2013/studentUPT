@@ -47,6 +47,20 @@ export class Profile {
     }
   }
 
+  logout() {
+
+    let loader = this.toastCtrl.create({
+      message: 'Logout successfuly',
+      duration: 1000,
+      position: 'top'
+    });
+    loader.present();
+    localStorage.removeItem('user');
+    this.navCtrl.setRoot('Login');
+
+
+  }
+  
   resetPassowrd() {
 
     let loader = this.loadingCtrl.create({

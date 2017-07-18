@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Googlemaps } from './googlemaps';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Googlemaps } from './googlemaps';
   ],
   imports: [
     IonicPageModule.forChild(Googlemaps),
+    IonicImageViewerModule
   ],
   exports: [
     Googlemaps

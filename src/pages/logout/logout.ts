@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Platform, ToastController } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
-
+import { AppVersion } from '@ionic-native/app-version';
 /**
  * Generated class for the Logout page.
  *
@@ -15,8 +15,23 @@ import { NativeStorage } from '@ionic-native/native-storage';
 })
 export class Logout {
 
-  constructor(public nativeStorage: NativeStorage, public toastCtrl: ToastController, public navCtrl: NavController, public platform: Platform) {
+  constructor(public nativeStorage: NativeStorage, public toastCtrl: ToastController, public navCtrl: NavController, public platform: Platform, private appVersion: AppVersion) {
+
+// this.appVersion.getVersionCode().then((data) => {
+//   alert(data)
+// });
+// this.appVersion.getPackageName().then((data) => {
+//   alert(data)
+// })
+// this.appVersion.getVersionNumber().then((data) => {
+//   alert(data)
+// })
+// this.appVersion.getAppName().then((data) => {
+//   alert(data)
+// })
+
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Logout');
@@ -31,7 +46,7 @@ export class Logout {
     });
     loader.present();
     localStorage.removeItem('user');
-    this.navCtrl.setRoot('Login')
+    this.navCtrl.setRoot('Login');
 
 
   }

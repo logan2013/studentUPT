@@ -90,7 +90,7 @@ export class Facultati {
         sunt organizate în paradigma „Bologna” și cuprind toate cele trei cicluri: licență, master,
          doctorat.
          Planurile de învățământ reprezintă rezultatul unei evoluții continue, menite să asigure excelența
-         ofesională și compatibilitatea cu mediul academic internațional. Exceptând activitățile de 
+         profesională și compatibilitatea cu mediul academic internațional. Exceptând activitățile de 
          învățământ, prioritățile Facultății de Automatică și Calculatoare sunt încurajarea cercetării 
          științifice și stabilirea de parteneriate cu mediul academic sau privat.`
         ,
@@ -1219,7 +1219,7 @@ digitală. Luând în considerare specificul programelor de studii, misiunea did
 Comunicării este de a forma atât specialiști în domeniul comunicării și al relațiilor publice. `,
         'fsc/descrierefsc.jpg'
       ];
-this.orarFSC.push({
+      this.orarFSC.push({
         orarAdmitere: `
           <table  width='100%'>
         <tr height="50px"  bgcolor="#2e2f92" >
@@ -1361,19 +1361,19 @@ this.orarFSC.push({
       this.info = isLoggedIn;
       console.log(this.info)
       this.selectedItem = navParams.get('item');
-      this.notes = ['ACUPT', 'CHIUPT', 'EEUPT', 'ETCUPT', 'MECUPT', 'MPTUPT', 'OSTLUPT', 'a4upt', 'FSCUPT'];
+      this.notes = ['a4upt', 'ACUPT', 'CHIUPT', 'OSTLUPT', 'ETCUPT', 'EEUPT', 'MPTUPT', 'MECUPT', 'FSCUPT'];
       this.faculties = [
+        'Facultatea de Arhitectură și Urbanism',
         'Facultatea de Automatică și Calculatoare',
         'Facultatea de Chimie Industrială și Ingineria Mediului ',
-        'Facultatea Electrotehnică și Electroenergetică',
-        'Facultatea de Electronică, Telecomunicații și Tehnologii Informaționale',
-        'Facultatea de Mecanică',
-        'Facultatea de Management în Producție și Transporturi',
         'Facultatea de Construcții',
-        'Facultatea de Arhitectură și Urbanism',
+        'Facultatea de Electronică, Telecomunicații și Tehnologii Informaționale',
+        'Facultatea Electrotehnică și Electroenergetică',
+        'Facultatea de Management în Producție și Transporturi',
+        'Facultatea de Mecanică',
         'Facultatea de Ştiinţe ale Comunicării '];
-      let short = ['AC', 'CIIM', 'EE', 'ETTI', 'MEC', 'MPT', 'CT', 'ARH', 'FSC']
-      let logos = ['ac/ac.png', 'ct/ct.png', 'ee/ee.png', 'etc/etc.png', 'mt/mt.png', 'mpt/mpt.png', 'ostl/ostl.png', 'a4/a4.png', 'fsc/fsc.png'];
+      let short = ['ARH', 'AC', 'CIIM', 'CT', 'ETTI', 'EE', 'MPT', 'MEC', 'FSC']
+      let logos = ['a4/a4.png', 'ac/ac.png', 'ct/ct.png', 'ostl/ostl.png', 'etc/etc.png', 'ee/ee.png', 'mpt/mpt.png', 'mt/mt.png', 'fsc/fsc.png'];
 
       this.items = [];
       console.log(this.selectedItem)

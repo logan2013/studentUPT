@@ -9,22 +9,19 @@
 
 <ion-content>
     <ion-card>
-        <!--<ion-card-header text-center>
-        </ion-card-header>-->
+
 
         <div *ngIf="descriere[1]">
             <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
         </div>
-        <p padding text-wrap style="white-space: pre;text-indent: 20px;
+        <p padding text-wrap style="white-space: pre-line;
     text-align: justify;
    ">
             {{descriere[0]}}
         </p>
     </ion-card>
-    <ion-card *ngIf="conducere != ''">
-        <!--<ion-card-header text-center>
-            <h1> Conducere </h1>
-        </ion-card-header>-->
+    <div *ngIf="conducere != ''">
+
         <ion-list *ngFor="let data of conducere">
 
             <ion-card>
@@ -51,6 +48,6 @@
 
             </ion-card>
         </ion-list>
-    </ion-card>
+    </div>
 
 </ion-content>

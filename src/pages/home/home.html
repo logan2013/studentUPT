@@ -1,19 +1,12 @@
-<!--<ion-header>
-
-</ion-header>-->
-
 <ion-content>
 
-    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
-                    <ion-icon color="light" item-start name="menu"></ion-icon>
-            </button>
-
-
-    <ion-navbar hideBackButton style="background-size: cover;
+    <ion-navbar style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
                 background-color:#2e2f92;">
-
+        <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+                    <ion-icon color="light" item-start name="menu"></ion-icon>
+            </button>
         <ion-title text-center>
             Home
         </ion-title>
@@ -21,6 +14,5 @@
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="informatii" title="Informatii"></super-tab>
         <super-tab [root]="beneficii" title="Beneficii"></super-tab>
-        <!--<super-tab [root]="about" title='Despre UPT'></super-tab>-->
     </super-tabs>
 </ion-content>
