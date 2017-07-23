@@ -27,6 +27,8 @@ export class NoutatiUpt {
   public time: any;
   public info: any = [];
   public statistici: any = [];
+  public limit: number = 15;
+  public offset: number = 0;
   constructor(public alertCtrl: AlertController, private toastCtrl: ToastController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
@@ -38,14 +40,15 @@ export class NoutatiUpt {
     this.user = localStorage.getItem('user') //user
     let loader = this.toastCtrl.create({
       message: "Loading...",
-      position: 'middle'
+      position: 'middle',
+      cssClass: 'toast'
     });
     loader.present();
     this.http.get('http://193.226.9.153/statistici.php').map(res => res.json()).subscribe(data => {
       this.statistici = data;
       console.log(this.statistici)
     });
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=15&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
       localStorage.removeItem('upt');
       loader.dismiss();
@@ -54,7 +57,7 @@ export class NoutatiUpt {
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=15&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
     });
     setTimeout(() => {
@@ -101,4 +104,26 @@ export class NoutatiUpt {
     this.modalCtrl.create('ShowContent', { item: item }).present();
     // this.navCtrl.push('ShowContent', {item:item});
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+    this.offset += this.limit;
+    this.limit += 15;
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=' + this.limit + '&offset=' + this.offset).map(res => res.json()).subscribe(data => {
+      if (data !== null) {
+        for (let i = 0; i < data.length; i++) {
+          this.posts.push(data[i]);
+        }
+      } else {
+        this.limit -= 15;
+        this.offset = this.limit;
+        infiniteScroll.enable(false);
+      }
+      console.log(this.posts)
+      console.log('Async operation has ended');
+    });
+    infiniteScroll.complete();
+
+  }
+
 }

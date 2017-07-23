@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage,Events, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -21,6 +21,7 @@ export class Profile {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
+    public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
 
@@ -56,7 +57,8 @@ export class Profile {
     });
     loader.present();
     localStorage.removeItem('user');
-    this.navCtrl.setRoot('Login');
+       this.events.publish('try:login', '');
+    this.navCtrl.pop()
 
 
   }

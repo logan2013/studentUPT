@@ -17,47 +17,44 @@
 
 
 <ion-content>
-    <ion-card>
 
-        <h2>Mai multe setari vor fi disponibile in curand. Momentan din sectiunea de profil se poate efectua doar operatia de resetare a parolei. Multumim.</h2>
 
-        <button ion-button color="light" (click)="showForm()" block>
+    <button ion-button color="light" (click)="showForm()" block>
            <p style="color:#2e2f92">  I want to change my password </p>
         </button>
 
-        <form *ngIf="show" scroll="false" [formGroup]="myForm" (ngSubmit)="resetPassowrd()" padding>
+    <form *ngIf="show" scroll="false" [formGroup]="myForm" (ngSubmit)="resetPassowrd()" padding>
 
-            <ion-list>
-                <ion-item>
-                    <ion-label stacked>
-                        <p> Parola curenta </p>
-                    </ion-label>
-                    <ion-input type="password" value="" formControlName="curentpass" placeholder=""></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div class="spacer" style="height: 2px;"></div>
-                    <ion-label stacked>
-                        <p>Noua parola</p>
-                    </ion-label>
-                    <ion-input type="password" value="" formControlName="pass" placeholder=""></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div class="spacer" style="height: 2px;"></div>
-                    <ion-label stacked>
-                        <p>Repeta parola</p>
-                    </ion-label>
-                    <ion-input type="password" value="" formControlName="repetpass" placeholder=""></ion-input>
-                </ion-item>
-                <ion-input [hidden]="true"></ion-input>
-            </ion-list>
-            <div class="spacer" style="height:30px;" id="login-spacer1"></div>
-            <button ion-button color="light" block>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>
+                    <p> Parola curenta </p>
+                </ion-label>
+                <ion-input type="password" value="" formControlName="curentpass" placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+                <div class="spacer" style="height: 2px;"></div>
+                <ion-label floating>
+                    <p>Noua parola</p>
+                </ion-label>
+                <ion-input type="password" value="" formControlName="pass" placeholder=""></ion-input>
+            </ion-item>
+            <ion-item>
+                <div class="spacer" style="height: 2px;"></div>
+                <ion-label floating>
+                    <p>Repeta parola</p>
+                </ion-label>
+                <ion-input type="password" value="" formControlName="repetpass" placeholder=""></ion-input>
+            </ion-item>
+            <ion-input [hidden]="true"></ion-input>
+        </ion-list>
+        <div class="spacer" style="height:30px;" id="login-spacer1"></div>
+        <button ion-button color="light" block>
               <p > Reset password </p>
             </button>
 
-        </form>
-        <button ion-button color="light" (click)="logout()" block>
+    </form>
+    <button ion-button color="light" (click)="logout()" block>
         <p style="color:#2e2f92"> Logout </p>
         </button>
-    </ion-card>
 </ion-content>

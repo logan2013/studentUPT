@@ -30,7 +30,7 @@ export class Login {
     public formBuilder: FormBuilder,
     private appUpdate: AppUpdate,
     public http: Http) {
-  
+
     this.menuCtrl.enable(false);
 
     if (localStorage.getItem('user')) {
@@ -50,8 +50,8 @@ export class Login {
   }
 
   ionViewDidEnter() {
-    
-      
+
+
     this.network.onConnect().subscribe(data => {
       this.show = true;
     }
@@ -95,9 +95,9 @@ export class Login {
 
   public logForm() {
 
-        const updateUrl = 'http://193.226.9.153/update.xml';
-        this.appUpdate.checkAppUpdate(updateUrl);
-   
+    const updateUrl = 'http://193.226.9.153/update.xml';
+    this.appUpdate.checkAppUpdate(updateUrl);
+
 
     let loader = this.loadingCtrl.create({
       content: "Authentification...",
@@ -154,9 +154,8 @@ export class Login {
   }
 
   guest() {
-    // this.navCtrl.push(HelloIonicPage);
-      this.navCtrl.setRoot('HomePage');
- 
+    this.navCtrl.setRoot('HomePage');
+
     this.events.publish('try:login', '');
     this.menuCtrl.enable(true);
   }
