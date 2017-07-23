@@ -1,17 +1,22 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
         "declaration": false,
+        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "target": "es5",
         "lib": [
-            "dom",
-            "es2015"
+            "es2016",
+            "dom"
         ],
         "module": "es2015",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "target": "es5"
+        "baseUrl": "",
+        "types": [],
+        "paths": {
+
+            "@angular/*": ["C:/Users/bogdan/Desktop/studentUPT01/ghidstudent/node_modules/@angular/*"]
+        }
     },
     "include": [
         "src/**/*.ts"

@@ -7,9 +7,9 @@
             <!--<p *ngIf="dataUser.data != 'user'" style="color:white"> Editeaza profil</p>-->
         </div>
         <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-       <ion-icon color="primary" name={{p.icon}}></ion-icon> &nbsp;&nbsp; {{p.title}}
-      </button>
+            <button menuClose ion-item *ngFor="let p of pages" [class.activeHighlight]="checkActive(p)" (click)="openPage(p)">
+            <ion-icon color="primary" name={{p.icon}}></ion-icon> &nbsp;&nbsp; {{p.title}}
+        </button>
         </ion-list>
     </ion-content>
 </ion-menu>

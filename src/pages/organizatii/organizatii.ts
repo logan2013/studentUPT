@@ -891,8 +891,18 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
       this.info = isLoggedIn;
       console.log(this.info)
       this.selectedItem = navParams.get('item');
-      this.notes = ['ligaacupt', 'ligactupt', 'ligaeeupt', 'ligaetcupt', 'ligamtupt', 'ligamptupt', 'ligaostlupt', 'ligaa4upt'];
+      this.notes = [
+        'ligaa4upt',
+        'ligaacupt',
+        'ligactupt',
+        'ligaeeupt',
+        'ligaetcupt',
+        'ligamtupt',
+        'ligamptupt',
+        'ligaostlupt',
+      ];
       this.faculties = [
+        'Asociația de la 4',
         'Liga Studenților din Facultatea de Automatică și Calculatoare',
         'Liga Studenților Chimiști Timișoara',
         'Liga Studenților din Facultatea de Electrotehnică și Electroenergetică',
@@ -900,9 +910,9 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
         'Liga Studenților din Facultatea de Mecanică Timișoara',
         'Liga Studenților din Facultatea de Management în Producție și Transporturi',
         'Organizația Studenților “Traian Lalescu”',
-        'Asociația de la 4'];
-      let short = ['Liga AC', 'LSCT', 'LSFEE', 'LSFEtc', 'LSFMT', 'LSFMPT', 'OSTL', 'A4'];
-      let logos = ['ligaac/ac.png', 'ligact/ct.png', 'ligaee/ee.png', 'ligaetc/etc.png', 'ligamt/mt.png', 'ligampt/mpt.png', 'ligaostl/ostl.png', 'ligaa4/a4.png'];
+      ];
+      let short = ['A4', 'Liga AC', 'LSCT', 'LSFEE', 'LSFEtc', 'LSFMT', 'LSFMPT', 'OSTL'];
+      let logos = ['ligaa4/a4.png', 'ligaac/ac.png', 'ligact/ct.png', 'ligaee/ee.png', 'ligaetc/etc.png', 'ligamt/mt.png', 'ligampt/mpt.png', 'ligaostl/ostl.png'];
 
       this.items = [];
       console.log(this.selectedItem)

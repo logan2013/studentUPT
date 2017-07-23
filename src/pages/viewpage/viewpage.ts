@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, AlertController,ModalController,NavController, NavParams ,LoadingController, } from 'ionic-angular';
+import { IonicPage, AlertController,ModalController,NavController, NavParams ,LoadingController, ToastController  } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DataTabs } from '../../providers/datatabs';
 import { Auth } from '../../providers/auth';
@@ -30,6 +30,7 @@ export class Viewpage {
     public dataTabs: DataTabs,
     public alertCtrl: AlertController,
     public http: Http,
+    public toastCtrl: ToastController,
     public modalCtrl: ModalController,
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -45,8 +46,9 @@ export class Viewpage {
     this.newtext = localStorage.getItem('text');// ??
     this.time = new Date().getDay() +"/"+new Date().getMonth()+ "/"+new Date().getFullYear() +"  " +new Date().getHours()+":"+new Date().getMinutes() ; // current date will be replaced with date at eevery post
     this.user=localStorage.getItem('user') //user
-    let loader = this.loadingCtrl.create({
-          content: "Loading...",
+    let loader = this.toastCtrl.create({
+          message: "Loading...",
+           position: 'middle'
         });
     loader.present();
     this.http.get('http://193.226.9.153/getdata.php?facultate='+ this.dataTabs.message.note).map(res => res.json()).subscribe(data => {

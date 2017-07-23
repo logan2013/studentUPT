@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+        </ion-buttons>
+        <ion-title *ngIf="type == 'add'">Adauga eveniment</ion-title>
+        <ion-title *ngIf="type == 'delete'"> Sterge evenimente</ion-title>
+        <ion-title *ngIf="type == 'edit'"> Editeaza evenimente</ion-title>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngIf="type == 'add'">
+        <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>End</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>All Day?</ion-label>
+            <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="type == 'delete'">
+        <ion-grid>
+            <ion-row *ngFor="let event of events">
+                <ion-col col-10>
+                    <p> {{event.title}}</p>
+                    <hr>
+                </ion-col>
+                <ion-col col-2>
+                    <button ion-button clear icon-only (click)="delete(event)">
+                  <ion-icon color="primary" name="trash"></ion-icon>
+             </button>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+
+    </ion-list>
+    <ion-list *ngIf="type == 'edit'">
+        <ion-grid>
+            <ion-row *ngFor="let events of all">
+                <!--<ion-col col-10>
+                    <p> {{events.title}}</p>
+                    <hr>
+                </ion-col>
+                <ion-col col-2>
+                    <button ion-button clear icon-only (click)="delete(events)">
+                  <ion-icon color="primary" name="create"></ion-icon>
+             </button>
+                </ion-col>-->
+                <ion-item>
+                    <ion-input type="text" placeholder="Title" value='{{events.title}}' [(ngModel)]="events.title"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Start</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]='events.startTime'></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>End</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]='events.endTime'></ion-datetime>
+                </ion-item>
+                <ion-item hidden>
+                    <ion-input type="text" placeholder="id" value='{{events.id}}' [(ngModel)]="events.id"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>All Day?</ion-label>
+                    <ion-checkbox [checked]="events.allDay" [(ngModel)]="events.allDay"></ion-checkbox>
+                </ion-item>
+                <button *ngIf="type == 'edit'" ion-button full icon-left (click)="edit(events)">
+    <ion-icon name="checkmark"></ion-icon>Editeaza eveniment
+  </button>
+
+            </ion-row>
+
+        </ion-grid>
+
+    </ion-list>
+    <button *ngIf="type == 'add'" ion-button full icon-left (click)="save()">
+    <ion-icon name="checkmark"></ion-icon> Adauga eveniment
+  </button>
+
+
+
+</ion-content>

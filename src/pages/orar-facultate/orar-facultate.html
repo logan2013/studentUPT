@@ -6,14 +6,15 @@
 -->
 
 <ion-content text-center>
-    <button *ngIf="!showCalendar" (click)="toggle()" full ion-button round icon-right text-capitalize>
+    <!--<button *ngIf="!showCalendar" (click)="toggle()" full ion-button round icon-right text-capitalize>
                    Calendar 
                    
-                    </button>
-    <button *ngIf="showCalendar" (click)="toggle()" full ion-button round color="primary" icon-right text-capitalize>
+                    </button>-->
+    <!--<button *ngIf="showCalendar" (click)="toggle()" full ion-button round color="primary" icon-right text-capitalize>
                    Tabel 
                     
-                    </button>
+                    </button>-->
+
 
 
     <div *ngIf="showCalendar">
@@ -21,6 +22,18 @@
             <ion-title color='primary'>
                 {{viewTitle}}
             </ion-title>
+            <ion-buttons *ngIf="userData.right == 1 && dataTabs.message.note == userData.facultate" end>
+                <button ion-button icon-only (click)="editEvent()">
+                 <ion-icon *ngIf="fullinfo.length != 0" name="create"></ion-icon>
+                  </button>
+
+                <button ion-button icon-only (click)="deleteEvent()">
+       <ion-icon *ngIf="fullinfo.length != 0" name="trash"></ion-icon>
+       </button>
+                <button ion-button icon-only (click)="addEvent()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+            </ion-buttons>
         </ion-navbar>
         <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30" class="calendar">
         </calendar>

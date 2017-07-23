@@ -1462,6 +1462,7 @@ Comunicării este de a forma atât specialiști în domeniul comunicării și al
    * @param item 
    */
   itemTapped(event, item) {
+    
     console.log(item.notes)
     if (item.note == 'ACUPT') {
 

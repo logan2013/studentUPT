@@ -1,12 +1,11 @@
 import { using } from 'rxjs/observable/using';
 import { Component } from '@angular/core';
 import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController, AlertController } from 'ionic-angular';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
 import { AppUpdate } from '@ionic-native/app-update';
-
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -44,8 +43,8 @@ export class Login {
     }
 
     this.myForm = this.formBuilder.group({
-      user: [''],
-      password: ['']
+      user: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
   }
