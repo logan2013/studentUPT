@@ -1,29 +1,14 @@
-<!--
-  Generated template for the DescriereFacultate page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
-
-
 <ion-content>
     <ion-card>
-
-
         <div *ngIf="descriere[1]">
             <img src="http://193.226.9.153/images/{{descriere[1]}}" imageViewer/>
         </div>
-        <p padding text-wrap style="white-space: pre-line;
-    text-align: justify;
-   ">
+        <p padding text-wrap style="white-space: pre-line; text-align: justify;">
             {{descriere[0]}}
         </p>
     </ion-card>
     <div *ngIf="conducere != ''">
-
         <ion-list *ngFor="let data of conducere">
-
             <ion-card>
                 <ion-row *ngIf="data.image">
                     <ion-col col-4>
@@ -32,22 +17,18 @@
                         <img src="http://193.226.9.153/images//{{data.image}}" imageViewer />
                     </ion-col>
                 </ion-row>
-
                 <h2 *ngIf="data.functie" text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</h2>
                 <h4 *ngIf="data.nume" text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</h4>
                 <div *ngIf="data.show">
-
                     <p *ngIf="data.telefon != ''" text-center text-wrap style="white-space: normal;"><b>Telefon: </b>{{data.telefon}}</p>
                     <p *ngIf="data.email" text-center text-wrap style="white-space: normal;"><b>E-mail: </b>{{data.email}}</p>
                 </div>
                 <div text-center>
                     <button (click)='toggle(data.nume)' clear ion-button icon-only>
-                <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline'"></ion-icon>
-            </button>
+                        <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline'"></ion-icon>
+                    </button>
                 </div>
-
             </ion-card>
         </ion-list>
     </div>
-
 </ion-content>

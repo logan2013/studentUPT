@@ -25,12 +25,12 @@ export class Informatii {
     public modalCtrl: ModalController,
     public http: Http,
     public navParams: NavParams) {
-
+    console.log(this.navCtrl.getViews())
 
     this.title = ['Statistici pentru admitere '];
     this.content = [`O reprezentare grafica a numarului de studenti inscrisi la fiecare facultate`,
     ];
-    this.imageLink = ['http://www.pwstats.leonardoweb.eu/graph.gif'];
+    this.imageLink = ['http://study.com/cimages/course-image/statistics-for-teachers-professional-development_137460_large.jpg'];
 
 
 

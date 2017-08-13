@@ -23,7 +23,7 @@ export class MyApp {
   public rootPage: any = "Login";
   public dataUser: any = [];
   activePage: any;
-  
+
   pages: Array<{ icon: string, title: string, component: any }>;
   constructor(private oneSignal: OneSignal,
     public events: Events,
@@ -46,14 +46,22 @@ export class MyApp {
     let load = this.loadCtrl.create({
       content: "Data is loading...",
     });
+    this.platform.registerBackButtonAction(() => {
+      this.appMinimize.minimize();
+    });
     this.auth.login().then((isLoggedIn) => {
-    this.activePage = 'Home';
+      this.activePage = 'Home';
 
       load.dismiss();
       this.dataUser = isLoggedIn;
       console.log(this.dataUser)
-      this.statusBar.styleDefault();
+
       if (this.dataUser.right == 0) {
+        setTimeout(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        }, 100)
+
 
         this.rootPage = 'Login';
         this.pages = [
@@ -64,8 +72,12 @@ export class MyApp {
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
-        
+
       } else if (this.dataUser.right == 1) {
+        setTimeout(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        }, 100)
 
         this.rootPage = 'Login';
         this.pages = [
@@ -77,7 +89,10 @@ export class MyApp {
           { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
-
+        setTimeout(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        }, 100)
         this.rootPage = 'Login';
         this.pages = [
           { icon: 'home', title: 'Home', component: "HomePage" },
@@ -87,7 +102,7 @@ export class MyApp {
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
-        
+
       }
     })
     events.subscribe('try:login', () => {
@@ -164,11 +179,7 @@ export class MyApp {
   initializeApp() {
     //a0bfcab0-43b0-456e-a62d-48c86af5202a
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      setTimeout(function () {
-        this.splashScreen.hide();
 
-      }, 100);
 
       this.getlocation.startTracking();
       // Okay, so the platform is ready and our plugins are available.
@@ -186,7 +197,7 @@ export class MyApp {
       this.oneSignal.endInit();
       this.oneSignal.getIds().then(data => {
         this.http.get('http://193.226.9.153/sendDevices.php?uuid=' + data.userId + '&deviceid=' + this.device.uuid + '&model=' + this.device.model + '&platform=' +
-          this.device.platform + '&version=' + this.device.version + '&manufacturer=' + this.device.manufacturer+ '&versionapp=' + this.appVersion.getVersionCode()).map(res => res.json()).subscribe(data => {
+          this.device.platform + '&version=' + this.device.version + '&manufacturer=' + this.device.manufacturer + '&versionapp=' + this.appVersion.getVersionCode()).map(res => res.json()).subscribe(data => {
             if (data.success) {
               //    alert('merge');
             } else {
@@ -208,8 +219,8 @@ export class MyApp {
   }
 
   checkActive(page) {
-   if(page.title == this.activePage.title) {
-     return true;
-   }
+    if (page.title == this.activePage.title) {
+      return true;
+    }
   }
 }

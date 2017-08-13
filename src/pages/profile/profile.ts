@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage,Events, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, Events, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Auth } from '../../providers/auth';
 import 'rxjs/add/operator/map';
 /**
  * Generated class for the Profile page.
@@ -17,14 +18,21 @@ import 'rxjs/add/operator/map';
 export class Profile {
   public myForm: any;
   public show: any = false;
+  public userData: any = [];
+  public rootOrar: any = 'OrarStudentPage';
+  public rootNote: any = 'NotePage';
+  public rootSetari: any = 'SetariPage';
   constructor(public navCtrl: NavController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
+    public auth: Auth,
     public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
-
+    this.auth.login().then((isLoggedIn) => {
+      this.userData = isLoggedIn;
+    });
     this.myForm = this.formBuilder.group({
       curentpass: [''],
       pass: [''],
@@ -57,12 +65,12 @@ export class Profile {
     });
     loader.present();
     localStorage.removeItem('user');
-       this.events.publish('try:login', '');
+    this.events.publish('try:login', '');
     this.navCtrl.pop()
 
 
   }
-  
+
   resetPassowrd() {
 
     let loader = this.loadingCtrl.create({

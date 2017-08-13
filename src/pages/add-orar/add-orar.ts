@@ -1,8 +1,8 @@
 import { IDateFormatter } from 'ionic2-calendar/calendar';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import * as moment from 'moment';
 import { FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -16,9 +16,11 @@ export class AddOrarPage {
   minDate = new Date().toISOString();
   public type: any;
   public events: any = [];
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    private navParams: NavParams, public viewCtrl: ViewController) {
+    private navParams: NavParams,
+    public viewCtrl: ViewController) {
 
     this.myForm = this.formBuilder.group({
       title: [''],
@@ -30,7 +32,6 @@ export class AddOrarPage {
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
     this.type = this.navParams.get('type');
     this.events = this.navParams.get('events');
-    console.log(this.events)
     if (this.type == 'edit') {
       for (let i = 0; i < this.events.length; i++) {
         this.all.push({
@@ -43,9 +44,9 @@ export class AddOrarPage {
         });
       }
     }
-    console.log(this.all)
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
+    
   }
 
   cancel() {

@@ -23,7 +23,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OneSignal } from '@ionic-native/onesignal';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
@@ -32,6 +32,15 @@ import { Device } from '@ionic-native/device';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { AppUpdate } from '@ionic-native/app-update';
 import { AppVersion } from '@ionic-native/app-version';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+// import { Timer } from '../components/countdown-timer/timer';
+// import { TimerProgress } from '../components/timer-progress/timer-progress';
+// import { ExpandableHeader } from '../components/expandable-header/expandable-header';
+// import { FlashCardComponent } from '../components/flash-card/flash-card';
+import { ToastService } from '../providers/util/toast.service';
+import { AlertService } from '../providers/util/alert.service';
+import { CameraProvider } from '../providers/util/camera.provider';
 
 @NgModule({
   declarations: [
@@ -43,7 +52,7 @@ import { AppVersion } from '@ionic-native/app-version';
     IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      pageTransitionDelay: 40
+      pageTransitionDelay: 10
     }),
     SuperTabsModule.forRoot(),
     IonicStorageModule.forRoot()
@@ -53,6 +62,9 @@ import { AppVersion } from '@ionic-native/app-version';
     MyApp
   ],
   providers: [
+    ToastService,
+    AlertService,
+    CameraProvider,
     StatusBar,
     SplashScreen,
     Network,
@@ -72,6 +84,7 @@ import { AppVersion } from '@ionic-native/app-version';
     FilePath,
     Transfer,
     BackgroundGeolocation,
+    LocationAccuracy,
     Geolocation,
     Diagnostic,
     Device,
@@ -79,6 +92,7 @@ import { AppVersion } from '@ionic-native/app-version';
     Connectivity,
     InAppBrowser,
     LaunchNavigator,
+    DocumentViewer,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useValue: 'ro-RO' }
     

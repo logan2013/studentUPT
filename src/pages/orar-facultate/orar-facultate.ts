@@ -179,8 +179,7 @@ export class OrarFacultate {
         setTimeout(() => {
           this.eventSource = events;
           this.http.get('http://193.226.9.153/sendOrar.php?user=' + this.userData.facultate +
-            '&title=' + eventData.title + '&start= ' + eventData.startTime +
-            '&end=' + eventData.endTime + '&allday=' + eventData.allDay +
+            '&id=' + eventData.id +
             '&typeofrequest=delete').map(res => res.json()).subscribe(data => {
               console.log(data)
             });

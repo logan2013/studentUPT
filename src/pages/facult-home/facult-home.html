@@ -1,12 +1,9 @@
 <ion-header>
     <ion-navbar hideBackButton>
-
         <ion-title tappable (click)="navigateToSecondPage()">
             <ion-icon name="arrow-round-back"> </ion-icon>BACK {{facultate}}</ion-title>
-
     </ion-navbar>
 </ion-header>
-
 <ion-content padding>
     <div class="profile-image-wrapper" (click)="presentActionSheet()" tappable>
         <div class="profile-image-placeholder">
@@ -22,22 +19,17 @@
         <ion-icon name="cloud-upload"></ion-icon>Upload
     </button>
     <form [formGroup]="myForm" (ngSubmit)="logForm()">
-
         <ion-item>
             <ion-label color="primary" floating>Titlu</ion-label>
             <ion-input *ngIf="!id[0].title" formControlName="title"></ion-input>
             <ion-input *ngIf="id[0].title" value="{{id[0].title}}" formControlName="title"></ion-input>
         </ion-item>
         <ion-item>
-
             <ion-label color="primary" floating>Continut</ion-label>
             <ion-textarea *ngIf="!id[0].text" mode="ios" rows="6" cols="10" white-space: pre-wrap lineHeight="22" formControlName="text" type="text"></ion-textarea>
             <ion-textarea *ngIf="id[0].text" value="{{id[0].text}}" mode="ios" rows="6" cols="10" white-space: pre-wrap lineHeight="22" formControlName="text" type="text"></ion-textarea>
         </ion-item>
-
         <button *ngIf="idd" ion-button block (click)="navigateToSecondPage()" [disabled]="lastImage === null && !myForm._value.title && !myForm._value.text ">Finish</button>
         <button *ngIf="id && !idd" ion-button block (click)="navigateToSecondPage()">Finish</button>
     </form>
-
-
 </ion-content>

@@ -160,10 +160,9 @@ Baza Sportivă  2 se află pe strada Diaconu Coresi, după stadionul Dan Păltin
   ionViewDidLoad() {
     console.log('ionViewDidLoad Beneficii');
   }
+
   showContent(item) {
     this.modalCtrl.create('ShowContent', { item: item }).present();
-    // this.navCtrl.push('ShowContent', {item:item});
   }
 
-  
 }

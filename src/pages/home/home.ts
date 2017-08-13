@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ToastController, Platform, MenuController, NavController, App, Nav } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
-
+import { AppMinimize } from '@ionic-native/app-minimize';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -18,12 +18,15 @@ export class HomePage {
     public app: App,
     public navCtrl: NavController,
     public nav: Nav,
+    public appMinimize: AppMinimize,
     public menuCtrl: MenuController
   ) {
     this.platform.ready().then(() => {
       this.menuCtrl.enable(true);
       var lastTimeBackPress = 0;
+
       var timePeriodToExit = 2000;
+    
       // this.platform.registerBackButtonAction(() => {
       //   alert(this.app.getActiveNav().getViews()[0].name);
       //   // if(this.app.getActiveNav().getViews()[0].name == 'ShowContent')

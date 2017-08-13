@@ -19,3 +19,59 @@ ion-navbar.toolbar {
 .activeHighlight {
     background-color: #E8EAF6;
 }
+
+@-webkit-keyframes slidingAnimation {
+    0% {
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-70px, 0, 0);
+        -webkit-transform: translate3d(-70px, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+
+.itemSlidingAnimation {
+    -webkit-animation: slidingAnimation;
+    animation: slidingAnimation;
+    -webkit-animation-duration: 1000ms;
+    animation-duraton: 1000ms;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+#menu-material {
+    .menu-header {
+        padding: 5px 15px;
+        background-image: url('../assets/material-design-background.jpg');
+        background-size: cover;
+        color: white;
+        .name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        .e-mail {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+    }
+    .user-avatar {
+        padding: .5em;
+        height: 12vh;
+    }
+    h3,
+    .label,
+    {
+        color: #999;
+        font-weight: 400;
+    }
+    ion-icon {
+        color: #2e2f92;
+    }
+}

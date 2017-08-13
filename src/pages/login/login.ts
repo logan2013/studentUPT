@@ -18,6 +18,8 @@ export class Login {
   public dataUser: any;
   public show: any = true;
   public update: any;
+  public images: any = ['electro.png', 'mpt.png', 'arh.png', 'chim.png', 'mec.png'];
+  public src: any;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
@@ -31,6 +33,8 @@ export class Login {
     private appUpdate: AppUpdate,
     public http: Http) {
 
+    this.src =  this.images[Math.floor(Math.random() * this.images.length)];
+    console.log(this.src)
     this.menuCtrl.enable(false);
 
     if (localStorage.getItem('user')) {

@@ -11,7 +11,7 @@
             <button ion-button icon-only (click)='toggleSearch()'>
         <ion-icon name="search"></ion-icon>
       </button>
-            <button ion-button icon-only (click)='choosePosition()'>
+            <button ion-button icon-only (click)='loadSetGoogle()'>
         <ion-icon name="ios-locate-outline"></ion-icon>
       </button>
         </ion-buttons>
@@ -33,6 +33,7 @@
 
 <ion-content>
     <div [hidden]="!(switch == 'list')">
+
         <ion-list *ngFor="let location of regionals">
             <ion-item>
                 <ion-row>
@@ -73,6 +74,17 @@
 
     <div class=" map " style="height:100% " [class.hidemap]="!((switch=='map' ) || error) ">
         <ion-searchbar #searchbar placeholder="Cauta " [hidden]="!search "></ion-searchbar>
-        <div id="map " #map style="height:100%; "></div>
+        <div id="map " #map style="height:100%; ">
+
+        </div>
+        <ion-fab *ngIf="!myLocation" style="bottom:125px;" bottom right>
+            <button ion-fab><ion-icon name="ios-navigate"></ion-icon></button>
+            <!-- <ion-fab-list>
+            <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+        </ion-fab-list> -->
+        </ion-fab>
     </div>
 </ion-content>

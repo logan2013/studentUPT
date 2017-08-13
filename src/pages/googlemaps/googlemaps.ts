@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 declare var google: any;
 @IonicPage()
 @Component({
@@ -32,6 +33,7 @@ export class Googlemaps {
   regionals: any = [];
   currentregional: any;
   markersArray = [];
+  public canNavigate: any = false;
   public myLocation: boolean = true;
   public locatieNavigator: any = [];
   constructor(
@@ -45,6 +47,7 @@ export class Googlemaps {
     public nav: NavController,
     public zone: NgZone,
     public platform: Platform,
+    private locationAccuracy: LocationAccuracy,
     public alertCtrl: AlertController,
     public storage: Storage,
     public actionSheetCtrl: ActionSheetController,
@@ -136,36 +139,68 @@ export class Googlemaps {
   }
 
   loadSetGoogle() {
-    let confirm = this.alertCtrl.create({
-      title: 'Nu s-a putut determina locatia',
-      message: 'Pentru a putea obtine locatia curenta va rugam sa activati GPS cu optiunea de precizie ridicata!',
-      buttons: [
-        {
-          text: 'Renunta',
-          handler: () => {
-            this.toastCtrl.create({
-              message: 'Nu s-a putut determina locatia cu acuratete maxima !',
-              duration: 3000
-            }).present();
+    let successCallback = (isAvailable) => {
+      if (!isAvailable) {
+        this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+          if (canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => this.choosePosition(),
+              error => console.log('Error requesting location permissions' + error)
+            );
           }
-        },
-        {
-          text: 'Activeaza',
-          handler: () => {
-            this.diagnostic.switchToLocationSettings();
-          }
-        }
-      ]
-    });
-    confirm.present();
+
+        });
+      } else {
+        this.choosePosition()
+      }
+    };
+    let errorCallback = (e) => console.log(e);
+    this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
+
+
+    // let confirm = this.alertCtrl.create({
+    //   title: 'Nu s-a putut determina locatia',
+    //   message: 'Pentru a putea obtine locatia curenta va rugam sa activati GPS cu optiunea de precizie ridicata!',
+    //   buttons: [
+    //     {
+    //       text: 'Renunta',
+    //       handler: () => {
+    //         this.toastCtrl.create({
+    //           message: 'Nu s-a putut determina locatia cu acuratete maxima !',
+    //           duration: 3000
+    //         }).present();
+    //       }
+    //     },
+    //     {
+    //       text: 'Activeaza',
+    //       handler: () => {
+    //         // this.diagnostic.switchToLocationSettings();
+    //         this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+    //           if (canRequest) {
+    //             // the accuracy option will be ignored by iOS
+    //             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+    //               () => alert('Request successful'),
+    //               error => alert('Error requesting location permissions' + error)
+    //             );
+    //           }
+
+    //         });
+    //       }
+    //     }
+    //   ]
+    // });
+    // confirm.present();
   }
 
 
   public ionViewCanEnter() {
 
-    let successCallback = (isAvailable) => { if (!isAvailable) { this.loadSetGoogle(); } };
-    let errorCallback = (e) => console.log(e);
-    this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
+    // let successCallback = (isAvailable) => { if (!isAvailable) { this.loadSetGoogle(); } };
+    // let errorCallback = (e) => console.log(e);
+    // this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
     //  this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
   }
 
@@ -227,8 +262,15 @@ export class Googlemaps {
         zoom: 15
       };
       this.map.setOptions(options);
-      this.addMarker(location.geometry.location, '<p><b>'+location.name+ '</b></p>'+location.adr_address +'<br><img src='+ location.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200})+' imageViewer />', false);
+      try {
 
+        this.addMarker(location.geometry.location, '<div style="padding:3px;"><p><b>' + location.name + '</b></p>' + location.adr_address + '<br></div> <div style="text-align:center;display:block;"><img  align="middle" src=' + location.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }) + ' imageViewer /></div>', false);
+      }
+      catch (e) {
+        if (location.photos == undefined) {
+          this.addMarker(location.geometry.location, '<div style="padding:3px;"><p><b>' + location.name + '</b></p>' + location.adr_address + '<br></div> <div style="text-align:center;display:block;">', false);
+        }
+      }
     });
   }
 
@@ -262,7 +304,114 @@ export class Googlemaps {
         zoom: 15,
         center: { lat: 45.747252, lng: 21.229041 }, //complex
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        // styles: [{ "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#e9e9e9" }, { "lightness": 17 }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }, { "lightness": 17 }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 18 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#ffffff" }, { "lightness": 16 }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#f5f5f5" }, { "lightness": 21 }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#dedede" }, { "lightness": 21 }] }, { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 }] }, { "elementType": "labels.text.fill", "stylers": [{ "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 }] }, { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "geometry", "stylers": [{ "color": "#f2f2f2" }, { "lightness": 19 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#fefefe" }, { "lightness": 20 }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 }] }],
+        styles: [{ elementType: 'geometry', stylers: [{ color: '#ebe3cd' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#523735' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#f5f1e6' }] },
+        {
+          featureType: 'administrative',
+          elementType: 'geometry.stroke',
+          stylers: [{ color: '#c9b2a6' }]
+        },
+        {
+          featureType: 'administrative.land_parcel',
+          elementType: 'geometry.stroke',
+          stylers: [{ color: '#dcd2be' }]
+        },
+        {
+          featureType: 'administrative.land_parcel',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#ae9e90' }]
+        },
+        {
+          featureType: 'landscape.natural',
+          elementType: 'geometry',
+          stylers: [{ color: '#dfd2ae' }]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'geometry',
+          stylers: [{ color: '#dfd2ae' }]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#93817c' }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry.fill',
+          stylers: [{ color: '#a5b076' }]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#447530' }]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{ color: '#f5f1e6' }]
+        },
+        {
+          featureType: 'road.arterial',
+          elementType: 'geometry',
+          stylers: [{ color: '#fdfcf8' }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{ color: '#f8c967' }]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{ color: '#e9bc62' }]
+        },
+        {
+          featureType: 'road.highway.controlled_access',
+          elementType: 'geometry',
+          stylers: [{ color: '#e98d58' }]
+        },
+        {
+          featureType: 'road.highway.controlled_access',
+          elementType: 'geometry.stroke',
+          stylers: [{ color: '#db8555' }]
+        },
+        {
+          featureType: 'road.local',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#806b63' }]
+        },
+        {
+          featureType: 'transit.line',
+          elementType: 'geometry',
+          stylers: [{ color: '#dfd2ae' }]
+        },
+        {
+          featureType: 'transit.line',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#8f7d77' }]
+        },
+        {
+          featureType: 'transit.line',
+          elementType: 'labels.text.stroke',
+          stylers: [{ color: '#ebe3cd' }]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'geometry',
+          stylers: [{ color: '#dfd2ae' }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry.fill',
+          stylers: [{ color: '#b9d3c2' }]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#92998d' }]
+        }],
       });
 
       for (let regional of this.regionals) {
@@ -277,12 +426,14 @@ export class Googlemaps {
           },
           map: this.map,
           title: regional.title,
-          img: regional.img
+          img: regional.img,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-pushpin.png'
+
         };
 
         regional.marker = new google.maps.Marker(markerData);
         this.markersArray.push(regional.marker);
-        this.addMarker(markerData.position, "<div><table><tr><td><img style='margin-top:5px;' width='40px;'src='http://193.226.9.153/images/" + regional.logo + "' imageViewer/>&nbsp;&nbsp;</td><td><p><b>" + regional.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + regional.img + "'/ imageViewer> <br></div>", true)
+        this.addMarker(markerData.position, "<div><table><tr><td><img align='middle' style='margin-top:5px;padding:3px;' width='40px;'src='http://193.226.9.153/images/" + regional.logo + "' imageViewer/>&nbsp;&nbsp;</td><td><p style='text-align:center;display:block;'><b>" + regional.title + "</p></b></td></table><div style='text-align:center;display:block;'><img  width='180px;'src='http://193.226.9.153/images/" + regional.img + "'/ > <div><br></div>", true)
         regional.marker.addListener('click', () => {
           for (let c of this.regionals) {
             c.current = false;
@@ -339,19 +490,17 @@ export class Googlemaps {
   openNavigator(location) {
     //alert(location.latitude)
     try {
-      window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude + '(' + location.title + ')', '_system');
+      // window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude + '(' + location.title + ')', '_system');
 
+      let options: LaunchNavigatorOptions = {
+        start: this.locatieNavigator
+      };
 
-      // console.log(this.locatieNavigator, location)
-      // let options: LaunchNavigatorOptions = {
-      //   start: [location.latitude , location.longitude]
-      // };
-
-      // this.launchNavigator.navigate([this.locatieNavigator[0],this.locatieNavigator[1]] , options)
-      //   .then(
-      //   success => console.log('Launched navigator'),
-      //   error => alert('Error launching navigator' + error)
-      //   );
+      this.launchNavigator.navigate([location.latitude, location.longitude], options)
+        .then(
+        success => console.log('Launched navigator'),
+        error => alert('Error launching navigator' + error)
+        );
     }
     catch (e) {
       alert(e)
@@ -559,9 +708,18 @@ export class Googlemaps {
       this.addInfoWindow(marker, content);
       return marker;
     } else {
+      let image = {
+        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/2000px-Map_pin_icon_green.svg.png',
+        // This marker is 20 pixels wide by 32 pixels high.
+        scaledSize: new google.maps.Size(50, 50), // scaled size
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+
+      };
       let marker = new google.maps.Marker({
         map: this.map,
         position: position,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-pushpin.png'
       });
 
       this.addInfoWindow(marker, content);
@@ -575,6 +733,7 @@ export class Googlemaps {
     });
 
     google.maps.event.addListener(marker, 'click', () => {
+      this.canNavigate = true;
       infoWindow.open(this.map, marker);
     });
   }
