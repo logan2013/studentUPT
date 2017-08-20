@@ -1,0 +1,29 @@
+<!--
+  Generated template for the RegulamentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+                    <ion-icon color="light" item-start name="menu"></ion-icon>
+            </button>
+        <ion-title text-center>
+            Regulamente
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-list inset>
+        <button text-wrap ion-item *ngFor="let item of title" (click)="showPDF(item.url)">
+          <!-- (click)="itemSelected(item)" -->
+    {{ item.title }} 
+        <ion-icon item-right name="ios-arrow-forward"></ion-icon>
+    
+  </button>
+    </ion-list>
+</ion-content>

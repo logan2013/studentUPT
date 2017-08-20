@@ -48,9 +48,9 @@ page-login {
         opacity: 0.8;
     }
     ion-content {
-        background: linear-gradient(316deg, #2e2f92, #2b1de8, #dd00f3, #2e2f92, #2b1de8, #dd00f3, #2e2f92);
+        background: linear-gradient(316deg, #2e2f92, #2b1de8, #5f04f2, #2e2f92, #2b1de8, #5f04f2, #2e2f92);
         background-size: 1800% 1800%;
-        animation: rainbow 30s linear infinite;
+        animation: rainbow 20s linear infinite;
     }
     @keyframes rainbow {
         0% {

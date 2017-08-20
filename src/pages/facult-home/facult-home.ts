@@ -195,8 +195,8 @@ export class FacultHome {
 
   private createFileName() {
     var d = new Date(),
-      n = d.getDay() + d.getHours() + d.getSeconds() + d.getSeconds(),
-      newFileName = '' + localStorage.getItem('user') + n + ".jpg";
+      //n = d.getDay() + d.getHours() + d.getSeconds() + d.getSeconds(),
+      newFileName = '' + localStorage.getItem('user') + d + ".jpg";
 
     localStorage.setItem('upt', newFileName);
     return newFileName;

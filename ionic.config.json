@@ -1,5 +1,8 @@
 {
   "name": "ghidstudent",
   "app_id": "eb39b3fc",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

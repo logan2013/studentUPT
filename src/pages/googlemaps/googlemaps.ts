@@ -1,3 +1,4 @@
+import { MyApp } from '../../app/app.component';
 import { identifierModuleUrl } from '@angular/compiler/compiler';
 import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, ActionSheetController, AlertController, App, LoadingController, NavController, Platform, ToastController } from 'ionic-angular';
@@ -9,6 +10,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
+// C:\Users\bogdan\Desktop\studentUPT01\ghidstudent\src\app\app.component.ts
 declare var google: any;
 @IonicPage()
 @Component({
@@ -37,6 +39,7 @@ export class Googlemaps {
   public myLocation: boolean = true;
   public locatieNavigator: any = [];
   constructor(
+    public global: MyApp,
     private iab: InAppBrowser,
     private diagnostic: Diagnostic,
     private launchNavigator: LaunchNavigator,
@@ -53,6 +56,8 @@ export class Googlemaps {
     public actionSheetCtrl: ActionSheetController,
     public geolocation: Geolocation
   ) {
+    this.global.theme = "theme-light";
+    
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
       "title": "Facultatea de Automatica si Calculatoare",
@@ -195,7 +200,9 @@ export class Googlemaps {
     // confirm.present();
   }
 
-
+  public ionViewCanLeave() {
+    this.global.theme = "theme-light";
+  }
   public ionViewCanEnter() {
 
     // let successCallback = (isAvailable) => { if (!isAvailable) { this.loadSetGoogle(); } };
@@ -519,6 +526,8 @@ export class Googlemaps {
   }
 
   resizeMap() {
+
+    this.global.theme = "theme-light1";
     setTimeout(() => {
       google.maps.event.trigger(this.map, 'resize');
     }, 20);
@@ -585,7 +594,9 @@ export class Googlemaps {
       }
     });
   }
-
+  change() {
+    this.global.theme = "theme-light1";
+  }
   // go show currrent location
   getCurrentPosition() {
     this.loading = this.loadingCtrl.create({

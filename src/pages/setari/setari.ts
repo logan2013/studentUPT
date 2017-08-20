@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, keyframes } from '@angular/core';
+import { App, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ToastService } from '../../providers/util/toast.service';
 import { AlertService } from '../../providers/util/alert.service';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage } from 'ionic-angular';
+import { Auth } from '../../providers/auth';
+
 /**
  * Generated class for the SetariPage page.
  *
@@ -16,7 +18,8 @@ import { IonicPage } from 'ionic-angular';
   templateUrl: 'setari.html',
 })
 export class SetariPage {
- profilePicture: string;
+  public userData: any = [];
+  profilePicture: string;
   profileRef: any;
   errorMessage: any;
   placeholderPicture = 'http://api.adorable.io/avatar/200/bob';
@@ -32,14 +35,23 @@ export class SetariPage {
 
   user = {
     name: 'Marty Mcfly',
-    imageUrl: 'http://api.adorable.io/avatar/200/bob'
+    imageUrl: 'http://193.226.9.153/profilelogo.png'
   };
 
   constructor(
+    public app: App,
     public alertService: AlertService,
     public toastCtrl: ToastService,
+    public modalCtrl: ModalController,
+    public navCtrl: NavController,
+    public auth: Auth,
     public camera: Camera
-  ) { }
+  ) {
+    this.auth.login().then((isLoggedIn) => {
+      this.userData = isLoggedIn;
+      console.log(this.userData)
+    });
+  }
 
   toggleNotifications() {
     if (this.enableNotifications) {
@@ -70,7 +82,13 @@ export class SetariPage {
     this.alertService.presentAlertWithCallback('Are you sure?',
       'This will log you out of this application.').then((yes) => {
         if (yes) {
-          this.toastCtrl.create('Logged out of the application');
+          // this.navCtrl.pop();
+// this.app.getRootNav().setRoot('HomePage') 
+
+          // localStorage.removeItem('user');
+          // this.navCtrl.push('Login');
+          //  this.modalCtrl.create('HomePage').present();
+          //this.app.goBack(); // in this line, you have to declare a root, which is the app's root 
         }
       });
   }

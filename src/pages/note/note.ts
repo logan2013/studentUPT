@@ -169,9 +169,11 @@ export class NotePage {
 
   showPDF() {
     console.log('asda')
+    window.open('http://tivatheme.com/file-download-calendar/admin/report/files/example.pdf', '_system', 'location=yes');
     const options: DocumentViewerOptions = {
       title: 'My PDF'
     };
-    this.document.viewDocument('assets/pdf.pdf', 'application/pdf', options);
+
+    // this.document.viewDocument('http://tivatheme.com/file-download-calendar/admin/report/files/example.pdf', 'application/pdf', options);
   }
 }

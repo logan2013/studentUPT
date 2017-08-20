@@ -27,8 +27,8 @@
     </ion-toolbar>
     <div [ngSwitch]="pet" padding>
         <div *ngSwitchCase="'studiu'">
-            <button (click)="showPDF()" full ion-button>PDF </button>
-            <br><br>
+            <!-- <button (click)="showPDF()" full ion-button>PDF </button> -->
+            <br>
             <accordion-list *ngFor="let item of items" [title]="item.name" textColor="#FFF" hasMargin="true" headerColor="#2e2f92">
                 <ion-grid>
                     <ion-row>
@@ -83,6 +83,7 @@
             </accordion-list>
         </div>
         <div *ngSwitchCase="'note'">
+            <h1 text-center padding>In lucru</h1>
         </div>
 
     </div>
