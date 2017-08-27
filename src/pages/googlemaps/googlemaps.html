@@ -24,13 +24,6 @@
     <button ion-button color="light" (click)="(switch = 'list'); change()" [class.active]="(switch == 'list')" icon-only><ion-icon name="list"></ion-icon></button>
 </div>
 
-<!--<div class="currentitem" *ngIf="currentregional">
-    <button ion-item no-lines (click)="viewPlace(currentregional.title)">
-    <h2>{{ currentregional.title }}</h2>
-    <ion-note item-right icon-only><ion-icon name="ios-arrow-forward"></ion-icon></ion-note>
-  </button>
-</div>-->
-
 <ion-content class="a">
     <div [hidden]="!(switch == 'list')">
 
@@ -77,14 +70,9 @@
         <div id="map " #map style="height:100%; ">
 
         </div>
-        <ion-fab *ngIf="!myLocation" style="bottom:125px;" bottom right>
+        <!-- <ion-fab *ngIf="!myLocation" style="bottom:125px;" bottom right>
             <button ion-fab><ion-icon name="ios-navigate"></ion-icon></button>
-            <!-- <ion-fab-list>
-            <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-        </ion-fab-list> -->
-        </ion-fab>
+          
+        </ion-fab> -->
     </div>
 </ion-content>

@@ -20,8 +20,10 @@ export class Profile {
   public show: any = false;
   public userData: any = [];
   public rootOrar: any = 'OrarStudentPage';
-  public rootNote: any = 'NotePage';
-  public rootSetari: any = 'SetariPage';
+  public rootNote: any = 'OrarStudentPage';
+  public rootSetari: any = 'OrarStudentPage';
+  // public rootNote: any = 'NotePage';
+  // public rootSetari: any = 'SetariPage';
   constructor(public navCtrl: NavController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,

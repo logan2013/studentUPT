@@ -52,7 +52,7 @@ import { CameraProvider } from '../providers/util/camera.provider';
     IonicImageViewerModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      pageTransitionDelay: 10
+      pageTransitionDelay: 30
     }),
     SuperTabsModule.forRoot(),
     IonicStorageModule.forRoot()

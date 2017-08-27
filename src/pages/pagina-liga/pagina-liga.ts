@@ -1,20 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { DataTabs } from '../../providers/datatabs';
 
-/**
- * Generated class for the PaginaLiga page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
-  selector: 'page-pagina-liga',
   templateUrl: 'pagina-liga.html',
 })
 export class PaginaLiga {
-public item: any;
+  public item: any;
   public descriere: any;
   public orar: any;
   public condurere: any;
@@ -55,8 +48,8 @@ public item: any;
 
   }
 
-   goBack() {
-     this.dataTabs.setMessage('');
+  goBack() {
+    this.dataTabs.setMessage('');
     this.dataTabs.setCoducere('');
     this.dataTabs.setDescriere('');
     this.dataTabs.setOrar('');

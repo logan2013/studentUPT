@@ -56,7 +56,6 @@ export class Googlemaps {
     public actionSheetCtrl: ActionSheetController,
     public geolocation: Geolocation
   ) {
-    this.global.theme = "theme-light";
     
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
@@ -201,7 +200,6 @@ export class Googlemaps {
   }
 
   public ionViewCanLeave() {
-    this.global.theme = "theme-light";
   }
   public ionViewCanEnter() {
 
@@ -527,7 +525,6 @@ export class Googlemaps {
 
   resizeMap() {
 
-    this.global.theme = "theme-light1";
     setTimeout(() => {
       google.maps.event.trigger(this.map, 'resize');
     }, 20);
@@ -595,7 +592,6 @@ export class Googlemaps {
     });
   }
   change() {
-    this.global.theme = "theme-light1";
   }
   // go show currrent location
   getCurrentPosition() {

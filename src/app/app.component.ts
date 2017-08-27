@@ -1,3 +1,4 @@
+import { setTimeout } from 'timers';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Events, Platform, LoadingController, ToastController, AlertController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -51,16 +52,18 @@ export class MyApp {
       this.appMinimize.minimize();
     });
     this.auth.login().then((isLoggedIn) => {
-      this.statusBar.styleDefault();
+
 
       this.activePage = 'Home';
-
-      load.dismiss();
-      this.dataUser = isLoggedIn;
-      console.log(this.dataUser)
+      this.statusBar.styleDefault();
       setTimeout(() => {
         this.splashScreen.hide();
       }, 100)
+
+      load.dismiss();
+
+      this.dataUser = isLoggedIn;
+      console.log(this.dataUser)
 
       if (this.dataUser.right == 0) {
 

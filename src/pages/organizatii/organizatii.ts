@@ -6,15 +6,8 @@ import { Http } from '@angular/http';
 import { OneSignal } from '@ionic-native/onesignal';
 import { DataTabs } from '../../providers/datatabs';
 
-/**
- * Generated class for the Organizatii page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
-  selector: 'page-organizatii',
   templateUrl: 'organizatii.html',
 })
 export class Organizatii {
@@ -89,118 +82,6 @@ Unul din principalele obiective ale organizației este informarea studenților. 
         'ligaac/descriereac.jpg'
       ];
 
-      // this.conducereAC.push({
-      //   functie: 'Președinte',
-      //   nume: 'Alexandru - Marian CHIRU ',
-      //   telefon: '+40 788 327 218',
-      //   email: ': alexandru.chiru@ligaac.ro',
-      //   image: 'ligaac/chiru.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Vicepreședinte Interne',
-      //   nume: 'Bogdan BODESCU',
-      //   telefon: '+40 769 714 367',
-      //   email: 'bogdan.bodescu@ligaac.ro ',
-      //   image: 'ligaac/bodescu.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Vicepreședinte Externe',
-      //   nume: 'Ioana Georgiana PLITEA ',
-      //   telefon: '+40 760 553 933',
-      //   email: 'ioana.plitea@ligaac.ro',
-      //   image: 'ligaac/piltea.jpg'
-      // });
-
-
-      // this.conducereAC.push({
-      //   functie: 'Vicepreședinte Proiecte',
-      //   nume: 'Cosmin - Ionuț CÎRLEA ',
-      //   telefon: '+40 760 287 725',
-      //   email: 'cosmin.cirlea@ligaac.ro',
-      //   image: 'ligaac/carlea.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Secretar General',
-      //   nume: 'Laurențiu - Adrian MOLNAR',
-      //   telefon: '+40 770 715 451',
-      //   email: 'laurentiu.molnar@ligaac.ro',
-      //   image: 'ligaac/molnar.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Educațional',
-      //   nume: 'Calina - Elena DRĂGULESCU',
-      //   telefon: '+40 761 636 364',
-      //   email: 'calina.dragulescu@ligaac.ro ',
-      //   image: 'ligaac/dragulescu.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Financiar ',
-      //   nume: 'Răzvan - Dumitru LĂCĂTUȘU ',
-      //   telefon: '+40 771 328 438',
-      //   email: 'razvan.lacatusu@ligaac.ro ',
-      //   image: 'ligaac/lacatusu.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Imagine',
-      //   nume: 'Arpad GABOR ',
-      //   telefon: '+40 742 571 335',
-      //   email: 'arpad.gabor@ligaac.ro',
-      //   image: 'ligaac/gabor.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Promovare',
-      //   nume: 'Diana - Adina NIȚU',
-      //   telefon: '+40 755 126 968',
-      //   email: 'diana.nitu@ligaac.ro',
-      //   image: 'ligaac/nitu.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Resurse Umane',
-      //   nume: 'Maria - Bernadeta URSAN ',
-      //   telefon: '+40 740 201 219',
-      //   email: 'bernadeta.ursan@ligaac.ro',
-      //   image: 'ligaac/ursan.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Tehnic',
-      //   nume: 'Denis - Remus TRONCOTĂ ',
-      //   telefon: '+40 753 964 349',
-      //   email: 'denis.troncota@ligaac.ro',
-      //   image: 'ligaac/troncota.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Coordonator Tineret',
-      //   nume: 'Alexandru - Constantin ILIESCU',
-      //   telefon: '+40 765 822 936',
-      //   email: 'alexandru.iliescu@ligaac.ro',
-      //   image: 'ligaac/iliescu.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Cenzor',
-      //   nume: 'Ioana - Ștefania SÂNTIMBREAN ',
-      //   telefon: '+40 733 573 743',
-      //   email: 'stefania.santimbrean@ligaac.ro',
-      //   image: 'ligaac/santimbrean.jpg'
-      // });
-
-      // this.conducereAC.push({
-      //   functie: 'Cenzor',
-      //   nume: 'Nicoleta - Alisa CIUBOTARU  ',
-      //   telefon: '+40 734 965 564',
-      //   email: 'alisa.ciubotaru@ligaac.ro',
-      //   image: 'ligaac/ciubotaru.jpg'
-      // });
 
       this.proiecteAC.push({
         descriere: `<b><h1>Chess Contest</h1></b><br>Când în holul Electro apar piese de şah de mărimea unui om mic, ştim că se apropie 
@@ -279,21 +160,6 @@ asocieri de către studenţii din Facultatea de Electrotehnică şi Electroenerg
         'ligaee/descriereee.jpg'
       ];
 
-      // this.conducereEE.push({
-      //   functie: 'Decan',
-      //   nume: 'Prof.dr.ing. Sorin Muşuroi',
-      //   telefon: '0256-403462',
-      //   email: 'sorin.musuroi@upt.ro',
-      //   image: 'ee/musuroi.jpg'
-      // });
-
-      // this.conducereEE.push({
-      //   functie: 'Prodecan',
-      //   nume: 'Prof.dr.ing. Doru Vătău',
-      //   telefon: '0256-403415',
-      //   email: 'doru.vatau@upt.ro',
-      //   image: 'ee/vatau.jpg'
-      // });
 
       this.proiecteEE.push({
         descriere: `<b>	<h1>CUPA POLI</h1></b><br>
@@ -398,21 +264,7 @@ Este cel mai mare proiect sportiv al L.S.F.E.E., care, sub sloganul PLAY, FIGHT 
         'ligaostl/descriereostl.jpg'
       ];
 
-      // this.conducereOSTL.push({
-      //   functie: 'Decan',
-      //   nume: 'Prof.dr.ing Raul ZAHARIA',
-      //   telefon: '0256403922',
-      //   email: 'raul.zaharia@upt.ro',
-      //   image: 'ostl/zaharia.jpg'
-      // });
 
-      // this.conducereOSTL.push({
-      //   functie: 'Prodecan',
-      //   nume: 'Conf.dr.ing Sorin HERBAN ',
-      //   telefon: '0256403984',
-      //   email: 'sorin.herban@upt.ro',
-      //   image: 'ostl/herban.jpg'
-      // });
 
       this.proiecteOSTL.push({
         descriere: ` <b><h1>Teambuildingul</h1></b><br>Când ne gândim la proiectele OSTL, primul care
@@ -451,22 +303,7 @@ Liga aşteaptă noi voluntari, de aceea nu ezită să participi la sesiunea de r
         'ligampt/descrierempt.jpg'
       ];
 
-      // this.conducereMPT.push({
-      //   functie: 'Decan',
-      //   nume: 'Prof. ing. Dr. ec. Marian MOCAN',
-      //   telefon: '0256 404284',
-      //   email: ' marian.mocan@upt.ro',
-      //   image: 'mpt/mocan.jpg'
-      // });
-
-      // this.conducereMPT.push({
-      //   functie: 'Prodecan',
-      //   nume: 'S.I. dr. ing. Ilie TĂUCEAN',
-      //   telefon: '0256 404287',
-      //   email: 'ilie.taucean@upt.ro  ',
-      //   image: 'mpt/taucean.jpg'
-      // });
-
+ 
       this.proiecteMPT.push({
         descriere: `<b><h1>Student Exchange</h1></b><br>
 Ești curios cum ar fi dacă ai studia în alt centru universitar? Proiectul Student Exchange
@@ -565,10 +402,7 @@ Numele ales pentru acest proiect nu este întâmplător, dat fiind faptul ca par
         image: 'ligamt/zts.jpg'
       });
 
-      // this.proiecteMT.push({
-      //   descriere: ``,
-      //   image: ''
-      // });
+   
 
       this.descriereETC = [
         `Liga Studenților din Facultatea de Electronică și Telecomunicații(LSFETc) este o organizaţie non-guvernamentală, non-profit, non-partizană, 
@@ -581,30 +415,6 @@ La nivel local suntem membru fondator al COSPol(Convenția Organizațiilor Stude
 `,
         'ligaetc/descriereetc.jpg'
       ];
-
-      // this.conducereETC.push({
-      //   functie: 'Decan',
-      //   nume: 'prof. univ. dr. ing. Florin Alexa ',
-      //   email: 'florin.alexa@upt.ro',
-      //   telefon: '',
-      //   image: 'etc/alexa.jpg'
-      // });
-
-      // this.conducereETC.push({
-      //   functie: 'Prodecan',
-      //   nume: 'prof. univ. dr. ing. Cătălin Căleanu  ',
-      //   email: 'catalin.caleanu@upt.ro',
-      //   telefon: '',
-      //   image: 'etc/caleanu.jpg'
-      // });
-
-      // this.conducereETC.push({
-      //   functie: 'Prodecan',
-      //   nume: 'prof. univ. dr. ing. Ivan Bogdanov ',
-      //   email: 'ivan.bogdanov@upt.ro',
-      //   telefon: '',
-      //   image: 'etc/bogdanov.jpg'
-      // });
 
       this.proiecteETC.push({
         descriere: `<b><h1>Exchange</h1></b><br>
@@ -697,29 +507,6 @@ Arhitectură și Urbanism împarte aceeași clădire cu Facultatea de Construcț
 `, 'ligaa4/descrierea4.jpg'
       ];
 
-      // this.conducereA4.push({
-      //   functie: 'Decan',
-      //   nume: 'Decan: prof. dr. arh. Ioan Andreescu',
-      //   telefon: '0256404022',
-      //   email: 'oan.andreescu@upt.ro',
-      //   image: 'a4/andreescu.jpg'
-      // });
-
-      // this.conducereA4.push({
-      //   functie: 'Prodecan',
-      //   nume: 'prof. dr. ing. Marius Moșoarcă',
-      //   email: 'marius.mosoarca@upt.ro',
-      //   telefon: '0256404560',
-      //   image: 'a4/mosoarca.jpg'
-      // });
-
-      // this.conducereA4.push({
-      //   functie: 'Director Departamament',
-      //   nume: 'conf. dr. arh. Cătălina Bocan',
-      //   telefon: '0256404019',
-      //   email: 'catalina.bocan@upt.ro ',
-      //   image: 'a4/bocan.jpg'
-      // });
 
       this.proiecteA4.push({
         descriere: `<b><h1>Seri(i)le D’arc </h1></b><br>
@@ -829,21 +616,7 @@ atât membrii asociației dar și membrii facultății de arhitectură doresc s�
         'ligact/descrierect.jpg'
       ];
 
-      // this.conducereCT.push({
-      //   functie: 'Decan',
-      //   nume: 'Prof. dr. ing. Nicolae  VASZILCSIN',
-      //   email: 'nicolae.vaszilcsin@upt.ro',
-      //   telefon: '0256-403061',
-      //   image: ''
-      // });
-
-      // this.conducereCT.push({
-      //   functie: 'Prodecan',
-      //   nume: 'Conf. dr. ing. Gabriela-Alina DUMITREL',
-      //   email: 'alina.dumitrel@upt.ro',
-      //   telefon: '0256-403062',
-      //   image: ''
-      // });
+   
 
       this.proiecteCT.push({
         descriere: `<b><h1>Săptămâna L.S.C.T. </h1></b><br>
@@ -919,16 +692,6 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
       // If we navigated to this page, we will have an item available as a nav param
       if (this.info.data == "user") {
         for (let i = 0; i < this.faculties.length; i++) {
-          // for(let j = 0; j < this.info.follow.length; j++){
-          //   if(this.notes[i] == this.info.follow[j].value && this.info.follow[j].counter == 1 ){
-          //       this.danger = "secondary";
-          //       this.favorite = "Unfollow";
-          //   }
-          //   else if(this.notes[i] == this.info.follow[j].value && this.info.follow[j].counter == 0){
-          //     this.danger = "danger";
-          //     this.favorite = "Follow"
-          //   }
-          // }
           if (this.notes[i] == 'ACUPT') {
             this.series = ['Ingineria Sistemelor', 'Calculatoare si Tehnologia Informatiei', 'Informatica']
           }

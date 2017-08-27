@@ -5,7 +5,6 @@ import { SuperTabsController } from 'ionic2-super-tabs';
 
 @IonicPage()
 @Component({
-  selector: 'page-about',
   templateUrl: 'about.html',
 })
 export class About {
@@ -21,5 +20,4 @@ export class About {
    onTabSelect(ev: any) {
     console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }
-
 }

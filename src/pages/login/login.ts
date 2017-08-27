@@ -99,8 +99,8 @@ export class Login {
 
   public logForm() {
 
-    const updateUrl = 'http://193.226.9.153/update.xml';
-    this.appUpdate.checkAppUpdate(updateUrl);
+    // const updateUrl = 'http://193.226.9.153/update.xml';
+    // this.appUpdate.checkAppUpdate(updateUrl);
 
 
     let loader = this.loadingCtrl.create({

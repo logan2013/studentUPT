@@ -24,7 +24,6 @@ export class Paginafacultate {
   public rootPage: string = "Viewpage"; // timeLine
   public rootOrar: string = "OrarFacultate";
   public rootDescriere: string = "DescriereFacultate";
-  public rootConducere: string = "ConducereFacultate"
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

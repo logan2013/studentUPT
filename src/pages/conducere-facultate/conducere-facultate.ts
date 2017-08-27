@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-conducere-facultate',
   templateUrl: 'conducere-facultate.html',
 })
 export class ConducereFacultate {
