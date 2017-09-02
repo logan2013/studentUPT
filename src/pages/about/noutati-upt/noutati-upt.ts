@@ -43,7 +43,7 @@ export class NoutatiUpt {
       this.statistici = data;
       console.log(this.statistici)
     });
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=15&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
       localStorage.removeItem('upt');
       loader.dismiss();
@@ -52,7 +52,7 @@ export class NoutatiUpt {
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=15&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
     });
     setTimeout(() => {
@@ -98,26 +98,4 @@ export class NoutatiUpt {
   showContent(item) {
     this.modalCtrl.create('ShowContent', { item: item }).present();
   }
-
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-    this.offset += this.limit;
-    this.limit += 15;
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=' + this.limit + '&offset=' + this.offset).map(res => res.json()).subscribe(data => {
-      if (data !== null) {
-        for (let i = 0; i < data.length; i++) {
-          this.posts.push(data[i]);
-        }
-      } else {
-        this.limit -= 15;
-        this.offset = this.limit;
-        infiniteScroll.enable(false);
-      }
-      console.log(this.posts)
-      console.log('Async operation has ended');
-    });
-    infiniteScroll.complete();
-
-  }
-
 }

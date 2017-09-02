@@ -1,5 +1,4 @@
 <ion-header>
-
     <ion-navbar>
         <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
                     <ion-icon color="light" item-start name="menu"></ion-icon>
@@ -16,7 +15,6 @@
       </button>
         </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 
 <div class="switch">
@@ -68,11 +66,6 @@
     <div class=" map " style="height:100% " [class.hidemap]="!((switch=='map' ) || error) ">
         <ion-searchbar #searchbar placeholder="Cauta " [hidden]="!search "></ion-searchbar>
         <div id="map " #map style="height:100%; ">
-
         </div>
-        <!-- <ion-fab *ngIf="!myLocation" style="bottom:125px;" bottom right>
-            <button ion-fab><ion-icon name="ios-navigate"></ion-icon></button>
-          
-        </ion-fab> -->
     </div>
 </ion-content>

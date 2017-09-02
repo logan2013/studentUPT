@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-conducere-upt',
   templateUrl: 'conducere-upt.html',
 })
 export class ConducereUpt {
@@ -16,7 +15,7 @@ export class ConducereUpt {
   public email: any = [];
   public show: any = [false, false, false, false, false, false, false];
   public all: Array<{ functie: any, nume: any, image: any, resort: any, adresa: any, telfax: any, email: any, show: any }>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor() {
     this.functie = [
       'Rector',
       'Prorector',
@@ -101,8 +100,6 @@ export class ConducereUpt {
       })
     }
   }
-
-  ionViewDidLoad() { }
 
   toggle(nume) {
     for (let i: number = 0; i < this.nume.length; i++) {

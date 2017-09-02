@@ -10,7 +10,6 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
-// C:\Users\bogdan\Desktop\studentUPT01\ghidstudent\src\app\app.component.ts
 declare var google: any;
 @IonicPage()
 @Component({
@@ -162,53 +161,7 @@ export class Googlemaps {
     };
     let errorCallback = (e) => console.log(e);
     this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
-
-
-    // let confirm = this.alertCtrl.create({
-    //   title: 'Nu s-a putut determina locatia',
-    //   message: 'Pentru a putea obtine locatia curenta va rugam sa activati GPS cu optiunea de precizie ridicata!',
-    //   buttons: [
-    //     {
-    //       text: 'Renunta',
-    //       handler: () => {
-    //         this.toastCtrl.create({
-    //           message: 'Nu s-a putut determina locatia cu acuratete maxima !',
-    //           duration: 3000
-    //         }).present();
-    //       }
-    //     },
-    //     {
-    //       text: 'Activeaza',
-    //       handler: () => {
-    //         // this.diagnostic.switchToLocationSettings();
-    //         this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-
-    //           if (canRequest) {
-    //             // the accuracy option will be ignored by iOS
-    //             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-    //               () => alert('Request successful'),
-    //               error => alert('Error requesting location permissions' + error)
-    //             );
-    //           }
-
-    //         });
-    //       }
-    //     }
-    //   ]
-    // });
-    // confirm.present();
   }
-
-  public ionViewCanLeave() {
-  }
-  public ionViewCanEnter() {
-
-    // let successCallback = (isAvailable) => { if (!isAvailable) { this.loadSetGoogle(); } };
-    // let errorCallback = (e) => console.log(e);
-    // this.diagnostic.isGpsLocationAvailable().then(successCallback).catch(errorCallback);
-    //  this.diagnostic.isGpsLocationEnabled().then(successCallback, errorCallback);
-  }
-
 
   loadMaps() {
     if (!!google) {
@@ -442,12 +395,9 @@ export class Googlemaps {
         regional.marker.addListener('click', () => {
           for (let c of this.regionals) {
             c.current = false;
-            //c.infoWindow.close();
           }
           this.currentregional = regional;
           regional.current = true;
-
-          // regional.infoWindow.open(this.map, regional.marker);
           this.map.panTo(regional.marker.getPosition());
         });
       }

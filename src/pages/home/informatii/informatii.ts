@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
-/**
- * Generated class for the Informatii page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-informatii',
@@ -37,10 +31,6 @@ export class Informatii {
     this.typeOfPage = [1];
 
     this.http.get('http://193.226.9.153/statistici.php').map(res => res.json()).subscribe(data => {
-      //this.posts = data;
-      console.log(data)
-
-      //1 chart
       this.items = [];
       for (let i = 0; i < this.title.length; i++) {
         this.items.push({
@@ -55,10 +45,6 @@ export class Informatii {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Informatii');
-  }
-
   showContent(item) {
     if (item.typeOfPage == 1) {
       this.modalCtrl.create('ShowChart', { item: item }).present();
@@ -66,13 +52,6 @@ export class Informatii {
     } else {
       this.modalCtrl.create('ShowContent', { item: item }).present();
     }
-    // this.navCtrl.push('ShowContent', {item:item});
   }
 
-  getStatistics() {
-
-
-
-
-  }
 }

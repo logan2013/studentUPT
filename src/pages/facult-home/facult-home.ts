@@ -172,7 +172,6 @@ export class FacultHome {
       saveToPhotoAlbum: false,
       correctOrientation: true
     };
-
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
       // Special handling for Android library

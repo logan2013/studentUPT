@@ -48,9 +48,9 @@ export class MyApp {
     let load = this.loadCtrl.create({
       content: "Data is loading...",
     });
-    this.platform.registerBackButtonAction(() => {
-      this.appMinimize.minimize();
-    });
+    // this.platform.registerBackButtonAction(() => {
+    //   this.appMinimize.minimize();
+    // });
     this.auth.login().then((isLoggedIn) => {
 
 
