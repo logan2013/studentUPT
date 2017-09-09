@@ -24,6 +24,7 @@ export class Paginafacultate {
   public rootPage: string = "Viewpage"; // timeLine
   public rootOrar: string = "OrarFacultate";
   public rootDescriere: string = "DescriereFacultate";
+  public show: boolean = true;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,7 +43,9 @@ export class Paginafacultate {
     this.dataTabs.setCoducere(this.condurere);
     this.dataTabs.setDescriere(this.descriere);
     this.dataTabs.setOrar(this.orar);
-
+    this.events.subscribe('page:news',(item)=>{
+      this.show = false;
+    });
   }
   ngOnInit() {
     // Ionic scroll element

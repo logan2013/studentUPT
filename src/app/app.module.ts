@@ -16,7 +16,8 @@ import { HTTP } from '@ionic-native/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
+import { FilePath } from '@ionic-native/file-path'; 
+import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer } from '@ionic-native/transfer';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -41,6 +42,18 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
 import { ToastService } from '../providers/util/toast.service';
 import { AlertService } from '../providers/util/alert.service';
 import { CameraProvider } from '../providers/util/camera.provider';
+import * as firebase from 'firebase';
+// import { AngularFireModule } from 'angularfire2';
+
+export var config = {
+  apiKey: "AIzaSyB8ANQHC7RqJVUNqEgb8jN39iO8TwQ-enE",
+  authDomain: "studentupt-9adeb.firebaseapp.com",
+  databaseURL: "https://studentupt-9adeb.firebaseio.com",
+  projectId: "studentupt-9adeb",
+  storageBucket: "studentupt-9adeb.appspot.com",
+  messagingSenderId: "312625259441"
+};
+firebase.initializeApp(config);
 
 @NgModule({
   declarations: [
@@ -51,6 +64,7 @@ import { CameraProvider } from '../providers/util/camera.provider';
     BrowserModule,
     IonicImageViewerModule,
     HttpModule,
+    // AngularFireModule.initializeApp(config),
     IonicModule.forRoot(MyApp, {
       pageTransitionDelay: 30
     }),
@@ -91,11 +105,12 @@ import { CameraProvider } from '../providers/util/camera.provider';
     OneSignal,
     Connectivity,
     InAppBrowser,
+    FileChooser,
     LaunchNavigator,
     DocumentViewer,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: LOCALE_ID, useValue: 'ro-RO' }
-    
+    { provide: LOCALE_ID, useValue: 'ro-RO' },
+
   ]
 })
 export class AppModule { }

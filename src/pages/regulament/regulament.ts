@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import * as firebase from 'firebase';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
@@ -7,37 +13,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'regulament.html',
 })
 export class RegulamentPage {
-  public title: any = [
-    {
-      title: 'Codul drepturilor și obligațiilor studentului din Universitatea “Politehnica” din Timișoara',
-      url: 'http://193.226.9.153/regulamente/Codul drepturilor și obligațiilor studentului din Universitatea “Politehnica” din Timișoara.pdf'
-    }, {
-      title: `Regulament privind organizarea si functionarea Complexului de Cazare al Universitatii Politehnica Timisoara`,
-      url: 'http://193.226.9.153/regulamente/Regulament privind organizarea si functionarea Complexului de Cazare al Universitatii Politehnica Timisoara.pdf'
-    }, {
-      title: `Regulament de Alegerea Studentilor Reprezentanti`,
-      url: 'http://193.226.9.153/regulamente/Regulament de Alegerea Studentilor Reprezentanti.pdf'
-    }, {
-      title: `Regulament privind repartizarea locurilor de tabara in cadrul Universitatii Politehnica Timisoara`,
-      url: 'http://193.226.9.153/regulamente/Regulament privind repartizarea locurilor de tabara in cadrul Universitatii Politehnica Timisoara.pdf'
-    }, {
-      title: `Regulament de organizare si desfasurare a procesului de invatamant la ciclul de studii Licenta din Universitatea Politehnica Timisoara`,
-      url: 'http://193.226.9.153/regulamente/Regulament de organizare si desfasurare a procesului de invatamant la ciclul de studii Licenta din Universitatea Politehnica Timisoara.pdf'
-    }, {
-      title: `Regulament de Acordare Credite Voluntariat`,
-      url: 'http://193.226.9.153/regulamente/Regulament de Acordare Credite Voluntariat.pdf'
-    }];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public nativepath: any;
+  public firestore = firebase.storage();
+  public imgsource: any;
+  public title: any = [];
+  constructor( private http: Http, public navCtrl: NavController, public navParams: NavParams, private fileChooser: FileChooser, private file: File, private filePath: FilePath, private zone: NgZone) {
+    this.http.get('http://193.226.9.153/regulamente.php').map(res => res.json()).subscribe((data) => {
+      this.title = data;
+    });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegulamentPage');
-  }
+  
   showPDF(url) {
     console.log('asda')
     window.open(url, '_system', 'location=yes');
-
-
-    // this.document.viewDocument('http://tivatheme.com/file-download-calendar/admin/report/files/example.pdf', 'application/pdf', options);
   }
+
+
+
 }

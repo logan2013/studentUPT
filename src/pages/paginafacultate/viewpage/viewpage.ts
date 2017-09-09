@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, AlertController, ModalController, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, AlertController, ModalController, NavController, NavParams, LoadingController, ToastController, Events, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DataTabs } from '../../../providers/datatabs';
 import { Auth } from '../../../providers/auth';
@@ -29,6 +29,8 @@ export class Viewpage {
   public limit: number = 50;
   public offset: number = 0;
   constructor(
+    private app: App,
+    private events: Events,
     public dataTabs: DataTabs,
     public alertCtrl: AlertController,
     public http: Http,
@@ -51,7 +53,7 @@ export class Viewpage {
     let loader = this.toastCtrl.create({
       message: "Loading...",
       position: 'middle',
-      cssClass:'toast'
+      cssClass: 'toast'
     });
     loader.present();
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
@@ -131,8 +133,12 @@ export class Viewpage {
   }
 
   showContent(item) {
-    this.modalCtrl.create('ShowContent', { item: item }).present();
-    // this.navCtrl.push('ShowContent', {item:item});
+    // this.app.getRootNav().setRoot('ShowContent', { item: item }, {animate: true, direction: 'forward'});
+    // this.events.publish('page:news', item);
+    this.modalCtrl.create('ShowContent', { item: item }).present().then(() => {
+      this.auth.modal = true;
+    })
+   // this.navCtrl.push('ShowContent', { item: item });
   }
 
 }

@@ -20,6 +20,7 @@ export class Login {
   public update: any;
   public images: any = ['electro.png', 'mpt.png', 'arh.png', 'chim.png', 'mec.png'];
   public src: any;
+  private loading: any;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
@@ -33,8 +34,9 @@ export class Login {
     private appUpdate: AppUpdate,
     public http: Http) {
 
-    this.src =  this.images[Math.floor(Math.random() * this.images.length)];
-    console.log(this.src)
+
+
+    this.src = this.images[Math.floor(Math.random() * this.images.length)];
     this.menuCtrl.enable(false);
 
     if (localStorage.getItem('user')) {
@@ -54,26 +56,24 @@ export class Login {
   }
 
   ionViewDidEnter() {
-
-
-    this.network.onConnect().subscribe(data => {
-      this.show = true;
-    }
-      , error => console.log(error));
-
     this.network.onDisconnect().subscribe(data => {
-      let alert = this.alertCtrl.create({
-        title: 'Network was disconnected :-(',
-        subTitle: 'Please check your connection. And try again ',
-        buttons: ['OK']
+      this.loading = this.loadingCtrl.create({
+        content: 'Please check your internet connection. And try again.'
       });
       if (this.show == true) {
-        alert.present();
+        this.loading.present();
         this.show = false;
       }
     }
       , error => console.log(error)
     );
+    this.network.onConnect().subscribe(data => {
+      this.show = true;
+      this.loading.dismiss();
+
+
+    }
+      , error => console.log(error));
   }
 
 
@@ -87,8 +87,6 @@ export class Login {
         duration: 5000
       }).present();
     } else {
-      this.navCtrl.push('Login');
-      // this.navCtrl.pop();
       this.toastCtrl.create({
         message: 'You are now ' + connectionState + ' via ' + networkType,
         duration: 5000
@@ -98,11 +96,6 @@ export class Login {
   ionViewDidLoad() { }
 
   public logForm() {
-
-    // const updateUrl = 'http://193.226.9.153/update.xml';
-    // this.appUpdate.checkAppUpdate(updateUrl);
-
-
     let loader = this.loadingCtrl.create({
       content: "Authentification...",
       duration: 750
@@ -138,7 +131,6 @@ export class Login {
         }
         else {
           loader.dismiss();
-
           loginFail.present(); // if login fail show a message error
         }
       }, error => {

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ToastController, Platform, AlertController, ViewController, MenuController, NavController, App, Nav } from 'ionic-angular';
+import { IonicPage, ToastController, Platform, AlertController, ViewController, MenuController, NavController, App, Nav, Events } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import { AppMinimize } from '@ionic-native/app-minimize';
+import { Auth } from '../../providers/auth';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -12,9 +14,11 @@ export class HomePage {
   public about: string = "About";
   public beneficii: string = "Beneficii";
   public user: string;
-  public alert: any;
+  public alert: any = false;
   public backButtonPressedOnceToExit: boolean = false;
-  constructor(private network: Network,
+  constructor(
+    private events: Events,
+    private network: Network,
     private toastCtrl: ToastController,
     public platform: Platform,
     public app: App,
@@ -23,77 +27,39 @@ export class HomePage {
     public alertCtrl: AlertController,
     public nav: Nav,
     public appMinimize: AppMinimize,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController,
+    private auth: Auth
   ) {
+
     this.platform.ready().then(() => {
       this.menuCtrl.enable(true);
       var lastTimeBackPress = 0;
 
       var timePeriodToExit = 2000;
+
       this.platform.registerBackButtonAction(() => {
-        if (this.backButtonPressedOnceToExit) {
-          this.appMinimize.minimize();
-        } else if (this.nav.canGoBack()) {
-          this.nav.pop({});
-          this.navCtrl.pop();
-        } else {
-          this.viewCtrl.dismiss();
-          this.showToast();
-          this.backButtonPressedOnceToExit = true;
-          setTimeout(() => {
 
-            this.backButtonPressedOnceToExit = false;
-          }, 2000)
-        }
+        let name: string = '' + document.location;
+        var n = name.lastIndexOf('/');
+        var result = name.substring(n + 1);
 
-        if (this.nav.canGoBack()) {
-          this.nav.pop();
-          this.navCtrl.pop();
-        } else {
-          this.viewCtrl.dismiss();
-          if (this.alert) {
-            this.alert.dismiss();
-            this.alert = null;
+        if (this.auth.modal == false) {
+          if (this.nav.canGoBack()) {
+            this.nav.pop({});
+            this.navCtrl.pop();
           } else {
-            this.showAlert();
+            if (this.alert) {
+            } else {
+              this.alert = true;
+              this.menuCtrl.open()
+              this.showAlert();
+            }
           }
+        } else {
+          this.events.publish('page:back');
         }
+
       });
-
-      // this.platform.registerBackButtonAction(() => {
-      //   alert(this.app.getActiveNav().getViews()[0].name);
-      //   // if(this.app.getActiveNav().getViews()[0].name == 'ShowContent')
-
-      //   // get current active page
-      //   //Double check to exit app  
-      //   // this.apps.
-      //   //           alert('1 ' +data)
-      //   //         });
-      //   //         this.app.navPop().then((data) => {
-      //   //           alert('2 ' + data)
-      //   //         })
-      //   //         alert(this.navCtrl.canGoBack())
-      //   // if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-      //   //   this.platform.exitApp()
-      //   // } else {
-      //   //   if (this.navCtrl.canGoBack) {
-      //   //     this.navCtrl.pop();
-      //   //   } else {
-      //   //     this.app.goBack();
-      //   //   }
-
-
-      //   //   let toast = this.toastCtrl.create({
-      //   //     message: 'Press back again to exit App.',
-      //   //     duration: 3000,
-      //   //     position: 'bottom'
-      //   //   });
-      //   //   toast.present();
-      //   //   lastTimeBackPress = new Date().getTime();
-      //   // }
-
-
-      // });
     });
 
   }
@@ -106,7 +72,7 @@ export class HomePage {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            this.alert = null;
+            this.alert = false;
           }
         },
         {
@@ -166,4 +132,5 @@ export class HomePage {
       , error => console.log(error)
     );
   }
+
 }

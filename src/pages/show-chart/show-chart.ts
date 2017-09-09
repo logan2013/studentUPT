@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { Chart } from 'chart.js';
+import { Auth } from '../../providers/auth';
 
 /**
  * Generated class for the ShowChart page.
@@ -27,8 +28,8 @@ export class ShowChart {
   @ViewChild('doughnutCanvas9') doughnutCanvas9;
   @ViewChild('doughnutCanvas10') doughnutCanvas10;
   @ViewChild('doughnutCanvas11') doughnutCanvas11;
-  
-  
+
+
   // @ViewChild('lineCanvas') lineCanvas;
   barChart: any;
   doughnutChart: any;
@@ -45,18 +46,25 @@ export class ShowChart {
   public hide9: boolean = true;
   public hide10: boolean = true;
   public hide11: boolean = true;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+
+  constructor(private events: Events, private auth: Auth, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    this.auth.modal = true;
+    this.events.subscribe('page:back', () => {
+      this.auth.modal = false;
+      this.navCtrl.pop().catch((e) => {
+        console.log(e)
+      })
+    });
     this.valori = navParams.get('item');
     console.log(this.valori.statistici[0].chart[0].sectia)
- 
+
   }
 
   ionViewDidLoad() {
 
     this.showChart(this.valori.statistici[0].chart)
   }
-  showChart(data :any) {
+  showChart(data: any) {
     console.log(data);
     // this.barChart = new Chart(this.barCanvas.nativeElement, {
 
@@ -155,7 +163,7 @@ export class ShowChart {
 
     });
 
-  this.doughnutChart = new Chart(this.doughnutCanvas3.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas3.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -183,7 +191,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas4.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas4.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -211,7 +219,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas5.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas5.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -239,7 +247,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas6.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas6.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -267,7 +275,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas7.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas7.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -295,7 +303,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas8.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas8.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -323,7 +331,7 @@ export class ShowChart {
       }
 
     });
-      this.doughnutChart = new Chart(this.doughnutCanvas9.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas9.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -351,7 +359,7 @@ export class ShowChart {
       }
 
     });
-       this.doughnutChart = new Chart(this.doughnutCanvas10.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas10.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -379,7 +387,7 @@ export class ShowChart {
       }
 
     });
-     this.doughnutChart = new Chart(this.doughnutCanvas11.nativeElement, {
+    this.doughnutChart = new Chart(this.doughnutCanvas11.nativeElement, {
 
       type: 'doughnut',
       data: {
@@ -394,11 +402,11 @@ export class ShowChart {
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
             'rgba(255, 159, 64, 0.2)',
-                 'rgba(54, 162, 235, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
-            
+
           ],
           hoverBackgroundColor: [
             "#FF6384",
@@ -407,7 +415,7 @@ export class ShowChart {
             "#FF6384",
             "#36A2EB",
             "#FFCE56",
-                 'rgba(54, 162, 235, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
@@ -451,43 +459,43 @@ export class ShowChart {
 
   }
 
-  
+
   chart1() {
     this.hide1 = !this.hide1;
   }
   chart2() {
     this.hide2 = !this.hide2;
-    
+
   }
   chart3() {
     this.hide3 = !this.hide3;
-  
-}
+
+  }
   chart4() {
     this.hide4 = !this.hide4;
-    
+
   }
   chart5() {
     this.hide5 = !this.hide5;
-    
+
   }
   chart6() {
     this.hide6 = !this.hide6;
-    
+
   }
   chart7() {
     this.hide7 = !this.hide7;
-    
+
   }
   chart8() {
     this.hide8 = !this.hide8;
-    
+
   }
   chart9() {
     this.hide9 = !this.hide9;
-    
+
   }
-chart10() {
+  chart10() {
     this.hide10 = !this.hide10;
 
   }

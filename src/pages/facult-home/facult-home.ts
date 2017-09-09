@@ -8,6 +8,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import * as firebase from 'firebase';
+
 declare var cordova: any;
 @IonicPage()
 @Component({
@@ -15,7 +17,10 @@ declare var cordova: any;
   templateUrl: 'facult-home.html',
 })
 export class FacultHome {
-
+  public nativepath: any;
+  public firestore = firebase.storage();
+  public imgsource: any;
+  correctPath: any = null;
   lastImage: string = null;
   loading: Loading;
   myForm: any;
@@ -167,10 +172,11 @@ export class FacultHome {
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
-      quality: 50,
+      quality: 100,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      encodingType: this.camera.EncodingType.JPEG,
     };
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
@@ -178,38 +184,26 @@ export class FacultHome {
       if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
+            this.correctPath = filePath;
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+            let currentNameBuilder = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+            let currentName = currentNameBuilder.substr(0, currentNameBuilder.lastIndexOf('?'));
           });
       } else {
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
     }, (err) => {
-      this.presentToast(err);
+      this.presentToast('23' + JSON.stringify(err));
     });
   }
 
   private createFileName() {
-    var d = new Date(),
-      //n = d.getDay() + d.getHours() + d.getSeconds() + d.getSeconds(),
-      newFileName = '' + localStorage.getItem('user') + d + ".jpg";
-
+    var d = new Date().getTime(),
+      newFileName = '' + localStorage.getItem('user') + d + ".jpeg";
     localStorage.setItem('upt', newFileName);
     return newFileName;
   }
-
-  // Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage = newFileName;
-    }, error => {
-      this.presentToast(error);
-    });
-  }
-
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({
@@ -246,26 +240,17 @@ export class FacultHome {
     actionSheet.present();
   }
 
-
-
-  // Always get the accurate path to your apps folder
-  public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
-  }
   public uploadImage() {
-    this.id[0].icon = localStorage.getItem('upt');
 
     // Destination URL
     var url = "http://hainedefirmasj.com/placesforme/upload.php";
     // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-
+    var targetPath = this.correctPath;
     // File name only
-    var filename = this.lastImage;
+    var filename = this.createFileName();
+
+    this.uploadimage(targetPath, filename);
+    this.id[0].icon = localStorage.getItem('upt');
 
     var options = {
       fileKey: "file",
@@ -284,11 +269,29 @@ export class FacultHome {
 
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options).then(data => {
-      this.loading.dismissAll()
-      this.presentToast('Image succesful uploaded.' + JSON.stringify(data));
+      this.presentToast('Image succesful uploaded.');
     }, err => {
       this.loading.dismissAll()
       this.presentToast(err);
     });
+  }
+
+  uploadimage(filePath, filename) {
+    (<any>window).resolveLocalFileSystemURL(filePath, (res) => {
+      res.file((resFile) => {
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(resFile);
+        reader.onloadend = (evt: any) => {
+          var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
+          var imageStore = this.firestore.ref().child(filename);
+          imageStore.put(imgBlob).then((res) => {
+            this.loading.dismissAll();
+            alert('Upload Success to firebase');
+          }).catch((err) => {
+            alert('Upload Failed' + err);
+          })
+        }
+      })
+    })
   }
 }

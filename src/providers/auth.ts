@@ -9,6 +9,8 @@ import 'rxjs/add/operator/map';
 export class Auth {
   public userData: any = [];
   public user: any;
+  public run: boolean = true;
+  public modal: boolean = false;
   constructor(public http: Http,
               public platform: Platform,
               public nativeStorage: NativeStorage) {
