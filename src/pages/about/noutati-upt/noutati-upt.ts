@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, LoadingController, AlertController, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Auth } from '../../../providers/auth';
-
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
@@ -14,7 +13,7 @@ export class NoutatiUpt {
   public items: Array<{ title: string, text: string, icon: string }>;
   public uptData: any; // parameters sends from tab page !
   public pozaUPT: any;
-  public user: any; // this will be a global variable for status of user
+  public user: any;
   public posts: any;
   public title: any;
   public text: any;
@@ -27,23 +26,21 @@ export class NoutatiUpt {
   constructor(public alertCtrl: AlertController, private toastCtrl: ToastController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
-      console.log(isLoggedIn)
     });
     this.items = [];
-    this.newtext = localStorage.getItem('text');// ??
+    this.newtext = localStorage.getItem('text');
     this.time = new Date().getDay() + "/" + new Date().getMonth() + "/" + new Date().getFullYear() + "  " + new Date().getHours() + ":" + new Date().getMinutes(); // current date will be replaced with date at eevery post
-    this.user = localStorage.getItem('user') //user
+    this.user = localStorage.getItem('user')
     let loader = this.toastCtrl.create({
       message: "Loading...",
       position: 'middle',
       cssClass: 'toast'
     });
     loader.present();
-    this.http.get('http://193.226.9.153/statistici.php').map(res => res.json()).subscribe(data => {
+    this.http.get(this.auth.server + '/statistici.php').map(res => res.json()).subscribe(data => {
       this.statistici = data;
-      console.log(this.statistici)
     });
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
       localStorage.removeItem('upt');
       loader.dismiss();
@@ -52,16 +49,12 @@ export class NoutatiUpt {
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get('http://193.226.9.153/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
     });
     setTimeout(() => {
       refresher.complete();
     }, 1500);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NoutatiUpt');
   }
 
   addNew() {
@@ -70,7 +63,6 @@ export class NoutatiUpt {
   }
 
   presentProfileModal(item) {
-    console.log(item)
     let profileModal = this.modalCtrl.create('FacultHome', { id: item });
     profileModal.present();
   }
@@ -87,7 +79,7 @@ export class NoutatiUpt {
       }, {
         text: 'Agree',
         handler: () => {
-          this.http.get('http://193.226.9.153/remove.php?delete=' + item).map(res => res.json()).subscribe(data => {
+          this.http.get(this.auth.server + '/remove.php?delete=' + item).map(res => res.json()).subscribe(data => {
             this.posts = data;
           });
         }
@@ -95,6 +87,7 @@ export class NoutatiUpt {
     });
     confirm.present();
   }
+
   showContent(item) {
     this.modalCtrl.create('ShowContent', { item: item }).present();
   }

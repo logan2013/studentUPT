@@ -70,11 +70,12 @@ export class OrarFacultate {
           title: data[i].title,
           startTime: new Date(data[i].startTime),
           endTime: new Date(data[i].endTime),
-          allDay: Boolean(data[i].allday),
+          allDay:(data[i].allday == "true"),
           id: data[i].id
         })
       }
       this.eventSource = this.eventData;
+      console.log(this.eventSource)
 
     })
     // console.log(this.dataTabs.orar)

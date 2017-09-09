@@ -1,5 +1,6 @@
+import { ViewCompiler } from '@angular/compiler';
 import { Component, keyframes } from '@angular/core';
-import { App, NavController, NavParams, ModalController } from 'ionic-angular';
+import { App, NavController, NavParams, ModalController, ViewController, Events } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
 import { AlertService } from '../../../providers/util/alert.service';
 import { Camera } from '@ionic-native/camera';
@@ -39,6 +40,8 @@ export class SetariPage {
   };
 
   constructor(
+    public events: Events,
+    public viewCtrl: ViewController,
     public app: App,
     public alertService: AlertService,
     public toastCtrl: ToastService,
@@ -82,13 +85,7 @@ export class SetariPage {
     this.alertService.presentAlertWithCallback('Are you sure?',
       'This will log you out of this application.').then((yes) => {
         if (yes) {
-          // this.navCtrl.pop();
-// this.app.getRootNav().setRoot('HomePage') 
-
-          // localStorage.removeItem('user');
-          // this.navCtrl.push('Login');
-          //  this.modalCtrl.create('HomePage').present();
-          //this.app.goBack(); // in this line, you have to declare a root, which is the app's root 
+          this.events.publish('user:logout');
         }
       });
   }

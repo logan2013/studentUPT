@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, Events, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, Events, NavController, NavParams, ToastController, LoadingController, App, MenuController } from 'ionic-angular';
 import { FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Auth } from '../../providers/auth';
@@ -20,11 +20,14 @@ export class Profile {
   public show: any = false;
   public userData: any = [];
   public rootOrar: any = 'OrarStudentPage';
-  public rootNote: any = 'OrarStudentPage';
-  public rootSetari: any = 'OrarStudentPage';
-  // public rootNote: any = 'NotePage';
-  // public rootSetari: any = 'SetariPage';
-  constructor(public navCtrl: NavController,
+  // public rootNote: any = 'OrarStudentPage';
+  // public rootSetari: any = 'OrarStudentPage';
+  public rootNote: any = 'NotePage';
+  public rootSetari: any = 'SetariPage';
+  constructor(
+    private menuCtrl: MenuController,
+    private app: App,
+    public navCtrl: NavController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
@@ -32,6 +35,18 @@ export class Profile {
     public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
+    this.events.subscribe('user:logout', () => {
+      this.navCtrl.pop()
+      let loader = this.toastCtrl.create({
+        message: 'Logout successfuly',
+        duration: 1000,
+        position: 'top'
+      });
+      loader.present();
+      localStorage.removeItem('user');
+      this.app.getRootNav().setRoot('Login');
+    })
+
     this.auth.login().then((isLoggedIn) => {
       this.userData = isLoggedIn;
     });

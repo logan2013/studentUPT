@@ -11,6 +11,7 @@ export class Auth {
   public user: any;
   public run: boolean = true;
   public modal: boolean = false;
+  public server: string = "http://193.226.9.153";
   constructor(public http: Http,
               public platform: Platform,
               public nativeStorage: NativeStorage) {

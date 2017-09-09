@@ -35,12 +35,14 @@
             </div>
         </ion-navbar>
 
-        <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
+        <super-tabs *ngIf="userData.right == 0" indicatorColor="light" badgeColor="light" toolbarColor="light">
             <super-tab [root]="rootOrar" title="Orar"></super-tab>
             <super-tab [root]="rootNote" title="Note"></super-tab>
             <super-tab [root]="rootSetari" title="Setari cont"></super-tab>
         </super-tabs>
-
+        <super-tabs *ngIf="userData.right == 1 || userData.right == 2" indicatorColor="light" badgeColor="light" toolbarColor="light">
+            <super-tab [root]="rootSetari" title="Setari cont"></super-tab>
+        </super-tabs>
         <!--
     <button ion-button color="light" (click)="showForm()" block>
            <p style="color:#2e2f92">  I want to change my password </p>

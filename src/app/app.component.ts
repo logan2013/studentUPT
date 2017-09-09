@@ -48,9 +48,7 @@ export class MyApp {
     let load = this.loadCtrl.create({
       content: "Data is loading...",
     });
-    // this.platform.registerBackButtonAction(() => {
-    //   this.appMinimize.minimize();
-    // });
+    
     this.auth.login().then((isLoggedIn) => {
 
 
@@ -76,7 +74,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+         // { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
 
       } else if (this.dataUser.right == 1) {
@@ -90,7 +88,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+     //     { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
 
@@ -132,7 +130,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+        //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
 
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
@@ -143,7 +141,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+        //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
 
         ];
       } else {
@@ -158,6 +156,40 @@ export class MyApp {
         ];
       }
 
+    }).catch((e) => {
+      if (this.dataUser.right == 0) {
+        this.pages = [
+          { icon: 'home', title: 'Home', component: "HomePage" },
+          { icon: 'information-circle', title: 'UPT', component: "About" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
+          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
+          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+        //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+
+        ];
+      } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
+        this.pages = [
+          { icon: 'home', title: 'Home', component: "HomePage" },
+          { icon: 'information-circle', title: 'UPT', component: "About" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
+          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
+          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+       //   { icon: 'log-in', title: 'Autentificare', component: "Logout" },
+
+        ];
+      } else {
+        this.pages = [
+          { icon: 'home', title: 'Home', component: "HomePage" },
+          { icon: 'information-circle', title: 'UPT', component: "About" },
+          { icon: 'school', title: 'Facultăți', component: "Facultati" },
+          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
+          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
+          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'log-in', title: 'Autentificare', component: "Login" },
+        ];
+      }
     })
     //code to execute when menu ha opened
   }
