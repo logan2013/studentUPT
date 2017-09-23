@@ -1,5 +1,5 @@
 import { AnimationStyleMetadata, Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Auth } from '../../providers/auth';
 import { Http } from '@angular/http';
@@ -11,61 +11,51 @@ import { DataTabs } from '../../providers/datatabs';
   templateUrl: 'organizatii.html',
 })
 export class Organizatii {
-  public selectedItem: any;
-  public posts: any;
-  public postss: any;
-  public id: any;
-  public icons: string[];
-  public faculties: string[];
-  public user: string;
-  public danger: string = "danger";
-  public favorite: string = "Follow";
-  public info: any = [];
+  private selectedItem: any;
+  private posts: any;
+  private postss: any;
+  private id: any;
+  private icons: string[];
+  private faculties: string[];
+  private user: string;
+  private danger: string = "danger";
+  private favorite: string = "Follow";
+  private info: any = [];
   private notes: any[];
-  public series: any[];
-  public descriereAC: any;
-  public conducereAC: Array<{ functie: string, nume: string, telefon: string, email: string, image: string }> = [];
-  public proiecteAC: Array<{ descriere: any, image: any }> = [];
-  public descriereEE: any;
-  public conducereEE: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteEE: Array<{ descriere: any, image: any }> = [];
-  public descriereOSTL: any;
-  public conducereOSTL: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteOSTL: Array<{ descriere: any, image: any }> = [];
-  public descriereMPT: any;
-  public conducereMPT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteMPT: Array<{ descriere: any, image: any }> = [];
-  public descriereMT: any;
-  public conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteMT: Array<{ descriere: any, image: any }> = []
-  public descriereETC: any;
-  public conducereETC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteETC: Array<{ descriere: any, image: any }> = [];
-  public descriereA4: any;
-  public conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteA4: Array<{ descriere: any, image: any }> = [];
-  public descriereCT: any;
-  public conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
-  public proiecteCT: Array<{ descriere: any, image: any }> = [];
-  public acupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public eeupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public ostl: Array<{ descriere: any, conducere: any, orar: any }>;
-  public mptupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public mtupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public etcupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public a4upt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public ctupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any, short: any }> = [];
+  private series: any[];
+  private descriereAC: any;
+  private conducereAC: Array<{ functie: string, nume: string, telefon: string, email: string, image: string }> = [];
+  private proiecteAC: Array<{ descriere: any, image: any }> = [];
+  private descriereEE: any;
+  private conducereEE: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteEE: Array<{ descriere: any, image: any }> = [];
+  private descriereOSTL: any;
+  private conducereOSTL: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteOSTL: Array<{ descriere: any, image: any }> = [];
+  private descriereMPT: any;
+  private conducereMPT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteMPT: Array<{ descriere: any, image: any }> = [];
+  private descriereMT: any;
+  private conducereMT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteMT: Array<{ descriere: any, image: any }> = []
+  private descriereETC: any;
+  private conducereETC: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteETC: Array<{ descriere: any, image: any }> = [];
+  private descriereA4: any;
+  private conducereA4: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteA4: Array<{ descriere: any, image: any }> = [];
+  private descriereCT: any;
+  private conducereCT: Array<{ functie: any, nume: any, telefon: any, email: any, image: any }> = [];
+  private proiecteCT: Array<{ descriere: any, image: any }> = [];
+  private items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any, short: any }> = [];
   constructor(
-    public auth: Auth,
-    public http: Http,
-    public dataTabs: DataTabs,
-    public oneSignal: OneSignal,
-    public alertCtrl: AlertController,
-    public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public toastCtrl: ToastController,
-    public navParams: NavParams) {
+    private auth: Auth,
+    private http: Http,
+    private dataTabs: DataTabs,
+    private oneSignal: OneSignal,
+    private navCtrl: NavController,
+    private toastCtrl: ToastController,
+    private navParams: NavParams) {
     this.dataTabs.setMessage('');
     this.dataTabs.setCoducere('');
     this.dataTabs.setDescriere('');
@@ -240,7 +230,7 @@ Este cel mai mare proiect sportiv al L.S.F.E.E., care, sub sloganul PLAY, FIGHT 
       this.proiecteEE.push({
         descriere: `<b>	<h1>Sesiunea de Comunicări Ştiinţifice Studenţeşti </h1></b><br>
 
- SCSS este un simpozion ce oferă studenților oportunitatea de a publica o lucrare stiitifică și de a debuta cu dreptul în cariera de inginer. 
+ SCSS este un simpozion ce oferă studenților oportunitatea de a privatea o lucrare stiitifică și de a debuta cu dreptul în cariera de inginer. 
  Sesiunea se adresează studenților de la ciclurile de licentă și master din 
  domeniile Ingineriei Electrotehnice și Electroenergetice, în două secțiuni, 
  cu scopul de a susține și promova preocupările științifice în rândul acestora.  
@@ -487,7 +477,7 @@ Abandonul școlar timpuriu este una dintre problemele principale la nivel națio
   construite pe fundamente practice cu ajutorul cărora se vor putea orienta pe
    viitor spre urmarea studiilor superioare. Totodată, proiectul contribuie și 
    în direcția educației non-formale prin includerea participanților în training-uri 
-   pe diverse teme de interes ca public speaking și time management. Pe 
+   pe diverse teme de interes ca private speaking și time management. Pe 
    lângă acestea, elevii vor beneficia și de seri sociale și activități 
    recreative și sportive.<br>
 `,
@@ -543,7 +533,7 @@ tipicul evenimentelor pe teme de arhitectură .<br>
       this.proiecteA4.push({
         descriere: `<b><h1>Harta culturală</h1></b><br>
 Acest proiect a dorit să abordeze o nouă formă de promovare a evenimentelor 
-culturale timișorene, propunând o variantă interactivă a panourilor de publicitate
+culturale timișorene, propunând o variantă interactivă a panourilor de privateitate
  și expunere. La intervale de 2 săptămâni, cele mai interesante evenimente 
  depistate, și-au găsit locul printre cartonașe colorate atârnate de „clădirea” 
  unde vor avea loc, alături de detalii legate de dată, oră, temă și înscrieri.<br>
@@ -567,7 +557,7 @@ unei părți de string art aplicată pe structură,această instalație dorește
 <b><h1>Street Delivery</h1></b><br>
 Asociația de la 4 a transformat strada Profesor Dionisie Linția în Strada Arhitecturii! 
 Alături de În comunitate, Planzero, AltfelStudio am propus patrimoniul ca temă generală,
- aducând în atenția publică situația în care se află acesta. Prin prisma atelierelor, 
+ aducând în atenția privateă situația în care se află acesta. Prin prisma atelierelor, 
  workshop-urilor, happening-urilor și al celorlalte evenimente desfășurate în perioada
  10-12 iunie, am dezbătut, analizat, radiografiat și interpretat artistic situația 
  generală în care se află patrimoniul orașului, modul în care ne raportăm la acesta, 
@@ -599,9 +589,6 @@ atât membrii asociației dar și membrii facultății de arhitectură doresc s�
 `,
         image: 'ligaa4/balulbobocilor.jpg'
       });
-
-
-
 
 
       this.descriereCT = [
@@ -662,7 +649,6 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
       });
 
       this.info = isLoggedIn;
-      console.log(this.info)
       this.selectedItem = navParams.get('item');
       this.notes = [
         'ligaa4upt',
@@ -688,7 +674,6 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
       let logos = ['ligaa4/a4.png', 'ligaac/ac.png', 'ligact/ct.png', 'ligaee/ee.png', 'ligaetc/etc.png', 'ligamt/mt.png', 'ligampt/mpt.png', 'ligaostl/ostl.png'];
 
       this.items = [];
-      console.log(this.selectedItem)
       // If we navigated to this page, we will have an item available as a nav param
       if (this.info.data == "user") {
         for (let i = 0; i < this.faculties.length; i++) {
@@ -731,10 +716,6 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
           } else {
             this.series = [];
           }
-
-
-
-
 
 
           this.items.push({

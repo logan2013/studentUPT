@@ -15,6 +15,19 @@
       </button>
         </ion-buttons>
     </ion-navbar>
+    <ion-navbar *ngIf="!myLocation" [hidden]="(switch == 'list')">
+        <ion-item color="primary">
+            <ion-label> Nearby places</ion-label>
+            <ion-select [(ngModel)]="os" submitText="Okay" cancelText="Nah" (ionChange)="searchPlaces(os)">
+                <ion-option value="store">Store</ion-option>
+                <ion-option value="atm">ATM</ion-option>
+                <ion-option value="transit_station">Transit station</ion-option>
+                <ion-option value="restaurant">Restaurant</ion-option>
+
+            </ion-select>
+        </ion-item>
+
+    </ion-navbar>
 </ion-header>
 
 <div class="switch">
@@ -64,7 +77,7 @@
     </div>
 
     <div class=" map " style="height:100% " [class.hidemap]="!((switch=='map' ) || error) ">
-        <ion-searchbar #searchbar placeholder="Cauta " [hidden]="!search "></ion-searchbar>
+        <ion-searchbar class={{mytheme}} #searchbar placeholder="Cauta " [hidden]="!search "></ion-searchbar>
         <div id="map " #map style="height:100%; ">
         </div>
     </div>

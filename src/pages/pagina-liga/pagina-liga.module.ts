@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { PaginaLiga } from './pagina-liga';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
   imports: [
     IonicPageModule.forChild(PaginaLiga),
     SuperTabsModule,
-    IonicImageViewerModule
+    IonicImageViewerModule,
+    IonicImageLoader
   ],
   exports: [
     PaginaLiga

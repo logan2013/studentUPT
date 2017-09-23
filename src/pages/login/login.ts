@@ -1,13 +1,11 @@
-import { using } from 'rxjs/observable/using';
 import { Component } from '@angular/core';
 import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
-import { AppUpdate } from '@ionic-native/app-update';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import 'rxjs/add/operator/map';
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -21,7 +19,9 @@ export class Login {
   public images: any = ['electro.png', 'mpt.png', 'arh.png', 'chim.png', 'mec.png'];
   public src: any;
   private loading: any;
-  constructor(public navCtrl: NavController,
+  constructor(
+    private nativePageTransitions: NativePageTransitions,
+    public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
     public platform: Platform,
@@ -31,13 +31,11 @@ export class Login {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    private appUpdate: AppUpdate,
     public http: Http) {
-
-
 
     this.src = this.images[Math.floor(Math.random() * this.images.length)];
     this.menuCtrl.enable(false);
+    this.events.unsubscribe('user:logout');
 
     if (localStorage.getItem('user')) {
       this.toastCtrl.create({
@@ -45,7 +43,8 @@ export class Login {
         duration: 1500,
         position: 'top'
       }).present();
-      this.navCtrl.setRoot('HomePage')
+
+      this.navCtrl.setRoot('Profile')
     }
 
     this.myForm = this.formBuilder.group({
@@ -125,7 +124,9 @@ export class Login {
         if (this.dataUser.success) {
           loader.dismiss();
           localStorage.setItem('user', this.dataUser.data)
-          this.navCtrl.setRoot('HomePage', { item: this.dataUser });
+          this.menuCtrl.enable(true);
+          localStorage.removeItem('slide');
+          this.navCtrl.setRoot('Profile', { item: this.dataUser });
           this.events.publish('try:login', '');
 
         }
@@ -150,7 +151,18 @@ export class Login {
   }
 
   guest() {
-    this.navCtrl.setRoot('HomePage');
+    if (localStorage.getItem('slide') == null) {
+      this.navCtrl.setRoot('Profile', {
+        animation: true,
+        direction: 'forward'
+      });
+    } else {
+      this.navCtrl.setRoot('About', {
+        animation: true,
+        direction: 'forward'
+      });
+    }
+
 
     this.events.publish('try:login', '');
     this.menuCtrl.enable(true);

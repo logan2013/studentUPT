@@ -20,9 +20,8 @@ export class Googlemaps {
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('searchbar', { read: ElementRef }) searchbar: ElementRef;
   addressElement: HTMLInputElement = null;
-
   listSearch: string = '';
-
+  public mytheme: string = 'searchbar searchbar-md searchbar-left-aligned ';
   map: any;
   marker: any;
   loading: any;
@@ -30,13 +29,15 @@ export class Googlemaps {
   error: any;
   switch: string = "map";
   watchlocaiton: number = 1;
-
   regionals: any = [];
   currentregional: any;
   markersArray = [];
   public canNavigate: any = false;
   public myLocation: boolean = true;
   public locatieNavigator: any = [];
+  public locatie: any = [];
+  music: string;
+  musicAlertOpts: { title: string, subTitle: string };
   constructor(
     public global: MyApp,
     private iab: InAppBrowser,
@@ -55,7 +56,7 @@ export class Googlemaps {
     public actionSheetCtrl: ActionSheetController,
     public geolocation: Geolocation
   ) {
-    
+
     this.platform.ready().then(() => this.loadMaps());
     this.regionals = [{
       "title": "Facultatea de Automatica si Calculatoare",
@@ -133,6 +134,13 @@ export class Googlemaps {
       "latitude": 45.748358,
       "longitude": 21.239724,
       "img": 'upt/cantina.jpg',
+      "logo": "icon.png"
+    }, {
+      "title": "Căminul C4 Complexul Studenţesc",
+      "website": '',
+      "latitude": 45.747327,
+      "longitude": 21.237525,
+      "img": 'caminc4.jpg',
       "logo": "icon.png"
     }];
   }
@@ -213,7 +221,7 @@ export class Googlemaps {
     // reference : https://github.com/driftyco/ionic/issues/7223
     this.addressElement = this.searchbar.nativeElement.querySelector('.searchbar-input');
     this.createAutocomplete(this.addressElement).subscribe((location) => {
-      console.log('Searchdata', location);
+      // console.log('Searchdata', location);
 
       let options = {
         center: location.geometry.location,
@@ -221,8 +229,11 @@ export class Googlemaps {
       };
       this.map.setOptions(options);
       try {
-
-        this.addMarker(location.geometry.location, '<div style="padding:3px;"><p><b>' + location.name + '</b></p>' + location.adr_address + '<br></div> <div style="text-align:center;display:block;"><img  align="middle" src=' + location.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }) + ' imageViewer /></div>', false);
+        console.log('asda')
+        this.addMarker(location.geometry.location, '<div style="padding:3px;"><p><b>' + location.name +
+          '</b></p>' + location.adr_address +
+          '<br></div> <div style="text-align:center;display:block;"><img  align="middle" src=' + location.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }) +
+          ' imageViewer /></div>', false);
       }
       catch (e) {
         if (location.photos == undefined) {
@@ -391,7 +402,9 @@ export class Googlemaps {
 
         regional.marker = new google.maps.Marker(markerData);
         this.markersArray.push(regional.marker);
-        this.addMarker(markerData.position, "<div><table><tr><td><img align='middle' style='margin-top:5px;padding:3px;' width='40px;'src='http://193.226.9.153/images/" + regional.logo + "' imageViewer/>&nbsp;&nbsp;</td><td><p style='text-align:center;display:block;'><b>" + regional.title + "</p></b></td></table><div style='text-align:center;display:block;'><img  width='180px;'src='http://193.226.9.153/images/" + regional.img + "'/ > <div><br></div>", true)
+        this.addMarker(markerData.position, "<div><table><tr><td><img align='middle' style='margin-top:5px;padding:3px;' width='40px;'src='http://193.226.9.153/images/" + regional.logo +
+          "' imageViewer/>&nbsp;&nbsp;</td><td><p style='text-align:center;display:block;'><b>" + regional.title +
+          "</p></b></td></table><div style='text-align:center;display:block;'><img  width='180px;'src='http://193.226.9.153/images/" + regional.img + "'/ > <div><br></div>", true);
         regional.marker.addListener('click', () => {
           for (let c of this.regionals) {
             c.current = false;
@@ -420,22 +433,18 @@ export class Googlemaps {
     });
   }
   openLocation(markerInfo) {
-    console.log(this.markersArray, markerInfo)
-
     for (let i = 0; i < this.markersArray.length; i++) {
-
       if (markerInfo.title == this.markersArray[i].title) {
         this.map.panTo(this.markersArray[i].getPosition());
         this.map.setZoom(16);
         let infoWindow = new google.maps.InfoWindow({
-          content: "<div><table><tr><td><img style='margin-top:5px;' width='35px;'src='http://193.226.9.153/images/" + markerInfo.logo + "' imageViewer/> &nbsp;&nbsp;</td><td><p><b>" + markerInfo.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + markerInfo.img + "'/ imageViewer> <br></div>"
+          content: "<div><table><tr><td><img style='margin-top:5px;' width='35px;'src='http://193.226.9.153/images/" + markerInfo.logo +
+          "' /> &nbsp;&nbsp;</td><td><p><b>" + markerInfo.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + markerInfo.img +
+          "'/ > <br></div>"
         });
         infoWindow.open(this.map, this.markersArray[i]);
-        console.log(this.markersArray, markerInfo)
-
       }
     }
-
   }
 
   openBrowser(website) {
@@ -443,10 +452,7 @@ export class Googlemaps {
   }
 
   openNavigator(location) {
-    //alert(location.latitude)
     try {
-      // window.open('geo://' + this.locatieNavigator[0] + ',' + this.locatieNavigator[1] + '?q=' + location.latitude + ',' + location.longitude + '(' + location.title + ')', '_system');
-
       let options: LaunchNavigatorOptions = {
         start: this.locatieNavigator
       };
@@ -541,8 +547,7 @@ export class Googlemaps {
       }
     });
   }
-  change() {
-  }
+
   // go show currrent location
   getCurrentPosition() {
     this.loading = this.loadingCtrl.create({
@@ -558,11 +563,12 @@ export class Googlemaps {
 
           this.showToast('Location found!');
           this.myLocation = false;
-
+          this.mytheme = "searchbar searchbar-md searchbar-left-aligned show";
           this.watchlocaiton = 0;
-          // console.log(position.coords.latitude, position.coords.longitude);
           this.locatieNavigator = [position.coords.latitude, position.coords.longitude];
           let myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          this.locatie = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
           let options = {
             center: myPos,
             zoom: 14
@@ -594,55 +600,33 @@ export class Googlemaps {
         });
       },
       (error) => {
-        // this.myLocation = true;
-
-        // this.watchlocaiton = 1;
-        // if (this.watchlocaiton == 1) {
-
-        //   this.showToast('Locația dvs. nu poate fi stabilită cu acuratete maxima.');
-        //   console.log(this.getlocation.lat, this.getlocation.lng);
-        //   this.locatieNavigator = [this.getlocation.lat, this.getlocation.lng];
-
-        //   let myPos = new google.maps.LatLng(this.getlocation.lat, this.getlocation.lng);
-        //   let options = {
-        //     center: myPos,
-        //     zoom: 14
-        //   };
-        //   this.map.setOptions(options);
-        //   this.addMarker(myPos, "Locatia mea!", false);
-
-        //   let alert = this.alertCtrl.create({
-        //     title: 'Location',
-        //     message: 'Do you want to save the Location?',
-        //     buttons: [
-        //       {
-        //         text: 'Cancel'
-        //       },
-        //       {
-        //         text: 'Save',
-        //         handler: data => {
-        //           let lastLocation = { lat: this.getlocation.lat, long: this.getlocation.lng };
-        //           console.log(lastLocation);
-        //           this.storage.set('lastLocation', lastLocation).then(() => {
-        //             this.showToast('Location saved');
-        //           });
-        //         }
-        //       }
-        //     ]
-        //   });
-        //   alert.present();
-
-        //   this.watchlocaiton = 0;
-        // } else {
         this.loading.dismiss().then(() => {
           this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
 
           console.log(error);
         });
-        // }
-
       }
     )
+  }
+
+  getPlaces(type) {
+    var service = new google.maps.places.PlacesService(this.map);
+    let request = {
+      location: this.locatie,
+      radius: 2000,
+      types: [type]
+    };
+    return new Promise((resolve, reject) => {
+      service.nearbySearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          resolve(results);
+        } else {
+          reject(status);
+        }
+
+      });
+    });
+
   }
 
   toggleSearch() {
@@ -653,9 +637,20 @@ export class Googlemaps {
     }
   }
 
-  addMarker(position, content, data) {
-    if (data == false) {
 
+
+  addMarker(position, content, data) {
+    if (data != false && data != true) {
+
+      let marker = new google.maps.Marker({
+        map: this.map,
+        position: position,
+      });
+
+      this.addInfoWindow(marker, content);
+      return marker;
+    } else if (data == false) {
+      console.log('asda')
       let marker = new google.maps.Marker({
         map: this.map,
         position: position,
@@ -665,14 +660,6 @@ export class Googlemaps {
       this.addInfoWindow(marker, content);
       return marker;
     } else {
-      let image = {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/2000px-Map_pin_icon_green.svg.png',
-        // This marker is 20 pixels wide by 32 pixels high.
-        scaledSize: new google.maps.Size(50, 50), // scaled size
-        origin: new google.maps.Point(0, 0), // origin
-        anchor: new google.maps.Point(0, 0) // anchor
-
-      };
       let marker = new google.maps.Marker({
         map: this.map,
         position: position,
@@ -695,4 +682,59 @@ export class Googlemaps {
     });
   }
 
+
+  public searchPlaces(data) {
+    this.initializeMap();
+    this.getPlaces(data).then((results: Array<any>) => {
+      for (let i = 0; i < results.length; i++) {
+        this.getInfoPlaces(results[i]).then((data: any) => {
+          try {
+
+            this.addMarker(data.geometry.location, '<div style="text-align:center;display:block;"><p><b>' + data.name +
+              '</div><div style="text-align:justify;display:block;"></b></p> <p><b>Adresa :</b> ' + data.formatted_address +
+              '</p><p><b>Telefon : </b>' + data.formatted_phone_number +
+              '</p><p><b>Deschis : </b>' + data.opening_hours.open_now +
+              '</p><p><b>Website : </b><a href=' + data.website + '>' + data.website +
+              '</a></p><p><b>Rating : </b>' + data.rating +
+              '</p><br></div> <div style="text-align:center;display:block;"><img  align="middle" src=' + data.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }) + ' imageViewer /></div>', data.icon);
+          }
+          catch (e) {
+            if (data.website == undefined && data.photos == undefined) {
+              this.addMarker(data.geometry.location, '<div style="text-align:center;display:block;"><p><b>' + data.name +
+                '</div><div style="text-align:justify;display:block;"></b></p> <p><b>Adresa :</b> ' + data.formatted_address +
+                '</p><p><b>Telefon : </b>' + data.formatted_phone_number +
+                '</p><p><b>Deschis : </b>' + data.opening_hours.open_now +
+                '</a></p><p><b>Rating : </b>' + data.rating +
+                '</p><br></div>', data.icon);
+            } else if (data.website == undefined && data.photos != undefined) {
+              this.addMarker(data.geometry.location, '<div style="text-align:center;display:block;"><p><b>' + data.name +
+                '</div><div style="text-align:justify;display:block;"></b></p> <p><b>Adresa :</b> ' + data.formatted_address +
+                '</p><p><b>Telefon : </b>' + data.formatted_phone_number +
+                '</p><p><b>Deschis : </b>' + data.opening_hours.open_now +
+                '</a></p><p><b>Rating : </b>' + data.rating +
+                '</p><br></div> <div style="text-align:center;display:block;"><img  align="middle" src=' + data.photos[0].getUrl({ 'maxWidth': 200, 'maxHeight': 200 }) + ' imageViewer /></div>', data.icon);
+            } else if (data.photos == undefined) {
+              this.addMarker(data.geometry.location, '<div style="padding:3px;"><p><b>' + data.name + '</b></p>' + data.vicinity + '<br></div> <div style="text-align:center;display:block;">', data.icon);
+            }
+          }
+        });
+      }
+    }, (status) => console.log(status));
+  }
+
+  public getInfoPlaces(data) {
+    var service = new google.maps.places.PlacesService(this.map);
+    let request = {
+      placeId: data.place_id
+    };
+    return new Promise((resolve, reject) => {
+      service.getDetails(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          resolve(results);
+        } else {
+          reject(status);
+        }
+      })
+    });
+  }
 }

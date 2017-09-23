@@ -1,6 +1,5 @@
 import { AnimationStyleMetadata, Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController, ModalController, AlertController } from 'ionic-angular';
-import { NativeStorage } from '@ionic-native/native-storage';
+import { IonicPage, NavController, NavParams,  ToastController, ModalController, AlertController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 import { Http } from '@angular/http';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -15,9 +14,7 @@ import { DataTabs } from '../../providers/datatabs';
 export class Facultati {
   public selectedItem: any;
   public posts: any;
-  public postss: any;
   public id: any;
-  public icons: string[];
   public faculties: string[];
   public user: string;
   public danger: string = "danger";
@@ -219,7 +216,7 @@ export class Facultati {
          precum și realizarea activităților de cercetare, proiectare, dezvoltare tehnologică și managerială la standardele cele mai ridicate. In cei peste 75 de ani de 
          existență, Facultatea de Construcții din Timisoara a fost întotdeauna deschisă colaborării cu mediul economic, social și academic, câștigându-și o imagine foarte 
          bună la nivel național și internațional, devenind un vector de dezvoltare în domeniu, un reper de profesionalism și exigență. Toate programele de studii sunt acreditate,
-          în concordanță`,
+          în concordanță cu programele facultăților de profil din UE.`,
         'ostl/descriereostl.jpg'
       ];
 

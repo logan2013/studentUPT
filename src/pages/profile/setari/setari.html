@@ -44,15 +44,13 @@
             </ion-select>
         </ion-item>
     </ion-list> -->
-    <ion-list>
+    <ion-list padding>
         <ion-list-header>
             Other
         </ion-list-header>
-        <ion-item>
-            <ion-icon name='power' item-start></ion-icon>
-            <button ion-button (click)="logOut()" item-end>
-      Logout
-      </button>
-        </ion-item>
+        <!-- <ion-icon name='power' item-start></ion-icon> -->
+        <button ion-button block padding (click)="logOut()">
+                 Logout
+            </button>
     </ion-list>
 </ion-content>

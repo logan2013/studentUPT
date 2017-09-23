@@ -1,26 +1,15 @@
-page-viewpage {
-    .background-image {
-        background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950);
-        background-size: cover;
-        background-position: center;
-        height: 50vw;
-    }
-}
+page-viewpage {}
 
 .toast {
     text-align: center;
     width: 90%;
     margin-left: 5%;
-    /* animation-name followed by duration in seconds*/
-    /* you could also use milliseconds (ms) or something like 2.5s */
     >div {
         background-color: #E8EAF6 !important;
         -webkit-animation-name: example;
         width: 70%;
-        /* Safari 4.0 - 8.0 */
         -webkit-animation-duration: 1s;
         border-radius: 15px;
-        /* Safari 4.0 - 8.0 */
         animation-name: example;
         animation-duration: 1s;
     }

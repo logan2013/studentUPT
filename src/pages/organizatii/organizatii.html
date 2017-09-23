@@ -10,11 +10,11 @@
 <ion-content no-padding>
     <ion-list *ngFor="let item of items">
         <ion-item>
-            <ion-row>
+            <ion-row (click)="itemTapped($event, item)">
                 <ion-col col-2>
-                    <img (click)="itemTapped($event, item)" tappable src="http://193.226.9.153/images/{{item.imagelink}}" />
+                    <img-loader tappable src="http://193.226.9.153/images/{{item.imagelink}}" useImg></img-loader>
                 </ion-col>
-                <ion-col (click)="itemTapped($event, item)" tappable col-10>
+                <ion-col tappable col-10>
                     <p>{{item.short}}</p>
                     <h3 text-left text-wrap style="white-space: normal;"> {{item.faculties}} </h3>
                 </ion-col>

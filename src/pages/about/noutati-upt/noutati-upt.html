@@ -8,6 +8,7 @@
         <button ion-button full (click)="addNew()">Adauga postare &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
     </ion-buttons>
     <ion-list>
+
         <ion-card ion-item *ngFor="let post of posts" text-wrap>
             <ion-row (click)="showContent(post);">
 
@@ -18,7 +19,10 @@
 
                 </ion-col>
                 <ion-col *ngIf="post.icon" item-left>
-                    <img src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" *ngIf="post.icon">
+                    <!-- <img src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" *ngIf="post.icon"> -->
+                    <img-loader src="http://193.226.9.153/upload/{{post.icon}}" *ngIf="post.icon" useImg></img-loader>
+
+
                 </ion-col>
                 <ion-row *ngIf="!post.icon">
                     <ion-col>
@@ -53,12 +57,23 @@
                 </ion-col>
 
             </ion-row>
+
         </ion-card>
-
+        <ion-grid (click)='showContentChart(itemss)'>
+            <ion-row>
+                <ion-col padding-vertical col-6>
+                    <p text-center> <b>{{titlee}}</b> </p>
+                    <p text-left text-wrap style="white-space: normal;">
+                        {{content}}
+                    </p>
+                </ion-col>
+                <ion-col>
+                    <img style="margin-top:30px;" src="{{imageLink}}">
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-list>
-    <ion-list no-padding style="margin:0;" *ngFor="let post of posts">
 
-
-    </ion-list>
     <!--</div>-->
+
 </ion-content>

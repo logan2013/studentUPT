@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { DataTabs } from '../../../providers/datatabs';
 
 @IonicPage()
@@ -11,13 +11,11 @@ export class DescriereFacultate {
   public descriere: any = [];
   public conducere: any = [];
   public proiecte: any = [];
-  constructor(public navCtrl: NavController, public dataTabs: DataTabs, public navParams: NavParams) {
+  constructor(public dataTabs: DataTabs) {
     this.descriere = this.dataTabs.descriere;
     this.conducere = this.dataTabs.conducere;
     this.proiecte = this.dataTabs.proiecte;
   }
-
-  ionViewDidLoad() { }
 
   toggle(nume) {
     for (let i: number = 0; i < this.conducere.length; i++) {

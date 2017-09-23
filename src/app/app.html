@@ -1,23 +1,8 @@
-<!-- <ion-menu [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
-    <ion-content>
-        <div (click)="editProfile(dataUser)" style="opacity:0.9;background-color:#2e2f92; padding:5px">
-            <img style="border-radius:50%; margin-top:10px;margin-left:10px; width:80px; height:80px;" src="http://193.226.9.153/profilelogo.png" />
-            <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
-            <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
-            <!--<p *ngIf="dataUser.data != 'user'" style="color:white"> Editeaza profil</p>-->
-<!-- </div>
-        <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" [class.activeHighlight]="checkActive(p)" (click)="openPage(p)">
-            <ion-icon color="primary" name={{p.icon}}></ion-icon> &nbsp;&nbsp; {{p.title}}
-        </button>
-        </ion-list>
-    </ion-content>
-</ion-menu> -->
 <div class="{{theme}}">
+
     <ion-menu [content]="content" id="menu-material" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
         <ion-content>
             <div (click)="editProfile(dataUser)" class="menu-header">
-                <!--material-design-background-->
                 <img class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
                 <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
                 <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
@@ -32,4 +17,5 @@
     </ion-menu>
     <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
     <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
 </div>

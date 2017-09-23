@@ -16,7 +16,7 @@ import { HTTP } from '@ionic-native/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path'; 
+import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer } from '@ionic-native/transfer';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
@@ -24,17 +24,18 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OneSignal } from '@ionic-native/onesignal';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Device } from '@ionic-native/device';
 import { AppMinimize } from '@ionic-native/app-minimize';
-import { AppUpdate } from '@ionic-native/app-update';
 import { AppVersion } from '@ionic-native/app-version';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { DocumentViewer } from '@ionic-native/document-viewer';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { IonicImageLoader } from 'ionic-image-loader';
 // import { Timer } from '../components/countdown-timer/timer';
 // import { TimerProgress } from '../components/timer-progress/timer-progress';
 // import { ExpandableHeader } from '../components/expandable-header/expandable-header';
@@ -60,14 +61,15 @@ firebase.initializeApp(config);
     MyApp
   ],
   imports: [
+    IonicModule.forRoot(MyApp, {
+      pageTransitionDelay: 5
+    }),
     NgCalendarModule,
     BrowserModule,
     IonicImageViewerModule,
     HttpModule,
     // AngularFireModule.initializeApp(config),
-    IonicModule.forRoot(MyApp, {
-      pageTransitionDelay: 30
-    }),
+    IonicImageLoader.forRoot(),
     SuperTabsModule.forRoot(),
     IonicStorageModule.forRoot()
   ],
@@ -93,7 +95,6 @@ firebase.initializeApp(config);
     AppMinimize,
     AppVersion,
     File,
-    AppUpdate,
     LocalNotifications,
     FilePath,
     Transfer,
@@ -108,6 +109,7 @@ firebase.initializeApp(config);
     FileChooser,
     LaunchNavigator,
     DocumentViewer,
+    NativePageTransitions,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useValue: 'ro-RO' },
 

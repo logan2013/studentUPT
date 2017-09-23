@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Paginafacultate } from './paginafacultate';
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
   ],
   imports: [
     IonicPageModule.forChild(Paginafacultate),
-    SuperTabsModule
+    SuperTabsModule,
+    IonicImageLoader
   ],
   exports: [
     Paginafacultate

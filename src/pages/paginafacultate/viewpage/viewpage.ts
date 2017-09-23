@@ -1,54 +1,47 @@
-import { Component } from '@angular/core';
-import { IonicPage, AlertController, ModalController, NavController, NavParams, LoadingController, ToastController, Events, App } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { IonicPage, AlertController, ModalController, ToastController, Events, } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DataTabs } from '../../../providers/datatabs';
 import { Auth } from '../../../providers/auth';
 import 'rxjs/add/operator/map';
-/**
- * Generated class for the Viewpage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
+
 @IonicPage()
 @Component({
   selector: 'page-viewpage',
   templateUrl: 'viewpage.html',
 })
 export class Viewpage {
-  public uptData: any; // parameters sends from tab page !
-  public pozaUPT: any;
-  public user: any; // this will be a global variable for status of user
-  public posts: any;
-  public title: any;
-  public text: any;
-  public newtext: any;
-  public time: any;
-  public info: any = []; // data user recieve from provider
-  public items: Array<{ title: string, text: string, icon: string }>;
-  public limit: number = 50;
-  public offset: number = 0;
+  public showSpinner: boolean = true;
+  public url: any;
+  public firestore = firebase.storage();
+  private uptData: any; // parameters sends from tab page !
+  private pozaUPT: any;
+  private user: any; // this will be a global variable for status of user
+  private posts: any;
+  private title: any;
+  private text: any;
+  private newtext: any;
+  private time: any;
+  private info: any = []; // data user recieve from provider
+  private items: Array<{ title: string, text: string, icon: string }>;
+  private limit: number = 50;
+  private offset: number = 0;
   constructor(
-    private app: App,
+    public zone: NgZone,
     private events: Events,
-    public dataTabs: DataTabs,
-    public alertCtrl: AlertController,
-    public http: Http,
-    public toastCtrl: ToastController,
-    public modalCtrl: ModalController,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public auth: Auth,
-    public loadingCtrl: LoadingController) {
+    private dataTabs: DataTabs,
+    private alertCtrl: AlertController,
+    private http: Http,
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
+    private auth: Auth) {
 
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
-      console.log(isLoggedIn)
-      console.log(this.info, this.dataTabs.message.note)
     });
     this.items = [];
     this.newtext = localStorage.getItem('text');// ??
-    this.time = new Date().getDay() + "/" + new Date().getMonth() + "/" + new Date().getFullYear() + "  " + new Date().getHours() + ":" + new Date().getMinutes(); // current date will be replaced with date at eevery post
     this.user = localStorage.getItem('user') //user
     let loader = this.toastCtrl.create({
       message: "Loading...",
@@ -58,29 +51,55 @@ export class Viewpage {
     loader.present();
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
-      console.log(data)
+      if (this.posts !== null) {
+        for (let i = 0; i < this.posts.length; i++) {
+          if (this.posts[i].icon) {
+            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+              this.zone.run(() => {
+                this.posts[i].url = url;
+              })
+            })
+          }
+        }
+      }
       localStorage.removeItem('upt');
-      loader.dismiss();
+      // setTimeout(() => {
+        loader.dismiss();
+      // }, 500);
+     
     });
+
   }
 
 
   doRefresh(refresher) {
+    this.showSpinner = false;
+    
     localStorage.removeItem('upt');
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
+      if (this.posts !== null) {
+        for (let i = 0; i < this.posts.length; i++) {
+          if (this.posts[i].icon) {
+            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+              this.zone.run(() => {
+                this.posts[i].url = url;
+              })
+            })
+          }
+        }
+      }
     });
 
     setTimeout(() => {
       refresher.complete();
-    }, 500);
+    }, 200);
 
   }
 
   ionViewDidLoad() { }
 
   presentProfileModal(item) {
-    console.log(item)
     let profileModal = this.modalCtrl.create('FacultHome', { id: item });
     profileModal.present();
   }
@@ -92,7 +111,6 @@ export class Viewpage {
   }
 
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
     this.offset += this.limit;
     this.limit += 15;
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=' + this.limit + '&offset=' + this.offset).map(res => res.json()).subscribe(data => {
@@ -105,8 +123,6 @@ export class Viewpage {
         this.offset = this.limit;
         infiniteScroll.enable(false);
       }
-      console.log(this.posts)
-      console.log('Async operation has ended');
     });
     infiniteScroll.complete();
 
@@ -133,12 +149,9 @@ export class Viewpage {
   }
 
   showContent(item) {
-    // this.app.getRootNav().setRoot('ShowContent', { item: item }, {animate: true, direction: 'forward'});
-    // this.events.publish('page:news', item);
     this.modalCtrl.create('ShowContent', { item: item }).present().then(() => {
       this.auth.modal = true;
     })
-   // this.navCtrl.push('ShowContent', { item: item });
   }
 
 }

@@ -46,7 +46,7 @@ export class AddOrarPage {
     }
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
-    
+
   }
 
   cancel() {
@@ -60,10 +60,7 @@ export class AddOrarPage {
   delete(ev) {
     this.viewCtrl.dismiss(ev);
   }
-  onSubmit(formData) {
-    // let's log our findings
-    console.log('Form submission is ', formData);
-  }
+
   edit(ev) {
     console.log(ev)
     this.viewCtrl.dismiss(ev);

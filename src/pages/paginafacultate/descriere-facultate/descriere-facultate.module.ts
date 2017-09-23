@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { DescriereFacultate } from './descriere-facultate';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
   ],
   imports: [
     IonicPageModule.forChild(DescriereFacultate),
-    IonicImageViewerModule
+    IonicImageViewerModule,
+    IonicImageLoader
   ],
   exports: [
     DescriereFacultate

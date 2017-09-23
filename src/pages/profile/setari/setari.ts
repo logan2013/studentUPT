@@ -52,7 +52,6 @@ export class SetariPage {
   ) {
     this.auth.login().then((isLoggedIn) => {
       this.userData = isLoggedIn;
-      console.log(this.userData)
     });
   }
 

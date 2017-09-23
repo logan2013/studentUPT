@@ -8,12 +8,8 @@ $font-path: "../assets/fonts";
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
-$toolbar-md-title-font-size:2rem;
-$toolbar-md-max-height:1rem;
-$tabs-md-tab-font-size:1.2rem;
-$tabs-md-tab-min-height:2rem;
 $segment-button-md-height:3.5rem;
-$segment-button-wp-font-size:0.8rem;
+$segment-button-wp-font-size:0.7rem;
 $font-size-small:7px !default;
 $toolbar-background: #2e2f92;
 // Named Color Variables
@@ -49,3 +45,6 @@ $colors: ( primary: #2e2f92, secondary: #32db64, danger: #f53d3d, light: #E8EAF6
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+super-tab-button {
+    font-size: 12px !important;
+}

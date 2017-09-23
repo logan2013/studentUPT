@@ -10,7 +10,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import * as firebase from 'firebase';
 
-declare var cordova: any;
 @IonicPage()
 @Component({
   selector: 'page-facult-home',
@@ -200,7 +199,7 @@ export class FacultHome {
 
   private createFileName() {
     var d = new Date().getTime(),
-      newFileName = '' + localStorage.getItem('user') + d + ".jpeg";
+      newFileName = '' + localStorage.getItem('user') + d + ".jpg";
     localStorage.setItem('upt', newFileName);
     return newFileName;
   }
@@ -243,7 +242,7 @@ export class FacultHome {
   public uploadImage() {
 
     // Destination URL
-    var url = "http://hainedefirmasj.com/placesforme/upload.php";
+    var url = "http://193.226.9.153/upload.php";
     // File for Upload
     var targetPath = this.correctPath;
     // File name only
@@ -282,7 +281,7 @@ export class FacultHome {
         var reader = new FileReader();
         reader.readAsArrayBuffer(resFile);
         reader.onloadend = (evt: any) => {
-          var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
+          var imgBlob = new Blob([evt.target.result], { type: 'image/jpg' });
           var imageStore = this.firestore.ref().child(filename);
           imageStore.put(imgBlob).then((res) => {
             this.loading.dismissAll();

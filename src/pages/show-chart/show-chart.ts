@@ -56,13 +56,14 @@ export class ShowChart {
       })
     });
     this.valori = navParams.get('item');
-    console.log(this.valori.statistici[0].chart[0].sectia)
+    console.log(this.valori)
+    // console.log(this.valori[0].statistici[0].chart[0].sectia)
 
   }
 
   ionViewDidLoad() {
 
-    this.showChart(this.valori.statistici[0].chart)
+    this.showChart(this.valori)
   }
   showChart(data: any) {
     console.log(data);

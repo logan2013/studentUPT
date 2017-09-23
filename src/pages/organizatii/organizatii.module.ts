@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Organizatii } from './organizatii';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Organizatii } from './organizatii';
   ],
   imports: [
     IonicPageModule.forChild(Organizatii),
+    IonicImageLoader
   ],
   exports: [
     Organizatii

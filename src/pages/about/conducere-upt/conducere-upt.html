@@ -1,5 +1,5 @@
 <ion-content>
-    <p padding text-left text-wrap style="white-space: pre;">
+    <p padding text-justify text-wrap style="white-space: pre;">
         Universitatea este condusă de Consiliul de Administraţie şi Senatul Universităţii. Consiliul de Administraţie este alcătuit din Rector, Prorectori şi Decanii facultăţilor şi este cel care asigură conducerea administrativă a universităţii. Senatul Universităţii
         este alcătuit din 68 cadre didactice şi studenţi.
     </p>
@@ -7,7 +7,7 @@
     <ion-list>
         <ion-item text-center *ngFor="let data of all">
             <div text-center>
-                <img style="margin-left:10px !important;" src="http://193.226.9.153/images/{{data.image}}">
+                <img-loader style="margin-left:10px !important;" src="http://193.226.9.153/images/{{data.image}}" useImg></img-loader>
             </div>
             <p text-center text-wrap style="white-space: normal;"><b></b>{{data.functie}}</p>
             <p text-center text-wrap style="white-space: normal;"><b></b>{{data.nume}}</p>

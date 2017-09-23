@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, LoadingController, AlertController, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Auth } from '../../../providers/auth';
 import 'rxjs/add/operator/map';
-
+import * as firebase from 'firebase';
 @IonicPage()
 @Component({
   selector: 'page-noutati-upt',
   templateUrl: 'noutati-upt.html',
 })
 export class NoutatiUpt {
+  public url: any;
+  public firestore = firebase.storage();
   public items: Array<{ title: string, text: string, icon: string }>;
   public uptData: any; // parameters sends from tab page !
   public pozaUPT: any;
@@ -23,10 +25,22 @@ export class NoutatiUpt {
   public statistici: any = [];
   public limit: number = 15;
   public offset: number = 0;
-  constructor(public alertCtrl: AlertController, private toastCtrl: ToastController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  public titlee: string[] = [];
+  public content: string[] = [];
+  public imageLink: string[] = [];
+  public typeOfPagee: number[] = []; // 1 - list page or 2 -content page
+  
+  public itemss: Array<{ title: string, content: string, imageLink: string, typeOfPage: number, statistici: any }> = [];
+  constructor(
+    public zone: NgZone,
+    public alertCtrl: AlertController, private toastCtrl: ToastController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
     });
+    this.titlee = ['Statistici pentru admitere '];
+    this.content = [`O reprezentare grafica a numarului de studenti inscrisi la fiecare facultate`,
+    ];
+    this.imageLink = ['http://study.com/cimages/course-image/statistics-for-teachers-professional-development_137460_large.jpg'];
     this.items = [];
     this.newtext = localStorage.getItem('text');
     this.time = new Date().getDay() + "/" + new Date().getMonth() + "/" + new Date().getFullYear() + "  " + new Date().getHours() + ":" + new Date().getMinutes(); // current date will be replaced with date at eevery post
@@ -40,10 +54,37 @@ export class NoutatiUpt {
     this.http.get(this.auth.server + '/statistici.php').map(res => res.json()).subscribe(data => {
       this.statistici = data;
     });
+    this.typeOfPagee = [1];
+
+    this.http.get('http://193.226.9.153/statistici.php').map(res => res.json()).subscribe(data => {
+      this.items = [];
+      for (let i = 0; i < this.titlee.length; i++) {
+        this.itemss.push({
+          title: this.titlee[i],
+          content: this.content[i],
+          imageLink: this.imageLink[i],
+          typeOfPage: this.typeOfPagee[i],
+          statistici: data
+        });
+      }
+    });
+
     this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
+      if (this.posts !== null) {
+        for (let i = 0; i < this.posts.length; i++) {
+          if (this.posts[i].icon) {
+            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+              this.zone.run(() => {
+                this.posts[i].url = url;
+              })
+            })
+          }
+        }
+      }
       localStorage.removeItem('upt');
       loader.dismiss();
+
     });
   }
 
@@ -51,6 +92,17 @@ export class NoutatiUpt {
     localStorage.removeItem('upt');
     this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
+      if (this.posts !== null) {
+        for (let i = 0; i < this.posts.length; i++) {
+          if (this.posts[i].icon) {
+            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+              this.zone.run(() => {
+                this.posts[i].url = url;
+              })
+            })
+          }
+        }
+      }
     });
     setTimeout(() => {
       refresher.complete();
@@ -89,6 +141,10 @@ export class NoutatiUpt {
   }
 
   showContent(item) {
-    this.modalCtrl.create('ShowContent', { item: item }).present();
+    this.modalCtrl.create('ShowContent', { item: item, icon: item.url }).present();
+  }
+  showContentChart(item) {
+    console.log(item)
+    this.modalCtrl.create('ShowChart', { item: item[0].statistici[0].chart }).present();
   }
 }

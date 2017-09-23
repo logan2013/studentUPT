@@ -3,12 +3,12 @@
         <ion-row>
             <ion-col col-7>
             </ion-col>
-            <ion-col style="margin-top:5px; margin-right:-12px;"> <img src="http://193.226.9.153/images/upt.png" />
+            <ion-col style="margin-top:5px; margin-right:-12px;"> <img src="assets/upt.png" />
             </ion-col>
         </ion-row>
         <ion-row style="margin-top:-120px;">
             <ion-col text-center>
-                <img style="width:320px" src="http://193.226.9.153/images/{{src}}">
+                <img style="width:320px" src="assets/{{src}}">
             </ion-col>
         </ion-row>
         <form style="margin-top:-110px;" scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
@@ -21,7 +21,7 @@
                     <ion-label floating>
                         <p style="color:white"> Email </p>
                     </ion-label>
-                    <ion-input type="email" value="" formControlName="user" placeholder=""></ion-input>
+                    <ion-input type="email" minlength='3' value="" formControlName="user" placeholder=""></ion-input>
                 </ion-item>
                 <ion-item color="primary">
                     <div class="spacer" style="height: 2px;"></div>
