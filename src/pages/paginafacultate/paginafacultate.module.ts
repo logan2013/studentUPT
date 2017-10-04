@@ -11,10 +11,10 @@ import { IonicImageLoader } from 'ionic-image-loader';
   imports: [
     IonicPageModule.forChild(Paginafacultate),
     SuperTabsModule,
-    IonicImageLoader
+    IonicImageLoader,
   ],
   exports: [
-    Paginafacultate
+    Paginafacultate,
   ]
 })
-export class PaginafacultateModule {}
+export class PaginafacultateModule { }

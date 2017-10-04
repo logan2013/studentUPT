@@ -1,5 +1,5 @@
 import { AnimationStyleMetadata, Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
+import { IonicPage, Events, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Auth } from '../../providers/auth';
 import { Http } from '@angular/http';
@@ -51,6 +51,7 @@ export class Organizatii {
   constructor(
     private auth: Auth,
     private http: Http,
+    public events: Events,
     private dataTabs: DataTabs,
     private oneSignal: OneSignal,
     private navCtrl: NavController,
@@ -809,7 +810,7 @@ prezentare și de a discuta și schimba relația dintre student si cadrul didact
     }
 
   }
-
+ 
   /**
    * 
    * @param itemss 

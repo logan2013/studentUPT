@@ -1,21 +1,22 @@
 <div class="{{theme}}">
+    <ion-split-pane when="(min-width: 550px)">
 
-    <ion-menu [content]="content" id="menu-material" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
-        <ion-content>
-            <div (click)="editProfile(dataUser)" class="menu-header">
-                <img class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
-                <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
-                <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
-            </div>
-            <ion-list no-lines>
-                <button menuClose="left" ion-item detail-none *ngFor="let p of pages" [class.activeHighlight]="checkActive(p)" (click)="openPage(p)">
+        <ion-menu [content]="content" id="menu-material" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
+            <ion-content>
+                <div (click)="editProfile(dataUser)" class="menu-header">
+                    <img class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
+                    <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
+                    <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
+                </div>
+                <ion-list no-lines>
+                    <button menuClose="left" ion-item detail-none *ngFor="let p of pages" [class.activeHighlight]="checkActive(p)" (click)="openPage(p)">
         <ion-icon [name]="p.icon" item-left></ion-icon>
         {{p.title}}
       </button>
-            </ion-list>
-        </ion-content>
-    </ion-menu>
-    <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+        <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+        <ion-nav [root]="rootPage" #content swipeBackEnabled="false" main></ion-nav>
+    </ion-split-pane>
 </div>

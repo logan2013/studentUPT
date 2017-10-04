@@ -38,14 +38,12 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { IonicImageLoader } from 'ionic-image-loader';
 // import { Timer } from '../components/countdown-timer/timer';
 // import { TimerProgress } from '../components/timer-progress/timer-progress';
-// import { ExpandableHeader } from '../components/expandable-header/expandable-header';
 // import { FlashCardComponent } from '../components/flash-card/flash-card';
 import { ToastService } from '../providers/util/toast.service';
 import { AlertService } from '../providers/util/alert.service';
 import { CameraProvider } from '../providers/util/camera.provider';
 import * as firebase from 'firebase';
 // import { AngularFireModule } from 'angularfire2';
-
 export var config = {
   apiKey: "AIzaSyB8ANQHC7RqJVUNqEgb8jN39iO8TwQ-enE",
   authDomain: "studentupt-9adeb.firebaseapp.com",

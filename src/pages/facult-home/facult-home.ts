@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Camera, } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
@@ -16,6 +16,7 @@ import * as firebase from 'firebase';
   templateUrl: 'facult-home.html',
 })
 export class FacultHome {
+  @ViewChild('fileInput') fileInput;
   public nativepath: any;
   public firestore = firebase.storage();
   public imgsource: any;
@@ -31,6 +32,7 @@ export class FacultHome {
   idd: any; //parametru inserare 
   facultate: any; // parametru trasnmis de la viewac pt inserare
   public tabBar: any;
+  public isBrowser: any;
   constructor(
     public camera: Camera,
     public file: File,
@@ -45,7 +47,8 @@ export class FacultHome {
     public toastCtrl: ToastController,
     public platform: Platform,
     public loadingCtrl: LoadingController) {
-
+    this.isBrowser = this.platform.is('core');
+    console.log(this.isBrowser);
     this.myForm = this.formBuilder.group({
       text: [''],
       title: [''],
@@ -55,12 +58,14 @@ export class FacultHome {
     if (navParams.get('id')) {
       this.id.pop();
       this.iddd = navParams.get('id');
+      console.log(this.iddd)
       this.id.push({
         title: this.iddd.title,
-        text: this.iddd.text,
+        text: this.iddd.content || this.iddd.text,
         icon: this.iddd.icon,
         id: this.iddd.id
       })
+      console.log(this.id)
     }
     else { }
 
@@ -96,52 +101,34 @@ export class FacultHome {
       headers.append('Content-Type', 'application/json');
       let options = new RequestOptions({ headers: headers });
 
-      console.log(this.id)
-      console.log(localStorage.getItem('upt'));
-      //  alert(this.myForm._value.title+this.myForm._value.text+localStorage.getItem('upt')+this.id[0].id)
       if (this.myForm.value.title && this.myForm.value.text === "" && localStorage.getItem('upt') === null) { //100
         this.myForm.value.text = this.id[0].text;
-        console.log(this.id);
         localStorage.setItem('upt', this.id[0].icon);
       }
       else if (this.myForm.value.title && this.myForm.value.text == "" && localStorage.getItem('upt')) { //101
-        console.log(this.id);
         this.myForm.value.text = this.id[0].text;
-      } else
-        if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt') === null) {//110
-          console.log(this.id);
-          localStorage.setItem('upt', this.id[0].icon);
-        }
-        else
-          if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt')) {//111
-            console.log(this.id);
-          }
-          else
-            if (this.myForm.value.title == "" && this.myForm.value.text == "" && localStorage.getItem('upt') === null) {//000
-              localStorage.setItem('upt', this.id[0].icon);
-              this.myForm.value.text = this.id[0].text;
-              this.myForm.value.title = this.id[0].title;
-              console.log(this.id);
-            }
-            else
-              if (this.myForm.value.title == "" && this.myForm.value.text == "" && localStorage.getItem('upt')) {//001
-                this.myForm.value.title = this.id[0].title;
-                this.myForm.value.text = this.id[0].text;
-                console.log(this.id);
-              }
-              else
-                if (this.myForm.value.title == "" && this.myForm.value.text && localStorage.getItem('upt') === null) {//010
-                  this.myForm.value.title = this.id[0].title;
-                  localStorage.setItem('upt', this.id[0].icon);
-                  console.log(this.id);
-                }
-                else
-                  if (this.myForm.value.title == "" && this.myForm.value.text && localStorage.getItem('upt')) {//011
-                    this.myForm.value.title = this.id[0].title;
-                    console.log(this.id);
+      } else if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt') === null) {//110
+        localStorage.setItem('upt', this.id[0].icon);
+      }
+      else if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt')) {//111
+      }
+      else if (this.myForm.value.title == "" && this.myForm.value.text == "" && localStorage.getItem('upt') === null) {//000
+        localStorage.setItem('upt', this.id[0].icon);
+        this.myForm.value.text = this.id[0].text;
+        this.myForm.value.title = this.id[0].title;
+      }
+      else if (this.myForm.value.title == "" && this.myForm.value.text == "" && localStorage.getItem('upt')) {//001
+        this.myForm.value.title = this.id[0].title;
+        this.myForm.value.text = this.id[0].text;
+      }
+      else if (this.myForm.value.title == "" && this.myForm.value.text && localStorage.getItem('upt') === null) {//010
+        this.myForm.value.title = this.id[0].title;
+        localStorage.setItem('upt', this.id[0].icon);
+      }
+      else if (this.myForm.value.title == "" && this.myForm.value.text && localStorage.getItem('upt')) {//011
+        this.myForm.value.title = this.id[0].title;
+      }
 
-                  }
-      console.log(this.myForm)
       this.postParamss = {
         inputtitle: this.myForm.value.title + " ",
         inputtext: this.myForm.value.text + " ",
@@ -154,20 +141,39 @@ export class FacultHome {
         }, error => {
           console.log(error);
         });
-
-
     }
   }
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LigaacPage');
   }
 
-
+  fileChange(event) {
+    const fileBrowser = this.fileInput.nativeElement;
+    if (fileBrowser.files && fileBrowser.files[0]) {
+      const formData = new FormData();
+      formData.append('file', fileBrowser.files[0]);
+      localStorage.setItem('upt', fileBrowser.files[0].name);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://193.226.9.153/upload.php', true);
+      xhr.onload = function () {
+        if (this['status'] === 200) {
+          const responseText = this['responseText'];
+          const files = JSON.parse(responseText);
+          alert('Upload Success');
+          //todo: emit event
+        } else {
+          //todo: error handling
+        }
+      };
+      xhr.send(formData);
+    }
+  }
+  
   navigateToSecondPage() {
     this.navCtrl.pop();
   }
+
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
@@ -273,6 +279,8 @@ export class FacultHome {
       this.loading.dismissAll()
       this.presentToast(err);
     });
+
+
   }
 
   uploadimage(filePath, filename) {

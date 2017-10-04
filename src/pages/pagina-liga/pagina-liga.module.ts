@@ -16,7 +16,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
     IonicImageLoader
   ],
   exports: [
-    PaginaLiga
+    PaginaLiga,
   ]
 })
 export class PaginaLigaModule {}

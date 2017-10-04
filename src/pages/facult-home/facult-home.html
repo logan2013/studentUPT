@@ -1,11 +1,11 @@
 <ion-header>
     <ion-navbar hideBackButton>
         <ion-title tappable (click)="navigateToSecondPage()">
-            <ion-icon name="arrow-round-back"> </ion-icon>BACK &nbsp; {{facultate}}</ion-title>
+            <ion-icon name="arrow-round-back"> </ion-icon> {{facultate}}</ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <div class="profile-image-wrapper" (click)="presentActionSheet()" tappable>
+    <div *ngIf="!isBrowser" class="profile-image-wrapper" (click)="presentActionSheet()" tappable>
         <div class="profile-image-placeholder">
             <ion-icon name="add"></ion-icon>
             <div>
@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+    <div text-center><input *ngIf="isBrowser" type="file" #fileInput (change)="fileChange($event)" placeholder="Upload file"></div>
 
     <img *ngIf="id[0].icon" class="profile-image-wrapper" src="{{correctPath}}" style="width: 100%" [hidden]="correctPath === null">
     <img *ngIf="id[0].icon" [hidden]="correctPath != null" class="profile-image-wrapper" src="http://hainedefirmasj.com/placesforme/upload/{{id[0].icon}}" style="width: 100%">

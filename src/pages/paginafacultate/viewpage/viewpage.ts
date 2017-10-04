@@ -1,5 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { IonicPage, AlertController, ModalController, ToastController, Events, } from 'ionic-angular';
+import { Component, NgZone,ViewChild } from '@angular/core';
+import { IonicPage, Content,ScrollEvent, AlertController, ModalController, ToastController, Events, } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DataTabs } from '../../../providers/datatabs';
 import { Auth } from '../../../providers/auth';
@@ -36,7 +36,6 @@ export class Viewpage {
     private toastCtrl: ToastController,
     private modalCtrl: ModalController,
     private auth: Auth) {
-
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
     });
@@ -153,5 +152,7 @@ export class Viewpage {
       this.auth.modal = true;
     })
   }
-
+  scrolll(ev) {
+    console.log(ev)
+  }
 }

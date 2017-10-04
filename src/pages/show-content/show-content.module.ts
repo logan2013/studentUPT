@@ -12,7 +12,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     IonicImageViewerModule
   ],
   exports: [
-    ShowContent
+    ShowContent,
   ]
 })
 export class ShowContentModule {}

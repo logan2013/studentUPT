@@ -17,6 +17,7 @@ export class ShowContent {
     public viewCtrl: ViewController) {
 
     this.item = navParams.get('item');
+    console.log(this.item)
     this.item.content =  this.item.content ;
     console.log(this.item)
     this.auth.modal = true;

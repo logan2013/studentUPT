@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { IonicPage, Content, Events, NavController, NavParams, ModalController } from 'ionic-angular';
 import { DataTabs } from '../../providers/datatabs';
 
 @IonicPage()
@@ -7,6 +7,7 @@ import { DataTabs } from '../../providers/datatabs';
   templateUrl: 'pagina-liga.html',
 })
 export class PaginaLiga {
+  @ViewChild(Content) content: Content;
   public item: any;
   public descriere: any;
   public orar: any;
@@ -19,6 +20,7 @@ export class PaginaLiga {
     public navCtrl: NavController,
     public navParams: NavParams,
     public dataTabs: DataTabs,
+    public events: Events,
     public modalCtrl: ModalController) {
 
     this.item = navParams.get('item');
@@ -32,6 +34,10 @@ export class PaginaLiga {
     this.dataTabs.setOrar(this.orar);
     this.dataTabs.setProiecte(this.proiecte)
 
+    this.events.subscribe('user:scroll', () => {
+      console.log('sadasd')
+      //  this.content.scrollTo(0,0, 100);
+    })
   }
 
   ionViewDidLoad() {
@@ -56,6 +62,6 @@ export class PaginaLiga {
     this.dataTabs.setProiecte('')
     this.navCtrl.pop();
   }
-
+ 
 }
 

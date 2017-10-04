@@ -4,7 +4,6 @@ import { Http } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class Auth {
   public userData: any = [];
@@ -29,6 +28,12 @@ export class Auth {
         }
         resolve(this.userData);    
       });
+    });
+  }
+
+  checkServer() {
+    return new Promise((resolve) => {
+
     });
   }
 

@@ -130,5 +130,5 @@
     <plugin name="cordova.plugins.diagnostic" spec="^3.6.5" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="onesignal-cordova-plugin" spec="^2.0.11" />
-    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.0.3" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.0.5" />
 </widget>

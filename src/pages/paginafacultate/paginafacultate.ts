@@ -23,6 +23,7 @@ export class Paginafacultate {
     public events: Events,
     public modalCtrl: ModalController) {
 
+    
     this.item = navParams.get('item');
     this.descriere = navParams.get('descriere');
     this.condurere = navParams.get('conducere');
@@ -53,4 +54,7 @@ export class Paginafacultate {
     this.navCtrl.pop();
   }
 
+  scrolll(ev) {
+    console.log(ev)
+  }
 }

@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content (ionScroll)="scrolll($event)">
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>

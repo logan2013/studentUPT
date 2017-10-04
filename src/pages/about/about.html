@@ -1,17 +1,28 @@
-<ion-content scroll="false" no-padding>
-    <div ion-fixed style="top:0px; margin-left:-5px; position:absolute;">
-    </div>
-    <ion-navbar hideBackButton style="background-size: cover;
+<!-- <div ion-fixed style="top:0px; margin-left:-5px; position:absolute;">
+</div>
+<ion-navbar hideBackButton style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
                 background-color:#2e2f92;">
-        <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
                     <ion-icon color="light" item-start name="menu"></ion-icon>
             </button>
-        <ion-title text-center>
-            UPT
-        </ion-title>
+    <ion-title text-center>
+        UPT
+    </ion-title>
+</ion-navbar> -->
+
+
+<ion-header no-shadow no-border>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        <ion-title style="position:relative;left:35%;">UPT</ion-title>
     </ion-navbar>
+</ion-header>
+<ion-content scroll="false" no-padding>
+
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="noutatiUpt" title="Noutati"></super-tab>
         <super-tab [root]="descriereUpt" title="Descriere"></super-tab>

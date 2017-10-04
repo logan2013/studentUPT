@@ -24,16 +24,13 @@ export class SetariPage {
   profileRef: any;
   errorMessage: any;
   placeholderPicture = 'http://api.adorable.io/avatar/200/bob';
-
   enableNotifications = true;
   language: any;
   currency: any;
   paymentMethod: any;
-
   languages = ['English', 'Portuguese', 'French'];
   paymentMethods = ['Paypal', 'Credit Card'];
   currencies = ['USD', 'BRL', 'EUR'];
-
   user = {
     name: 'Marty Mcfly',
     imageUrl: 'http://193.226.9.153/profilelogo.png'

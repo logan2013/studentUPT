@@ -1,4 +1,4 @@
-<ion-content no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
+<ion-content (ionScroll)="scrolll($event)" no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
 
     <ion-navbar [hidden]="show == false" hideBackButton style="background-size: cover;
                 background-position: center;
@@ -7,7 +7,7 @@
         <button ion-fixed ion-button clear (click)="goBack()" icon-only>
         <ion-icon color="light"  name='md-arrow-round-back'></ion-icon>
       </button>
-        <img style=" width:100px; margin-left:35%; margin-top:12px;" src="http://193.226.9.153/images/{{item.imagelink}}">
+        <img style=" width:100px; margin-left:35%; margin-top:12px;" src="http://193.226.9.153/images/{{item.white}}">
         <p text-center text-wrap style="white-space: pre-line;color:white; ">
             {{item.title}}
         </p>
