@@ -4,7 +4,13 @@
         <ion-menu [content]="content" id="menu-material" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
             <ion-content>
                 <div (click)="editProfile(dataUser)" class="menu-header">
-                    <img class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
+
+                    <img *ngIf="!photo" class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
+                    <!-- <div class="image-cropper">
+
+                        <img *ngIf="photo" class="img" src="http://193.226.9.153/upload/{{photo}}" />
+                    </div> -->
+
                     <p *ngIf="dataUser.data == 'user'" style="color:white">&nbsp;&nbsp; Guest User </p>
                     <p *ngIf="dataUser.data != 'user'" style="color:white">&nbsp;&nbsp;{{dataUser.data}} </p>
                 </div>

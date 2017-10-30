@@ -6,17 +6,20 @@
         <button ion-fixed style="margin:0px; top:9px;position:absolute;" ion-button clear menuToggle>
                         <ion-icon color="light" item-start name="menu"></ion-icon>
                 </button>
-        <div text-center>
-            <img style="  width:80px; border-radius:40px;  margin-top:12px;" src="http://193.226.9.153/profilelogo.png" />
-            <p text-wrap style="white-space: pre-line;color:white">
-                {{userData.data}}
-            </p>
+        <div text-center class="image-cropper" style="margin-left:35%">
+            <img *ngIf="!photo" text-center class="img" src="http://193.226.9.153/profilelogo.png" />
+            <img *ngIf="photo" text-center class="img" src="http://193.226.9.153/upload/{{photo}}" />
+
+
         </div>
+        <p text-center text-wrap style="white-space: pre-line;color:white">
+            {{userData.data}}
+        </p>
     </ion-navbar>
     <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
-        <super-tab [root]="rootOrar" title="Orar"></super-tab>
-        <super-tab [root]="rootNote" title="Note"></super-tab>
-        <super-tab [root]="rootSetari" title="Setari"></super-tab>
+        <super-tab [root]="rootOrar" title="Orar" icon="md-calendar"></super-tab>
+        <super-tab [root]="rootNote" title="Note" icon="school"></super-tab>
+        <super-tab [root]="rootSetari" title="Setari" icon="settings"></super-tab>
     </super-tabs>
     <super-tabs *ngIf="userData.right == 1 || userData.right == 2" indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="rootSetari" title="Setari"></super-tab>
@@ -64,9 +67,9 @@
         </button>-->
 </ion-content>
 
-<ion-content *ngIf="!activeuser&&showContent">
+<ion-content *ngIf="!activeuser&&showContent" class="page-popup-fab">
 
-    <ion-slides pager="true" (ionSlideWillChange)="onSlideChangeStart($event)">
+    <!-- <ion-slides pager="true" (ionSlideWillChange)="onSlideChangeStart($event)">
 
         <ion-slide *ngFor="let slide of slides">
             <button style="margin-top:3%;right:3%;position:absolute" text-end ion-button icon-end small clear (click)="startApp()">
@@ -86,5 +89,16 @@
                 <ion-icon name="arrow-forward"></ion-icon>
             </button>
         </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
+
+    <ion-card>
+        <img src="assets/s1_b.png">
+        <h1 color="light">Let's take a look</h1>
+    </ion-card>
+    <ion-fab right bottom middle>
+        <button class="pop-in" [ngClass]="{ 'expand' : expanded, 'contract': contracted }" ion-fab mini (click)="expand()">
+          <ion-icon [hidden]="!showIcon" name="ios-arrow-forward"></ion-icon>
+        </button>
+    </ion-fab>
+
 </ion-content>

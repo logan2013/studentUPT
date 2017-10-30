@@ -1,12 +1,31 @@
 <ion-content>
     <ion-list>
-        <ion-list-header>
-            <ion-avatar item-start (click)="updateProfileImage()">
-                <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture">
-            </ion-avatar>
-            <p class="username">{{userData.data}}</p>
-            <p>User</p>
-        </ion-list-header>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col col-2>
+                    <div class="image-cropper">
+                        <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture" class="img" [hidden]="lastImage">
+                    </div>
+                </ion-col>
+                <ion-col col-10>
+                    <p>{{userData.data}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left full (click)="presentActionSheet()">
+                        <ion-icon name="add"></ion-icon>Change photo
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left full (click)="uploadImage()" [disabled]="lastImage === null">
+                        <ion-icon name="cloud-upload"></ion-icon>Upload
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
     </ion-list>
     <ion-list no-border>
         <ion-list-header>
@@ -19,12 +38,35 @@
                 <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>
             </ion-select>
         </ion-item> -->
-        <ion-item>
-            <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
-            <ion-label class="label"> Enable notifications </ion-label>
-            <ion-icon name='notifications' item-start></ion-icon>
-        </ion-item>
+
+        <div *ngFor="let key of userKeyAndVal">
+            <ion-row padding-horizontal class="label" *ngIf="key.value==''">
+                <ion-col col-6>
+                    {{key.key}}:
+                </ion-col>
+                <ion-col col-6>
+                    ---
+                </ion-col>
+            </ion-row>
+            <ion-row padding-horizontal class="label" *ngIf="key.value">
+                <ion-col col-6>
+                    {{key.key}}:
+                </ion-col>
+                <ion-col col-6>
+                    {{key.value}}
+                </ion-col>
+            </ion-row>
+        </div>
+
     </ion-list>
+    <ion-item>
+
+        <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
+        <ion-label class="label"> Enable notifications </ion-label>
+        <ion-icon name='notifications' item-start></ion-icon>
+
+
+    </ion-item>
     <!-- <ion-list>
         <ion-list-header>
             Currency

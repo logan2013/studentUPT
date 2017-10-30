@@ -1,5 +1,4 @@
 <ion-content (ionScroll)="scrolll($event)" no-bounce style="background-color:#2e2f92;    overflow: hidden;" scroll="false" no-padding>
-
     <ion-navbar [hidden]="show == false" hideBackButton style="background-size: cover;
                 background-position: center;
                 overflow: hidden;
@@ -12,10 +11,9 @@
             {{item.title}}
         </p>
     </ion-navbar>
-
     <super-tabs small indicatorColor="light" badgeColor="light" toolbarColor="light">
-        <super-tab small [root]="rootPage" title="Noutati"></super-tab>
-        <super-tab small [root]="rootDescriere" title="Descriere"></super-tab>
-        <super-tab small [root]="rootOrar" title="Evenimente"></super-tab>
+        <super-tab small [root]="rootPage" title="Noutati" icon="paper"></super-tab>
+        <super-tab small [root]="rootDescriere" title="Descriere" icon="information-circle"></super-tab>
+        <super-tab small [root]="rootOrar" title="Evenimente" icon="calendar"></super-tab>
     </super-tabs>
 </ion-content>

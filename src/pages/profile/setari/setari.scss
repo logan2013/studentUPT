@@ -1,8 +1,22 @@
-page-setari {
-    .username {
-        font-size: 1.3em;
+    page-setari {
+        .username {
+            font-size: 1.3em;
+        }
+        .label {
+            color: #7f7f7f;
+        }
+        .image-cropper {
+            margin-top: 5px;
+            width: 70px;
+            height: 70px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        img {
+            display: inline;
+            margin: 0 auto;
+            margin-top: -20px;
+            width: auto;
+        }
     }
-    .label {
-        color: #7f7f7f;
-    }
-}

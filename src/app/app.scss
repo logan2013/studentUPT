@@ -12,10 +12,6 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app. 
-ion-navbar.toolbar {
-    min-height: 40px;
-}
-
 .activeHighlight {
     background-color: #E8EAF6;
 }
@@ -43,7 +39,22 @@ ion-navbar.toolbar {
 }
 
 .round {
+    border-radius: 80%;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
     border-radius: 50%;
+}
+
+.img {
+    display: inline;
+    margin: 0 auto;
+    margin-top: -20px;
+    width: auto;
 }
 
 #menu-material {
@@ -64,7 +75,8 @@ ion-navbar.toolbar {
     }
     .user-avatar {
         padding: .5em;
-        height: 12vh;
+        height: auto;
+        width: 40%
     }
     h3,
     .label,

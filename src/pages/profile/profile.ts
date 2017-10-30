@@ -19,6 +19,7 @@ export interface Slide {
   templateUrl: 'profile.html',
 })
 export class Profile {
+  public photo: string = localStorage.getItem("photo");
   loading: any;
   slides: Slide[];
   showSkip = true;
@@ -33,6 +34,14 @@ export class Profile {
   public rootOrar: any = 'OrarStudentPage';
   public rootNote: any = 'NotePage';
   public rootSetari: any = 'SetariPage';
+  public userSet: any = [];
+  public userKey: any = [];
+  //modal
+  expanded: any;
+  contracted: any;
+  showIcon = true;
+  preload = true;
+
   constructor(
     private appMinimize: AppMinimize,
     private alertCtrl: AlertController,
@@ -50,10 +59,22 @@ export class Profile {
     public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
+
+    this.events.subscribe("updatePhoto", (photo) => {
+      this.photo = photo;
+    });
+
+    try {
+      console.log(this.user)
+      this.userSet = localStorage.getItem("dataUser");
+      this.userKey = Object.keys(JSON.parse(this.userSet));
+    }
+    catch (r) { }
     if (this.user == null || this.user == "user") {
       if (localStorage.getItem('slide') == null) {
         this.showContent = true;
         this.activeuser = false;
+
       } else if (localStorage.getItem('slide') == 'true') {
 
         this.navCtrl.setRoot('About', {
@@ -96,6 +117,8 @@ export class Profile {
       loader.present();
       localStorage.removeItem('slide')
       localStorage.removeItem('user');
+      localStorage.removeItem("dataUser");
+      localStorage.clear();
       this.menuCtrl.enable(false);
       this.app.getRootNav().setRoot('Login');
 
@@ -317,5 +340,21 @@ export class Profile {
 
   onSlideChangeStart(slider) {
     this.showSkip = !slider.isEnd();
+  }
+
+
+  expand() {
+    this.expanded = true;
+    this.contracted = !this.expanded;
+    this.showIcon = false;
+    setTimeout(() => {
+      const modal = this.navCtrl.push('ModalPage');
+      // modal.onDidDismiss(data => {
+      //   this.expanded = false;
+      //   this.contracted = !this.expanded;
+      //   setTimeout(() => this.showIcon = true, 330);
+      // });
+      // modal.present();
+    }, 200);
   }
 }

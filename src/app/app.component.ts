@@ -16,13 +16,14 @@ import 'rxjs/add/operator/map';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  public photo: string = localStorage.getItem("photo");
   public rootPage: any = "Profile";
   public dataUser: any = [];
   activePage: any;
   public theme: any = 'theme-light';
   pages: Array<{ icon: string, title: string, component: any }>;
   constructor(private oneSignal: OneSignal,
+
     public events: Events,
     public device: Device,
     public modalCtrl: ModalController,
@@ -36,11 +37,18 @@ export class MyApp {
     private appVersion: AppVersion,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen) {
+
+    this.photo = localStorage.getItem("photo");
+    this.events.subscribe("updatePhoto", (photo) => {
+      this.photo = photo;
+    });
+
     if (localStorage.getItem('slide') == "true") {
       this.rootPage = 'About';
     } else {
       this.rootPage = 'Profile';
     }
+    
     if (localStorage.getItem('user')) {
       this.toastCtrl.create({
         message: 'Sunteti logat cu ' + localStorage.getItem('user'),

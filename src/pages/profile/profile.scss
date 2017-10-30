@@ -1,4 +1,18 @@
 page-profile {
+    .image-cropper {
+        margin-top: 5px;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+    img {
+        display: inline;
+        margin: 0 auto;
+        margin-top: -20px;
+        width: auto;
+    }
     .toolbar-background {
         background: transparent;
         border-color: transparent;
@@ -24,6 +38,58 @@ page-profile {
         color: #60646B;
         b {
             color: #000000;
+        }
+    }
+    .page-popup-fab {
+        .preload {
+            animation: none !important;
+        }
+        .fab {
+            transition: 1s all ease;
+            margin-top: 20rem !important;
+            margin-right: 3rem !important;
+            background: #2e2f92;
+        }
+        .expand {
+            animation: expand 0.5s cubic-bezier(.66, .35, .96, .38) forwards;
+        }
+        .contract {
+            animation: contract 0.4s cubic-bezier(0.75, .80, 0.25, 0) forwards;
+        }
+        .scroll-content {
+            background: #2e2f92;
+        }
+        @keyframes contract {
+            0% {
+                transform: scale(100);
+                border-radius: 100%;
+                margin: 0;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes expand {
+            50% {
+                transform: scale(100);
+            }
+            100% {
+                transform: scale(100);
+                border-radius: 100%;
+                margin: 0;
+            }
+        }
+        ion-card {
+            position: absolute;
+            height: 90vh;
+            h4 {
+                left: 5%;
+                bottom: 3%;
+                position: absolute;
+            }
+        }
+        ion-icon {
+            transition: display 1s ease-in;
         }
     }
 }
