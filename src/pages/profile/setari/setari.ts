@@ -40,6 +40,7 @@ export class SetariPage {
     name: 'Marty Mcfly',
     imageUrl: "http://193.226.9.153/upload/" + localStorage.getItem("photo")
   };
+  public photo: string = localStorage.getItem("photo");
   public userKeyAndVal: Array<{ key: any, value: any }> = [];
   public userSet: any = [];
   public userKey: any = [];
@@ -70,7 +71,7 @@ export class SetariPage {
     });
 
     this.events.subscribe("updatePhoto", (photo) => {
-      this.userKey.imageUrl = photo;
+      this.photo = photo;
     });
     try {
       this.userSet = localStorage.getItem("dataUser");
@@ -147,7 +148,7 @@ export class SetariPage {
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
-      quality: 100,
+      quality: 50,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
@@ -177,7 +178,7 @@ export class SetariPage {
   private createFileName() {
     var d = new Date(),
       n = d.getTime(),
-      newFileName = n + ".jpg";
+      newFileName = localStorage.getItem("user") + n + ".jpg";
     return newFileName;
   }
 
@@ -236,18 +237,20 @@ export class SetariPage {
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options).then(data => {
       this.loading.dismissAll()
-      this.presentToast('Image succesful uploaded.');
-
+      alert('Image succesful uploaded.');
       this.http.get('http://193.226.9.153/userPhoto.php?photo=' + filename + "&user=" + localStorage.getItem("user")).map(res => res.json()).subscribe(data => {
         if (data.success) {
           this.events.publish("updatePhoto", filename);
           localStorage.setItem("photo", filename);
-        } 
+        } else {
+          alert("nup")
+        }
+      }, (err) => {
+        alert(JSON.stringify(err))
       })
-
     }, err => {
       this.loading.dismissAll()
-      this.presentToast('Error while uploading file.');
+      alert('Error while uploading file.' + JSON.stringify(err));
     });
   }
 }

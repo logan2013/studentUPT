@@ -22,8 +22,8 @@ export class MyApp {
   activePage: any;
   public theme: any = 'theme-light';
   pages: Array<{ icon: string, title: string, component: any }>;
+  public userSet: any = [];
   constructor(private oneSignal: OneSignal,
-
     public events: Events,
     public device: Device,
     public modalCtrl: ModalController,
@@ -37,10 +37,9 @@ export class MyApp {
     private appVersion: AppVersion,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen) {
-
     this.photo = localStorage.getItem("photo");
     this.events.subscribe("updatePhoto", (photo) => {
-      this.photo = photo;
+      //this.photo = photo;
     });
 
     if (localStorage.getItem('slide') == "true") {
@@ -48,7 +47,7 @@ export class MyApp {
     } else {
       this.rootPage = 'Profile';
     }
-    
+
     if (localStorage.getItem('user')) {
       this.toastCtrl.create({
         message: 'Sunteti logat cu ' + localStorage.getItem('user'),
@@ -134,6 +133,8 @@ export class MyApp {
   }
 
   menuOpened() {
+    this.photo = localStorage.getItem("photo");
+
     this.auth.login().then((isLoggedIn) => {
       this.dataUser = isLoggedIn;
       if (this.dataUser.right == 0) {
@@ -178,7 +179,6 @@ export class MyApp {
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
         this.pages = [
@@ -189,7 +189,6 @@ export class MyApp {
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           //   { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-
         ];
       } else {
         this.pages = [
@@ -216,8 +215,18 @@ export class MyApp {
 
       setTimeout(() => {
         this.splashScreen.hide();
-      }, 100)
-
+      }, 100);
+      this.userSet = localStorage.getItem("dataUser");
+      var usrData = JSON.parse(this.userSet);
+      // this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + localStorage.getItem("user")).map(res => res.json()).subscribe(data => {
+      //   if (data.success == true) {
+      //     this.events.publish("updatePhoto", data.photo);
+      //     localStorage.setItem('photo', data.photo);
+      //   } else {
+      //     localStorage.removeItem('photo');
+      //   }
+        
+      // })
       this.getlocation.startTracking();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -233,6 +242,7 @@ export class MyApp {
       });
       this.oneSignal.endInit();
       this.oneSignal.getIds().then(data => {
+
         this.http.get('http://193.226.9.153/sendDevices.php?uuid=' + data.userId + '&deviceid=' + this.device.uuid + '&model=' + this.device.model + '&platform=' +
           this.device.platform + '&version=' + this.device.version + '&manufacturer=' + this.device.manufacturer + '&versionapp=' + this.appVersion.getVersionCode()).map(res => res.json()).subscribe(data => {
             if (data.success) {
@@ -241,6 +251,17 @@ export class MyApp {
               console.log(data.error)
             }
           });
+
+        this.http.get('http://193.226.9.153/userPhoto.php?photo='+localStorage.getItem("photo") + "&user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid="+ data.userId +"&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
+          if (data.success) {
+            this.events.publish("updatePhoto", localStorage.getItem("photo"));
+            localStorage.setItem("photo", localStorage.getItem("photo"));
+          } else {
+            alert("nup")
+          }
+        }, (err) => {
+          alert(JSON.stringify(err))
+        })
         // this gives you back the new userId and pushToken associated with the device. Helpful.
       });
 

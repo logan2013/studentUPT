@@ -1,38 +1,37 @@
 <ion-content padding-horizontal>
     <br><br>
-    <!-- <button ion-button full (click)="showOrar()">Orar</button> -->
-    <div id="nume" padding-horizontal style="white-space: pre-line;
+    <div hidden id="nume" padding-horizontal style="white-space: pre-line;
     background: #fff;
     position: relative;
     border: 1px solid #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     text-align: center;">
         {{nume}}
     </div>
-    <hr>
-    <div id="specializare" padding-horizontal style="white-space: pre-line;
+    <hr hidden>
+    <div hidden id="specializare" padding-horizontal style="white-space: pre-line;
     background: #fff;
     position: relative;
     border: 1px solid #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     text-align: center;">
         {{specializare}}
     </div>
     <hr>
-    <h1 text-center> <i>Orar secretariat</i></h1>
+    <h3 text-center> Orar secretariat</h3>
     <div id="text" padding-horizontal style="white-space: pre-line;
     background: #fff;
     position: relative;
     border: 1px solid #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     text-align: center;">
         {{secretariat}}
     </div>
     <hr>
-    <button ion-button color="primary" full large (click)="openOrar()">
+    <button ion-button color="primary" full round (click)="openOrar()">
         Link Orar
     </button>
 </ion-content>

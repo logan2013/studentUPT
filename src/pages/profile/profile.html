@@ -6,11 +6,9 @@
         <button ion-fixed style="margin:0px; top:9px;position:absolute;" ion-button clear menuToggle>
                         <ion-icon color="light" item-start name="menu"></ion-icon>
                 </button>
-        <div text-center class="image-cropper" style="margin-left:35%">
-            <img *ngIf="!photo" text-center class="img" src="http://193.226.9.153/profilelogo.png" />
-            <img *ngIf="photo" text-center class="img" src="http://193.226.9.153/upload/{{photo}}" />
-
-
+        <img *ngIf="!photo" style="width:100px;height:100px;border-radius: 80%;margin-top:5px;margin-left:35%" src="http://193.226.9.153/profilelogo.png" />
+        <div *ngIf="photo" class="image-cropper">
+            <img class="img" src="http://193.226.9.153/upload/{{photo}}" />
         </div>
         <p text-center text-wrap style="white-space: pre-line;color:white">
             {{userData.data}}
