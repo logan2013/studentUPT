@@ -121,20 +121,6 @@ export class NotePage {
             Semestru: usrData[this.userKeyNote[9] + "[" + j + "]"],
             An: usrData[this.userKeyNote[10] + "[" + j + "]"],
           }
-          // ,
-          // Sem: [
-          //   usrData[this.userKeyNote[0] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[1] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[2] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[3] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[4] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[5] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[6] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[7] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[8] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[9] + "[" + j + "]"],
-          //   usrData[this.userKeyNote[10] + "[" + j + "]"],
-          // ]
         })
       }
 

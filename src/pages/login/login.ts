@@ -5,6 +5,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { OneSignal } from '@ionic-native/onesignal';
+import { Device } from '@ionic-native/device';
 import 'rxjs/add/operator/map';
 @IonicPage()
 @Component({
@@ -20,6 +22,8 @@ export class Login {
   public src: any;
   private loading: any;
   constructor(
+    private oneSignal: OneSignal,
+    public device: Device,
     private app: App,
     private nativePageTransitions: NativePageTransitions,
     public navCtrl: NavController,
@@ -70,8 +74,6 @@ export class Login {
     this.network.onConnect().subscribe(data => {
       this.show = true;
       this.loading.dismiss();
-
-
     }
       , error => console.log(error));
   }
@@ -81,7 +83,6 @@ export class Login {
     let networkType = this.network.type;
     if (networkType === 'none') {
       this.navCtrl.push('NoNetwork');
-
       this.toastCtrl.create({
         message: 'You are now ' + connectionState,
         duration: 5000
@@ -102,127 +103,105 @@ export class Login {
     });
 
     let loginFail = this.toastCtrl.create({
-      message: 'Failed',
+      message: 'Something goes wrong. Try again.',
       duration: 2500,
       position: 'top'
     });
 
     let headers = new Headers();
-
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
     let user: string = this.myForm._value.user.split("@");
     console.log(user);
-    if (user[1] == "student.upt.ro" || user[1]=="upt.ro") {
-
-      let postParams = 'utilizator=' + user[0] + '&parola=' + this.myForm._value.password + '&intra=Intra';
-      // {
-      //   utilizator: this.myForm._value.user,
-      //   parola: this.myForm._value.password,
-      // }
-      loader.present();
-      this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options).map(res => res.json()).subscribe(data => {
-        this.dataUser = data;
-        if (this.dataUser.ok == false) {
-
-          loader.dismiss();
-          loginFail.present(); // if login fail show a message error
-        } else {
-          this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + this.myForm._value.user).map(res => res.json()).subscribe(data => {
-            if (data.success == true) {
-              localStorage.setItem('photo', data.photo);
-            } else {
-              localStorage.removeItem('photo');
+    var reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+    if (reg.test(this.myForm._value.user)) {
+      if (user[1] == "student.upt.ro") {
+        let postParams = `utilizator=${user[0]}&parola=${this.myForm._value.password}&intra=Intra`;
+        loader.present();
+        this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options).map(res => res.json()).subscribe(data => {
+          this.dataUser = data;
+          console.log(this.dataUser)
+          if (this.dataUser.ok == false) {
+            loader.dismiss();
+            loginFail.present(); // if login fail show a message error
+          } else {
+            let userSet = {
+              "success": true,
+              "data": this.myForm._value.user,
+              "facultate": null,
+              "right": "0",
             }
-            
-          })
-          let userSet = {
-            "success": true,
-            "data": this.myForm._value.user,
-            "facultate": null,
-            "right": "0",
+            localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
+            localStorage.setItem('user', this.myForm._value.user)
+            setTimeout(() => {
+              loader.dismiss();
+            }, 500)
+            this.menuCtrl.enable(true);
+            localStorage.removeItem('slide');
+            this.app.getRootNav().setRoot('Profile');
+            this.navCtrl.setRoot('Profile', { item: userSet });
+            this.events.publish('try:login', '');
           }
-          localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
-          localStorage.setItem('user', this.myForm._value.user)
+        }, (error) => {
           loader.dismiss();
-          this.menuCtrl.enable(true);
-          localStorage.removeItem('slide');
-          this.app.getRootNav().setRoot('Profile');
-          this.navCtrl.setRoot('Profile', { item: userSet });
-          this.events.publish('try:login', '');
-        }
-
-
-      }, error => {
-        loader.dismiss();
-        loginFail.present();
+          loginFail.present();
+          console.log(error.message);
+        });
+      } else {
         let postParams =
           {
             user: this.myForm._value.user,
             pwd: this.myForm._value.password,
           }
         if (postParams.user != '' && postParams.pwd != '') {
-
           this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
             this.dataUser = data;
-
-            console.log(this.dataUser.data)
             if (this.dataUser.success) {
-              loader.dismiss();
+              setTimeout(() => {
+                loader.dismiss();
+              }, 300)
               localStorage.setItem('user', this.dataUser.data)
               this.menuCtrl.enable(true);
               localStorage.removeItem('slide');
               this.app.getRootNav().setRoot('Profile');
               this.navCtrl.setRoot('Profile', { item: this.dataUser });
               this.events.publish('try:login', '');
-             
             }
             else {
               loader.dismiss();
               loginFail.present(); // if login fail show a message error
             }
-          }, error => {
-            console.log(error);
+          }, (error) => {
+            console.log(error.message);
           });
         } else {
           loader.dismiss();
         }
-        //'utilizator=' + this.myForm._value.user + '&parola=' + this.myForm._value.password + '&intra=Intra';
-
-        console.log(error);
-      });
-
+      }
     } else {
-      alert("adresa email invalida !")
+      alert("Insert valid email address");
     }
-
   }
 
   ionViewWillLeave() {
-
     this.menuCtrl.enable(true);
-
   }
 
   guest() {
     if (localStorage.getItem('slide') == null) {
       this.app.getRootNav().setRoot('Profile');
-
       this.navCtrl.setRoot('Profile', {
         animation: true,
         direction: 'forward'
       });
-
     } else {
       this.app.getRootNav().setRoot('About');
-
       this.navCtrl.setRoot('About', {
         animation: true,
         direction: 'forward'
       });
     }
-
 
     this.events.publish('try:login', '');
     this.menuCtrl.enable(true);

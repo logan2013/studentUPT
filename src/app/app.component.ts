@@ -39,7 +39,7 @@ export class MyApp {
     public splashScreen: SplashScreen) {
     this.photo = localStorage.getItem("photo");
     this.events.subscribe("updatePhoto", (photo) => {
-      //this.photo = photo;
+      this.photo = photo;
     });
 
     if (localStorage.getItem('slide') == "true") {
@@ -75,7 +75,6 @@ export class MyApp {
         if (localStorage.getItem('slide') == "true") {
           this.rootPage = 'About';
         } else {
-
           this.rootPage = 'Profile';
         }
         this.pages = [
@@ -91,7 +90,6 @@ export class MyApp {
         if (localStorage.getItem('slide') == "true") {
           this.rootPage = 'About';
         } else {
-
           this.rootPage = 'Profile';
         };
         this.pages = [
@@ -106,7 +104,6 @@ export class MyApp {
         if (localStorage.getItem('slide') == "true") {
           this.rootPage = 'About';
         } else {
-
           this.rootPage = 'Profile';
         }
 
@@ -124,6 +121,23 @@ export class MyApp {
     })
     events.subscribe('try:login', () => {
       this.menuOpened();
+      this.userSet = localStorage.getItem("dataUser");
+      var usrData = JSON.parse(this.userSet);
+      this.oneSignal.getIds().then(data => {
+
+        this.http.get('http://193.226.9.153/userPhoto.php?photo=' + localStorage.getItem("photo") + "&user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid=" + data.userId + "&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
+          if (data.success) {
+            this.events.publish("updatePhoto", localStorage.getItem("photo"));
+            localStorage.setItem("photo", localStorage.getItem("photo"));
+          } else {
+            alert("nup")
+          }
+        }, (err) => {
+          alert(JSON.stringify(err))
+        })
+        // this gives you back the new userId and pushToken associated with the device. Helpful.
+      });
+
     });
 
   }
@@ -155,7 +169,6 @@ export class MyApp {
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-
         ];
       } else {
         this.pages = [
@@ -225,7 +238,7 @@ export class MyApp {
       //   } else {
       //     localStorage.removeItem('photo');
       //   }
-        
+
       // })
       this.getlocation.startTracking();
       // Okay, so the platform is ready and our plugins are available.
@@ -238,7 +251,7 @@ export class MyApp {
       });
       this.oneSignal.handleNotificationOpened().subscribe(() => {
         // do something when the notification is opened.
-        this.rootPage = 'Home';
+        this.rootPage = 'About';
       });
       this.oneSignal.endInit();
       this.oneSignal.getIds().then(data => {
@@ -252,7 +265,7 @@ export class MyApp {
             }
           });
 
-        this.http.get('http://193.226.9.153/userPhoto.php?photo='+localStorage.getItem("photo") + "&user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid="+ data.userId +"&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
+        this.http.get('http://193.226.9.153/userPhoto.php?photo=' + localStorage.getItem("photo") + "&user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid=" + data.userId + "&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
           if (data.success) {
             this.events.publish("updatePhoto", localStorage.getItem("photo"));
             localStorage.setItem("photo", localStorage.getItem("photo"));

@@ -18,7 +18,6 @@ export class Auth {
   }
 
   login() {
-    console.log(JSON.parse(localStorage.getItem("dataUser")));
     this.user = localStorage.getItem('user');
     return new Promise((resolve) => {
       if (JSON.parse(localStorage.getItem("dataUser")) !== null) {

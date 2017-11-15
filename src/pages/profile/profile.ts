@@ -65,7 +65,6 @@ export class Profile {
     });
 
     try {
-      console.log(this.user)
       this.userSet = localStorage.getItem("dataUser");
       this.userKey = Object.keys(JSON.parse(this.userSet));
     }
@@ -74,40 +73,21 @@ export class Profile {
       if (localStorage.getItem('slide') == null) {
         this.showContent = true;
         this.activeuser = false;
-
       } else if (localStorage.getItem('slide') == 'true') {
-
         this.navCtrl.setRoot('About', {
           animation: true,
           direction: "forward"
         });
-
       }
-
     } else {
       this.showContent = true;
       this.activeuser = true;
     }
-    this.slides = [
-      {
-        title: "values.TUTORIAL_SLIDE1_TITLE",
-        description: "values.TUTORIAL_SLIDE1_DESCRIPTION",
-        image: 'assets/ica-slidebox-img-1.png',
-      },
-      {
-        title: "values.TUTORIAL_SLIDE2_TITLE",
-        description: "values.TUTORIAL_SLIDE2_DESCRIPTION",
-        image: 'assets/ica-slidebox-img-2.png',
-      },
-      {
-        title: "values.TUTORIAL_SLIDE3_TITLE",
-        description: "values.TUTORIAL_SLIDE3_DESCRIPTION",
-        image: 'assets/ica-slidebox-img-3.png',
-      }
-    ];
+
     setTimeout(() => {
       this.showSpinner = false;
     }, 300);
+
     this.events.subscribe('user:logout', () => {
       let loader = this.toastCtrl.create({
         message: 'Logout successfuly',
@@ -121,17 +101,18 @@ export class Profile {
       localStorage.clear();
       this.menuCtrl.enable(false);
       this.app.getRootNav().setRoot('Login');
-
     });
 
     this.auth.login().then((isLoggedIn) => {
       this.userData = isLoggedIn;
     });
+
     this.myForm = this.formBuilder.group({
       curentpass: [''],
       pass: [''],
       repetpass: ['']
     });
+
     this.platform.ready().then(() => {
       this.menuCtrl.enable(true);
       var lastTimeBackPress = 0;
@@ -139,11 +120,9 @@ export class Profile {
       var timePeriodToExit = 2000;
 
       this.platform.registerBackButtonAction(() => {
-
         let name: string = '' + document.location;
         var n = name.lastIndexOf('/');
         var result = name.substring(n + 1);
-
         if (this.auth.modal == false) {
           if (this.nav.canGoBack()) {
             this.nav.pop({});
@@ -159,7 +138,6 @@ export class Profile {
         } else {
           this.events.publish('page:back');
         }
-
       });
     });
   }
@@ -195,11 +173,7 @@ export class Profile {
   }
 
   showForm() {
-    if (this.show == false) {
-      this.show = true;
-    } else if (this.show == true) {
-      this.show = false;
-    }
+    this.show == false ? this.show = true : this.show = false;
   }
 
   logout() {
@@ -227,7 +201,6 @@ export class Profile {
       duration: 2500,
       position: 'top'
     });
-
 
     if (this.myForm._value.curentpass !== '' || this.myForm._value.pass !== '' || this.myForm._value.repetpass !== '') {
 
@@ -305,11 +278,11 @@ export class Profile {
 
 
   ionViewWillLeave() {
-    // enable the root left menu when leaving the tutorial page
     if (this.user == 'user') {
       this.menuCtrl.enable(true);
     }
   }
+
   ionViewDidEnter() {
     this.user == 'user' ? this.menuCtrl.enable(false) : null;
 
@@ -342,19 +315,12 @@ export class Profile {
     this.showSkip = !slider.isEnd();
   }
 
-
   expand() {
     this.expanded = true;
     this.contracted = !this.expanded;
     this.showIcon = false;
     setTimeout(() => {
       const modal = this.navCtrl.push('ModalPage');
-      // modal.onDidDismiss(data => {
-      //   this.expanded = false;
-      //   this.contracted = !this.expanded;
-      //   setTimeout(() => this.showIcon = true, 330);
-      // });
-      // modal.present();
-    }, 200);
+    }, 250);
   }
 }

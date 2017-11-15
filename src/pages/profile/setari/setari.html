@@ -26,6 +26,19 @@
             </ion-row>
         </ion-grid>
     </ion-list>
+    <ion-item>
+        <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
+        <ion-label class="label"> Enable notifications </ion-label>
+        <ion-icon name='notifications' item-start></ion-icon>
+    </ion-item>
+    <ion-list padding>
+        <ion-list-header>
+            Other
+        </ion-list-header>
+        <button ion-button round block padding (click)="logOut()">
+                 Logout
+            </button>
+    </ion-list>
     <ion-list no-border>
         <ion-list-header>
             General
@@ -48,18 +61,5 @@
                 </ion-col>
             </ion-row>
         </div>
-    </ion-list>
-    <ion-item>
-        <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
-        <ion-label class="label"> Enable notifications </ion-label>
-        <ion-icon name='notifications' item-start></ion-icon>
-    </ion-item>
-    <ion-list padding>
-        <ion-list-header>
-            Other
-        </ion-list-header>
-        <button ion-button block padding (click)="logOut()">
-                 Logout
-            </button>
     </ion-list>
 </ion-content>

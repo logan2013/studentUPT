@@ -4,11 +4,11 @@
                 overflow: hidden;
                 background-color:#2e2f92;">
         <button ion-fixed style="margin:0px; top:9px;position:absolute;" ion-button clear menuToggle>
-                        <ion-icon color="light" item-start name="menu"></ion-icon>
-                </button>
-        <img *ngIf="!photo" style="width:100px;height:100px;border-radius: 80%;margin-top:5px;margin-left:35%" src="http://193.226.9.153/profilelogo.png" />
+             <ion-icon color="light" item-start name="menu"></ion-icon>
+        </button>
+        <img *ngIf="!photo" imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;margin-left:35%" src="http://193.226.9.153/profilelogo.png" />
         <div *ngIf="photo" class="image-cropper">
-            <img class="img" src="http://193.226.9.153/upload/{{photo}}" />
+            <img class="img" src="http://193.226.9.153/upload/{{photo}}" imageViewer />
         </div>
         <p text-center text-wrap style="white-space: pre-line;color:white">
             {{userData.data}}
@@ -66,29 +66,6 @@
 </ion-content>
 
 <ion-content *ngIf="!activeuser&&showContent" class="page-popup-fab">
-
-    <!-- <ion-slides pager="true" (ionSlideWillChange)="onSlideChangeStart($event)">
-
-        <ion-slide *ngFor="let slide of slides">
-            <button style="margin-top:3%;right:3%;position:absolute" text-end ion-button icon-end small clear (click)="startApp()">
-                        Skip  
-                    <ion-icon name="arrow-forward"></ion-icon>
-                </button>
-            <img [src]="slide.image" class="slide-image" />
-            <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-            <p [innerHTML]="slide.description"></p>
-        </ion-slide>
-        <ion-slide>
-
-            <img src="assets/ica-slidebox-img-4.png" class="slide-image" />
-            <h2 class="slide-title">Are you ready to play?</h2>
-            <button ion-button icon-end large clear (click)="startApp()">
-                Continua  
-                <ion-icon name="arrow-forward"></ion-icon>
-            </button>
-        </ion-slide>
-    </ion-slides> -->
-
     <ion-card>
         <img src="assets/s1_b.png">
         <h1 color="light">Let's take a look</h1>
@@ -98,5 +75,4 @@
           <ion-icon [hidden]="!showIcon" name="ios-arrow-forward"></ion-icon>
         </button>
     </ion-fab>
-
 </ion-content>
