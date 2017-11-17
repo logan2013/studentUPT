@@ -17,7 +17,7 @@
 
     <img *ngIf="id[0].icon" class="profile-image-wrapper" src="{{correctPath}}" style="width: 100%" [hidden]="correctPath === null">
     <img *ngIf="id[0].icon" [hidden]="correctPath != null" class="profile-image-wrapper" src="http://hainedefirmasj.com/placesforme/upload/{{id[0].icon}}" style="width: 100%">
-    <button ion-button block icon-left (click)="uploadImage()" [disabled]="correctPath === null">
+    <button *ngIf="!isBrowser" ion-button block icon-left (click)="uploadImage()" [disabled]="correctPath === null">
         <ion-icon name="cloud-upload"></ion-icon>Upload
     </button>
     <form [formGroup]="myForm" (ngSubmit)="logForm()">

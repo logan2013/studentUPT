@@ -15,27 +15,27 @@ export class Viewpage {
   public showSpinner: boolean = true;
   public url: any;
   public firestore = firebase.storage();
-  private uptData: any; // parameters sends from tab page !
-  private pozaUPT: any;
-  private user: any; // this will be a global variable for status of user
-  private posts: any;
-  private title: any;
-  private text: any;
-  private newtext: any;
-  private time: any;
-  private info: any = []; // data user recieve from provider
-  private items: Array<{ title: string, text: string, icon: string }>;
-  private limit: number = 50;
-  private offset: number = 0;
+  public uptData: any; // parameters sends from tab page !
+  public pozaUPT: any;
+  public user: any; // this will be a global variable for status of user
+  public posts: any;
+  public title: any;
+  public text: any;
+  public newtext: any;
+  public time: any;
+  public info: any = []; // data user recieve from provider
+  public items: Array<{ title: string, text: string, icon: string }>;
+  public limit: number = 50;
+  public offset: number = 0;
   constructor(
     public zone: NgZone,
-    private events: Events,
-    private dataTabs: DataTabs,
-    private alertCtrl: AlertController,
-    private http: Http,
-    private toastCtrl: ToastController,
-    private modalCtrl: ModalController,
-    private auth: Auth) {
+    public events: Events,
+    public dataTabs: DataTabs,
+    public alertCtrl: AlertController,
+    public http: Http,
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public auth: Auth) {
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
     });
@@ -49,6 +49,7 @@ export class Viewpage {
     });
     loader.present();
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
+      console.log(data)
       this.posts = data;
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {

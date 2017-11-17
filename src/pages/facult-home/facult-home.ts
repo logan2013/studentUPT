@@ -149,27 +149,44 @@ export class FacultHome {
   }
 
   fileChange(event) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Uploading...',
+    });
+
     const fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
       const formData = new FormData();
-      formData.append('file', fileBrowser.files[0]);
+      var name = fileBrowser.files[0].name;
       localStorage.setItem('upt', fileBrowser.files[0].name);
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://193.226.9.153/upload.php', true);
-      xhr.onload = function () {
-        if (this['status'] === 200) {
-          const responseText = this['responseText'];
-          const files = JSON.parse(responseText);
-          alert('Upload Success');
-          //todo: emit event
-        } else {
-          //todo: error handling
-        }
-      };
-      xhr.send(formData);
+      formData.append('file', fileBrowser.files[0]);
+      if (fileBrowser.files[0].type == "image/jpeg" || fileBrowser.files[0].type == "image/png") {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://193.226.9.153/upload.php', true);
+        let scope = this;
+        this.loading.present();
+        xhr.onload = function () {
+          if (this['status'] === 200) {
+            const responseText = this['responseText'];
+            const files = JSON.parse(responseText);
+            console.log(files)
+            if (files.success) {
+              scope.loading.dismiss();
+              alert('Image Uploaded with Success');
+            } else {
+              alert('Error. Something goes wrong upload another photo.')
+            }
+          } else {
+            //todo: error handling
+          }
+        };
+        xhr.send(formData);
+      } else {
+        alert("please select an image .jpg or .png . Thank you")
+      }
     }
+
   }
-  
+
   navigateToSecondPage() {
     this.navCtrl.pop();
   }
