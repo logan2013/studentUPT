@@ -85,7 +85,8 @@ export class FacultHome {
         inserttitle: this.myForm._value.title,
         inserttext: this.myForm._value.text,
         insertimage: localStorage.getItem('upt'),
-        facultate: this.facultate
+        facultate: this.facultate,
+        token: localStorage.getItem("token")
       }
       this.http.post('http://193.226.9.153/insert.php', JSON.stringify(postParams), options).map(res => res.json())
         .subscribe(data => {
@@ -133,7 +134,8 @@ export class FacultHome {
         inputtitle: this.myForm.value.title + " ",
         inputtext: this.myForm.value.text + " ",
         inputimage: localStorage.getItem('upt'),
-        id: this.id[0].id
+        id: this.id[0].id,
+        token: localStorage.getItem("token")
       }
       this.http.post('http://193.226.9.153/edit.php', JSON.stringify(this.postParamss), options)
         .subscribe(data => {

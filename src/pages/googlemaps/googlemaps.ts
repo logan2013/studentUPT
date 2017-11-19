@@ -613,17 +613,14 @@ export class Googlemaps {
     var service = new google.maps.places.PlacesService(this.map);
     let request = {
       location: this.locatie,
-      radius: 400,
-      types: type
+      radius: 1000,
+      type: type
     };
     return new Promise((resolve, reject) => {
       service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           resolve(results);
-        } else {
-          reject(status);
         }
-
       });
     });
 

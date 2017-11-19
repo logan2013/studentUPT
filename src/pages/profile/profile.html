@@ -6,8 +6,10 @@
         <button ion-fixed style="margin:0px; top:9px;position:absolute;" ion-button clear menuToggle>
              <ion-icon color="light" item-start name="menu"></ion-icon>
         </button>
-        <img *ngIf="!photo" imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;margin-left:35%" src="http://193.226.9.153/profilelogo.png" />
-        <div *ngIf="photo" class="image-cropper">
+        <div text-center>
+            <img *ngIf="!photo" imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+        </div>
+        <div *ngIf="photo" class="image-cropper" text-center>
             <img class="img" src="http://193.226.9.153/upload/{{photo}}" imageViewer />
         </div>
         <p text-center text-wrap style="white-space: pre-line;color:white">
@@ -19,9 +21,9 @@
         <super-tab [root]="rootNote" title="Note" icon="school"></super-tab>
         <super-tab [root]="rootSetari" title="Setari" icon="settings"></super-tab>
     </super-tabs>
-    <super-tabs *ngIf="userData.right == 1 || userData.right == 2" indicatorColor="light" badgeColor="light" toolbarColor="light">
+    <!-- <super-tabs *ngIf="userData.right == 1 || userData.right == 2" indicatorColor="light" badgeColor="light" toolbarColor="light">
         <super-tab [root]="rootSetari" title="Setari"></super-tab>
-    </super-tabs>
+    </super-tabs> -->
 
     <!--
     <button ion-button color="light" (click)="showForm()" block>

@@ -140,7 +140,7 @@ export class Viewpage {
       }, {
         text: 'Agree',
         handler: () => {
-          this.http.get('http://193.226.9.153/remove.php?delete=' + item).map(res => res.json()).subscribe(data => {
+          this.http.get('http://193.226.9.153/remove.php?delete=' + item + '&token='+localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
           });
         }
       }]
@@ -150,6 +150,7 @@ export class Viewpage {
 
   showContent(item) {
     this.modalCtrl.create('ShowContent', { item: item }).present().then(() => {
+      console.log(item)
       this.auth.modal = true;
     })
   }

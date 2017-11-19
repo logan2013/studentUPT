@@ -38,6 +38,7 @@ export class Login {
     public formBuilder: FormBuilder,
     public http: Http) {
 
+    this.menuCtrl.close();
     this.src = this.images[Math.floor(Math.random() * this.images.length)];
     this.menuCtrl.enable(false);
     this.events.unsubscribe('user:logout');
@@ -113,7 +114,7 @@ export class Login {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
     let user: string = this.myForm._value.user.split("@");
-    console.log(user);
+
     var reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
     if (reg.test(this.myForm._value.user)) {
       if (user[1] == "student.upt.ro") {
@@ -142,6 +143,19 @@ export class Login {
             this.app.getRootNav().setRoot('Profile');
             this.navCtrl.setRoot('Profile', { item: userSet });
             this.events.publish('try:login', '');
+            this.oneSignal.getIds().then(data => {
+              var usrData = JSON.parse(this.dataUser);
+              this.http.get("http://193.226.9.153/userPhoto.php?user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid=" + data.userId + "&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
+                if (data.success) {
+                  
+                } else {
+                  alert("nup")
+                }
+              }, (err) => {
+                alert(JSON.stringify(err))
+              })
+              // this gives you back the new userId and pushToken associated with the device. Helpful.
+            });
           }
         }, (error) => {
           loader.dismiss();
@@ -162,6 +176,7 @@ export class Login {
                 loader.dismiss();
               }, 300)
               localStorage.setItem('user', this.dataUser.data)
+              localStorage.setItem('token', this.dataUser.token)
               this.menuCtrl.enable(true);
               localStorage.removeItem('slide');
               this.app.getRootNav().setRoot('Profile');

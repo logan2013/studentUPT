@@ -100,6 +100,7 @@ export class Profile {
       localStorage.removeItem("dataUser");
       localStorage.clear();
       this.menuCtrl.enable(false);
+      this.menuCtrl.close();
       this.app.getRootNav().setRoot('Login');
     });
 

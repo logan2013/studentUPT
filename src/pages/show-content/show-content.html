@@ -9,7 +9,10 @@
 </ion-header>
 <ion-content>
     <ion-card>
-        <img *ngIf="item.icon" style="width:100%; height:200px; position:relative;" src="http://193.226.9.153/upload/{{item.icon}}" imageViewer/>
+        <img *ngIf="item.icon" style="width:100%;position:relative;" src="http://193.226.9.153/upload/{{item.icon}}" imageViewer/>
+        <div text-center *ngIf="item.imageLink">
+            <img src="http://193.226.9.153/images/{{item.imageLink}}">
+        </div>
         <!-- <img *ngIf="item.url" style="width:100%;  position:relative;" src="{{item.url}}" imageViewer/> -->
         <ion-card-title text-left padding-horizontal><b>{{item.title}}</b></ion-card-title><br>
 

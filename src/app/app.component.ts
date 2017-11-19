@@ -23,7 +23,8 @@ export class MyApp {
   public theme: any = 'theme-light';
   pages: Array<{ icon: string, title: string, component: any }>;
   public userSet: any = [];
-  constructor(private oneSignal: OneSignal,
+  constructor(
+    private oneSignal: OneSignal,
     public events: Events,
     public device: Device,
     public modalCtrl: ModalController,
@@ -124,7 +125,6 @@ export class MyApp {
       this.userSet = localStorage.getItem("dataUser");
       var usrData = JSON.parse(this.userSet);
       this.oneSignal.getIds().then(data => {
-
         this.http.get('http://193.226.9.153/userPhoto.php?photo=' + localStorage.getItem("photo") + "&user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid=" + data.userId + "&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
           if (data.success) {
             this.events.publish("updatePhoto", localStorage.getItem("photo"));
@@ -133,7 +133,7 @@ export class MyApp {
             alert("nup")
           }
         }, (err) => {
-          alert(JSON.stringify(err))
+          alert("Eroare: " + JSON.stringify(err))
         })
         // this gives you back the new userId and pushToken associated with the device. Helpful.
       });
@@ -231,27 +231,23 @@ export class MyApp {
       }, 100);
       this.userSet = localStorage.getItem("dataUser");
       var usrData = JSON.parse(this.userSet);
-      // this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + localStorage.getItem("user")).map(res => res.json()).subscribe(data => {
-      //   if (data.success == true) {
-      //     this.events.publish("updatePhoto", data.photo);
-      //     localStorage.setItem('photo', data.photo);
-      //   } else {
-      //     localStorage.removeItem('photo');
-      //   }
-
-      // })
+      
       this.getlocation.startTracking();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.oneSignal.startInit("a0bfcab0-43b0-456e-a62d-48c86af5202a", "791062974267");
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
       this.oneSignal.setSubscription(true);
-      this.oneSignal.handleNotificationReceived().subscribe(() => {
-        // do something when the notification is received.
-      });
-      this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // this.oneSignal.handleNotificationReceived().subscribe((data) => {
+      //   // do something when the notification is received.
+      // });
+      this.oneSignal.handleNotificationOpened().subscribe((data) => {
         // do something when the notification is opened.
+        // this.rootPage = 'About';
         this.rootPage = 'About';
+        this.modalCtrl.create('ShowContent', { item: data.notification.payload.additionalData }).present().then(() => {
+          this.auth.modal = true;
+        });
       });
       this.oneSignal.endInit();
       this.oneSignal.getIds().then(data => {

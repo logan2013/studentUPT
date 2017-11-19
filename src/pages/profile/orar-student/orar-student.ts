@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+
 @IonicPage()
 @Component({
   selector: 'page-orar-student',
@@ -27,44 +28,54 @@ export class OrarStudentPage {
     private iab: InAppBrowser,
     public navParams: NavParams,
     public http: Http) {
-    this.userSet = localStorage.getItem("dataUser");
-    var usrData = JSON.parse(this.userSet);
-    this.http.get('http://193.226.9.153/coduriFacultati.php?cod=' + usrData['Profil']).map(res => res.json()).subscribe((data) => {
-      setTimeout(() => {
+    try {
 
-        document.getElementById("nume").innerHTML = data[0].Nume;
-        document.getElementById("specializare").innerHTML = data[0].Specializare;
-        document.getElementById("text").innerHTML = data[0].Secretariat;
-        this.nume = data[0].Nume;
-        this.specializare = data[0].Specializare;
-        this.secretariat = data[0].secretariat
-      }, 1000)
+      this.userSet = localStorage.getItem("dataUser");
+      var usrData = JSON.parse(this.userSet);
+      this.http.get('http://193.226.9.153/coduriFacultati.php?cod=' + usrData['Profil']).map(res => res.json()).subscribe((data) => {
+        setTimeout(() => {
 
-      this.orarlink = data[0].Orar;
-      this.orar = data;
-    });
+          document.getElementById("nume").innerHTML = data[0].Nume;
+          document.getElementById("specializare").innerHTML = data[0].Specializare;
+          document.getElementById("text").innerHTML = data[0].Secretariat;
+          this.nume = data[0].Nume;
+          this.specializare = data[0].Specializare;
+          this.secretariat = data[0].secretariat
+        }, 1000)
+
+        this.orarlink = data[0].Orar;
+        this.orar = data;
+      });
+    }
+    catch (e) {
+    
+    }
   }
 
   ionViewDidLoad() {
-    this.userSet = localStorage.getItem("dataUser");
-    var usrData = JSON.parse(this.userSet);
-    this.http.get('http://193.226.9.153/coduriFacultati.php?cod=' + usrData['Profil']).map(res => res.json()).subscribe((data) => {
-      setTimeout(() => {
+    try {
+      this.userSet = localStorage.getItem("dataUser");
+      var usrData = JSON.parse(this.userSet);
+      this.http.get('http://193.226.9.153/coduriFacultati.php?cod=' + usrData['Profil']).map(res => res.json()).subscribe((data) => {
+        setTimeout(() => {
 
-        document.getElementById("nume").innerHTML = data[0].Nume;
-        document.getElementById("specializare").innerHTML = data[0].Specializare;
-        document.getElementById("text").innerHTML = data[0].Secretariat;
-        this.nume = data[0].Nume;
-        this.specializare = data[0].Specializare;
-        this.secretariat = data[0].secretariat
-      }, 1000)
+          document.getElementById("nume").innerHTML = data[0].Nume;
+          document.getElementById("specializare").innerHTML = data[0].Specializare;
+          document.getElementById("text").innerHTML = data[0].Secretariat;
+          this.nume = data[0].Nume;
+          this.specializare = data[0].Specializare;
+          this.secretariat = data[0].secretariat
+        }, 1000)
 
-      this.orarlink = data[0].Orar;
-      this.orar = data;
-    });
+        this.orarlink = data[0].Orar;
+        this.orar = data;
+      });
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
-  ionView
   openOrar() {
     this.iab.create(this.orarlink)
   }
@@ -73,3 +84,4 @@ export class OrarStudentPage {
     this.iab.create('https://docs.google.com/spreadsheets/d/1Xce_iTswniGhthlHVcZZETW0voP94ZJMLWq-mr7Inck/pub?gid=3');
   }
 }
+

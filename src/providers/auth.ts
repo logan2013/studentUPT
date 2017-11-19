@@ -24,6 +24,8 @@ export class Auth {
         this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + this.user).map(res => res.json()).subscribe(data => {
           if (data.success == true) {
             localStorage.setItem('photo', data.photo);
+            localStorage.setItem('enableNotification', data.enableNotification);
+            localStorage.setItem('phoneid', data.phoneid);
           } else {
             localStorage.removeItem('photo');
           }

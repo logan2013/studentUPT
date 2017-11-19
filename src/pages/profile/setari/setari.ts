@@ -20,6 +20,7 @@ declare var cordova: any;
 })
 export class SetariPage {
   public userData: any = [];
+  public userToken: any = localStorage.getItem('token');
   profilePicture: string;
   profileRef: any;
   errorMessage: any;
@@ -61,14 +62,20 @@ export class SetariPage {
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController
   ) {
-    this.auth.login().then((isLoggedIn) => {
-      this.userData = isLoggedIn;
-    });
-
+    this.userToken = localStorage.getItem('token');
+    
+    if(localStorage.getItem("enableNotification") == "1") {
+      this.enableNotifications = true;
+    } else {
+      this.enableNotifications = false;
+    }
     this.events.subscribe("updatePhoto", (photo) => {
       this.photo = photo;
     });
     try {
+      this.auth.login().then((isLoggedIn) => {
+        this.userData = isLoggedIn;
+      });
       this.userSet = localStorage.getItem("dataUser");
       this.userKey = Object.keys(JSON.parse(this.userSet));
       for (let i = 0; i < 20; i++) {
@@ -82,10 +89,21 @@ export class SetariPage {
   }
 
   toggleNotifications() {
+    console.log("asdads")
     if (this.enableNotifications) {
       this.toastCtrl.create('Notifications enabled.');
+      this.enableNotifications = true;
+      localStorage.setItem("enableNotifiation", "1q")
+      this.http.get("http://193.226.9.153/enableNotification.php?phoneid="+ localStorage.getItem("phoneid")).subscribe(() => {
+
+      });
     } else {
       this.toastCtrl.create('Notifications disabled.');
+      this.enableNotifications = false;
+      localStorage.setItem("enableNotifiation", "0")
+      this.http.get("http://193.226.9.153/enableNotification.php?phoneid="+ localStorage.getItem("phoneid")).subscribe(() => {
+        
+      });
     }
   }
 

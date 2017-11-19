@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content *ngIf="!userToken">
     <ion-list>
         <ion-grid>
             <ion-row>
@@ -27,7 +27,7 @@
         </ion-grid>
     </ion-list>
     <ion-item>
-        <ion-toggle [(ngModel)]="enableNotifications" (click)="toggleNotifications()"></ion-toggle>
+        <ion-toggle [(ngModel)]="enableNotifications" [(ngModel)]="enableNotifications" (ionChange)="toggleNotifications()"></ion-toggle>
         <ion-label class="label"> Enable notifications </ion-label>
         <ion-icon name='notifications' item-start></ion-icon>
     </ion-item>
@@ -61,5 +61,26 @@
                 </ion-col>
             </ion-row>
         </div>
+    </ion-list>
+</ion-content>
+<ion-content *ngIf="userToken">
+    <ion-row>
+        <ion-col col-2>
+            <img *ngIf="!photo" style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+            <div *ngIf="photo" class="image-cropper">
+                <img src="http://193.226.9.153/upload/{{photo}}" />
+            </div>
+        </ion-col>
+        <ion-col col-10>
+            <p>{{userData.data}}</p>
+        </ion-col>
+    </ion-row>
+    <ion-list padding>
+        <ion-list-header>
+            Other
+        </ion-list-header>
+        <button ion-button round block padding (click)="logOut()">
+                 Logout
+            </button>
     </ion-list>
 </ion-content>
