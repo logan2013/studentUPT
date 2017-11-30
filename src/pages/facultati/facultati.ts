@@ -698,7 +698,7 @@ Comunicării este de a forma atât specialiști în domeniul comunicării și al
    */
   itemTapped(item) {
     
-    console.log(item.notes)
+    console.log(item)
     if (item.note == 'ACUPT') {
 
       this.navCtrl.push('Paginafacultate', {

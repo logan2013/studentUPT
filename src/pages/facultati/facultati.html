@@ -9,7 +9,7 @@
 <ion-content no-padding>
     <ion-list *ngFor="let item of items">
         <ion-item>
-            <ion-row (click)="itemTapped($event, item)">
+            <ion-row (click)="itemTapped(item)">
                 <ion-col col-2>
                     <img-loader src="http://193.226.9.153/images/{{item.imagelink}}" useImg></img-loader>
                 </ion-col>
