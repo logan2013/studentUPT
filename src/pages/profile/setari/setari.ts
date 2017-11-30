@@ -93,7 +93,7 @@ export class SetariPage {
     if (this.enableNotifications) {
       this.toastCtrl.create('Notifications enabled.');
       this.enableNotifications = true;
-      localStorage.setItem("enableNotifiation", "1q")
+      localStorage.setItem("enableNotifiation", "1")
       this.http.get("http://193.226.9.153/enableNotification.php?phoneid="+ localStorage.getItem("phoneid")).subscribe(() => {
 
       });

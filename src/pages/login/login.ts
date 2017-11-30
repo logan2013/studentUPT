@@ -113,12 +113,12 @@ export class Login {
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
-    let user: string = this.myForm._value.user.split("@");
+    let user: string = this.myForm.value.user.split("@");
 
     var reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-    if (reg.test(this.myForm._value.user)) {
+    if (reg.test(this.myForm.value.user)) {
       if (user[1] == "student.upt.ro") {
-        let postParams = `utilizator=${user[0]}&parola=${this.myForm._value.password}&intra=Intra`;
+        let postParams = `utilizator=${user[0]}&parola=${this.myForm.value.password}&intra=Intra`;
         loader.present();
         this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options).map(res => res.json()).subscribe(data => {
           this.dataUser = data;
@@ -129,12 +129,12 @@ export class Login {
           } else {
             let userSet = {
               "success": true,
-              "data": this.myForm._value.user,
+              "data": this.myForm.value.user,
               "facultate": null,
               "right": "0",
             }
             localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
-            localStorage.setItem('user', this.myForm._value.user)
+            localStorage.setItem('user', this.myForm.value.user)
             setTimeout(() => {
               loader.dismiss();
             }, 500)
@@ -165,8 +165,8 @@ export class Login {
       } else {
         let postParams =
           {
-            user: this.myForm._value.user,
-            pwd: this.myForm._value.password,
+            user: this.myForm.value.user,
+            pwd: this.myForm.value.password,
           }
         if (postParams.user != '' && postParams.pwd != '') {
           this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
