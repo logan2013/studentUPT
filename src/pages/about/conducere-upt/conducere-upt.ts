@@ -104,7 +104,6 @@ export class ConducereUpt {
   toggle(nume) {
     for (let i: number = 0; i < this.nume.length; i++) {
       if (this.all[i].nume == nume) {
-        console.log('ss')
         this.all[i].show = !this.all[i].show;
       }
     }

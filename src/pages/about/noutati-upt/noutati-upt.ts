@@ -29,7 +29,7 @@ export class NoutatiUpt {
   public content: string[] = [];
   public imageLink: string[] = [];
   public typeOfPagee: number[] = []; // 1 - list page or 2 -content page
-  
+  public showContenttt: any = true;
   public itemss: Array<{ title: string, content: string, imageLink: string, typeOfPage: number, statistici: any }> = [];
   constructor(
     public zone: NgZone,
@@ -50,7 +50,7 @@ export class NoutatiUpt {
       position: 'middle',
       cssClass: 'toast'
     });
-    loader.present();
+   // loader.present();
     this.http.get(this.auth.server + '/statistici.php').map(res => res.json()).subscribe(data => {
       this.statistici = data;
     });
@@ -71,6 +71,7 @@ export class NoutatiUpt {
 
     this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
+      
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {
           if (this.posts[i].icon) {
@@ -83,8 +84,9 @@ export class NoutatiUpt {
         }
       }
       localStorage.removeItem('upt');
-      loader.dismiss();
-
+    //  loader.dismiss();
+      setTimeout(()=>this.showContenttt = false, 200);
+      
     });
   }
 
@@ -110,6 +112,7 @@ export class NoutatiUpt {
   }
 
   addNew() {
+    // this.navCtrl.push('FacultHome', { idd: 1, facultate: 'UPT' });
     let profileModall = this.modalCtrl.create('FacultHome', { idd: 1, facultate: 'UPT' });
     profileModall.present();
   }
@@ -131,7 +134,7 @@ export class NoutatiUpt {
       }, {
         text: 'Agree',
         handler: () => {
-          this.http.get(this.auth.server + '/remove.php?delete=' + item).map(res => res.json()).subscribe(data => {
+          this.http.get(this.auth.server + '/remove.php?delete=' + item+ '&token=' + localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
             this.posts = data;
           });
         }
@@ -143,8 +146,8 @@ export class NoutatiUpt {
   showContent(item) {
     this.modalCtrl.create('ShowContent', { item: item, icon: item.url }).present();
   }
+
   showContentChart(item) {
-    console.log(item)
     this.modalCtrl.create('ShowChart', { item: item[0].statistici[0].chart }).present();
   }
 }

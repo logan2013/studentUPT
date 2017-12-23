@@ -60,7 +60,7 @@ firebase.initializeApp(config);
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
-      pageTransitionDelay: 5
+      pageTransitionDelay: 15
     }),
     NgCalendarModule,
     BrowserModule,

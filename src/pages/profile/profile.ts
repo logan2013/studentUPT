@@ -19,7 +19,7 @@ export interface Slide {
   templateUrl: 'profile.html',
 })
 export class Profile {
-  public photo: string = localStorage.getItem("photo");
+  public photo: any = localStorage.getItem("photo") || 'null';
   loading: any;
   slides: Slide[];
   showSkip = true;
@@ -59,11 +59,12 @@ export class Profile {
     public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
-
+     
     this.events.subscribe("updatePhoto", (photo) => {
       this.photo = photo;
+      console.log(this.photo)
     });
-
+  
     try {
       this.userSet = localStorage.getItem("dataUser");
       this.userKey = Object.keys(JSON.parse(this.userSet));
@@ -167,6 +168,10 @@ export class Profile {
   }
 
   ionViewDidLoad() {
+  }
+  
+  ionViewDidLeave() {
+    this.events.unsubscribe('updatePhoto')
   }
 
   goBack() {

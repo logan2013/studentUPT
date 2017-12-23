@@ -33,6 +33,7 @@ export class FacultHome {
   facultate: any; // parametru trasnmis de la viewac pt inserare
   public tabBar: any;
   public isBrowser: any;
+  public ckeditorContent:any;
   constructor(
     public camera: Camera,
     public file: File,
@@ -55,35 +56,37 @@ export class FacultHome {
       nothing: ['']
     });
 
+    
     if (navParams.get('id')) {
       this.id.pop();
       this.iddd = navParams.get('id');
-      console.log(this.iddd)
       this.id.push({
         title: this.iddd.title,
         text: this.iddd.content || this.iddd.text,
         icon: this.iddd.icon,
         id: this.iddd.id
       })
-      console.log(this.id)
-    }
-    else { }
-
+    this.ckeditorContent = this.iddd.content || this.iddd.text;    
+    } else { }
     this.idd = navParams.get('idd');
     this.facultate = navParams.get('facultate');
   }
 
+  onChange(ev, val) {
+    console.log(ev, val)
+    this.myForm.value.text = encodeURIComponent(ev);
+  }
+
   logForm() {
-    localStorage.setItem('text', this.myForm._value.text);
+    localStorage.setItem('text', this.myForm.value.text);
     if (this.idd === 1) {
       let headers = new Headers();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json');
       let options = new RequestOptions({ headers: headers });
-
       let postParams = {
-        inserttitle: this.myForm._value.title,
-        inserttext: this.myForm._value.text,
+        inserttitle: this.myForm.value.title,
+        inserttext: this.myForm.value.text,
         insertimage: localStorage.getItem('upt'),
         facultate: this.facultate,
         token: localStorage.getItem("token")
@@ -170,7 +173,6 @@ export class FacultHome {
           if (this['status'] === 200) {
             const responseText = this['responseText'];
             const files = JSON.parse(responseText);
-            console.log(files)
             if (files.success) {
               scope.loading.dismiss();
               alert('Image Uploaded with Success');
@@ -178,7 +180,6 @@ export class FacultHome {
               alert('Error. Something goes wrong upload another photo.')
             }
           } else {
-            //todo: error handling
           }
         };
         xhr.send(formData);

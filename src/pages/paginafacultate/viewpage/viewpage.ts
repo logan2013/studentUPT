@@ -1,5 +1,5 @@
-import { Component, NgZone,ViewChild } from '@angular/core';
-import { IonicPage, Content,ScrollEvent, AlertController, ModalController, ToastController, Events, } from 'ionic-angular';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { IonicPage, Content, ScrollEvent, AlertController, ModalController, ToastController, Events, } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DataTabs } from '../../../providers/datatabs';
 import { Auth } from '../../../providers/auth';
@@ -27,6 +27,7 @@ export class Viewpage {
   public items: Array<{ title: string, text: string, icon: string }>;
   public limit: number = 50;
   public offset: number = 0;
+  public showContentt1: any = false;
   constructor(
     public zone: NgZone,
     public events: Events,
@@ -47,7 +48,7 @@ export class Viewpage {
       position: 'middle',
       cssClass: 'toast'
     });
-    loader.present();
+    //loader.present();
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
       console.log(data)
       this.posts = data;
@@ -64,9 +65,11 @@ export class Viewpage {
       }
       localStorage.removeItem('upt');
       // setTimeout(() => {
-        loader.dismiss();
+      setTimeout(() => { this.showContentt1 = true; }, 400)
+
+
       // }, 500);
-     
+
     });
 
   }
@@ -74,7 +77,7 @@ export class Viewpage {
 
   doRefresh(refresher) {
     this.showSpinner = false;
-    
+
     localStorage.removeItem('upt');
     this.http.get('http://193.226.9.153/getdata.php?facultate=' + this.dataTabs.message.note + '&limit=50&offset=0').map(res => res.json()).subscribe(data => {
       this.posts = data;
@@ -140,7 +143,7 @@ export class Viewpage {
       }, {
         text: 'Agree',
         handler: () => {
-          this.http.get('http://193.226.9.153/remove.php?delete=' + item + '&token='+localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
+          this.http.get('http://193.226.9.153/remove.php?delete=' + item + '&token=' + localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
           });
         }
       }]

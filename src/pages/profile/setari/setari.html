@@ -3,8 +3,8 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-2>
-                    <img *ngIf="!photo" style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
-                    <div *ngIf="photo" class="image-cropper">
+                    <img *ngIf="photo == 'null'" style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+                    <div *ngIf="photo != 'null'" class="image-cropper">
                         <img src="http://193.226.9.153/upload/{{photo}}" />
                     </div>
                 </ion-col>

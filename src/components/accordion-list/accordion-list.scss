@@ -15,7 +15,7 @@ accordion-list {
         transform: rotate(90deg);
     }
     .accordion-content {
-        transition: 0.15s ease-in-out;
+        transition: 0.01s ease-in-out;
         &.active {
             padding: .75rem;
         }

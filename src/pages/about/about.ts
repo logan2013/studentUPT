@@ -14,7 +14,6 @@ export class About {
   public Beneficii: any = "Beneficii";
   public alert: any = false;
   public user: string = localStorage.getItem("user");
-
   constructor(
     private platform: Platform,
     private nav: Nav,

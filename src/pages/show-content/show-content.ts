@@ -20,6 +20,9 @@ export class ShowContent {
     console.log(this.item)
     this.item.content =  this.item.content ;
     console.log(this.item)
+    this.item.text = decodeURIComponent(this.item.text);
+    this.item.content = decodeURIComponent(this.item.content);
+    
     this.auth.modal = true;
     this.events.subscribe('page:back', () => {
       this.auth.modal = false;

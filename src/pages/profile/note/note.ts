@@ -30,28 +30,7 @@ export class NotePage {
       Semestru: any,
       An: any
     }
-    // ,
-    // Sem: Array<{
-    //   key: any,
-    //   value: any,
-    //   Semestrul: any,
-    //   materie: {
-    //     Materia: any,
-    //     Forma_ev: any,
-    //     Credite: any,
-    //     Prog1: any,
-    //     Prog2: any,
-    //     Prog3: any,
-    //     NP: any,
-    //     NF: any,
-    //     Taxa: any,
-    //     Semestru: any,
-    //     An: any
-    //   }
-    // }>
   }> = [];
-
-
   public userKeyNote: any = [
     "Materia",
     "Forma_ev",
@@ -65,15 +44,12 @@ export class NotePage {
     "Semestru",
     "An"
   ];
-
-  //, "Setul"];
-  //
   public totalCredite: any;
   public totalPlata: any;
   public an: any;
-  public sem: any = [];
+  public sem: Array<{ sem: any, an: any }> = [];
+  public anStudiu: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private document: DocumentViewer) {
-
     try {
 
       this.userSet = localStorage.getItem("dataUser");
@@ -165,34 +141,59 @@ export class NotePage {
         }
       }
       if (count_1 != 0) {
-        this.sem.push(1);
+        this.sem.push({
+          sem: 1,
+          an: "I"
+        });
       }
       if (count_2 != 0) {
-        this.sem.push(2);
+        this.sem.push({
+          sem: 2,
+          an: "I"
+        });
       }
       if (count_3 != 0) {
-        this.sem.push(3);
+        this.sem.push({
+          sem: 3,
+          an: "II"
+        });;
       }
       if (count_4 != 0) {
-        this.sem.push(4);
+        this.sem.push({
+          sem: 4,
+          an: "II"
+        });
       }
       if (count_5 != 0) {
-        this.sem.push(5);
+        this.sem.push({
+          sem: 5,
+          an: "III"
+        });
       }
       if (count_6 != 0) {
-        this.sem.push(6);
+        this.sem.push({
+          sem: 6,
+          an: "III"
+        });
       }
       if (count_7 != 0) {
-        this.sem.push(7);
+        this.sem.push({
+          sem: 7,
+          an: "IV"
+        });
       }
       if (count_8 != 0) {
-        this.sem.push(8);
+        this.sem.push({
+          sem: 8,
+          an: "IV"
+        });
       }
-    }
-    catch (e) {
-      console.log(e.message)
+      console.log(this.sem)
+    } catch(e) {
+      console.log(e)
     }
   }
+
 
   public sortNote(a: any, b: any) {
     if (a.Semestrul < b.Semestrul) {

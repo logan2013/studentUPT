@@ -1,5 +1,5 @@
 import { AnimationStyleMetadata, Component } from '@angular/core';
-import { IonicPage, Events, NavController, NavParams,  ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, Events, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 import { Http } from '@angular/http';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -12,6 +12,7 @@ import { DataTabs } from '../../providers/datatabs';
 })
 
 export class Facultati {
+  public showContentttt: any = false;
   public selectedItem: any;
   public posts: any;
   public id: any;
@@ -58,7 +59,7 @@ export class Facultati {
   public a4upt: Array<{ descriere: any, conducere: any, orar: any }>;
   public ctupt: Array<{ descriere: any, conducere: any, orar: any }>;
   public fscupt: Array<{ descriere: any, conducere: any, orar: any }>;
-  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any, short: any , white:any}> = [];
+  public items: Array<{ title: string, note: string, iconActive: any, faculties: string, favorite: string, serie: string[], imagelink: any, short: any, white: any }> = [];
   public logos: Array<{ imagelink: any }> = [];
   constructor(
     public auth: Auth,
@@ -681,7 +682,7 @@ Comunicării este de a forma atât specialiști în domeniul comunicării și al
           });
         }
       }
-
+      setTimeout(()=> { this.showContentttt = true; }, 400)
     });
     // let logos = ['ac/ac.jpg', 'ee/ee.jpg', 'etc/etc.png', 'ostl/ostl.jpg', 'mpt/mpt.jpg', 'ct/ct.jpg', 'a4/a4.jpg', 'mt/mt.jpg'];
     // for (let i = 0, count = logos.length; i < count; i++) {
@@ -697,7 +698,7 @@ Comunicării este de a forma atât specialiști în domeniul comunicării și al
    * @param item 
    */
   itemTapped(item) {
-    
+
     console.log(item)
     if (item.note == 'ACUPT') {
 
@@ -805,5 +806,5 @@ Comunicării este de a forma atât specialiști în domeniul comunicării și al
     }
   }
 
- 
+
 }

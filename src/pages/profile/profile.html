@@ -7,9 +7,9 @@
              <ion-icon color="light" item-start name="menu"></ion-icon>
         </button>
         <div text-center>
-            <img *ngIf="!photo" imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+            <img *ngIf="photo == 'null' " imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
         </div>
-        <div *ngIf="photo" class="image-cropper" text-center>
+        <div *ngIf="photo != 'null' " class="image-cropper" text-center>
             <img class="img" src="http://193.226.9.153/upload/{{photo}}" imageViewer />
         </div>
         <p text-center text-wrap style="white-space: pre-line;color:white">

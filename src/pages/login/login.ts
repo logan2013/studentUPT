@@ -195,7 +195,7 @@ export class Login {
         }
       }
     } else {
-      alert("Insert valid email address");
+    //  alert("Insert valid email address");
     }
   }
 

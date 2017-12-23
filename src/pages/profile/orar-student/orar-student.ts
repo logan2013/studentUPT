@@ -24,6 +24,7 @@ export class OrarStudentPage {
   public orarlink: any = "";
   public nume: any = "";
   public specializare: any = "";
+  public showContent: any = true;
   constructor(public navCtrl: NavController,
     private iab: InAppBrowser,
     public navParams: NavParams,
@@ -52,7 +53,7 @@ export class OrarStudentPage {
     }
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     try {
       this.userSet = localStorage.getItem("dataUser");
       var usrData = JSON.parse(this.userSet);
@@ -65,7 +66,8 @@ export class OrarStudentPage {
           this.nume = data[0].Nume;
           this.specializare = data[0].Specializare;
           this.secretariat = data[0].secretariat
-        }, 1000)
+          this.showContent = false;
+        }, 300)
 
         this.orarlink = data[0].Orar;
         this.orar = data;

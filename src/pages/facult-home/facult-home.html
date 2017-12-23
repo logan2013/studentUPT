@@ -1,7 +1,8 @@
 <ion-header>
     <ion-navbar hideBackButton>
         <ion-title tappable (click)="navigateToSecondPage()">
-            <ion-icon name="arrow-round-back"> </ion-icon> {{facultate}}</ion-title>
+            <ion-icon name="arrow-round-back"> </ion-icon> {{facultate}}
+        </ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -14,9 +15,8 @@
         </div>
     </div>
     <div text-center><input *ngIf="isBrowser" type="file" #fileInput (change)="fileChange($event)" placeholder="Upload file"></div>
-
     <img *ngIf="id[0].icon" class="profile-image-wrapper" src="{{correctPath}}" style="width: 100%" [hidden]="correctPath === null">
-    <img *ngIf="id[0].icon" [hidden]="correctPath != null" class="profile-image-wrapper" src="http://hainedefirmasj.com/placesforme/upload/{{id[0].icon}}" style="width: 100%">
+    <img *ngIf="id[0].icon" [hidden]="correctPath != null" class="profile-image-wrapper" src="http://193.226.9.153/upload/{{id[0].icon}}" style="width: 100%">
     <button *ngIf="!isBrowser" ion-button block icon-left (click)="uploadImage()" [disabled]="correctPath === null">
         <ion-icon name="cloud-upload"></ion-icon>Upload
     </button>
@@ -26,12 +26,9 @@
             <ion-input *ngIf="!id[0].title" formControlName="title"></ion-input>
             <ion-input *ngIf="id[0].title" value="{{id[0].title}}" formControlName="title"></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-label color="primary" floating>Continut</ion-label>
-            <ion-textarea *ngIf="!id[0].text" mode="ios" rows="6" cols="10" white-space: pre-wrap lineHeight="22" formControlName="text" type="text"></ion-textarea>
-            <ion-textarea *ngIf="id[0].text" value="{{id[0].text}}" mode="ios" rows="6" cols="10" white-space: pre-wrap lineHeight="22" formControlName="text" type="text"></ion-textarea>
-        </ion-item>
-        <button *ngIf="idd" ion-button block (click)="navigateToSecondPage()" [disabled]="lastImage === null && !myForm._value.title && !myForm._value.text ">Finish</button>
-        <button *ngIf="id && !idd" ion-button block (click)="navigateToSecondPage()">Finish</button>
     </form>
+    <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event, myForm.value)">
+    </ckeditor>
+    <button *ngIf="idd" ion-button block (click)="navigateToSecondPage()">Finish</button>
+    <button *ngIf="id && !idd" ion-button block (click)="navigateToSecondPage()">Finish</button>
 </ion-content>

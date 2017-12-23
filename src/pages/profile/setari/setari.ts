@@ -71,6 +71,7 @@ export class SetariPage {
     }
     this.events.subscribe("updatePhoto", (photo) => {
       this.photo = photo;
+      console.log(this.photo)
     });
     try {
       this.auth.login().then((isLoggedIn) => {
@@ -87,7 +88,9 @@ export class SetariPage {
     }
     catch (r) { }
   }
-
+  ionViewDidLeave() {
+    this.events.unsubscribe('updatePhoto')
+  }
   toggleNotifications() {
     console.log("asdads")
     if (this.enableNotifications) {

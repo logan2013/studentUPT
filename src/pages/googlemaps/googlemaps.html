@@ -26,18 +26,14 @@
 
             </ion-select>
         </ion-item>
-
     </ion-navbar>
 </ion-header>
-
 <div class="switch">
     <button ion-button color="light" (click)="(switch = 'map');  resizeMap()" [class.active]="(switch == 'map')" icon-only><ion-icon name="map"></ion-icon></button>
     <button ion-button color="light" (click)="(switch = 'list'); change()" [class.active]="(switch == 'list')" icon-only><ion-icon name="list"></ion-icon></button>
 </div>
-
 <ion-content class="a">
     <div [hidden]="!(switch == 'list')">
-
         <ion-list *ngFor="let location of regionals">
             <ion-item>
                 <ion-row>
@@ -75,10 +71,10 @@
             <hr hidden>
         </ion-list>
     </div>
-
     <div class=" map " style="height:100% " [class.hidemap]="!((switch=='map' ) || error) ">
         <ion-searchbar class={{mytheme}} #searchbar placeholder="Cauta " [hidden]="!search "></ion-searchbar>
         <div id="map " #map style="height:100%; ">
         </div>
     </div>
+
 </ion-content>

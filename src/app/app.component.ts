@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  public photo: string = localStorage.getItem("photo");
+  public photo: string = 'null';
   public rootPage: any = "Profile";
   public dataUser: any = [];
   activePage: any;
@@ -38,11 +38,8 @@ export class MyApp {
     private appVersion: AppVersion,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen) {
-    this.photo = localStorage.getItem("photo");
-    this.events.subscribe("updatePhoto", (photo) => {
-      this.photo = photo;
-    });
 
+  
     if (localStorage.getItem('slide') == "true") {
       this.rootPage = 'About';
     } else {
@@ -146,8 +143,24 @@ export class MyApp {
     console.log('menu closed')
   }
 
+  ionViewDidLeave() {
+    this.events.unsubscribe('updatePhoto')
+  }
+
   menuOpened() {
-    this.photo = localStorage.getItem("photo");
+    // this.photo = localStorage.getItem("photo");
+    this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + localStorage.getItem('user')).map(res => res.json()).subscribe(data => {
+      if (data.success == true) {
+        this.photo = data.photo;
+        this.events.publish("updatePhoto", (data.photo));
+        localStorage.setItem('photo', data.photo);
+        localStorage.setItem('enableNotification', data.enableNotification);
+        localStorage.setItem('phoneid', data.phoneid);
+      } else {
+        localStorage.removeItem('photo');
+        this.photo = 'null';
+      }
+    })
 
     this.auth.login().then((isLoggedIn) => {
       this.dataUser = isLoggedIn;
@@ -231,7 +244,7 @@ export class MyApp {
       }, 100);
       this.userSet = localStorage.getItem("dataUser");
       var usrData = JSON.parse(this.userSet);
-      
+
       this.getlocation.startTracking();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

@@ -12,10 +12,10 @@
     <div [ngSwitch]="pet">
         <div *ngSwitchCase="'note'">
             <br>
-            <div *ngFor="let s of sem">
-                <accordion-list hasMargin="true" title="Semestrul {{s}}" headerColor="white">
+            <div *ngFor="let s of sem;">
+                <accordion-list hasMargin="true" title="Semestrul {{s.sem}}, An {{s.an}}" headerColor="white">
                     <div *ngFor="let key of userKeyAndValNote">
-                        <div *ngIf="s==key.Semestrul">
+                        <div *ngIf="s.sem ==key.Semestrul">
                             <accordion-list hasMargin="true" style="font-size:10px!important; " title="{{key.value}}  Nota Finala : {{key.materie.NF}}" headerColor="white">
                                 <ion-row padding-horizontal class="label">
                                     <ion-col col-4>

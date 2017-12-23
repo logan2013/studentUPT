@@ -22,17 +22,17 @@ export class ModalPage {
       {
         title: "",
         description: "",
-        image: '../assets/s2_b.png',
+        image: 'http://193.226.9.153/images/s2_b.png',
       },
       {
         title: "",
         description: "",
-        image: '../assets/s3_b.png',
+        image: 'http://193.226.9.153/images/s3_b.png',
       },
       {
         title: "",
         description: "",
-        image: '../assets/s4_b.png',
+        image: 'http://193.226.9.153/images/s4_b.png',
       }
     ];
   }
