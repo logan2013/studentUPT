@@ -44,6 +44,9 @@ import { AlertService } from '../providers/util/alert.service';
 import { CameraProvider } from '../providers/util/camera.provider';
 import * as firebase from 'firebase';
 // import { AngularFireModule } from 'angularfire2';
+import { registerLocaleData } from '@angular/common';
+import localeZh from '@angular/common/locales/ro';
+registerLocaleData(localeZh);
 export var config = {
   apiKey: "AIzaSyB8ANQHC7RqJVUNqEgb8jN39iO8TwQ-enE",
   authDomain: "studentupt-9adeb.firebaseapp.com",

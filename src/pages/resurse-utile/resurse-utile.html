@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-fixed style="margin:0px; position:absolute;" ion-button clear menuToggle>
+      <ion-icon color="light" item-start name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Resurse Utile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let res of resurse">
+    <!-- <div *ngIf="res.imageLink">
+      <img [src]="res.imageLink" style="width:80%;margin:auto"/>
+    </div> -->
+    <ion-card-content>
+      <ion-card-title>
+        {{res.titlu}}
+      </ion-card-title>
+      <p>
+        {{res.description}}
+      </p>
+      <a [href]="res.urlResursa" target="_blank">Mai multe detalii aici 
+      </a>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

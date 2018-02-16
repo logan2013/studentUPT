@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Events, Platform, LoadingController, ToastController, AlertController, ModalController } from 'ionic-angular';
+import { Nav, Events, Platform, LoadingController, NavOptions, ToastController, AlertController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Auth } from '../providers/auth';
@@ -23,6 +23,12 @@ export class MyApp {
   public theme: any = 'theme-light';
   pages: Array<{ icon: string, title: string, component: any }>;
   public userSet: any = [];
+  private navOptions: NavOptions = {
+    animate: true,
+    direction: 'forward',
+    animation: 'wp-transition',
+    duration: 300
+  };
   constructor(
     private oneSignal: OneSignal,
     public events: Events,
@@ -39,7 +45,11 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen) {
 
-  
+    this.events.subscribe("updatePhoto", (data) => {
+      this.photo = data;
+    })
+
+
     if (localStorage.getItem('slide') == "true") {
       this.rootPage = 'About';
     } else {
@@ -82,6 +92,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
         ];
 
       } else if (this.dataUser.right == 1) {
@@ -97,6 +108,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
         ];
       } else {
         if (localStorage.getItem('slide') == "true") {
@@ -112,6 +124,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
 
@@ -139,16 +152,35 @@ export class MyApp {
 
   }
 
+
   menuClosed() {
     console.log('menu closed')
-  }
-
-  ionViewDidLeave() {
     this.events.unsubscribe('updatePhoto')
   }
 
+  ionViewDidLeave() {
+  }
+
+  ionViewDidEnter() {
+
+  }
+
+  ionViewDidLoad() {
+
+  }
+
   menuOpened() {
-    // this.photo = localStorage.getItem("photo");
+
+    if (localStorage.getItem("loginTime") != null) {
+      console.log(localStorage.getItem("loginTime"), new Date().getTime().toString())
+      var timeLog: any = localStorage.getItem("loginTime");
+      var timeCurrent: any = new Date().getTime().toString();
+      if ((timeCurrent - timeLog) / 1000 > 3600) {
+        localStorage.clear();
+      }
+    }
+
+    this.photo = localStorage.getItem("photo");
     this.http.get('http://193.226.9.153/getUserPhoto.php?user=' + localStorage.getItem('user')).map(res => res.json()).subscribe(data => {
       if (data.success == true) {
         this.photo = data.photo;
@@ -159,6 +191,8 @@ export class MyApp {
       } else {
         localStorage.removeItem('photo');
         this.photo = 'null';
+        this.events.publish("updatePhoto", "null");
+
       }
     })
 
@@ -172,6 +206,8 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
         this.pages = [
@@ -181,6 +217,8 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
@@ -191,6 +229,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
       }
@@ -204,6 +243,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
@@ -214,6 +254,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
           //   { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
@@ -224,6 +265,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
       }
@@ -296,7 +338,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     if (page.component == 'Profile') {
       if (localStorage.getItem('slide') == null) {
-        this.nav.setRoot(page.component);
+        this.nav.setRoot(page.component, {}, this.navOptions);
       } else {
         let alert = this.alertCtrl.create({
           title: 'Trebuie sa te loghezi!',
@@ -310,7 +352,7 @@ export class MyApp {
           {
             text: 'Login',
             handler: () => {
-              this.nav.setRoot('Login');
+              this.nav.setRoot('Login', {}, this.navOptions);
             }
           }
           ]
@@ -318,7 +360,7 @@ export class MyApp {
         alert.present();
       }
     } else {
-      this.nav.setRoot(page.component);
+      this.nav.setRoot(page.component, {}, this.navOptions);
     }
 
     this.activePage = page;

@@ -432,6 +432,7 @@ export class Googlemaps {
 
     });
   }
+  
   openLocation(markerInfo) {
     for (let i = 0; i < this.markersArray.length; i++) {
       if (markerInfo.title == this.markersArray[i].title) {

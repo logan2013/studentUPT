@@ -50,7 +50,7 @@ export class NoutatiUpt {
       position: 'middle',
       cssClass: 'toast'
     });
-   // loader.present();
+    // loader.present();
     this.http.get(this.auth.server + '/statistici.php').map(res => res.json()).subscribe(data => {
       this.statistici = data;
     });
@@ -69,9 +69,8 @@ export class NoutatiUpt {
       }
     });
 
-    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).toPromise().then(data => {
       this.posts = data;
-      
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {
           if (this.posts[i].icon) {
@@ -79,20 +78,23 @@ export class NoutatiUpt {
               this.zone.run(() => {
                 this.posts[i].url = url;
               })
+            }).catch(err => {
+              console.log(err);
             })
           }
         }
       }
       localStorage.removeItem('upt');
-    //  loader.dismiss();
-      setTimeout(()=>this.showContenttt = false, 200);
-      
+      //  loader.dismiss();
+      setTimeout(() => this.showContenttt = false, 200);
+    }).catch((err) => {
+      console.log(err, '/getdata.php?facultate=UPT&limit=150&offset=0')
     });
   }
 
   doRefresh(refresher) {
     localStorage.removeItem('upt');
-    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).subscribe(data => {
+    this.http.get(this.auth.server + '/getdata.php?facultate=UPT&limit=150&offset=0').map(res => res.json()).toPromise().then((data) => {
       this.posts = data;
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {
@@ -105,7 +107,7 @@ export class NoutatiUpt {
           }
         }
       }
-    });
+    }).catch((err) => console.log(err, '/getdata.php?facultate=UPT&limit=150&offset=0'));
     setTimeout(() => {
       refresher.complete();
     }, 1500);
@@ -134,7 +136,7 @@ export class NoutatiUpt {
       }, {
         text: 'Agree',
         handler: () => {
-          this.http.get(this.auth.server + '/remove.php?delete=' + item+ '&token=' + localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
+          this.http.get(this.auth.server + '/remove.php?delete=' + item + '&token=' + localStorage.getItem('token')).map(res => res.json()).subscribe(data => {
             this.posts = data;
           });
         }

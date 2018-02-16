@@ -66,14 +66,14 @@ export class FacultHome {
         icon: this.iddd.icon,
         id: this.iddd.id
       })
-    this.ckeditorContent = this.iddd.content || this.iddd.text;    
+    this.ckeditorContent = this.iddd.text;    
     } else { }
     this.idd = navParams.get('idd');
     this.facultate = navParams.get('facultate');
   }
 
   onChange(ev, val) {
-    console.log(ev, val)
+    ///console.log(ev, val)
     this.myForm.value.text = encodeURIComponent(ev);
   }
 
@@ -191,6 +191,7 @@ export class FacultHome {
   }
 
   navigateToSecondPage() {
+    this.logForm();
     this.navCtrl.pop();
   }
 

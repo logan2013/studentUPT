@@ -15,6 +15,7 @@ export class ConducereUpt {
   public email: any = [];
   public show: any = [false, false, false, false, false, false, false];
   public all: Array<{ functie: any, nume: any, image: any, resort: any, adresa: any, telfax: any, email: any, show: any }>;
+  public imageError: any[] = [];
   constructor() {
     this.functie = [
       'Rector',
@@ -37,6 +38,15 @@ export class ConducereUpt {
     ];
 
     this.image = [
+      'http://upt.ro/img/images/Conducere%20UPT/2016/MCP_4201.JPG',
+      'http://upt.ro/img/images/Conducere%20UPT/Davidescu.jpg',
+      'http://upt.ro/img/images/Conducere%20UPT/Marius_Otesteanu-3.JPG',
+      'http://upt.ro/img/images/Conducere%20UPT/Dan_Daniel.JPG',
+      'http://upt.ro/img/images/Conducere%20UPT/2016/Florin%20DRAGAN-1.jpg',
+      'http://upt.ro/img/images/Conducere%20UPT/2016/Liviu_Cadariu-1.jpg',
+      'http://upt.ro/img/images/Conducere%20UPT/Staicu_Florentiu.JPG'
+    ];
+    this.imageError = [
       'upt/serban.jpg',
       'upt/davidescu.jpg',
       'upt/oltesteanu.jpg',
@@ -107,6 +117,12 @@ export class ConducereUpt {
         this.all[i].show = !this.all[i].show;
       }
     }
+  }
+
+  errorHandler(event, i) {
+    // this.all[i].image = this.imageError[i];
+    event.target.src = 'http://193.226.9.153/images/' + this.imageError[i];
+    console.log(event)
   }
 
 }

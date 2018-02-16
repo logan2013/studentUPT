@@ -1,50 +1,47 @@
 <ion-content style="background-color:#2e2f92;">
-    <ion-grid>
-        <ion-row>
-            <ion-col col-7>
-            </ion-col>
-            <ion-col style="margin-top: 18px;margin-right: -12px !important;position: absolute;width: 180px;right: 11px;"> <img src="assets/upt.png" />
-            </ion-col>
-        </ion-row>
-        <ion-row style="margin-top:-5px;">
-            <ion-col text-center>
-                <img style="width:320px" src="assets/{{src}}">
-            </ion-col>
-        </ion-row>
-        <form style="margin-top:-110px;" scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
-
-
-
-            <h2 style="color:white"> Login </h2>
-            <ion-list>
-                <ion-item color="primary">
-                    <ion-label floating>
-                        <p style="color:white"> Email </p>
-                    </ion-label>
-                    <ion-input type="email" minlength='3' value="" formControlName="user" placeholder=""></ion-input>
-                </ion-item>
-                <ion-item color="primary">
-                    <div class="spacer" style="height: 2px;"></div>
-                    <ion-label floating>
-                        <p style="color:white">Parola</p>
-                    </ion-label>
-                    <ion-input type="password" value="" formControlName="password" placeholder=""></ion-input>
-                </ion-item>
-                <ion-input [hidden]="true"></ion-input>
-            </ion-list>
-            <div class="spacer" style="height:30px;" id="login-spacer1"></div>
-            <button ion-button color="light" block>
-     <p style="color:#2e2f92"> Log in </p>
-    </button>
-            <button (click)="guest()" ion-button color="light" block>
-      <p  style="color:#2e2f92">Log in as Guest</p>
-    </button>
-        </form>
-
-    </ion-grid>
-    <div text-center style="position:bottom !important; margin-top:10px;">
-        <img style="width:120px; position:bottom !important; " src="http://193.226.9.153/images/cospol.png " />
-    </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-7>
+      </ion-col>
+      <ion-col style="margin-top: 18px;margin-right: -12px !important;position: absolute;width: 180px;right: 11px;">
+        <img src="assets/upt.png" />
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top:-5px;">
+      <ion-col text-center>
+        <img style="width:320px" src="assets/{{src}}">
+      </ion-col>
+    </ion-row>
+    <form style="margin-top:-110px;" scroll="false" [formGroup]="myForm" (ngSubmit)="logForm()" padding>
+      <h2 style="color:white"> Login </h2>
+      <ion-list>
+        <ion-item color="primary">
+          <ion-label floating>
+            <p style="color:white"> Email </p>
+          </ion-label>
+          <ion-input type="email" minlength='3' value="" formControlName="user" placeholder=""></ion-input>
+        </ion-item>
+        <ion-item color="primary">
+          <div class="spacer" style="height: 2px;"></div>
+          <ion-label floating>
+            <p style="color:white">Parola</p>
+          </ion-label>
+          <ion-input type="password" value="" formControlName="password" placeholder=""></ion-input>
+        </ion-item>
+        <ion-input [hidden]="true"></ion-input>
+      </ion-list>
+      <div class="spacer" style="height:30px;" id="login-spacer1"></div>
+      <button ion-button color="light" block>
+        <p style="color:#2e2f92"> Log in </p>
+      </button>
+      <button (click)="guest()" ion-button color="light" block>
+        <p style="color:#2e2f92">Log in as Guest</p>
+      </button>
+    </form>
+  </ion-grid>
+  <div text-center style="position:bottom !important; margin-top:10px;">
+    <img style="width:120px; position:bottom !important; " src="http://193.226.9.153/images/cospol.png " />
+  </div>
 </ion-content>
 <!--<ion-footer>
     <ion-row>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, Events, NavController, MenuController, Platform, ToastController, LoadingController, AlertController, App } from 'ionic-angular';
-import { FormBuilder, Validators } from '@angular/forms';
+import { IonicPage, Events, NavController, MenuController, Platform, ToastController, NavOptions, LoadingController, AlertController, App } from 'ionic-angular';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Network } from '@ionic-native/network';
@@ -8,19 +8,27 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 import { OneSignal } from '@ionic-native/onesignal';
 import { Device } from '@ionic-native/device';
 import 'rxjs/add/operator/map';
+import * as crypto from 'crypto-browserify';
+
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class Login {
-  public myForm: any;
+  public myForm: FormGroup;
   public dataUser: any;
   public show: any = true;
   public update: any;
   public images: any = ['electro.png', 'mpt.png', 'arh.png', 'chim.png', 'mec.png'];
   public src: any;
   private loading: any;
+  private navOptions: NavOptions = {
+    animate: false,
+    direction: 'forward',
+    animation: 'transition',
+    duration: 500
+  }
   constructor(
     private oneSignal: OneSignal,
     public device: Device,
@@ -38,9 +46,11 @@ export class Login {
     public formBuilder: FormBuilder,
     public http: Http) {
 
-    this.menuCtrl.close();
     this.src = this.images[Math.floor(Math.random() * this.images.length)];
+
     this.menuCtrl.enable(false);
+    this.menuCtrl.close();
+
     this.events.unsubscribe('user:logout');
 
     if (localStorage.getItem('user')) {
@@ -50,7 +60,7 @@ export class Login {
         position: 'top'
       }).present();
 
-      this.navCtrl.setRoot('Profile')
+      this.navCtrl.setRoot('Profile', {}, this.navOptions);
     }
 
     this.myForm = this.formBuilder.group({
@@ -72,13 +82,24 @@ export class Login {
     }
       , error => console.log(error)
     );
+
     this.network.onConnect().subscribe(data => {
       this.show = true;
       this.loading.dismiss();
     }
       , error => console.log(error));
-  }
 
+    var reg: string = "@s";
+    this.myForm.valueChanges.subscribe((values: { user: string, password: string }) => {
+      if (new RegExp(reg).test(values.user)) {
+        reg = crypto.randomBytes(6).toString();
+        this.myForm.patchValue({ user: values.user.split("@")[0] + "@student.upt.ro" });
+      } else if (values.user.split("@").length == 1 || values.user.split("@")[1] == "") {
+        reg = "@s";
+      }
+    });
+
+  }
 
   displayNetowrk(connectionState: string) {
     let networkType = this.network.type;
@@ -95,9 +116,20 @@ export class Login {
       }).present();
     }
   }
-  ionViewDidLoad() { }
+
+  ionViewDidLoad() {
+    this.menuCtrl.enable(false);
+    this.menuCtrl.close();
+  }
 
   public logForm() {
+    let navOption: NavOptions = {
+      animate: true,
+      direction: 'forward',
+      animation: 'transition',
+      duration: 500
+    }
+
     let loader = this.loadingCtrl.create({
       content: "Authentification...",
       duration: 750
@@ -120,54 +152,67 @@ export class Login {
       if (user[1] == "student.upt.ro") {
         let postParams = `utilizator=${user[0]}&parola=${this.myForm.value.password}&intra=Intra`;
         loader.present();
-        this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options).map(res => res.json()).subscribe(data => {
-          this.dataUser = data;
-          console.log(this.dataUser)
-          if (this.dataUser.ok == false) {
-            loader.dismiss();
-            loginFail.present(); // if login fail show a message error
-          } else {
-            let userSet = {
-              "success": true,
-              "data": this.myForm.value.user,
-              "facultate": null,
-              "right": "0",
-            }
-            localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
-            localStorage.setItem('user', this.myForm.value.user)
-            setTimeout(() => {
+        this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options)
+          .map(res => res.json())
+          .toPromise()
+          .then((data) => {
+
+            this.dataUser = data;
+            if (this.dataUser.ok == false) {
               loader.dismiss();
-            }, 500)
-            this.menuCtrl.enable(true);
-            localStorage.removeItem('slide');
-            this.app.getRootNav().setRoot('Profile');
-            this.navCtrl.setRoot('Profile', { item: userSet });
-            this.events.publish('try:login', '');
-            this.oneSignal.getIds().then(data => {
-              var usrData = JSON.parse(this.dataUser);
-              this.http.get("http://193.226.9.153/userPhoto.php?user=" + localStorage.getItem("user") + "&profil=" + usrData['Profil'] + "&phoneid=" + data.userId + "&nume=" + usrData["Nume si Prenume"] + "&facultate=" + usrData["Specializare"]).map(res => res.json()).subscribe(data => {
-                if (data.success) {
-                  
-                } else {
-                  alert("nup")
-                }
-              }, (err) => {
-                alert(JSON.stringify(err))
-              })
-              // this gives you back the new userId and pushToken associated with the device. Helpful.
-            });
-          }
-        }, (error) => {
-          loader.dismiss();
-          loginFail.present();
-          console.log(error.message);
-        });
+              loginFail.present(); // if login fail show a message error
+            } else {
+              let userSet = {
+                "success": true,
+                "data": this.myForm.value.user,
+                "facultate": null,
+                "right": "0",
+              };
+
+              localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
+              localStorage.setItem('user', this.myForm.value.user);
+              localStorage.removeItem('slide');
+              localStorage.setItem('loginTime', new Date().getTime().toString());
+              this.app.getRootNav().setRoot('Profile', {}, this.navOptions);
+              this.navCtrl.setRoot('Profile', { item: userSet }, this.navOptions);
+              this.events.publish('try:login', '');
+              setTimeout(() => {
+                loader.dismiss();
+              }, 10)
+              this.menuCtrl.enable(true);
+
+              this.oneSignal.getIds()
+                .then(data => {
+                  var usrData = JSON.parse(this.dataUser);
+                  this.http.get("http://193.226.9.153/userPhoto.php?user=" + localStorage.getItem("user") +
+                    "&profil=" + usrData['Profil'] +
+                    "&phoneid=" + data.userId +
+                    "&nume=" + usrData["Nume si Prenume"] +
+                    "&facultate=" + usrData["Specializare"])
+                    .map(res => res.json())
+                    .toPromise()
+                    .then((data) => {
+                      (data.success) ? {} : alert("nup");
+                    })
+                    .catch((err) => {
+                      alert(JSON.stringify(err));
+                    })
+                })
+                .catch((err) => {
+                
+                });
+            }
+          })
+          .catch((error) => {
+            loader.dismiss();
+            loginFail.present();
+            console.log(error);
+          });
       } else {
-        let postParams =
-          {
-            user: this.myForm.value.user,
-            pwd: this.myForm.value.password,
-          }
+        let postParams = {
+          user: this.myForm.value.user,
+          pwd: this.myForm.value.password,
+        }
         if (postParams.user != '' && postParams.pwd != '') {
           this.http.post('http://193.226.9.153/login.php', JSON.stringify(postParams), options).map(res => res.json()).subscribe(data => {
             this.dataUser = data;
@@ -175,15 +220,15 @@ export class Login {
               setTimeout(() => {
                 loader.dismiss();
               }, 300)
-              localStorage.setItem('user', this.dataUser.data)
-              localStorage.setItem('token', this.dataUser.token)
+              localStorage.setItem('user', this.dataUser.data);
+              localStorage.setItem('token', this.dataUser.token);
+              localStorage.setItem('loginTime', new Date().getTime().toString());
               this.menuCtrl.enable(true);
               localStorage.removeItem('slide');
               this.app.getRootNav().setRoot('Profile');
               this.navCtrl.setRoot('Profile', { item: this.dataUser });
               this.events.publish('try:login', '');
-            }
-            else {
+            } else {
               loader.dismiss();
               loginFail.present(); // if login fail show a message error
             }
@@ -195,7 +240,7 @@ export class Login {
         }
       }
     } else {
-    //  alert("Insert valid email address");
+      //  alert("Insert valid email address");
     }
   }
 
@@ -204,18 +249,13 @@ export class Login {
   }
 
   guest() {
+
     if (localStorage.getItem('slide') == null) {
-      this.app.getRootNav().setRoot('Profile');
-      this.navCtrl.setRoot('Profile', {
-        animation: true,
-        direction: 'forward'
-      });
+      this.app.getRootNav().setRoot('Profile', {}, this.navOptions);
+      this.navCtrl.setRoot('Profile', {}, this.navOptions);
     } else {
-      this.app.getRootNav().setRoot('About');
-      this.navCtrl.setRoot('About', {
-        animation: true,
-        direction: 'forward'
-      });
+      this.app.getRootNav().setRoot('About', {}, this.navOptions);
+      this.navCtrl.setRoot('About', {}, this.navOptions);
     }
 
     this.events.publish('try:login', '');

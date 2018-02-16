@@ -23,7 +23,6 @@ export class Paginafacultate {
     public events: Events,
     public modalCtrl: ModalController) {
 
-    
     this.item = navParams.get('item');
     this.descriere = navParams.get('descriere');
     this.condurere = navParams.get('conducere');
@@ -47,7 +46,6 @@ export class Paginafacultate {
   addNew() {
     let profileModall = this.modalCtrl.create('facult-home', { idd: 1, facultate: this.dataTabs.message.note });
     profileModall.present();
-
   }
 
   goBack() {
@@ -55,6 +53,5 @@ export class Paginafacultate {
   }
 
   scrolll(ev) {
-    console.log(ev)
   }
 }

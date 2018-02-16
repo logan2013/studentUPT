@@ -3,8 +3,8 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-2>
-                    <img *ngIf="photo == 'null'" style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
-                    <div *ngIf="photo != 'null'" class="image-cropper">
+                    <img *ngIf="photo == 'null'  " style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+                    <div *ngIf="photo != 'null' " class="image-cropper">
                         <img src="http://193.226.9.153/upload/{{photo}}" />
                     </div>
                 </ion-col>
@@ -32,9 +32,9 @@
         <ion-icon name='notifications' item-start></ion-icon>
     </ion-item>
     <ion-list padding>
-        <ion-list-header>
+        <!-- <ion-list-header>
             Other
-        </ion-list-header>
+        </ion-list-header> -->
         <button ion-button round block padding (click)="logOut()">
                  Logout
             </button>

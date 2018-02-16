@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
 
-
 @IonicPage()
 @Component({
   selector: 'page-note',
@@ -106,14 +105,7 @@ export class NotePage {
       }
 
       this.userKeyAndValNote.sort(this.sortNote)
-      var count_1 = 0;
-      var count_2 = 0;
-      var count_3 = 0;
-      var count_4 = 0;
-      var count_5 = 0;
-      var count_6 = 0;
-      var count_7 = 0;
-      var count_8 = 0;
+      var count_1 = 0, count_2 = 0, count_3 = 0, count_4 = 0, count_5 = 0, count_6 = 0, count_7 = 0, count_8 = 0;
       for (var i = 0; i < this.userKeyAndValNote.length; i++) {
         if (1 == this.userKeyAndValNote[i].Semestrul) {
           count_1++;
@@ -188,12 +180,10 @@ export class NotePage {
           an: "IV"
         });
       }
-      console.log(this.sem)
-    } catch(e) {
+    } catch (e) {
       console.log(e)
     }
   }
-
 
   public sortNote(a: any, b: any) {
     if (a.Semestrul < b.Semestrul) {

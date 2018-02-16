@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, MenuController } from 'ionic-angular';
 
 
 export interface Slide {
@@ -17,7 +17,7 @@ export class ModalPage {
   loading: any;
   slides: Slide[];
   showSkip = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private app: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private app: App, public menuCtrl: MenuController) {
     this.slides = [
       {
         title: "",
@@ -35,6 +35,7 @@ export class ModalPage {
         image: 'http://193.226.9.153/images/s4_b.png',
       }
     ];
+    this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
@@ -42,7 +43,6 @@ export class ModalPage {
   }
   startApp() {
     localStorage.setItem('slide', 'true');
-    // this.app.getRootNav().setRoot('Login');
     this.navCtrl.setRoot("Login", {}, {
       animate: true,
       direction: 'left'

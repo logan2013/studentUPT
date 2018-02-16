@@ -16,7 +16,8 @@
                 <accordion-list hasMargin="true" title="Semestrul {{s.sem}}, An {{s.an}}" headerColor="white">
                     <div *ngFor="let key of userKeyAndValNote">
                         <div *ngIf="s.sem ==key.Semestrul">
-                            <accordion-list hasMargin="true" style="font-size:10px!important; " title="{{key.value}}  Nota Finala : {{key.materie.NF}}" headerColor="white">
+                            <accordion-list hasMargin="true" style="font-size:10px!important; " title="{{key.value}} 
+                            Nota Finala : {{key.materie.NF}}" headerColor="white">
                                 <ion-row padding-horizontal class="label">
                                     <ion-col col-4>
                                         Materie:
@@ -134,7 +135,7 @@
                         Total plata:
                     </ion-col>
                     <ion-col col-6>
-                        {{totalPlata}} RON
+                        {{totalPlata || 0}} RON
                     </ion-col>
                 </ion-row>
                 <div *ngFor="let key of userKeyAndVal">

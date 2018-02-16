@@ -36,12 +36,11 @@ export class Profile {
   public rootSetari: any = 'SetariPage';
   public userSet: any = [];
   public userKey: any = [];
-  //modal
   expanded: any;
   contracted: any;
   showIcon = true;
   preload = true;
-
+  public UserName: any; // name displayed below photo
   constructor(
     private appMinimize: AppMinimize,
     private alertCtrl: AlertController,
@@ -59,19 +58,21 @@ export class Profile {
     public events: Events,
     public http: Http,
     public formBuilder: FormBuilder) {
-     
+
     this.events.subscribe("updatePhoto", (photo) => {
       this.photo = photo;
-      console.log(this.photo)
     });
-  
+
     try {
       this.userSet = localStorage.getItem("dataUser");
+      this.UserName = JSON.parse(this.userSet)["Nume si Prenume"];
       this.userKey = Object.keys(JSON.parse(this.userSet));
     }
     catch (r) { }
+
     if (this.user == null || this.user == "user") {
       if (localStorage.getItem('slide') == null) {
+        this.menuCtrl.enable(false);
         this.showContent = true;
         this.activeuser = false;
       } else if (localStorage.getItem('slide') == 'true') {
@@ -83,6 +84,15 @@ export class Profile {
     } else {
       this.showContent = true;
       this.activeuser = true;
+    }
+
+    if (localStorage.getItem("loginTime") != null) {
+      var timeLog: any = localStorage.getItem("loginTime");
+      var timeCurrent: any = new Date().getTime().toString();
+      if ((timeCurrent - timeLog) / 1000 > 3600) {
+        localStorage.clear();
+        this.navCtrl.setRoot("Login")
+      }
     }
 
     setTimeout(() => {
@@ -105,7 +115,8 @@ export class Profile {
       this.app.getRootNav().setRoot('Login');
     });
 
-    this.auth.login().then((isLoggedIn) => {
+    this.auth.login().then((isLoggedIn: any) => {
+      if (!this.UserName) { this.UserName = isLoggedIn.data } else { this.UserName += " \n " + isLoggedIn.data };
       this.userData = isLoggedIn;
     });
 
@@ -115,33 +126,35 @@ export class Profile {
       repetpass: ['']
     });
 
-    this.platform.ready().then(() => {
-      this.menuCtrl.enable(true);
-      var lastTimeBackPress = 0;
-
-      var timePeriodToExit = 2000;
-
-      this.platform.registerBackButtonAction(() => {
-        let name: string = '' + document.location;
-        var n = name.lastIndexOf('/');
-        var result = name.substring(n + 1);
-        if (this.auth.modal == false) {
-          if (this.nav.canGoBack()) {
-            this.nav.pop({});
-            this.navCtrl.pop();
-          } else {
-            if (this.alert) {
-            } else {
-              this.alert = true;
-              this.menuCtrl.open()
-              this.showAlert();
-            }
-          }
-        } else {
-          this.events.publish('page:back');
+    this.platform.ready()
+      .then(() => {
+        if (localStorage.getItem('slide') != null) {
+          this.menuCtrl.enable(true);
         }
+        var lastTimeBackPress = 0;
+        var timePeriodToExit = 2000;
+
+        this.platform.registerBackButtonAction(() => {
+          let name: string = '' + document.location;
+          var n = name.lastIndexOf('/');
+          var result = name.substring(n + 1);
+          if (this.auth.modal == false) {
+            if (this.nav.canGoBack()) {
+              this.nav.pop({});
+              this.navCtrl.pop();
+            } else {
+              if (this.alert) {
+              } else {
+                this.alert = true;
+                this.menuCtrl.open()
+                this.showAlert();
+              }
+            }
+          } else {
+            this.events.publish('page:back');
+          }
+        });
       });
-    });
   }
 
   showAlert() {
@@ -169,9 +182,9 @@ export class Profile {
 
   ionViewDidLoad() {
   }
-  
+
   ionViewDidLeave() {
-    this.events.unsubscribe('updatePhoto')
+    this.events.unsubscribe('updatePhoto');
   }
 
   goBack() {
@@ -327,6 +340,6 @@ export class Profile {
     this.showIcon = false;
     setTimeout(() => {
       const modal = this.navCtrl.push('ModalPage');
-    }, 250);
+    }, 100);
   }
 }
