@@ -4,6 +4,8 @@ import { Http } from '@angular/http';
 import { Auth } from '../../../providers/auth';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @IonicPage()
 @Component({
   selector: 'page-noutati-upt',
@@ -33,6 +35,7 @@ export class NoutatiUpt {
   public itemss: Array<{ title: string, content: string, imageLink: string, typeOfPage: number, statistici: any }> = [];
   constructor(
     public zone: NgZone,
+    private socialSharing: SocialSharing,
     public alertCtrl: AlertController, private toastCtrl: ToastController, public auth: Auth, public loadingCtrl: LoadingController, public http: Http, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.auth.login().then((isLoggedIn) => {
       this.info = isLoggedIn;
@@ -151,5 +154,11 @@ export class NoutatiUpt {
 
   showContentChart(item) {
     this.modalCtrl.create('ShowChart', { item: item[0].statistici[0].chart }).present();
+  }
+
+  shareContent(item) {
+    console.log(item)
+    this.socialSharing.shareViaFacebookWithPasteMessageHint(item.text, null, null, item.text).then((data) => {
+    })
   }
 }

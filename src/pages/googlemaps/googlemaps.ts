@@ -10,6 +10,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
+
 declare var google: any;
 @IonicPage()
 @Component({

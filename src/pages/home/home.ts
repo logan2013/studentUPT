@@ -98,39 +98,6 @@ export class HomePage {
 
     toast.present();
   }
-  /**
- * 
- * @param connectionState 
- */
-  displayNetowrk(connectionState: string) {
-    let networkType = this.network.type;
-    if (networkType === 'none') {
-      this.toastCtrl.create({
-        message: 'You are now ' + connectionState,
-        duration: 5000
-      }).present();
-    } else {
-      this.toastCtrl.create({
-        message: 'You are now ' + connectionState + ' via ' + networkType,
-        duration: 5000
-      }).present();
-    }
-  }
-
-  /**
-   * check if you have netowrk connection
-   */
-  ionViewDidEnter() {
-    this.network.onConnect().subscribe(data => {
-      this.displayNetowrk(data.type);
-    }
-      , error => console.log(error));
-
-    this.network.onDisconnect().subscribe(data => {
-      this.displayNetowrk(data.type);
-    }
-      , error => console.log(error)
-    );
-  }
+ 
 
 }

@@ -35,7 +35,7 @@ export class Auth {
         resolve(
           {
             "success": true,
-            "data": this.user ,
+            "data": this.user,
             "facultate": null,
             "right": "0",
           }
@@ -55,7 +55,9 @@ export class Auth {
 
   checkServer() {
     return new Promise((resolve) => {
-
+      this.http.get('https://193.226.9.153').map(res => res.json()).subscribe(data => {
+        resolve(data);
+      });
     });
   }
 

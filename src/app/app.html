@@ -2,7 +2,7 @@
     <ion-split-pane when="(min-width: 550px)">
         <ion-menu [content]="content" id="menu-material" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
             <ion-content>
-                <div (click)="editProfile(dataUser)" class="menu-header">
+                <div menuClose (click)="editProfile(dataUser)" class="menu-header">
                     <img *ngIf="photo == 'null'" class="user-avatar round" src="http://193.226.9.153/profilelogo.png" />
                     <div *ngIf="photo != 'null'" class="image-cropper">
                         <img class="img" id='img' src="http://193.226.9.153/upload/{{photo}}" />

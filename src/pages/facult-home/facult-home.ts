@@ -195,6 +195,10 @@ export class FacultHome {
     this.navCtrl.pop();
   }
 
+  navigateToSecondPageBack() {
+    this.navCtrl.pop();
+  }
+
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {

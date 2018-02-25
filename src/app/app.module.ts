@@ -36,6 +36,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { IonicImageLoader } from 'ionic-image-loader';
+import { SocialSharing } from '@ionic-native/social-sharing';
 // import { Timer } from '../components/countdown-timer/timer';
 // import { TimerProgress } from '../components/timer-progress/timer-progress';
 // import { FlashCardComponent } from '../components/flash-card/flash-card';
@@ -47,6 +48,8 @@ import * as firebase from 'firebase';
 import { registerLocaleData } from '@angular/common';
 import localeZh from '@angular/common/locales/ro';
 registerLocaleData(localeZh);
+
+
 export var config = {
   apiKey: "AIzaSyB8ANQHC7RqJVUNqEgb8jN39iO8TwQ-enE",
   authDomain: "studentupt-9adeb.firebaseapp.com",
@@ -72,7 +75,7 @@ firebase.initializeApp(config);
     // AngularFireModule.initializeApp(config),
     IonicImageLoader.forRoot(),
     SuperTabsModule.forRoot(),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -95,6 +98,7 @@ firebase.initializeApp(config);
     Camera,
     AppMinimize,
     AppVersion,
+    SocialSharing,
     File,
     LocalNotifications,
     FilePath,

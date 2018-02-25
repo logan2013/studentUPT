@@ -65,9 +65,6 @@ export class MyApp {
       this.rootPage = 'Profile';
     }
     this.initializeApp();
-    let load = this.loadCtrl.create({
-      content: "Data is loading...",
-    });
 
     this.auth.login().then((isLoggedIn) => {
       this.activePage = 'Profile';
@@ -76,7 +73,6 @@ export class MyApp {
         this.splashScreen.hide();
       }, 100)
 
-      load.dismiss();
       this.dataUser = isLoggedIn;
 
       if (this.dataUser.right == 0) {
@@ -92,7 +88,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
         ];
 
       } else if (this.dataUser.right == 1) {
@@ -108,7 +104,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
         ];
       } else {
         if (localStorage.getItem('slide') == "true") {
@@ -124,12 +120,13 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
 
       }
-    })
+    });
+
     events.subscribe('try:login', () => {
       this.menuOpened();
       this.userSet = localStorage.getItem("dataUser");
@@ -166,7 +163,7 @@ export class MyApp {
   }
 
   ionViewDidLoad() {
-
+    
   }
 
   menuOpened() {
@@ -206,7 +203,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
@@ -217,7 +214,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
@@ -229,7 +226,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
       }
@@ -243,7 +240,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
@@ -254,7 +251,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           //   { icon: 'log-in', title: 'Autentificare', component: "Logout" },
         ];
       } else {
@@ -265,7 +262,7 @@ export class MyApp {
           { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
           { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
           { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'book', title: 'Resurse Utile', component: "ResurseUtilePage" },
+          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
           { icon: 'log-in', title: 'Autentificare', component: "Login" },
         ];
       }
@@ -273,7 +270,29 @@ export class MyApp {
     //code to execute when menu ha opened
   }
 
-  public editProfile(user) {
+  public editProfile(page) {
+    if (localStorage.getItem('slide') == null) {
+      this.nav.setRoot("Profile", {}, this.navOptions);
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Trebuie sa te loghezi!',
+        subTitle: 'Pentru a accesa aceasta sectiune este nevoie sa te loghezi folosind contul upt!',
+        buttons: [{
+          text: 'Nu acum',
+          handler: () => {
+            // this.nav.setRoot('About');
+          }
+        },
+        {
+          text: 'Login',
+          handler: () => {
+            this.nav.setRoot('Login', {}, this.navOptions);
+          }
+        }
+        ]
+      });
+      alert.present();
+    }
   }
 
 

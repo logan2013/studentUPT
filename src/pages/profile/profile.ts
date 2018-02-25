@@ -57,7 +57,8 @@ export class Profile {
     public auth: Auth,
     public events: Events,
     public http: Http,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+  ) {
 
     this.events.subscribe("updatePhoto", (photo) => {
       this.photo = photo;
@@ -90,8 +91,15 @@ export class Profile {
       var timeLog: any = localStorage.getItem("loginTime");
       var timeCurrent: any = new Date().getTime().toString();
       if ((timeCurrent - timeLog) / 1000 > 3600) {
+        let loader = this.toastCtrl.create({
+          message: 'Logout with succes.',
+          duration: 1000,
+          position: 'top'
+        });
+        loader.present();
         localStorage.clear();
-        this.navCtrl.setRoot("Login")
+        this.navCtrl.setRoot("Login");
+        this.events.unsubscribe('user:logout');
       }
     }
 
@@ -181,10 +189,17 @@ export class Profile {
   }
 
   ionViewDidLoad() {
+    // this.auth.checkServer().then(data => {
+    //   console.log(data)
+    // });
+
+
+
   }
 
   ionViewDidLeave() {
     this.events.unsubscribe('updatePhoto');
+
   }
 
   goBack() {
@@ -280,20 +295,20 @@ export class Profile {
     }
   }
 
-  displayNetowrk(connectionState: string) {
-    let networkType = this.network.type;
-    if (networkType === 'none') {
-      this.toastCtrl.create({
-        message: 'You are now ' + connectionState,
-        duration: 5000
-      }).present();
-    } else {
-      this.toastCtrl.create({
-        message: 'You are now ' + connectionState + ' via ' + networkType,
-        duration: 5000
-      }).present();
-    }
-  }
+  // displayNetowrk(connectionState: string) {
+  //   let networkType = this.network.type;
+  //   if (networkType === 'none') {
+  //     this.toastCtrl.create({
+  //       message: 'You are now ' + connectionState,
+  //       duration: 5000
+  //     }).present();
+  //   } else {
+  //     this.toastCtrl.create({
+  //       message: 'You are now ' + connectionState + ' via ' + networkType,
+  //       duration: 5000
+  //     }).present();
+  //   }
+  // }
 
 
   ionViewWillLeave() {
@@ -305,20 +320,20 @@ export class Profile {
   ionViewDidEnter() {
     this.user == 'user' ? this.menuCtrl.enable(false) : null;
 
-    this.network.onDisconnect().subscribe(data => {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please check your internet connection. And try again.'
-      });
-      if (this.show == true) {
-        this.loading.present();
-        this.show = false;
-      }
-    });
+    // this.network.onDisconnect().subscribe(data => {
+    //   this.loading = this.loadingCtrl.create({
+    //     content: 'Please check your internet connection. And try again.'
+    //   });
+    //   if (this.show == true) {
+    //     this.loading.present();
+    //     this.show = false;
+    //   }
+    // });
 
-    this.network.onConnect().subscribe(data => {
-      this.show = true;
-      this.loading.dismiss();
-    }, error => console.log(error));
+    // this.network.onConnect().subscribe(data => {
+    //   this.show = true;
+    //   this.loading.dismiss();
+    // }, error => console.log(error));
 
   }
 

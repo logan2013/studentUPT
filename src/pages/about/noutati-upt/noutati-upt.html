@@ -1,78 +1,99 @@
 <ion-content elastic-header>
-    <div [hidden]='showContenttt'>
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
-            </ion-refresher-content>
-        </ion-refresher>
-        <ion-buttons *ngIf="info.right == 2">
-            <button ion-button full (click)="addNew()">Adauga postare &nbsp;&nbsp; <ion-icon name="add"></ion-icon></button>
-        </ion-buttons>
-        <ion-list>
-            <ion-card ion-item *ngFor="let post of posts" text-wrap>
-                <ion-row (click)="showContent(post);">
-                    <ion-col *ngIf="post.icon" padding-vertical col-6>
-                        <h3 [innerHTML]=""><b>{{post.title}}</b></h3>
-                        <p style="/*bottom: 5%;position: absolute;*/" [innerHTML]="post.data"></p>
-                    </ion-col>
-                    <ion-col *ngIf="post.icon" item-left>
-                        <!-- <img src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" *ngIf="post.icon"> -->
-                        <img-loader src="http://193.226.9.153/upload/{{post.icon}}" *ngIf="post.icon" useImg></img-loader>
-                    </ion-col>
-                    <ion-row *ngIf="!post.icon">
-                        <ion-col>
-                            <h3 style="white-space: pre;font-size:15.5px;" text-wrap> <b>{{post.title}} </b></h3>
-                            <p style="position:bottom;" text-left>{{post.data}} </p>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col *ngIf="!post.icon">
-                            <p text-left style="white-space: pre-line; " text-wrap [innerHTML]="post.preview"></p>
-                        </ion-col>
-                    </ion-row>
-                </ion-row>
-                <ion-row>
-                    <ion-col tappable *ngIf=" info.right == 2" (click)="presentProfileModal(post)" width-50 text-left>
-                        <button ion-button outline full clear icon-left text-capitalize>
-                    <ion-icon name='create'></ion-icon>
-                    Editeaza
-                    </button>
-                    </ion-col>
-                    <ion-col tappable *ngIf=" info.right == 2" (click)="deleteProfil(post.id)" width-50 text-center>
-                        <button ion-button outline full clear icon-left text-capitalize>
-                    <ion-icon  name="close-circle"></ion-icon>
-                    Sterge
-                    </button>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
-            <ion-grid (click)='showContentChart(itemss)'>
-                <ion-row>
-                    <ion-col padding-vertical col-6>
-                        <p text-center> <b>{{titlee}}</b> </p>
-                        <p text-left text-wrap style="white-space: normal;">
-                            {{content}}
-                        </p>
-                    </ion-col>
-                    <ion-col>
-                        <img style="margin-top:30px;" src="{{imageLink}}">
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-list>
+  <div [hidden]='showContenttt'>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-buttons *ngIf="info.right == 2">
+      <button ion-button full (click)="addNew()">Adauga postare &nbsp;&nbsp;
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-list>
+      <ion-card ion-item *ngFor="let post of posts" text-wrap>
+        <ion-row (click)="showContent(post);">
+          <ion-col *ngIf="post.icon" padding-vertical col-6>
+            <h3 [innerHTML]="">
+              <b>{{post.title}}</b>
+            </h3>
+            <p style="/*bottom: 5%;position: absolute;*/" [innerHTML]="post.data"></p>
+          </ion-col>
+          <ion-col *ngIf="post.icon" item-left>
+            <!-- <img src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" *ngIf="post.icon"> -->
+            <img-loader src="http://193.226.9.153/upload/{{post.icon}}" *ngIf="post.icon" useImg></img-loader>
+          </ion-col>
+          <ion-row *ngIf="!post.icon">
+            <ion-col>
+              <h3 style="white-space: pre;font-size:15.5px;" text-wrap>
+                <b>{{post.title}} </b>
+              </h3>
+              <p style="position:bottom;" text-left>{{post.data}} </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="!post.icon">
+              <p text-left style="white-space: pre-line; " text-wrap [innerHTML]="post.preview"></p>
+            </ion-col>
+          </ion-row>
+        </ion-row>
 
-    </div>
-    <div *ngIf='showContenttt' class="sk-fading-circle">
-        <div class="sk-circle1 sk-circle"></div>
-        <div class="sk-circle2 sk-circle"></div>
-        <div class="sk-circle3 sk-circle"></div>
-        <div class="sk-circle4 sk-circle"></div>
-        <div class="sk-circle5 sk-circle"></div>
-        <div class="sk-circle6 sk-circle"></div>
-        <div class="sk-circle7 sk-circle"></div>
-        <div class="sk-circle8 sk-circle"></div>
-        <div class="sk-circle9 sk-circle"></div>
-        <div class="sk-circle10 sk-circle"></div>
-        <div class="sk-circle11 sk-circle"></div>
-        <div class="sk-circle12 sk-circle"></div>
-    </div>
+        <!-- 
+          <ion-row>
+            <ion-col col-5>
+            </ion-col>
+            <ion-col col-2>
+              <ion-icon color="primary" ios="ios-share" md="md-share" (click)="shareContent(post)"></ion-icon>
+            </ion-col>
+            <ion-col col-5>
+            </ion-col>
+          </ion-row> 
+        -->
+
+        <ion-row>
+          <ion-col tappable *ngIf=" info.right == 2" (click)="presentProfileModal(post)" width-50 text-left>
+            <button ion-button outline full clear icon-left text-capitalize>
+              <ion-icon name='create'></ion-icon>
+              Editeaza
+            </button>
+          </ion-col>
+          <ion-col tappable *ngIf=" info.right == 2" (click)="deleteProfil(post.id)" width-50 text-center>
+            <button ion-button outline full clear icon-left text-capitalize>
+              <ion-icon name="close-circle"></ion-icon>
+              Sterge
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-grid (click)='showContentChart(itemss)'>
+        <ion-row>
+          <ion-col padding-vertical col-6>
+            <p text-center>
+              <b>{{titlee}}</b>
+            </p>
+            <p text-left text-wrap style="white-space: normal;">
+              {{content}}
+            </p>
+          </ion-col>
+          <ion-col>
+            <img style="margin-top:30px;" src="{{imageLink}}">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+  </div>
+  <div *ngIf='showContenttt' class="sk-fading-circle">
+    <div class="sk-circle1 sk-circle"></div>
+    <div class="sk-circle2 sk-circle"></div>
+    <div class="sk-circle3 sk-circle"></div>
+    <div class="sk-circle4 sk-circle"></div>
+    <div class="sk-circle5 sk-circle"></div>
+    <div class="sk-circle6 sk-circle"></div>
+    <div class="sk-circle7 sk-circle"></div>
+    <div class="sk-circle8 sk-circle"></div>
+    <div class="sk-circle9 sk-circle"></div>
+    <div class="sk-circle10 sk-circle"></div>
+    <div class="sk-circle11 sk-circle"></div>
+    <div class="sk-circle12 sk-circle"></div>
+  </div>
 </ion-content>
