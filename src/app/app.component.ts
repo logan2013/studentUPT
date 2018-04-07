@@ -19,9 +19,9 @@ export class MyApp {
   public photo: string = 'null';
   public rootPage: any = "Profile";
   public dataUser: any = [];
-  activePage: any;
+  public activePage: any;
   public theme: any = 'theme-light';
-  pages: Array<{ icon: string, title: string, component: any }>;
+  public pages: Array<{ icon: string, title: string, component: any }>;
   public userSet: any = [];
   private navOptions: NavOptions = {
     animate: true,
@@ -29,6 +29,25 @@ export class MyApp {
     animation: 'wp-transition',
     duration: 300
   };
+  public guestUserPages: any = [
+    { icon: 'home', title: 'Home', component: "Profile" },
+    { icon: 'information-circle', title: 'UPT', component: "About" },
+    { icon: 'school', title: 'Facultăți', component: "Facultati" },
+    { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
+    { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
+    { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+    { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
+    { icon: 'log-in', title: 'Autentificare', component: "Login" },
+  ];
+  public loggedInUserPages: any = [
+    { icon: 'home', title: 'Home', component: "Profile" },
+    { icon: 'information-circle', title: 'UPT', component: "About" },
+    { icon: 'school', title: 'Facultăți', component: "Facultati" },
+    { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
+    { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
+    { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
+    { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
+  ];
   constructor(
     private oneSignal: OneSignal,
     public events: Events,
@@ -45,10 +64,12 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen) {
 
+    this.initializeApp();
+    this.activePage = 'Profile';
+    this.statusBar.styleDefault();
     this.events.subscribe("updatePhoto", (data) => {
       this.photo = data;
     })
-
 
     if (localStorage.getItem('slide') == "true") {
       this.rootPage = 'About';
@@ -64,66 +85,13 @@ export class MyApp {
       }).present();
       this.rootPage = 'Profile';
     }
-    this.initializeApp();
 
     this.auth.login().then((isLoggedIn) => {
-      this.activePage = 'Profile';
-      this.statusBar.styleDefault();
-      setTimeout(() => {
-        this.splashScreen.hide();
-      }, 100)
-
       this.dataUser = isLoggedIn;
-
-      if (this.dataUser.right == 0) {
-        if (localStorage.getItem('slide') == "true") {
-          this.rootPage = 'About';
-        } else {
-          this.rootPage = 'Profile';
-        }
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-        ];
-
-      } else if (this.dataUser.right == 1) {
-        if (localStorage.getItem('slide') == "true") {
-          this.rootPage = 'About';
-        } else {
-          this.rootPage = 'Profile';
-        };
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-        ];
+      if (this.dataUser.right == 0 || this.dataUser.right == 1 || this.dataUser.right == 2) {
+        this.pages = this.loggedInUserPages;
       } else {
-        if (localStorage.getItem('slide') == "true") {
-          this.rootPage = 'About';
-        } else {
-          this.rootPage = 'Profile';
-        }
-
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          { icon: 'log-in', title: 'Autentificare', component: "Login" },
-        ];
-
+        this.pages = this.guestUserPages;
       }
     });
 
@@ -137,39 +105,29 @@ export class MyApp {
             this.events.publish("updatePhoto", localStorage.getItem("photo"));
             localStorage.setItem("photo", localStorage.getItem("photo"));
           } else {
-            alert("nup")
+            console.log("nup")
           }
         }, (err) => {
-          alert("Eroare: " + JSON.stringify(err))
+          console.log("Eroare: " + JSON.stringify(err))
         })
-        // this gives you back the new userId and pushToken associated with the device. Helpful.
       });
-
     });
 
   }
 
-
   menuClosed() {
-    console.log('menu closed')
     this.events.unsubscribe('updatePhoto')
   }
 
-  ionViewDidLeave() {
-  }
+  ionViewDidLeave() { }
 
-  ionViewDidEnter() {
+  ionViewDidEnter() { }
 
-  }
-
-  ionViewDidLoad() {
-    
-  }
+  ionViewDidLoad() { }
 
   menuOpened() {
 
     if (localStorage.getItem("loginTime") != null) {
-      console.log(localStorage.getItem("loginTime"), new Date().getTime().toString())
       var timeLog: any = localStorage.getItem("loginTime");
       var timeCurrent: any = new Date().getTime().toString();
       if ((timeCurrent - timeLog) / 1000 > 3600) {
@@ -195,106 +153,23 @@ export class MyApp {
 
     this.auth.login().then((isLoggedIn) => {
       this.dataUser = isLoggedIn;
-      if (this.dataUser.right == 0) {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          
-        ];
-      } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          
-          //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-        ];
+      if (this.dataUser.right == 0 || this.dataUser.right == 1 || this.dataUser.right == 2) {
+        this.pages = this.loggedInUserPages;
       } else {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          { icon: 'log-in', title: 'Autentificare', component: "Login" },
-        ];
+        this.pages = this.guestUserPages;
       }
-
     }).catch((e) => {
-      if (this.dataUser.right == 0) {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          //  { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-        ];
-      } else if (this.dataUser.right == 1 || this.dataUser.right == 2) {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          //   { icon: 'log-in', title: 'Autentificare', component: "Logout" },
-        ];
+      if (this.dataUser.right == 0 || this.dataUser.right == 1 || this.dataUser.right == 2) {
+        this.pages = this.loggedInUserPages
       } else {
-        this.pages = [
-          { icon: 'home', title: 'Home', component: "Profile" },
-          { icon: 'information-circle', title: 'UPT', component: "About" },
-          { icon: 'school', title: 'Facultăți', component: "Facultati" },
-          { icon: 'school', title: 'Organizații Studențești', component: "Organizatii" },
-          { icon: 'book', title: 'Regulamente', component: "RegulamentPage" },
-          { icon: 'map', title: 'Harta Campusului', component: "Googlemaps" },
-          { icon: 'document', title: 'Resurse Utile', component: "ResurseUtilePage" },
-          { icon: 'log-in', title: 'Autentificare', component: "Login" },
-        ];
+        this.pages = this.guestUserPages;
       }
     })
-    //code to execute when menu ha opened
   }
 
   public editProfile(page) {
-    if (localStorage.getItem('slide') == null) {
-      this.nav.setRoot("Profile", {}, this.navOptions);
-    } else {
-      let alert = this.alertCtrl.create({
-        title: 'Trebuie sa te loghezi!',
-        subTitle: 'Pentru a accesa aceasta sectiune este nevoie sa te loghezi folosind contul upt!',
-        buttons: [{
-          text: 'Nu acum',
-          handler: () => {
-            // this.nav.setRoot('About');
-          }
-        },
-        {
-          text: 'Login',
-          handler: () => {
-            this.nav.setRoot('Login', {}, this.navOptions);
-          }
-        }
-        ]
-      });
-      alert.present();
-    }
+    this.openPage({component: "Profile"});
   }
-
 
   initializeApp() {
     //a0bfcab0-43b0-456e-a62d-48c86af5202a
@@ -316,8 +191,6 @@ export class MyApp {
       //   // do something when the notification is received.
       // });
       this.oneSignal.handleNotificationOpened().subscribe((data) => {
-        // do something when the notification is opened.
-        // this.rootPage = 'About';
         this.rootPage = 'About';
         this.modalCtrl.create('ShowContent', { item: data.notification.payload.additionalData }).present().then(() => {
           this.auth.modal = true;

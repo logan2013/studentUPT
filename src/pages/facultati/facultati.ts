@@ -472,7 +472,8 @@ Participarea constantă, cu rezultate deosebite, a studenţilor şi absolvenţil
       });
 
       this.conducereA4.push({
-        functie: 'Director Departamament',
+        //Director Departament: conf. dr. arh. Cătălina Bocan
+        functie: 'Director Departament',
         nume: 'conf. dr. arh. Cătălina Bocan',
         telefon: '0256404019',
         email: 'catalina.bocan@upt.ro ',

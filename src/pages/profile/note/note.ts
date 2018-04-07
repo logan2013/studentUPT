@@ -94,7 +94,7 @@ export class NotePage {
               Prog2: usrData[this.userKeyNote[4] + "[" + j + "]"],
               Prog3: usrData[this.userKeyNote[5] + "[" + j + "]"],
               NP: usrData[this.userKeyNote[6] + "[" + j + "]"],
-              NF: usrData[this.userKeyNote[7] + "[" + j + "]"],
+              NF: usrData[this.userKeyNote[7] + "[" + j + "]"] || "--",
               Taxa: usrData[this.userKeyNote[8] + "[" + j + "]"],
               Semestru: usrData[this.userKeyNote[9] + "[" + j + "]"],
               An: usrData[this.userKeyNote[10] + "[" + j + "]"],

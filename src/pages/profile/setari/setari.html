@@ -1,7 +1,7 @@
 <ion-content *ngIf="!userToken">
   <ion-list>
     <ion-grid>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col col-2>
 
           <img *ngIf="photo == 'null'  " style="width:50px;height:50px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png"
@@ -13,7 +13,7 @@
         <ion-col col-10>
           <p>{{userData.data}}</p>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <ion-row>
         <ion-col>
           <button ion-button icon-left full round (click)="presentActionSheet()">
@@ -42,11 +42,11 @@
     </button>
   </ion-list>
   <ion-list no-border>
-    <ion-list-header>
+    <!-- <ion-list-header>
       General
-    </ion-list-header>
-    <div *ngFor="let key of userKeyAndVal">
-      <ion-row padding-horizontal class="label" *ngIf="key.value==''">
+    </ion-list-header> -->
+    <div *ngFor="let key of userKeyAndVal; let i = index;">
+      <ion-row padding-horizontal class="label" *ngIf="key.value=='' && i < 5 ">
         <ion-col col-6>
           {{key.key}}:
         </ion-col>
@@ -54,7 +54,7 @@
           ---
         </ion-col>
       </ion-row>
-      <ion-row padding-horizontal class="label" *ngIf="key.value">
+      <ion-row padding-horizontal class="label" *ngIf="key.value && i < 5 || i == userKeyAndVal.length -1">
         <ion-col col-6>
           {{key.key}}:
         </ion-col>

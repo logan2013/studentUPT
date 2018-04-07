@@ -82,7 +82,7 @@ export class NoutatiUpt {
                 this.posts[i].url = url;
               })
             }).catch(err => {
-              console.log(err);
+              // console.log(err);
             })
           }
         }
@@ -162,3 +162,5 @@ export class NoutatiUpt {
     })
   }
 }
+
+

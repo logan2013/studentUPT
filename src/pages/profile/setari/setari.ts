@@ -69,11 +69,11 @@ export class SetariPage {
     } else {
       this.enableNotifications = false;
     }
-    this.photo = localStorage.getItem('photo') == null ? this.photo = 'null' : this.photo = localStorage.getItem('photo');
-    this.events.subscribe("updatePhoto", (photo) => {
-      this.photo = photo;
-      console.log(this.photo)
-    });
+    // this.photo = localStorage.getItem('photo') == null ? this.photo = 'null' : this.photo = localStorage.getItem('photo');
+    // this.events.subscribe("updatePhoto", (photo) => {
+    //   this.photo = photo;
+    //   console.log(this.photo)
+    // });
     console.log(this.photo)
     try {
       this.auth.login().then((isLoggedIn) => {
