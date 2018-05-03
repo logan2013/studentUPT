@@ -48,6 +48,8 @@ export class NotePage {
   public an: any;
   public sem: Array<{ sem: any, an: any }> = [];
   public anStudiu: any = [];
+  public headerColors: any = ["#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2"];
+  public headerColors2: any = ["#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585"];
   constructor(public navCtrl: NavController, public navParams: NavParams, private document: DocumentViewer) {
     try {
 

@@ -148,8 +148,10 @@ export class Login {
     let user: string = this.myForm.value.user.split("@");
 
     var reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+    
     if (reg.test(this.myForm.value.user)) {
       if (user[1] == "student.upt.ro") {
+
         let postParams = `utilizator=${user[0]}&parola=${this.myForm.value.password}&intra=Intra`;
         loader.present();
         this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options)
@@ -162,6 +164,7 @@ export class Login {
               loader.dismiss();
               loginFail.present(); // if login fail show a message error
             } else {
+
               let userSet = {
                 "success": true,
                 "data": this.myForm.value.user,
@@ -169,7 +172,8 @@ export class Login {
                 "right": "0",
               };
 
-              localStorage.setItem("dataUser", JSON.stringify(this.dataUser));
+              let data: string = JSON.stringify(this.dataUser);
+              localStorage.setItem("dataUser", data);
               localStorage.setItem('user', this.myForm.value.user);
               localStorage.removeItem('slide');
               localStorage.setItem('loginTime', new Date().getTime().toString());
@@ -199,7 +203,7 @@ export class Login {
                     })
                 })
                 .catch((err) => {
-                
+
                 });
             }
           })

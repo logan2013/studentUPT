@@ -1,13 +1,12 @@
 <ion-list class="accordion-list">
-    <ion-list-header style="font-size:14px" no-lines no-padding>
-        <button small ion-item detail-none [style.background]="headerColor" (click)="toggleAccordion()" class="accordion-header" [class.active]="expanded">
-        <ion-icon
-          item-left
-          name="ios-arrow-forward">
-        </ion-icon>
-      <p style="font-size:15px!important; white-space: pre-line;">{{ title }}</p>  
-    </button>
-        <section #accordionContent [style.background]="contentColor" [class.active]="expanded" class="accordion-content">
+    <ion-list-header style="font-size:14px;color:black !important;" no-lines no-padding>
+        <button small ion-item detail-none [style.background]="headerColor" (click)="toggleAccordion()" class="accordion-header"
+            [class.active]="expanded">
+            <ion-icon item-left name="ios-arrow-forward">
+            </ion-icon>
+            <p style="font-size:15px!important; white-space: pre-line;color:black;">{{ title }}</p>
+        </button>
+        <section #accordionContent style="color:black;" [style.background]="contentColor" [class.active]="expanded" class="accordion-content">
             <ng-content></ng-content>
         </section>
     </ion-list-header>
