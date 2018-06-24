@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Login } from './login';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Login } from './login';
   ],
   imports: [
     IonicPageModule.forChild(Login),
+    RecaptchaModule.forRoot()
   ],
   exports: [
     Login

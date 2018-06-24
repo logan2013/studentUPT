@@ -123,7 +123,7 @@ export class Login {
   }
 
   public logForm() {
-    let navOption: NavOptions = {
+    let navOption: any = {
       animate: true,
       direction: 'forward',
       animation: 'transition',

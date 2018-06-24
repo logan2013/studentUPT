@@ -77,13 +77,13 @@ export class NoutatiUpt {
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {
           if (this.posts[i].icon) {
-            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
-              this.zone.run(() => {
-                this.posts[i].url = url;
-              })
-            }).catch(err => {
-              // console.log(err);
-            })
+            // this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+            //   this.zone.run(() => {
+            //     this.posts[i].url = url;
+            //   })
+            // }).catch(err => {
+            //   // console.log(err);
+            // })
           }
         }
       }
@@ -102,11 +102,11 @@ export class NoutatiUpt {
       if (this.posts !== null) {
         for (let i = 0; i < this.posts.length; i++) {
           if (this.posts[i].icon) {
-            this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
-              this.zone.run(() => {
-                this.posts[i].url = url;
-              })
-            })
+            // this.firestore.ref().child(this.posts[i].icon).getDownloadURL().then((url) => {
+            //   this.zone.run(() => {
+            //     this.posts[i].url = url;
+            //   })
+            // })
           }
         }
       }
