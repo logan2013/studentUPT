@@ -4,10 +4,11 @@
                 overflow: hidden;
                 background-color:#2e2f92;">
         <button ion-fixed style="margin:0px; top:9px;position:absolute;" ion-button clear menuToggle>
-             <ion-icon color="light" item-start name="menu"></ion-icon>
+            <ion-icon color="light" item-start name="menu"></ion-icon>
         </button>
         <div text-center>
-            <img *ngIf="photo == 'null' " imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png" />
+            <img *ngIf="photo == 'null' " imageViewer style="width:100px;height:100px;border-radius: 80%;margin-top:5px;" src="http://193.226.9.153/profilelogo.png"
+            />
         </div>
         <div *ngIf="photo != 'null' " class="image-cropper" text-center>
             <img class="img" src="http://193.226.9.153/upload/{{photo}}" imageViewer />
@@ -67,14 +68,18 @@
         </button>-->
 </ion-content>
 
-<ion-content *ngIf="!activeuser&&showContent" class="page-popup-fab">
+<ion-content *ngIf="!activeuser && showContent" class="page-popup-fab">
+    <button style="margin-top:6%;right:6%;position:absolute;z-index: 2;" text-end ion-button icon-end small clear (click)="startApp()" color="light">
+        Skip
+        <ion-icon name="arrow-forward"></ion-icon>
+    </button>
     <ion-card>
         <img src="http://193.226.9.153/images//s1_b.png">
         <h1 color="light">Let's take a look</h1>
     </ion-card>
-    <ion-fab right bottom middle>
+    <ion-fab right bottom middle style="top:53%">
         <button class="pop-in" [ngClass]="{ 'expand' : expanded, 'contract': contracted }" ion-fab mini (click)="expand()">
-          <ion-icon [hidden]="!showIcon" name="ios-arrow-forward"></ion-icon>
+            <ion-icon [hidden]="!showIcon" name="ios-arrow-forward"></ion-icon>
         </button>
     </ion-fab>
 </ion-content>

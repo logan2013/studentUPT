@@ -39,6 +39,7 @@ export class Googlemaps {
   public locatie: any = [];
   music: string;
   musicAlertOpts: { title: string, subTitle: string };
+  public infoWindow: any;
   constructor(
     public global: MyApp,
     private iab: InAppBrowser,
@@ -433,18 +434,25 @@ export class Googlemaps {
 
     });
   }
-  
+
   openLocation(markerInfo) {
     for (let i = 0; i < this.markersArray.length; i++) {
       if (markerInfo.title == this.markersArray[i].title) {
         this.map.panTo(this.markersArray[i].getPosition());
+
         this.map.setZoom(16);
-        let infoWindow = new google.maps.InfoWindow({
+        try {
+          this.infoWindow.close()
+        } catch (error) {
+
+        }
+        this.infoWindow = new google.maps.InfoWindow({
           content: "<div><table><tr><td><img style='margin-top:5px;' width='35px;'src='http://193.226.9.153/images/" + markerInfo.logo +
-          "' /> &nbsp;&nbsp;</td><td><p><b>" + markerInfo.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + markerInfo.img +
-          "'/ > <br></div>"
+            "' /> &nbsp;&nbsp;</td><td><p><b>" + markerInfo.title + "</p></b></td></table><img width='200px;'src='http://193.226.9.153/images/" + markerInfo.img +
+            "'/ > <br></div>"
         });
-        infoWindow.open(this.map, this.markersArray[i]);
+        this.infoWindow.open(this.map, this.markersArray[i]);
+
       }
     }
   }
@@ -461,8 +469,8 @@ export class Googlemaps {
 
       this.launchNavigator.navigate([location.latitude, location.longitude], options)
         .then(
-        success => console.log('Launched navigator'),
-        error => alert('Error launching navigator' + error)
+          success => console.log('Launched navigator'),
+          error => alert('Error launching navigator' + error)
         );
     }
     catch (e) {
@@ -671,13 +679,18 @@ export class Googlemaps {
   }
 
   addInfoWindow(marker, content) {
-    let infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
 
     google.maps.event.addListener(marker, 'click', () => {
       this.canNavigate = true;
-      infoWindow.open(this.map, marker);
+      try {
+        this.infoWindow.close();
+      } catch (error) {
+
+      }
+      this.infoWindow = new google.maps.InfoWindow({
+        content: content
+      });
+      this.infoWindow.open(this.map, marker);
     });
   }
 

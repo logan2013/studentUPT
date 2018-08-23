@@ -44,7 +44,8 @@ export class Login {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    public http: Http) {
+    public http: Http
+  ) {
 
     this.src = this.images[Math.floor(Math.random() * this.images.length)];
 
@@ -148,7 +149,7 @@ export class Login {
     let user: string = this.myForm.value.user.split("@");
 
     var reg = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-    
+
     if (reg.test(this.myForm.value.user)) {
       if (user[1] == "student.upt.ro") {
 

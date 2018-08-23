@@ -9,20 +9,20 @@
 </ion-header>
 <ion-content>
   <ion-card>
-    <img *ngIf="item.icon" style="width:100%;position:relative;" src="http://193.226.9.153/upload/{{item.icon}}" imageViewer/>
-    <div text-center *ngIf="item.imageLink">
-      <img src="http://193.226.9.153/images/{{item.imageLink}}">
+    <img *ngIf="item.icon" style="width:100%;position:relative;" src="http://193.226.9.153/upload/{{item?.icon}}" imageViewer/>
+    <div text-center *ngIf="item?.imageLink">
+      <img src="http://193.226.9.153/images/{{item?.imageLink}}">
     </div>
     <!-- <img *ngIf="item.url" style="width:100%;  position:relative;" src="{{item.url}}" imageViewer/> -->
     <ion-card-title text-left padding-horizontal>
-      <b>{{item.title}}</b>
+      <b>{{item?.title}}</b>
     </ion-card-title>
     <br>
     <p *ngIf="item.data" style="text-align:right" padding-horizontal>
-      <b>{{item.data}}</b>
+      <b>{{item?.data}}</b>
       <br>
     </p>
-    <div *ngIf="item.content" padding-horizontal [ngStyle]="cssProperties" [innerHTML]="item.content"> </div>
-    <div *ngIf="item.text" padding-horizontal [ngStyle]="cssProperties" [innerHTML]="item.text"></div>
+    <div *ngIf="item.content" padding-horizontal [ngStyle]="cssProperties" [innerHTML]="item?.content"> </div>
+    <div *ngIf="item.text" padding-horizontal [ngStyle]="cssProperties" [innerHTML]="item?.text"></div>
   </ion-card>
 </ion-content>

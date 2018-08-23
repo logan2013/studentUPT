@@ -117,10 +117,13 @@ export class Profile {
       localStorage.removeItem('slide')
       localStorage.removeItem('user');
       localStorage.removeItem("dataUser");
-      localStorage.clear();
+      localStorage.removeItem("token");
+      localStorage.removeItem("loginTime");
+   //   localStorage.clear();
       this.menuCtrl.enable(false);
       this.menuCtrl.close();
       this.app.getRootNav().setRoot('Login');
+      this.events.unsubscribe('user:logout');
     });
 
     this.auth.login().then((isLoggedIn: any) => {
@@ -188,14 +191,7 @@ export class Profile {
     }).present();
   }
 
-  ionViewDidLoad() {
-    // this.auth.checkServer().then(data => {
-    //   console.log(data)
-    // });
-
-
-
-  }
+  ionViewDidLoad() {  }
 
   ionViewDidLeave() {
     this.events.unsubscribe('updatePhoto');
@@ -344,6 +340,7 @@ export class Profile {
       direction: 'left'
     });
   }
+
 
   onSlideChangeStart(slider) {
     this.showSkip = !slider.isEnd();

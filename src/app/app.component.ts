@@ -147,7 +147,6 @@ export class MyApp {
         localStorage.removeItem('photo');
         this.photo = 'null';
         this.events.publish("updatePhoto", "null");
-
       }
     })
 
@@ -168,7 +167,7 @@ export class MyApp {
   }
 
   public editProfile(page) {
-    this.openPage({component: "Profile"});
+    this.openPage({ component: "Profile" });
   }
 
   initializeApp() {
@@ -191,10 +190,13 @@ export class MyApp {
       //   // do something when the notification is received.
       // });
       this.oneSignal.handleNotificationOpened().subscribe((data) => {
-        this.rootPage = 'About';
-        this.modalCtrl.create('ShowContent', { item: data.notification.payload.additionalData }).present().then(() => {
-          this.auth.modal = true;
-        });
+        localStorage.setItem("popUpNotification", "true");
+        setTimeout(() => {
+          this.rootPage = 'About';
+        }, 40)
+        // this.modalCtrl.create('ShowContent', { item: data.notification.payload.additionalData }).present().then(() => {
+        //   this.auth.modal = true;
+        // });
       });
       this.oneSignal.endInit();
       this.oneSignal.getIds().then(data => {

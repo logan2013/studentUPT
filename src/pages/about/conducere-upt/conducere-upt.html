@@ -1,7 +1,6 @@
 <ion-content>
     <p padding text-justify text-wrap style="white-space: pre;">
-        Universitatea este condusă de Consiliul de Administraţie şi Senatul Universităţii. Consiliul de Administraţie este alcătuit din Rector, Prorectori şi Decanii facultăţilor şi este cel care asigură conducerea administrativă a universităţii. Senatul Universităţii
-        este alcătuit din 68 cadre didactice şi studenţi.
+        {{descriereConducere}}
     </p>
     <hr>
     <ion-list>
@@ -15,38 +14,27 @@
             margin: auto;'>
                 <img style=" display: inline;  width: auto;" src='{{data.image}}' (error)="errorHandler($event, i) ">
             </div>
-            <p text-center text-wrap style="white-space: normal; "><b></b>{{data.functie}}</p>
-            <p text-center text-wrap style="white-space: normal; "><b></b>{{data.nume}}</p>
+            <p text-center text-wrap style="white-space: normal; ">
+                <b></b>{{data.functie}}</p>
+            <p text-center text-wrap style="white-space: normal; ">
+                <b></b>{{data.nume}}</p>
             <ion-row text-center padding-horizontal *ngIf="data.show " style='text-align:center;margin:auto;'>
                 <div text-center style=' transition: all 1s ease-out'>
-                    <p text-wrap style="white-space: normal; "><b>Adresa: </b>{{data.adresa}}</p>
-                    <p *ngIf='data.resort' text-wrap style="white-space: normal; "><b>Resort: </b>{{data.resort}}</p>
-                    <p text-wrap style="white-space: normal; "><b>Tel/Fax: </b>{{data.telfax}}</p>
-                    <p text-wrap style="white-space: normal; "><b>E-mail: </b>{{data.email}}</p>
+                    <p text-wrap style="white-space: normal; ">
+                        <b>Adresa: </b>{{data.adresa}}</p>
+                    <p *ngIf='data.resort' text-wrap style="white-space: normal; ">
+                        <b>Resort: </b>{{data.resort}}</p>
+                    <p text-wrap style="white-space: normal; ">
+                        <b>Tel/Fax: </b>{{data.telfax}}</p>
+                    <p text-wrap style="white-space: normal; ">
+                        <b>E-mail: </b>{{data.email}}</p>
                 </div>
             </ion-row>
             <div text-center>
                 <button (click)='toggle(data.nume)' clear ion-button icon-only>
-                <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline' "></ion-icon>
-            </button>
+                    <ion-icon [name]="!data.show ? 'ios-arrow-dropdown-outline' : 'ios-arrow-dropup-outline' "></ion-icon>
+                </button>
             </div>
         </ion-item>
     </ion-list>
 </ion-content>
-<!-- 
-     .image-cropper {
-        margin-top: 5px;
-        width: 100px;
-        height: 100px;
-        position: relative;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: auto;
-        // margin-left: 35% !important;
-    }
-    img {
-        display: inline;
-        // margin-top: -20px;
-        width: auto;
-    }
--->

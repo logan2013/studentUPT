@@ -1,5 +1,5 @@
 <ion-content elastic-header>
-  <div [hidden]='showContenttt'>
+  <div [hidden]='showNoutatiUpt'>
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
       </ion-refresher-content>
@@ -10,8 +10,8 @@
       </button>
     </ion-buttons>
     <ion-list>
-      <ion-card ion-item *ngFor="let post of posts" text-wrap>
-        <ion-row (click)="showContent(post);">
+      <ion-card ion-item *ngFor="let post of posts;let i = index;" text-wrap>
+        <ion-row (click)="showContent(post);" [id]="'post' + i">
           <ion-col *ngIf="post.icon" padding-vertical col-6>
             <h3 [innerHTML]="">
               <b>{{post.title}}</b>
@@ -19,7 +19,6 @@
             <p style="/*bottom: 5%;position: absolute;*/" [innerHTML]="post.data"></p>
           </ion-col>
           <ion-col *ngIf="post.icon" item-left>
-            <!-- <img src="http://hainedefirmasj.com/placesforme/upload/{{post.icon}}" *ngIf="post.icon"> -->
             <img-loader src="http://193.226.9.153/upload/{{post.icon}}" *ngIf="post.icon" useImg></img-loader>
           </ion-col>
           <ion-row *ngIf="!post.icon">
@@ -36,28 +35,15 @@
             </ion-col>
           </ion-row>
         </ion-row>
-
-        <!-- 
-          <ion-row>
-            <ion-col col-5>
-            </ion-col>
-            <ion-col col-2>
-              <ion-icon color="primary" ios="ios-share" md="md-share" (click)="shareContent(post)"></ion-icon>
-            </ion-col>
-            <ion-col col-5>
-            </ion-col>
-          </ion-row> 
-        -->
-
         <ion-row>
           <ion-col tappable *ngIf=" info.right == 2" (click)="presentProfileModal(post)" width-50 text-left>
-            <button ion-button outline full clear icon-left text-capitalize>
+            <button ion-button outline full clear icon-left text-capitalize >
               <ion-icon name='create'></ion-icon>
               Editeaza
             </button>
           </ion-col>
           <ion-col tappable *ngIf=" info.right == 2" (click)="deleteProfil(post.id)" width-50 text-center>
-            <button ion-button outline full clear icon-left text-capitalize>
+            <button ion-button outline full clear icon-left text-capitalize color="danger">
               <ion-icon name="close-circle"></ion-icon>
               Sterge
             </button>
@@ -80,9 +66,8 @@
         </ion-row>
       </ion-grid>
     </ion-list>
-
   </div>
-  <div *ngIf='showContenttt' class="sk-fading-circle">
+  <div *ngIf='showNoutatiUpt' class="sk-fading-circle">
     <div class="sk-circle1 sk-circle"></div>
     <div class="sk-circle2 sk-circle"></div>
     <div class="sk-circle3 sk-circle"></div>

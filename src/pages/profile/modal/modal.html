@@ -2,14 +2,14 @@
     <ion-slides pager="true" (ionSlideWillChange)="onSlideChangeStart($event)">
 
         <ion-slide *ngFor="let slide of slides">
-            <button style="margin-top:3%;right:3%;position:absolute" text-end ion-button icon-end small clear (click)="startApp()" color="light">
+            <button style="margin-top:10%;right:10%;position:absolute" text-end ion-button icon-end small clear (click)="startApp()" color="light">
                         Skip  
                     <ion-icon name="arrow-forward"></ion-icon>
                 </button>
             <img [src]="slide.image" class="slide-image" />
         </ion-slide>
         <ion-slide>
-            <button style="    margin-top: 85%;
+            <button style="margin-top: 85%;
             right: 20%;
             position: absolute;
             font-size: 25px;" text-end ion-button icon-end small clear (click)="startApp()" color="light">

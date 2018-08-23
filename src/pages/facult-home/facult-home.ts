@@ -33,7 +33,13 @@ export class FacultHome {
   facultate: any; // parametru trasnmis de la viewac pt inserare
   public tabBar: any;
   public isBrowser: any;
-  public ckeditorContent:any;
+  public ckeditorContent: any;
+
+  enableNotifications = true;
+  public uploadedWithSuccess: any = 0;
+  public uploadedMessage: any;
+  public isNewPost: boolean = false;
+  public isEditPost: boolean = false;
   constructor(
     public camera: Camera,
     public file: File,
@@ -56,7 +62,7 @@ export class FacultHome {
       nothing: ['']
     });
 
-    
+
     if (navParams.get('id')) {
       this.id.pop();
       this.iddd = navParams.get('id');
@@ -66,10 +72,18 @@ export class FacultHome {
         icon: this.iddd.icon,
         id: this.iddd.id
       })
-    this.ckeditorContent = this.iddd.text;    
+      this.ckeditorContent = this.iddd.text;
     } else { }
     this.idd = navParams.get('idd');
     this.facultate = navParams.get('facultate');
+
+    if (this.idd === 1) {
+      this.isNewPost = true;
+      this.isEditPost = false;
+    } else {
+      this.isNewPost = false;
+      this.isEditPost = true;
+    }
   }
 
   onChange(ev, val) {
@@ -80,6 +94,13 @@ export class FacultHome {
   logForm() {
     localStorage.setItem('text', this.myForm.value.text);
     if (this.idd === 1) {
+      let notif;
+      console.log(this.enableNotifications)
+      if (this.enableNotifications) {
+        notif = "1";
+      } else {
+        notif = "0";
+      }
       let headers = new Headers();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json');
@@ -89,17 +110,24 @@ export class FacultHome {
         inserttext: this.myForm.value.text,
         insertimage: localStorage.getItem('upt'),
         facultate: this.facultate,
+        sendNotification: notif,
         token: localStorage.getItem("token")
       }
-      this.http.post('http://193.226.9.153/insert.php', JSON.stringify(postParams), options).map(res => res.json())
+      this.http.post('http://193.226.9.153/insert.php', JSON.stringify(postParams), options)
         .subscribe(data => {
-          console.log(data);
+
+          let message = "";
+          if (this.enableNotifications) {
+            message = "Postare adaugata cu success.  Toti userii activi vor primi notificare.";
+          } else {
+            message = "Postare adaugata cu success.";
+          }
+          this.presentToast(message);
+
         }, error => {
           console.log(error);
         });
-    }
-    else {
-
+    } else {
       let headers = new Headers();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json');
@@ -111,7 +139,8 @@ export class FacultHome {
       }
       else if (this.myForm.value.title && this.myForm.value.text == "" && localStorage.getItem('upt')) { //101
         this.myForm.value.text = this.id[0].text;
-      } else if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt') === null) {//110
+      }
+      else if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt') === null) {//110
         localStorage.setItem('upt', this.id[0].icon);
       }
       else if (this.myForm.value.title && this.myForm.value.text && localStorage.getItem('upt')) {//111
@@ -142,7 +171,7 @@ export class FacultHome {
       }
       this.http.post('http://193.226.9.153/edit.php', JSON.stringify(this.postParamss), options)
         .subscribe(data => {
-          console.log(data);
+          this.presentToast("Postare editata cu success !");
         }, error => {
           console.log(error);
         });
@@ -175,16 +204,19 @@ export class FacultHome {
             const files = JSON.parse(responseText);
             if (files.success) {
               scope.loading.dismiss();
-              alert('Image Uploaded with Success');
+              scope.id[0].icon = name;
+              scope.uploadedWithSuccess = 1;
             } else {
-              alert('Error. Something goes wrong upload another photo.')
+              scope.uploadedWithSuccess = -1;
+              scope.uploadedMessage = 'Error ! Something goes wrong, upload another photo.';
             }
           } else {
           }
         };
         xhr.send(formData);
       } else {
-        alert("please select an image .jpg or .png . Thank you")
+        this.uploadedWithSuccess = -1;
+        this.uploadedMessage = "Error ! Please select an image .jpg or .png . Thank you !";
       }
     }
 
@@ -326,4 +358,12 @@ export class FacultHome {
       })
     })
   }
+
+  // toggleNotifications() {
+  //   if (this.enableNotifications) {
+  //     this.enableNotifications = false;
+  //   } else {
+  //     this.enableNotifications = true;
+  //   }
+  // }
 }
