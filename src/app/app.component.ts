@@ -174,9 +174,9 @@ export class MyApp {
     //a0bfcab0-43b0-456e-a62d-48c86af5202a
     this.platform.ready().then(() => {
 
-      setTimeout(() => {
+      // setTimeout(() => {
         this.splashScreen.hide();
-      }, 100);
+      // }, 100);
       this.userSet = localStorage.getItem("dataUser");
       var usrData = JSON.parse(this.userSet);
 
