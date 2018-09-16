@@ -9,100 +9,118 @@
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
+
     <div [ngSwitch]="pet">
         <div *ngSwitchCase="'note'">
+            <ion-grid style="text-align: center">
+                <ion-row>
+                    <ion-col style="    background-color: #f0f5ff;border: 1px  solid #e6e9ee;margin:2px">
+                        AN
+                    </ion-col>
+                    <ion-col style=" background-color: #f0f5ff;border:1px solid #e6e9ee;margin:2px" *ngFor="let medie of anMedii;let i = index;"> {{i
+                        +1}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col style=" background-color: #f0f5ff;border:1px solid #e6e9ee;margin:2px">
+                        Medie
+                    </ion-col>
+                    <ion-col style=" background-color: #f0f5ff;border:1px solid #e6e9ee;margin:2px" *ngFor="let medie of anMedii;let i = index;"> <b>
+                            {{medie}}
+                        </b></ion-col>
+                </ion-row>
+            </ion-grid>
             <br>
             <div *ngFor="let s of sem;let i = index;">
-                <accordion-list hasMargin="true" title="Semestrul {{s.sem}}, An {{s.an}}" [headerColor]="headerColors[i]">
+                <accordion-list hasMargin="true" title="Semestrul {{s?.sem}}, An {{s?.an}}, Medie: {{s?.med}}" [headerColor]="headerColors[i]">
                     <div *ngFor="let key of userKeyAndValNote;let k = index;">
                         <div *ngIf="s.sem ==key.Semestrul">
                             <accordion-list hasMargin="true" style="font-size:10px!important; color:black !important;" title="{{key.value}} 
                             Nota Finala : {{key.materie.NF}}" [headerColor]="headerColors2[k]">
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Materie:
                                     </ion-col>
-                                    <ion-col col-8 text-wrap style="white-space: pre-line; text-align: left">
+                                    <ion-col col-6 text-wrap style="white-space: pre-line; text-align: left">
                                         {{key.value}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Forma evaluare:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Forma_ev}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Credite:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Credite}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Programarea 1:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Prog1}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Programarea 2:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Prog2}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         Programarea 3:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Prog3}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         NP:
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.NP}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         <b>NF:</b>
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.NF}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         <b>Taxa:</b>
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Taxa}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         <b>Semestrul:</b>
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.Semestru}}
                                     </ion-col>
                                 </ion-row>
                                 <ion-row padding-horizontal class="label">
-                                    <ion-col col-4>
+                                    <ion-col col-6>
                                         <b>An:</b>
                                     </ion-col>
-                                    <ion-col col-8>
+                                    <ion-col col-6>
                                         {{key.materie.An}}
                                     </ion-col>
                                 </ion-row>
@@ -141,50 +159,50 @@
                 <div *ngFor="let key of userKeyAndVal">
                     <accordion-list hasMargin="true" title="{{key.value}}" headerColor="white">
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Materie:
                             </ion-col>
-                            <ion-col col-8 text-wrap style="white-space: pre-line; text-align: left">
+                            <ion-col col-6 text-wrap style="white-space: pre-line; text-align: left">
                                 {{key.value}}
                             </ion-col>
                         </ion-row>
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Forma evaluare:
                             </ion-col>
-                            <ion-col col-8>
+                            <ion-col col-6>
                                 {{key.materie.Forma_ev}}
                             </ion-col>
                         </ion-row>
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Ore curs:
                             </ion-col>
-                            <ion-col col-8>
+                            <ion-col col-6>
                                 {{key.materie.Ore_curs}}
                             </ion-col>
                         </ion-row>
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Ore laborator:
                             </ion-col>
-                            <ion-col col-8>
+                            <ion-col col-6>
                                 {{key.materie.Ore_laborator}}
                             </ion-col>
                         </ion-row>
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Ore proiect:
                             </ion-col>
-                            <ion-col col-8>
+                            <ion-col col-6>
                                 {{key.materie.Ore_proiect}}
                             </ion-col>
                         </ion-row>
                         <ion-row padding-horizontal class="label">
-                            <ion-col col-4>
+                            <ion-col col-6>
                                 Total ore:
                             </ion-col>
-                            <ion-col col-8>
+                            <ion-col col-6>
                                 {{key.materie.Total_ore}}
                             </ion-col>
                         </ion-row>

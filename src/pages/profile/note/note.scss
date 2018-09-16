@@ -1,4 +1,5 @@
 page-note {
+    text-transform: capitalize !important;
     .grid {
         color: black;
         // border: 1px solid;
@@ -14,5 +15,8 @@ page-note {
     accordion-list .accordion-header {
         color: black;
         // border: 1px solid;
+    }
+    .label {
+        text-transform: capitalize !important;
     }
 }

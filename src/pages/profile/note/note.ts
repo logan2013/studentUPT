@@ -46,10 +46,11 @@ export class NotePage {
   public totalCredite: any;
   public totalPlata: any;
   public an: any;
-  public sem: Array<{ sem: any, an: any }> = [];
+  public sem: Array<{ sem: any, an: any, med: any }> = [];
   public anStudiu: any = [];
   public headerColors: any = ["#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2", "#494991", "#6565A5", "#A7A7D0", "#C9C9E2"];
   public headerColors2: any = ["#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585", "#C1D1DD", "#9CB4C7", "#577C98", "#3C6585"];
+  public anMedii: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private document: DocumentViewer) {
     try {
 
@@ -58,6 +59,13 @@ export class NotePage {
       this.totalCredite = Math.round(usrData["Total credite"]) || 0;
       this.totalPlata = Math.round(usrData["Total de plata"]);
       this.an = usrData["An_studiu"]
+      for (i = 0; i < 4; i++) {
+        if(usrData.hasOwnProperty(`Med_F[${i}]`)) {
+          this.anMedii.push(usrData[`Med_F[${i}]`])
+        }
+      }
+      console.log(usrData)
+
       // this.userKey = Object.keys(usrData);
       for (let j = 0; j < 70; j++) {
 
@@ -137,49 +145,57 @@ export class NotePage {
       if (count_1 != 0) {
         this.sem.push({
           sem: 1,
-          an: "I"
+          an: "I",
+          med: usrData["Med_S1[0]"]
         });
       }
       if (count_2 != 0) {
         this.sem.push({
           sem: 2,
-          an: "I"
+          an: "I",
+          med: usrData["Med_S2[0]"]
         });
       }
       if (count_3 != 0) {
         this.sem.push({
           sem: 3,
-          an: "II"
+          an: "II",
+          med: usrData["Med_S1[1]"]
         });;
       }
       if (count_4 != 0) {
         this.sem.push({
           sem: 4,
-          an: "II"
+          an: "II",
+          med: usrData["Med_S2[1]"]
         });
       }
       if (count_5 != 0) {
         this.sem.push({
           sem: 5,
-          an: "III"
+          an: "III",
+          med: usrData["Med_S1[2]"]
         });
       }
       if (count_6 != 0) {
         this.sem.push({
           sem: 6,
-          an: "III"
+          an: "III",
+          med: usrData["Med_S2[2]"]
         });
       }
       if (count_7 != 0) {
         this.sem.push({
           sem: 7,
-          an: "IV"
+          an: "IV",
+          med: usrData["Med_S1[3]"]
         });
       }
       if (count_8 != 0) {
         this.sem.push({
           sem: 8,
-          an: "IV"
+          an: "IV",
+          med: usrData["Med_S2[3]"]
         });
       }
     } catch (e) {
