@@ -38,6 +38,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { BotDetectCaptchaModule } from 'angular-captcha';
+
 // import { Timer } from '../components/countdown-timer/timer';
 // import { TimerProgress } from '../components/timer-progress/timer-progress';
 // import { FlashCardComponent } from '../components/flash-card/flash-card';
@@ -50,6 +51,7 @@ import { registerLocaleData } from '@angular/common';
 import localeZh from '@angular/common/locales/ro';
 
 import { RecaptchaModule } from 'ng-recaptcha';
+import { Crop } from '@ionic-native/crop';
 registerLocaleData(localeZh);
 
 
@@ -119,6 +121,7 @@ firebase.initializeApp(config);
     LaunchNavigator,
     DocumentViewer,
     NativePageTransitions,
+    Crop,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useValue: 'ro-RO' },
 

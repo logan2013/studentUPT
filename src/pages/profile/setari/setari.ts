@@ -10,7 +10,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-
+import { Crop } from '@ionic-native/crop';
 declare var cordova: any;
 
 @IonicPage()
@@ -60,11 +60,12 @@ export class SetariPage {
     private file: File,
     private filePath: FilePath,
     public actionSheetCtrl: ActionSheetController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private crop: Crop
   ) {
     this.userToken = localStorage.getItem('token');
-    
-    if(localStorage.getItem("enableNotification") == "1") {
+
+    if (localStorage.getItem("enableNotification") == "1") {
       this.enableNotifications = true;
     } else {
       this.enableNotifications = false;
@@ -99,15 +100,15 @@ export class SetariPage {
       this.toastCtrl.create('Notifications enabled.');
       this.enableNotifications = true;
       localStorage.setItem("enableNotifiation", "1")
-      this.http.get("http://193.226.9.153/enableNotification.php?phoneid="+ localStorage.getItem("phoneid")).subscribe(() => {
+      this.http.get("http://193.226.9.153/enableNotification.php?phoneid=" + localStorage.getItem("phoneid")).subscribe(() => {
 
       });
     } else {
       this.toastCtrl.create('Notifications disabled.');
       this.enableNotifications = false;
       localStorage.setItem("enableNotifiation", "0")
-      this.http.get("http://193.226.9.153/enableNotification.php?phoneid="+ localStorage.getItem("phoneid")).subscribe(() => {
-        
+      this.http.get("http://193.226.9.153/enableNotification.php?phoneid=" + localStorage.getItem("phoneid")).subscribe(() => {
+
       });
     }
   }
@@ -176,21 +177,26 @@ export class SetariPage {
     };
 
     // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
+    this.camera.getPicture(options).then((imageP) => {
       // Special handling for Android library
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        this.filePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      this.crop.crop(imageP, { quality: 75 })
+        .then(imagePath => {
+          if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+            this.filePath.resolveNativePath(imagePath)
+              .then(filePath => {
+                let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+                let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
 
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
+              });
+          } else {
+            var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+            var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+          }
+        }, (err) => {
+          this.presentToast('Error while selecting image.');
+        })
     }, (err) => {
       this.presentToast('Error while selecting image.');
     });
