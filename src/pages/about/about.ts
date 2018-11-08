@@ -53,8 +53,8 @@ export class About {
 
   showAlert() {
     this.alertCtrl.create({
-      title: 'Exit?',
-      message: 'Do you want to exit the app?',
+      title: 'Ieșiți?',
+      message: 'Doriți să ieșiți din aplicație?',
       buttons: [
         {
           text: 'Cancel',
@@ -65,7 +65,7 @@ export class About {
           }
         },
         {
-          text: 'Exit',
+          text: 'Ieșiți',
           handler: () => {
             this.appMinimize.minimize();
           }

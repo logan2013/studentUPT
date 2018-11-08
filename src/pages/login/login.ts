@@ -74,7 +74,7 @@ export class Login {
   ionViewDidEnter() {
     this.network.onDisconnect().subscribe(data => {
       this.loading = this.loadingCtrl.create({
-        content: 'Please check your internet connection. And try again.'
+        content: 'Verificați conexiunea la internet. Si incearca din nou.'
       });
       if (this.show == true) {
         this.loading.present();
@@ -132,12 +132,12 @@ export class Login {
     }
 
     let loader = this.loadingCtrl.create({
-      content: "Authentification...",
+      content: "Authentificare...",
       duration: 750
     });
 
     let loginFail = this.toastCtrl.create({
-      message: 'Something goes wrong. Try again.',
+      message: 'Ceva nu merge bine. Încearcă din nou.',
       duration: 2500,
       position: 'top'
     });
@@ -155,64 +155,69 @@ export class Login {
 
         let postParams = `utilizator=${user[0]}&parola=${this.myForm.value.password}&intra=Intra`;
         loader.present();
-        this.http.post('https://upt.ro/gisc/mbackend.php', postParams, options)
-          .map(res => res.json())
-          .toPromise()
-          .then((data) => {
+        this.http.get("http://193.226.9.153/config.php").map(res => res.json()).subscribe((data: any) => {
+          console.log(data);
+          this.http.post(data.mbackend, postParams, options)
+            .map(res => res.json())
+            .toPromise()
+            .then((data) => {
 
-            this.dataUser = data;
-            if (this.dataUser.ok == false) {
-              loader.dismiss();
-              loginFail.present(); // if login fail show a message error
-            } else {
-
-              let userSet = {
-                "success": true,
-                "data": this.myForm.value.user,
-                "facultate": null,
-                "right": "0",
-              };
-
-              let data: string = JSON.stringify(this.dataUser);
-              localStorage.setItem("dataUser", data);
-              localStorage.setItem('user', this.myForm.value.user);
-              localStorage.removeItem('slide');
-              localStorage.setItem('loginTime', new Date().getTime().toString());
-              this.app.getRootNav().setRoot('Profile', {}, this.navOptions);
-              this.navCtrl.setRoot('Profile', { item: userSet }, this.navOptions);
-              this.events.publish('try:login', '');
-              setTimeout(() => {
+              this.dataUser = data;
+              if (this.dataUser.ok == false) {
                 loader.dismiss();
-              }, 10)
-              this.menuCtrl.enable(true);
+                loginFail.present(); // if login fail show a message error
+              } else {
 
-              this.oneSignal.getIds()
-                .then(data => {
-                  var usrData = JSON.parse(this.dataUser);
-                  this.http.get("http://193.226.9.153/userPhoto.php?user=" + localStorage.getItem("user") +
-                    "&profil=" + usrData['Profil'] +
-                    "&phoneid=" + data.userId +
-                    "&nume=" + usrData["Nume si Prenume"] +
-                    "&facultate=" + usrData["Specializare"])
-                    .map(res => res.json())
-                    .toPromise()
-                    .then((data) => {
-                      (data.success) ? {} : alert("nup");
-                    })
-                    .catch((err) => {
-                      alert(JSON.stringify(err));
-                    })
-                })
-                .catch((err) => {
+                let userSet = {
+                  "success": true,
+                  "data": this.myForm.value.user,
+                  "facultate": null,
+                  "right": "0",
+                };
 
-                });
-            }
-          })
-          .catch((error) => {
-            loader.dismiss();
-            loginFail.present();
-            console.log(error);
-          });
+                let data: string = JSON.stringify(this.dataUser);
+                localStorage.setItem("dataUser", data);
+                localStorage.setItem('user', this.myForm.value.user);
+                localStorage.removeItem('slide');
+                localStorage.setItem('loginTime', new Date().getTime().toString());
+                this.app.getRootNav().setRoot('Profile', {}, this.navOptions);
+                this.navCtrl.setRoot('Profile', { item: userSet }, this.navOptions);
+                this.events.publish('try:login', '');
+
+                this.menuCtrl.enable(true);
+
+                this.oneSignal.getIds()
+                  .then(data => {
+                    var usrData = JSON.parse(this.dataUser);
+                    this.http.get("http://193.226.9.153/userPhoto.php?user=" + localStorage.getItem("user") +
+                      "&profil=" + usrData['Profil'] +
+                      "&phoneid=" + data.userId +
+                      "&nume=" + usrData["Nume si Prenume"] +
+                      "&facultate=" + usrData["Specializare"])
+                      .map(res => res.json())
+                      .toPromise()
+                      .then((data) => {
+                        setTimeout(() => {
+                          loader.dismiss();
+                        });
+                        (data.success) ? {} : alert("nup");
+
+                      })
+                      .catch((err) => {
+                        alert(JSON.stringify(err));
+                      })
+                  })
+                  .catch((err) => {
+
+                  });
+              }
+            })
+            .catch((error) => {
+              loader.dismiss();
+              loginFail.present();
+              console.log(error);
+            })
+        });
       } else {
         let postParams = {
           user: this.myForm.value.user,

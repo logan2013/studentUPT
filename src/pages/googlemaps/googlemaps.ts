@@ -178,7 +178,7 @@ export class Googlemaps {
       this.initializeMap();
       this.initAutocomplete();
     } else {
-      this.errorAlert('Error', 'Something went wrong with the Internet Connection. Please check your Internet.')
+      this.errorAlert('Error', 'S-a întâmplat ceva în legătură cu conexiunea la Internet. Verificați-vă Internetul.')
     }
   }
 
@@ -504,7 +504,7 @@ export class Googlemaps {
           center: myPos,
           zoom: 14
         });
-        let marker = this.addMarker(myPos, "My last saved Location ", false);
+        let marker = this.addMarker(myPos, "Ultima mea locație salvată ", false);
 
         markers.push(marker);
         this.bounceMap(markers);
@@ -526,7 +526,7 @@ export class Googlemaps {
     this.storage.get('lastLocation').then((result) => {
       if (result) {
         let actionSheet = this.actionSheetCtrl.create({
-          title: 'Last Location: ' + result.location,
+          title: 'Ultima Locatie: ' + result.location,
           buttons: [
             {
               text: 'Reload',
@@ -538,7 +538,7 @@ export class Googlemaps {
               text: 'Delete',
               handler: () => {
                 this.storage.set('lastLocation', null);
-                this.showToast('Location deleted!');
+                this.showToast('Locatie stearge!');
                 this.initializeMap();
               }
             },
@@ -561,7 +561,7 @@ export class Googlemaps {
   // go show currrent location
   getCurrentPosition() {
     this.loading = this.loadingCtrl.create({
-      content: 'Searching Location ...'
+      content: 'Căuta locație...'
     });
     this.loading.present();
 
@@ -571,7 +571,7 @@ export class Googlemaps {
       (position) => {
         this.loading.dismiss().then(() => {
 
-          this.showToast('Location found!');
+          this.showToast('Locație gasita!');
           this.myLocation = false;
           this.mytheme = "searchbar searchbar-md searchbar-left-aligned show";
           this.watchlocaiton = 0;
@@ -611,7 +611,7 @@ export class Googlemaps {
       },
       (error) => {
         this.loading.dismiss().then(() => {
-          this.showToast('Location not found. Please enable your GPS or restart this app or phone! Thank you !');
+          this.showToast('Locația nu a fost găsită. Activați GPS-ul dvs. sau reporniți această aplicație sau telefon! Mulțumesc !');
 
           console.log(error);
         });

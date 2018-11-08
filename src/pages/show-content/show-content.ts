@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 
@@ -19,6 +19,7 @@ export class ShowContent {
     'text-align': 'justify'
   };
   private lastPWEditor: Date = new Date(2017, 12, 15); // last post without editor
+  @ViewChild('videoPlayer') mVideoPlayer: any;
   constructor(
     private auth: Auth,
     private events: Events,
@@ -42,8 +43,7 @@ export class ShowContent {
           'text-align': 'justify'
         };
       }
-    } catch(err) {}
-
+    } catch (err) { }
     try {
       this.item.text = decodeURIComponent(this.item.text);
       this.item.content = decodeURIComponent(this.item.content);
@@ -63,6 +63,13 @@ export class ShowContent {
   goBack() {
     this.viewCtrl.dismiss();
     this.auth.modal = false;
+  }
+
+  ionViewDidLoad() {
+    if (this.mVideoPlayer) {
+      let video = this.mVideoPlayer.nativeElement;
+      video.src = "http://193.226.9.153/upload/" + this.item.video;
+    }
   }
 
 }

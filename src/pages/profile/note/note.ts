@@ -64,7 +64,7 @@ export class NotePage {
           this.anMedii.push(usrData[`Med_F[${i}]`])
         }
       }
-      console.log(usrData)
+      // console.log(usrData)
 
       // this.userKey = Object.keys(usrData);
       for (let j = 0; j < 70; j++) {

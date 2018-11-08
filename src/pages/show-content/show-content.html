@@ -9,10 +9,14 @@
 </ion-header>
 <ion-content>
   <ion-card>
-    <img *ngIf="item.icon" style="width:100%;position:relative;" src="http://193.226.9.153/upload/{{item?.icon}}" imageViewer/>
-    <div text-center *ngIf="item?.imageLink">
+    <img *ngIf="item.icon && !item.video" style="width:100%;position:relative;" src="http://193.226.9.153/upload/{{item?.icon}}"
+      imageViewer />
+    <div text-center *ngIf="item?.imageLink && !item.video">
       <img src="http://193.226.9.153/images/{{item?.imageLink}}">
     </div>
+
+    <video *ngIf="item.video" #videoPlayer class="video-player" controls></video>
+
     <!-- <img *ngIf="item.url" style="width:100%;  position:relative;" src="{{item.url}}" imageViewer/> -->
     <ion-card-title text-left padding-horizontal>
       <b>{{item?.title}}</b>

@@ -17,7 +17,7 @@
             {{UserName}}
         </p>
     </ion-navbar>
-    <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light">
+    <super-tabs indicatorColor="light" badgeColor="light" toolbarColor="light"  selectedTabIndex="1">
         <super-tab [root]="rootOrar" title="Orar" icon="md-calendar"></super-tab>
         <super-tab [root]="rootNote" title="Note" icon="school"></super-tab>
         <super-tab [root]="rootSetari" title="Setari" icon="settings"></super-tab>
@@ -74,8 +74,7 @@
         <ion-icon name="arrow-forward"></ion-icon>
     </button>
     <ion-card>
-        <img src="http://193.226.9.153/images//s1_b.png">
-        <h1 color="light">Let's take a look</h1>
+        <img style="height: 100%;width: 100%" src="http://193.226.9.153/images//s1_b.png">
     </ion-card>
     <ion-fab right bottom middle style="top:53%">
         <button class="pop-in" [ngClass]="{ 'expand' : expanded, 'contract': contracted }" ion-fab mini (click)="expand()">
@@ -83,3 +82,4 @@
         </button>
     </ion-fab>
 </ion-content>
+

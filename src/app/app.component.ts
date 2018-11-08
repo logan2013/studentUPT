@@ -130,7 +130,7 @@ export class MyApp {
     if (localStorage.getItem("loginTime") != null) {
       var timeLog: any = localStorage.getItem("loginTime");
       var timeCurrent: any = new Date().getTime().toString();
-      if ((timeCurrent - timeLog) / 1000 > 3600) {
+      if ((timeCurrent - timeLog) / 1000 > 259000) {
         localStorage.clear();
       }
     }

@@ -90,7 +90,7 @@ export class Profile {
     if (localStorage.getItem("loginTime") != null) {
       var timeLog: any = localStorage.getItem("loginTime");
       var timeCurrent: any = new Date().getTime().toString();
-      if ((timeCurrent - timeLog) / 1000 > 3600) {
+      if ((timeCurrent - timeLog) / 1000 > 259000) {
         let loader = this.toastCtrl.create({
           message: 'Logout with succes.',
           duration: 1000,
@@ -103,9 +103,9 @@ export class Profile {
       }
     }
 
-    setTimeout(() => {
-      this.showSpinner = false;
-    }, 300);
+    // setTimeout(() => {
+    // this.showSpinner = false;
+    // }, 300);
 
     this.events.subscribe('user:logout', () => {
       let loader = this.toastCtrl.create({
@@ -119,7 +119,7 @@ export class Profile {
       localStorage.removeItem("dataUser");
       localStorage.removeItem("token");
       localStorage.removeItem("loginTime");
-   //   localStorage.clear();
+      //   localStorage.clear();
       this.menuCtrl.enable(false);
       this.menuCtrl.close();
       this.app.getRootNav().setRoot('Login');
@@ -191,7 +191,7 @@ export class Profile {
     }).present();
   }
 
-  ionViewDidLoad() {  }
+  ionViewDidLoad() { }
 
   ionViewDidLeave() {
     this.events.unsubscribe('updatePhoto');

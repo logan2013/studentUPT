@@ -96,6 +96,7 @@ export class NoutatiUpt {
   }
 
   presentProfileModal(item) {
+    console.log(item)
     let modalEditPost = this.modalCtrl.create('FacultHome', { id: item });
     modalEditPost.present();
     modalEditPost.onDidDismiss(() => {

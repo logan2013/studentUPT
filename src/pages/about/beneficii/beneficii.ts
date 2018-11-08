@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -16,6 +16,7 @@ export class Beneficii {
   public preview: string[] = [];
   public typeOfPage: number[] = []; // 1 - list page or 2 -content page
   public items: Array<{ title: string, content: string, imageLink: string, typeOfPage: number, preview: string, text: any }>;
+  @ViewChild('videoPlayer') mVideoPlayer: any;
   constructor(
     public modalCtrl: ModalController,
     private http: Http

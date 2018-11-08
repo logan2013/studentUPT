@@ -17,6 +17,7 @@ import * as firebase from 'firebase';
 })
 export class FacultHome {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('fileVideoInput') fileVideoInput;
   public nativepath: any;
   public firestore = firebase.storage();
   public imgsource: any;
@@ -28,7 +29,7 @@ export class FacultHome {
   image: any;
   postParamss: any;
   iddd: any;
-  id: Array<{ title: string, text: string, icon: string, id: string }> = [{ title: '', text: '', icon: '', id: '' }];
+  id: Array<{ title: string, text: string, icon: string, id: string, video?: string }> = [{ title: '', text: '', icon: '', id: '', video: '' }];
   idd: any; //parametru inserare 
   facultate: any; // parametru trasnmis de la viewac pt inserare
   public tabBar: any;
@@ -37,9 +38,11 @@ export class FacultHome {
 
   enableNotifications = true;
   public uploadedWithSuccess: any = 0;
+  public videoUploadedWithSuccess: any = 0;
   public uploadedMessage: any;
   public isNewPost: boolean = false;
   public isEditPost: boolean = false;
+  public videoNameToUpload: any;
   constructor(
     public camera: Camera,
     public file: File,
@@ -70,7 +73,8 @@ export class FacultHome {
         title: this.iddd.title,
         text: this.iddd.content || this.iddd.text,
         icon: this.iddd.icon,
-        id: this.iddd.id
+        id: this.iddd.id,
+        video : this.iddd.video
       })
       this.ckeditorContent = this.iddd.text;
     } else { }
@@ -83,6 +87,7 @@ export class FacultHome {
     } else {
       this.isNewPost = false;
       this.isEditPost = true;
+      this.videoNameToUpload = this.id[0].video;
     }
   }
 
@@ -110,6 +115,7 @@ export class FacultHome {
         inserttext: this.myForm.value.text,
         insertimage: localStorage.getItem('upt'),
         facultate: this.facultate,
+        insertvideo: this.videoNameToUpload,
         sendNotification: notif,
         token: localStorage.getItem("token")
       }
@@ -133,6 +139,7 @@ export class FacultHome {
       headers.append('Content-Type', 'application/json');
       let options = new RequestOptions({ headers: headers });
 
+   
       if (this.myForm.value.title && this.myForm.value.text === "" && localStorage.getItem('upt') === null) { //100
         this.myForm.value.text = this.id[0].text;
         localStorage.setItem('upt', this.id[0].icon);
@@ -166,6 +173,7 @@ export class FacultHome {
         inputtitle: this.myForm.value.title + " ",
         inputtext: this.myForm.value.text + " ",
         inputimage: localStorage.getItem('upt'),
+        insertvideo: this.videoNameToUpload,
         id: this.id[0].id,
         token: localStorage.getItem("token")
       }
@@ -193,6 +201,8 @@ export class FacultHome {
       var name = fileBrowser.files[0].name;
       localStorage.setItem('upt', fileBrowser.files[0].name);
       formData.append('file', fileBrowser.files[0]);
+      formData.append('type', "image_description");
+      formData.append('token', localStorage.getItem("token"));
       if (fileBrowser.files[0].type == "image/jpeg" || fileBrowser.files[0].type == "image/png") {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://193.226.9.153/upload.php', true);
@@ -220,6 +230,52 @@ export class FacultHome {
       }
     }
 
+  }
+
+  public uploadVideo(event): void {
+    this.loading = this.loadingCtrl.create({
+      content: 'Uploading...',
+      enableBackdropDismiss: true
+    });
+
+    const fileBrowser = this.fileVideoInput.nativeElement;
+    if (fileBrowser.files && fileBrowser.files[0]) {
+      const formData = new FormData();
+      var name = fileBrowser.files[0].name;
+      formData.append('file', fileBrowser.files[0]);
+      formData.append('type', "video");
+      formData.append('token', localStorage.getItem("token"));
+      if (fileBrowser.files[0].type == "video/mp4") {
+        this.videoNameToUpload = fileBrowser.files[0].name;
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://193.226.9.153/upload.php', true);
+        let scope = this;
+        this.loading.present();
+        xhr.onload = function () {
+          if (this['status'] === 200) {
+            const responseText = this['responseText'];
+            const files = JSON.parse(responseText);
+            if (files.success) {
+              scope.loading.dismiss();
+              scope.id[0].video = name;
+              scope.videoUploadedWithSuccess = 1;
+            } else {
+              scope.videoUploadedWithSuccess = -1;
+              scope.uploadedMessage = 'Error ! Something goes wrong trying uploading your video.';
+            }
+          } else {
+            scope.videoNameToUpload = "";
+          }
+        };
+        xhr.send(formData);
+        xhr.onerror = function () {
+          scope.loading.dismiss();
+        }
+      } else {
+        this.videoUploadedWithSuccess = -1;
+        this.uploadedMessage = "Error ! We support only vide/mp4 file. Thank you !";
+      }
+    }
   }
 
   navigateToSecondPage() {

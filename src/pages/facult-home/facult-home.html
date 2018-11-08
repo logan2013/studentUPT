@@ -15,15 +15,25 @@
         </div>
     </div>
     <div text-center>
-        <label ion-button for="fileInput">Upload
-            <input *ngIf="isBrowser" type="file" id="fileInput" style="display:none" #fileInput (change)="fileChange($event)" placeholder="Upload file">
+        <label ion-button for="fileInput">Upload image
+            <input *ngIf="isBrowser" type="file" id="fileInput" style="display:none" #fileInput (change)="fileChange($event)"
+                placeholder="Upload file">
+        </label>
+    </div>
+    <div text-center>
+        <label ion-button for="fileVideoInput">Upload video
+            <input *ngIf="isBrowser" type="file" id="fileVideoInput" style="display:none" #fileVideoInput (change)="uploadVideo($event)"
+                placeholder="Upload file">
         </label>
     </div>
 
     <h4 style="color:green; text-align: center" *ngIf="uploadedWithSuccess == 1">
         Imagine uploadata cu success !
     </h4>
-    <h4 style="color:red; text-align: center" *ngIf="uploadedWithSuccess == -1">
+    <h4 style="color:green; text-align: center" *ngIf="videoUploadedWithSuccess == 1">
+        Video uploadat cu success !
+    </h4>
+    <h4 style="color:red; text-align: center" *ngIf="uploadedWithSuccess == -1 || videoUploadedWithSuccess == -1">
         {{uploadedMessage}}
     </h4>
 
